@@ -15,7 +15,7 @@ import React, { useState } from 'react'
         },
         body: JSON.stringify(credentials)
     })
-        .then(data => data.json())
+        .then(data => data.json());
     */
    return "login token"
 }
