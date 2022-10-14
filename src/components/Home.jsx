@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from '../logo.svg';
 import '../styles/Home.css';
-import InfiniteScroll from "react-infinite-scroller";
-import { useInfiniteQuery } from "react-query";
+import InfiniteScroll from 'react-infinite-scroller';
+import { useInfiniteQuery } from 'react-query';
 import FeedPost from './FeedPost';
 
 function Home() {
@@ -21,20 +21,20 @@ function Home() {
         isError,
         hasNextPage,
         fetchNextPage
-    } = useInfiniteQuery("posts", fetchPosts, {
+    } = useInfiniteQuery('posts', fetchPosts, {
         getNextPageParam: (lastPage) => (lastPage.nextPage < lastPage.totalPages) ? lastPage.nextPage : undefined
     });
 
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
+        <div className='App'>
+            <header className='App-header'>
+                <img src={logo} className='App-logo' alt='logo' />
                 <p>Edit <code>src/App.js</code> and save to reload.</p>
                 <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    className='App-link'
+                    href='https://reactjs.org'
+                    target='_blank'
+                    rel='noopener noreferrer'
                 >
                     Learn React
                 </a>
