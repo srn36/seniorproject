@@ -22,12 +22,7 @@ function Home() {
         hasNextPage,
         fetchNextPage
     } = useInfiniteQuery("posts", fetchPosts, {
-        getNextPageParam: (lastPage) => {
-            if (lastPage.nextPage < lastPage.totalPages) {
-                return lastPage.nextPage;
-            }
-            return undefined;
-        }
+        getNextPageParam: (lastPage) => (lastPage.nextPage < lastPage.totalPages) ? lastPage.nextPage : undefined
     });
 
     return (
@@ -46,17 +41,11 @@ function Home() {
             </header>
             <button>hi</button>
             <main>
-                {isLoading ?  
-                    (
+                {isLoading ? (
                         <p>Loading...</p>
-                    ) 
-                    : 
-                    isError ? 
-                        (
+                    ) : isError ? (
                             <p>There was an error</p>
-                        ) 
-                        : 
-                        (
+                        ) : (
                             <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
                                 {data.pages.map((page) =>
                                     page.results.map((post) => <FeedPost post={post} key={post.id} />)
