@@ -8,7 +8,9 @@ import FeedPost from './FeedPost';
 function Home() {
     const fetchPosts = async ({ pageParam = 1 }) => {
         const results = await fetch(
-          `https://picsum.photos/v2/list?page=${pageParam}&limit=10`
+            //This is just an api which provides images to use as sample posts
+            //Replace with a call that accesses post/feed database
+            `https://picsum.photos/v2/list?page=${pageParam}&limit=10`
         ).then(response => 
             response.json()
         );
