@@ -1,17 +1,25 @@
 import routes from './helper/routes';
 import { getToken } from './helper/tokens';
 import { fetchUserInfoFromToken } from './helper/apiCalls';
+import { RouterProvider } from 'react-router-dom';
+import Login from './components/Login';
 
-function App() {
-    let props = {};
+function App(props) {
+    let newProps = {...props};
     //Fetch user info if they have a login token in their cookies
     const userLoginToken = getToken();
     if(userLoginToken != null) {
-        props.loginToken = userLoginToken;
-        props.userInfo = /*await*/ fetchUserInfoFromToken(userLoginToken);
+        newProps.loginToken = userLoginToken;
+        newProps.userInfo = /*await*/ fetchUserInfoFromToken(userLoginToken);
     }
-    const router = routes(props);
-    return router;
+    const router = routes(newProps);
+    if(userLoginToken != null) {
+        return <RouterProvider router={router} />;
+    }
+    else {
+        return <Login {...newProps} />;
+    }
+    
 }
 
 export default App;

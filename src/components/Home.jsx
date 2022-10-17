@@ -4,9 +4,9 @@ import '../styles/Home.css';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import FeedPost from './FeedPost';
-import Login from './Login';
 import { getToken } from '../helper/tokens';
 import { fetchFeedForUser } from '../helper/apiCalls';
+import App from '../App';
 
 
 function Home(props) {
@@ -33,7 +33,7 @@ function Home(props) {
             sessionStorage.removeItem('token');
             let propsCopy = {...props};
             delete propsCopy.userInfo;
-            setContent(<Home {...propsCopy} />);
+            setContent(<App {...propsCopy} />);
         };
 
         const homePage = () => {
@@ -71,7 +71,7 @@ function Home(props) {
         };
 
         if(loginToken == null) {
-            setContent(<Login {...props}/>);
+            setContent(<App {...props}/>);
         }
         else {
             setContent(homePage());
