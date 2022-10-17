@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { getToken, storeToken } from '../helper/tokens';
 import Home from './Home';
 import { fetchLoginTokenFromCredentials } from '../helper/apiCalls';
+import '../styles/Login.css';
 
 function Login(props) {
     const submitCredentials = /*async*/ e => {
