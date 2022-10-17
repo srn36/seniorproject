@@ -4,16 +4,19 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { storeToken } from '../helper/tokens';
+import { getToken, storeToken } from '../helper/tokens';
 import Home from './Home';
+import { fetchLoginTokenFromCredentials } from '../helper/apiCalls';
 
-function Login(props) {   
+function Login(props) {
     const submitCredentials = /*async*/ e => {
         e.preventDefault();
-        const token = /*await*/ validateLogin({
+        const credentials = {
             'username': username,
             'password': password
-        });
+        };
+        setUserInfo({...credentials});
+        const token = /*await*/ fetchLoginTokenFromCredentials(credentials);
         storeToken(token);
     }
 
@@ -38,29 +41,13 @@ function Login(props) {
         );
     };
 
-    const validateLogin = /*async*/ (credentials) => {
-        /*
-        return fetch('login validation service', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(credentials)
-        }).then(data => 
-            data.json()
-        );
-        */
-        setUserInfo({...credentials});
-        return "login token";
-    }
-
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [userInfo, setUserInfo] = useState(props.userInfo);
     const [content, setContent] = useState(loginInputs());
 
     useEffect(() => {
-        if(userInfo && Object.keys(userInfo).length > 0) {
+        if(getToken() || (userInfo && Object.keys(userInfo).length > 0)) {
             setContent(<Home {...props} userInfo={userInfo}/>);
         }
     }, [props, userInfo]);   

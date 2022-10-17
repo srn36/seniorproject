@@ -4,6 +4,7 @@ export function storeToken(userLoginToken) {
 
 export function getToken() {
     const storedToken = sessionStorage.getItem('token');
-    const userLoginToken = JSON.parse(storedToken);
-    return userLoginToken?.token;
+    return storedToken;
+    //const userLoginToken = JSON.parse(storedToken);  
+    //return userLoginToken?.token;
 }

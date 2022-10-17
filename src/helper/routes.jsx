@@ -16,8 +16,8 @@ function routes(props) {
         },
         {
             /*
-            probably going to remove this path and handle login page from home page props.
-            that way users can't access the login page while logged in.
+            Definitely going to remove this path and handle login page from home page props so users can't access the login page while logged in.
+            Keeping it here as an example right now.
             */
             path: "/login/", 
             element: <Login />,

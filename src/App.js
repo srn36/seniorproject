@@ -1,27 +1,15 @@
 import routes from './helper/routes';
-//import { getToken } from './helper/tokens';
+import { getToken } from './helper/tokens';
+import { fetchUserInfoFromToken } from './helper/apiCalls';
 
 function App() {
-    //Check if user is logged in
     let props = {};
-    /*
     //Fetch user info if they have a login token in their cookies
-    userLoginToken = getToken();
+    const userLoginToken = getToken();
     if(userLoginToken != null) {
-        //This probably needs extra code to handle invalid tokens or unexpected http responses
         props.loginToken = userLoginToken;
-        props.userInfo = fetch('token validation service', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({'token': userLoginToken})
-        }).then(data => 
-            data.json()
-        );
+        props.userInfo = /*await*/ fetchUserInfoFromToken(userLoginToken);
     }
-    */
-    //props.userInfo = {username: 'test', password: 'test'};
     const router = routes(props);
     return router;
 }

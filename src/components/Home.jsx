@@ -5,16 +5,15 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import FeedPost from './FeedPost';
 import Login from './Login';
+import { getToken } from '../helper/tokens';
+import { fetchFeedForUser } from '../helper/apiCalls';
+
 
 function Home(props) {
+    const loginToken = getToken();
+
     const fetchPosts = async ({ pageParam = 1 }) => {
-        const results = await fetch(
-            //This is just an api which provides images to use as sample posts
-            //Replace with a call that accesses post/feed database
-            `https://picsum.photos/v2/list?page=${pageParam}&limit=10`
-        ).then(response => 
-            response.json()
-        );
+        const results = await fetchFeedForUser(loginToken, pageParam);
         return { results, nextPage: pageParam + 1, totalPages: 100 };
     };
 
@@ -71,13 +70,13 @@ function Home(props) {
             );
         };
 
-        if(!props.userInfo || Object.keys(props.userInfo)?.length === 0) {
+        if(loginToken == null) {
             setContent(<Login {...props}/>);
         }
         else {
             setContent(homePage());
         }
-    }, [props, data, isLoading, isError, hasNextPage, fetchNextPage]);
+    }, [props, data, isLoading, isError, hasNextPage, fetchNextPage, loginToken]);
     
     return content;
 }
