@@ -23,7 +23,7 @@ function Login(props) {
     const loginInputs = () => {
         return (
             <div class='container'>
-                <h1>Login</h1>
+                <h1>LOGIN</h1>
                 <form onSubmit={submitCredentials}>
                     <label>
                         <p>Username</p>
