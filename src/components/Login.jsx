@@ -3,9 +3,9 @@
  * https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
  */
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { storeToken } from '../helper/tokens';
 import Home from './Home';
-//import PropTypes from 'prop-types'
 
 function Login(props) {   
     const submitCredentials = /*async*/ e => {
@@ -14,8 +14,7 @@ function Login(props) {
             'username': username,
             'password': password
         });
-        props.setToken(token);
-        console.log(props);
+        storeToken(token);
     }
 
     const loginInputs = () => {
@@ -68,11 +67,5 @@ function Login(props) {
 
     return content;
 }
-
-/*
-Login.propTypes = {
-    setToken: PropTypes.func.isRequired
-}
-*/
 
 export default Login

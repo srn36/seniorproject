@@ -1,11 +1,12 @@
 import routes from './helper/routes';
-import useToken from './helper/useToken';
+//import { getToken } from './helper/tokens';
 
 function App() {
     //Check if user is logged in
-    const props = useToken();
+    let props = {};
     /*
     //Fetch user info if they have a login token in their cookies
+    userLoginToken = getToken();
     if(userLoginToken != null) {
         //This probably needs extra code to handle invalid tokens or unexpected http responses
         props.loginToken = userLoginToken;
