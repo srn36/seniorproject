@@ -27,15 +27,15 @@ function Login(props) {
                 <h1>LOGIN</h1>
                 <form onSubmit={submitCredentials}>
                     <label>
-                        <p>Username</p>
+                        <p class='center'>Username</p>
                         <input type="text" onChange={e => setUsername(e.target.value)}></input>
                     </label>
                     <label>
-                        <p>Password</p>
+                        <p class='center'>Password</p>
                         <input type="password" onChange={e => setPassword(e.target.value)}></input>
                     </label>
                     <div>
-                        <button type="submit">Log In</button>
+                        <button type="submit" class='center'>Log In</button>
                     </div>
                 </form>
             </div>
