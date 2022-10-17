@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../logo.svg';
 import '../styles/Home.css';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import FeedPost from './FeedPost';
+import Login from './Login';
 
-function Home() {
+function Home(props) {
     const fetchPosts = async ({ pageParam = 1 }) => {
         const results = await fetch(
             //This is just an api which provides images to use as sample posts
@@ -26,38 +27,59 @@ function Home() {
     } = useInfiniteQuery('posts', fetchPosts, {
         getNextPageParam: (lastPage) => (lastPage.nextPage < lastPage.totalPages) ? lastPage.nextPage : undefined
     });
+    const [content, setContent] = useState();
 
-    return (
-        <div className='App'>
-            <header className='App-header'>
-                <img src={logo} className='App-logo' alt='logo' />
-                <p>Edit <code>src/App.js</code> and save to reload.</p>
-                <a
-                    className='App-link'
-                    href='https://reactjs.org'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                >
-                    Learn React
-                </a>
-            </header>
-            <button>hi</button>
-            <main>
-                {isLoading ? (
-                        <p>Loading...</p>
-                    ) : isError ? (
-                            <p>There was an error</p>
-                        ) : (
-                            <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
-                                {data.pages.map((page) =>
-                                    page.results.map((post) => <FeedPost post={post} key={post.id} />)
-                                )}
-                            </InfiniteScroll>
-                        )
-                }
-            </main>
-        </div>
-    );
+    useEffect(() => {
+        const logOut = () => {
+            sessionStorage.removeItem('token');
+            let propsCopy = {...props};
+            delete propsCopy.userInfo;
+            setContent(<Home {...propsCopy} />);
+        };
+
+        const homePage = () => {
+            return (
+                <div className='App'>
+                    <header className='App-header'>
+                        <img src={logo} className='App-logo' alt='logo' />
+                        <p>Edit <code>src/App.js</code> and save to reload.</p>
+                        <a
+                            className='App-link'
+                            href='https://reactjs.org'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                        >
+                            Learn React
+                        </a>
+                    </header>
+                    <button onClick={e => logOut()}>Log Out</button>
+                    <main>
+                        {isLoading ? (
+                                <p>Loading...</p>
+                            ) : isError ? (
+                                    <p>There was an error</p>
+                                ) : (
+                                    <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
+                                        {data.pages.map((page) =>
+                                            page.results.map((post) => <FeedPost post={post} key={post.id} />)
+                                        )}
+                                    </InfiniteScroll>
+                                )
+                        }
+                    </main>
+                </div>
+            );
+        };
+
+        if(!props.userInfo || Object.keys(props.userInfo)?.length === 0) {
+            setContent(<Login {...props}/>);
+        }
+        else {
+            setContent(homePage());
+        }
+    }, [props, data, isLoading, isError, hasNextPage, fetchNextPage]);
+    
+    return content;
 }
 
 export default Home

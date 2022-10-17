@@ -6,16 +6,20 @@ import {
 import Home from '../components/Home';
 import Login from '../components/Login';
 
-function routes() {
+function routes(props) {
     //ADD ROUTES FOR NEW PAGES BELOW
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Home />,
+            element: <Home {...props}/>,
             children: [],
         },
         {
-            path: "/login/",
+            /*
+            probably going to remove this path and handle login page from home page props.
+            that way users can't access the login page while logged in.
+            */
+            path: "/login/", 
             element: <Login />,
             children: [],
         }
