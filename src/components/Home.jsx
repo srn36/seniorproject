@@ -7,6 +7,7 @@ import FeedPost from './FeedPost';
 import { getToken } from '../helper/tokens';
 import { fetchFeedForUser } from '../helper/apiCalls';
 import App from '../App';
+import { Dropdown } from 'react-bootstrap';
 
 
 function Home(props) {
@@ -52,6 +53,17 @@ function Home(props) {
                         </a>
                     </header>
                     <button onClick={e => logOut()}>Log Out</button>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            Dropdown Button
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="http://localhost:3000/">Home</Dropdown.Item>
+                            <Dropdown.Item href="http://localhost:3000/Chat/">Chat</Dropdown.Item>
+                            <Dropdown.Item href="http://localhost:3000/Profile/">Profile</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                     <main>
                         {isLoading ? (
                                 <p>Loading...</p>
