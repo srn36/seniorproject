@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import App from './App';
 import './styles/index.css';
-import './styles/Home.css';
+import './styles/App.css';
 import './styles/Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
