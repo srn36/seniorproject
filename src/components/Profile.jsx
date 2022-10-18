@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from "react";
-import NavigationBar from "./NavigationBar";
+import React from "react";
 
 function Profile(props) {
-    const [content, setContent] = useState();
-
-    useEffect(() => {
-        setContent(
-            <div>
-                <NavigationBar setContent={setContent} />
-                <h4>Profile Page</h4>
-            </div>
-        );
-    }, []);
     
-    return content;
+    return (
+        <div>
+            <h4>Profile Page</h4>
+        </div>
+    );
 }
 
 export default Profile;
