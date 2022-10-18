@@ -3,6 +3,7 @@ import Home from '../components/Home';
 import Login from '../components/Login';
 import Profile from '../components/Profile';
 import AuthRoute from '../components/AuthRoute';
+import Chat from '../components/Chat';
 
 function routes() {
     //ADD ROUTES FOR NEW PAGES BELOW
@@ -16,6 +17,11 @@ function routes() {
         {
             path: "/profile/", 
             element: <AuthRoute child={<Profile/>}/>,
+            children: [],
+        },
+        {
+            path: "/chat/", 
+            element: <AuthRoute child={<Chat/>}/>,
             children: [],
         },
         {
