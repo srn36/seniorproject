@@ -15,19 +15,19 @@ function Login() {
     const [password, setPassword] = useState();
     const [content, setContent] = useState(); 
     const loginToken = getToken();
-    
-    const submitCredentials = /*async*/ e => {
-        e.preventDefault();
-        const credentials = {
-            'username': username,
-            'password': password
-        };
-        const token = /*await*/ fetchLoginTokenFromCredentials(credentials);
-        storeToken(token);
-        setContent(<Navigate to='/' />);
-    }
 
     useEffect(() => {
+        const submitCredentials = /*async*/ e => {
+            e.preventDefault();
+            const credentials = {
+                'username': username,
+                'password': password
+            };
+            const token = /*await*/ fetchLoginTokenFromCredentials(credentials);
+            storeToken(token);
+            setContent(<Navigate to='/' />);
+        }
+
         setContent(
             <div className='center'>
                 <h1>LOGIN</h1>
@@ -50,8 +50,8 @@ function Login() {
                 </form>
             </div>
         );
-    }, []);
-    
+    }, [username, password]);
+
     return (loginToken != null) ? <Navigate to='/' /> : content;
 }
 
