@@ -1,9 +1,6 @@
-import {
-    createBrowserRouter,
-    //RouterProvider
-} from 'react-router-dom';
-
+import { createBrowserRouter } from 'react-router-dom';
 import Home from '../components/Home';
+import Login from '../components/Login';
 import Profile from '../components/Profile';
 
 function routes(props) {
@@ -18,7 +15,7 @@ function routes(props) {
             path: "/profile/", 
             element: <Profile />,
             children: [],
-        }
+        },
     ]);
     return router;
 }

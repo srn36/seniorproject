@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import logo from '../logo.svg';
 import '../styles/Home.css';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
@@ -7,7 +6,10 @@ import FeedPost from './FeedPost';
 import { getToken } from '../helper/tokens';
 import { fetchFeedForUser } from '../helper/apiCalls';
 import App from '../App';
-import { Dropdown } from 'react-bootstrap';
+import { DropdownButton } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function Home(props) {
@@ -41,29 +43,13 @@ function Home(props) {
             return (
                 <div className='App'>
                     <header className='App-header'>
-                        <img src={logo} className='App-logo' alt='logo' />
-                        <p>Edit <code>src/App.js</code> and save to reload.</p>
-                        <a
-                            className='App-link'
-                            href='https://reactjs.org'
-                            target='_blank'
-                            rel='noopener noreferrer'
-                        >
-                            Learn React
-                        </a>
+                        <DropdownButton id="dropdown-basic-button" title="Navigation" style={{display: 'flex'}}>
+                            <Link to='/' className='dropdown-item'>Home</Link>
+                            <Link to='/chat' className='dropdown-item'>Chat</Link>
+                            <Link to='/profile' className='dropdown-item'>Profile</Link>
+                            <button onClick={e => logOut()} className='dropdown-item'>Log Out</button>
+                        </DropdownButton>
                     </header>
-                    <button onClick={e => logOut()}>Log Out</button>
-                    <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Dropdown Button
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item href="http://localhost:3000/">Home</Dropdown.Item>
-                            <Dropdown.Item href="http://localhost:3000/Chat/">Chat</Dropdown.Item>
-                            <Dropdown.Item href="http://localhost:3000/Profile/">Profile</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
                     <main>
                         {isLoading ? (
                                 <p>Loading...</p>

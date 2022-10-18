@@ -25,15 +25,19 @@ function Login(props) {
         return (
             <div class='center'>
                 <h1>LOGIN</h1>
-                <form onSubmit={submitCredentials}>
-                    <label>
-                        <p class='center'>Username</p>
-                        <input type="text" onChange={e => setUsername(e.target.value)}></input>
-                    </label>
-                    <label>
-                        <p class='center'>Password</p>
-                        <input type="password" onChange={e => setPassword(e.target.value)}></input>
-                    </label>
+                <form onSubmit={submitCredentials}>        
+                    <div class='center'>
+                        <label>
+                            <p class='center'>Username</p>
+                            <input type="text" onChange={e => setUsername(e.target.value)}></input>
+                        </label>
+                    </div>
+                    <div class='center'>
+                        <label>
+                            <p class='center'>Password</p>
+                            <input type="password" onChange={e => setPassword(e.target.value)}></input>
+                        </label>
+                    </div>
                     <div class='center'>
                         <button type="submit">Log In</button>
                     </div>
