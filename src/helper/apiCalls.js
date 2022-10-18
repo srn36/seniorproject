@@ -10,7 +10,7 @@ export /*async*/ function fetchLoginTokenFromCredentials(credentials) {
         data.json()
     );
     */
-   return "login token";
+   return 'login token';
 }
 
 export /*async*/ function fetchUserInfoFromToken(token) {

@@ -1,0 +1,31 @@
+import React from "react";
+import { Navigate } from "react-router-dom/dist";
+import { DropdownButton } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/Home.css';
+
+function NavigationBar(props) {
+    const logOut = () => {
+        sessionStorage.removeItem('token');
+        return props.setContent(<Navigate to='/login/' />);
+    };
+
+    return (
+        <header className='App-header'>
+            <DropdownButton id="dropdown-basic-button" title="Navigation" style={{display: 'flex'}}>
+                <Link to='/' className='dropdown-item'>Home</Link>
+                <Link to='/chat' className='dropdown-item'>Chat</Link>
+                <Link to='/profile' className='dropdown-item'>Profile</Link>
+                <button onClick={e => logOut()} className='dropdown-item'>Log Out</button>
+            </DropdownButton>
+        </header>
+    );
+}
+
+NavigationBar.propTypes = {
+    setContent: PropTypes.func.isRequired
+};
+
+export default NavigationBar

@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/Home.css';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import FeedPost from './FeedPost';
 import { getToken } from '../helper/tokens';
 import { fetchFeedForUser } from '../helper/apiCalls';
-import App from '../App';
-import { DropdownButton } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import NavigationBar from './NavigationBar';
+import { Navigate } from 'react-router-dom/dist';
+import '../styles/Home.css';
 
 function Home(props) {
     const loginToken = getToken();
@@ -32,51 +28,28 @@ function Home(props) {
     const [content, setContent] = useState();
 
     useEffect(() => {
-        const logOut = () => {
-            sessionStorage.removeItem('token');
-            let propsCopy = {...props};
-            delete propsCopy.userInfo;
-            setContent(<App {...propsCopy} />);
-        };
-
-        const homePage = () => {
-            return (
-                <div className='App'>
-                    <header className='App-header'>
-                        <DropdownButton id="dropdown-basic-button" title="Navigation" style={{display: 'flex'}}>
-                            <Link to='/' className='dropdown-item'>Home</Link>
-                            <Link to='/chat' className='dropdown-item'>Chat</Link>
-                            <Link to='/profile' className='dropdown-item'>Profile</Link>
-                            <button onClick={e => logOut()} className='dropdown-item'>Log Out</button>
-                        </DropdownButton>
-                    </header>
-                    <main>
-                        {isLoading ? (
-                                <p>Loading...</p>
-                            ) : isError ? (
-                                    <p>There was an error</p>
-                                ) : (
-                                    <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
-                                        {data.pages.map((page) =>
-                                            page.results.map((post) => <FeedPost post={post} key={post.id} />)
-                                        )}
-                                    </InfiniteScroll>
-                                )
-                        }
-                    </main>
-                </div>
-            );
-        };
-
-        if(loginToken == null) {
-            setContent(<App {...props}/>);
-        }
-        else {
-            setContent(homePage());
-        }
+        setContent(
+            <div className='App'>
+                <NavigationBar setContent={setContent}/>
+                <main>
+                    {isLoading ? (
+                            <p>Loading...</p>
+                        ) : isError ? (
+                                <p>There was an error</p>
+                            ) : (
+                                <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
+                                    {data.pages.map((page) =>
+                                        page.results.map((post) => <FeedPost post={post} key={post.id} />)
+                                    )}
+                                </InfiniteScroll>
+                            )
+                    }
+                </main>
+            </div>
+        );
     }, [props, data, isLoading, isError, hasNextPage, fetchNextPage, loginToken]);
     
-    return content;
+    return (loginToken == null) ? <Navigate to='/login/' /> : content;
 }
 
 export default Home

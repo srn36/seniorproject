@@ -3,61 +3,56 @@
  * https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { getToken, storeToken } from '../helper/tokens';
-import Home from './Home';
 import { fetchLoginTokenFromCredentials } from '../helper/apiCalls';
 import '../styles/Login.css';
+import { Navigate } from 'react-router-dom/dist';
+import { useEffect } from 'react';
 
-function Login(props) {
+function Login() {
+    const [username, setUsername] = useState();
+    const [password, setPassword] = useState();
+    const [content, setContent] = useState(); 
+    const loginToken = getToken();
+    
     const submitCredentials = /*async*/ e => {
         e.preventDefault();
         const credentials = {
             'username': username,
             'password': password
         };
-        setUserInfo({...credentials});
         const token = /*await*/ fetchLoginTokenFromCredentials(credentials);
         storeToken(token);
+        setContent(<Navigate to='/' />);
     }
 
-    const loginInputs = () => {
-        return (
-            <div class='center'>
+    useEffect(() => {
+        setContent(
+            <div className='center'>
                 <h1>LOGIN</h1>
                 <form onSubmit={submitCredentials}>        
-                    <div class='center'>
+                    <div className='center'>
                         <label>
-                            <p class='center'>Username</p>
+                            <p className='center'>Username</p>
                             <input type="text" onChange={e => setUsername(e.target.value)}></input>
                         </label>
                     </div>
-                    <div class='center'>
+                    <div className='center'>
                         <label>
-                            <p class='center'>Password</p>
+                            <p className='center'>Password</p>
                             <input type="password" onChange={e => setPassword(e.target.value)}></input>
                         </label>
                     </div>
-                    <div class='center'>
+                    <div className='center'>
                         <button type="submit">Log In</button>
                     </div>
                 </form>
             </div>
         );
-    };
-
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
-    const [userInfo, setUserInfo] = useState(props.userInfo);
-    const [content, setContent] = useState(loginInputs());
-
-    useEffect(() => {
-        if(getToken() || (userInfo && Object.keys(userInfo).length > 0)) {
-            setContent(<Home {...props} userInfo={userInfo}/>);
-        }
-    }, [props, userInfo]);   
-
-    return content;
+    }, []);
+    
+    return (loginToken != null) ? <Navigate to='/' /> : content;
 }
 
 export default Login

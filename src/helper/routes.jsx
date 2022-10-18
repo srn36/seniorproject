@@ -3,17 +3,22 @@ import Home from '../components/Home';
 import Login from '../components/Login';
 import Profile from '../components/Profile';
 
-function routes(props) {
+function routes() {
     //ADD ROUTES FOR NEW PAGES BELOW
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Home {...props}/>,
+            element: <Home />,
             children: [],
         },
         {
             path: "/profile/", 
             element: <Profile />,
+            children: [],
+        },
+        {
+            path: "/login/", 
+            element: <Login />,
             children: [],
         },
     ]);
