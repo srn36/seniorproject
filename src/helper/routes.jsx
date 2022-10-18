@@ -6,6 +6,7 @@ import AuthRoute from '../components/AuthRoute';
 
 function routes() {
     //ADD ROUTES FOR NEW PAGES BELOW
+    //Wrap the 'element' for each page in an AuthRoute for access control
     const router = createBrowserRouter([
         {
             path: "/",
