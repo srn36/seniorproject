@@ -5,7 +5,6 @@ import FeedPost from './FeedPost';
 import { getToken } from '../helper/tokens';
 import { fetchFeedForUser } from '../helper/apiCalls';
 import NavigationBar from './NavigationBar';
-import { Navigate } from 'react-router-dom/dist';
 import '../styles/Home.css';
 
 function Home(props) {
@@ -49,7 +48,7 @@ function Home(props) {
         );
     }, [props, data, isLoading, isError, hasNextPage, fetchNextPage, loginToken]);
     
-    return (loginToken == null) ? <Navigate to='/login/' /> : content;
+    return content;
 }
 
 export default Home

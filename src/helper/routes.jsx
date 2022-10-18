@@ -2,23 +2,24 @@ import { createBrowserRouter } from 'react-router-dom';
 import Home from '../components/Home';
 import Login from '../components/Login';
 import Profile from '../components/Profile';
+import AuthRoute from '../components/AuthRoute';
 
 function routes() {
     //ADD ROUTES FOR NEW PAGES BELOW
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Home />,
+            element: <AuthRoute child={<Home/>}/>,
             children: [],
         },
         {
             path: "/profile/", 
-            element: <Profile />,
+            element: <AuthRoute child={<Profile/>}/>,
             children: [],
         },
         {
             path: "/login/", 
-            element: <Login />,
+            element: <Login/>,
             children: [],
         },
     ]);
