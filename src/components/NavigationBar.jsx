@@ -27,8 +27,6 @@ import { Navigate } from "react-router-dom/dist";
 import { DropdownButton } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/Home.css';
 
 function NavigationBar(props) {
     const logOut = () => {

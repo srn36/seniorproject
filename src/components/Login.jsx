@@ -6,7 +6,6 @@
 import React, { useState } from 'react';
 import { getToken, storeToken } from '../helper/tokens';
 import { fetchLoginTokenFromCredentials } from '../helper/apiCalls';
-import '../styles/Login.css';
 import { Navigate } from 'react-router-dom/dist';
 import { useEffect } from 'react';
 

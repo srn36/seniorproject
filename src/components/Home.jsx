@@ -5,7 +5,6 @@ import FeedPost from './FeedPost';
 import { getToken } from '../helper/tokens';
 import { fetchFeedForUser } from '../helper/apiCalls';
 import NavigationBar from './NavigationBar';
-import '../styles/Home.css';
 
 function Home(props) {
     const loginToken = getToken();

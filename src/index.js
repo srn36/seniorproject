@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import App from './App';
-import './styles/index.css';
 import reportWebVitals from './reportWebVitals';
+import './styles/index.css';
+import './styles/Home.css';
+import './styles/Login.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));
