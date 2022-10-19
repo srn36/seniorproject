@@ -44,7 +44,7 @@ function Profile(props) {
                     <h4>hi</h4>
                 </div>
                 <div style={{placeItems: 'center', display: 'flex', flexDirection: 'column'}}>
-                    <h3>Friend List</h3>
+                    <h3>{username.username}'s Friends</h3>
                     <div className="col-6" style={{display: 'flex'}}>
                         {
                             (Object.keys(friendTable).length > 0) &&
