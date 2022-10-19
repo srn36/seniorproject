@@ -41,15 +41,18 @@ function Profile(props) {
                                                                 username={friend.username} 
                                                                 profilePic={friend.profilePic}/>);
         return (
-            <div style={{display: 'flex', flexDirection: 'column'}}>
-                <h2>Profile Page for {username.username}</h2>            
+            <div style={{placeItems: 'center', display: 'flex', flexDirection: 'column', }}>
+                <div className='col-6' style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                    <img src='' alt='profile pic here'/>
+                    <h2>Profile Page for {username.username}</h2>
+                </div>
                 <div>
                     <h4>hi</h4>
                     <button onClick={e => {setPostFriendToggle(toggleFriendsOrPosts[postFriendToggle]);}}>Show {postFriendToggle}</button>
                 </div>
                 {
                     (toggleFriendsOrPosts[postFriendToggle] === 'Friends') &&
-                    <div style={{placeItems: 'center', display: 'flex', flexDirection: 'column'}}>
+                    <div className='col-12' style={{placeItems: 'center', display: 'flex', flexDirection: 'column'}}>
                         <h3>{username.username}'s Friends</h3>
                         <div className="col-6" style={{display: 'flex', maxHeight: '75vh', overflowY: 'scroll'}}>
                             {
