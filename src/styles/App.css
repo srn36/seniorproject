@@ -16,7 +16,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: transparent;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
