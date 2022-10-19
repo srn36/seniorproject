@@ -23,6 +23,7 @@ function NavigationBar(props) {
                 <Link to={`/profile/${props.username}`} className='dropdown-item'>Profile</Link>
                 <button onClick={e => logOut()} className='dropdown-item'>Log Out</button>
             </DropdownButton>
+            <img src="/Users/surbhi/Clone/seniorproject/src/smollogo.png" align="left"/>
         </div>
     );
 }
