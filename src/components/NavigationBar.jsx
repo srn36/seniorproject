@@ -20,7 +20,7 @@ function NavigationBar(props) {
             <DropdownButton id="dropdown-basic-button" title="Navigation" style={{display: 'flex'}}>
                 <Link to='/' className='dropdown-item'>Home</Link>
                 <Link to='/chat' className='dropdown-item'>Chat</Link>
-                <Link to='/profile' className='dropdown-item'>Profile</Link>
+                <Link to={`/profile/${props.username}`} className='dropdown-item'>Profile</Link>
                 <button onClick={e => logOut()} className='dropdown-item'>Log Out</button>
             </DropdownButton>
         </div>
@@ -28,7 +28,8 @@ function NavigationBar(props) {
 }
 
 NavigationBar.propTypes = {
-    setContent: PropTypes.func.isRequired
+    setContent: PropTypes.func.isRequired,
+    username: PropTypes.string.isRequired
 };
 
 export default NavigationBar

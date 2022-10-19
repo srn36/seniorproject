@@ -1,11 +1,31 @@
 import React, { useMemo } from "react";
-import { fetchFriendsForUser } from "../helper/apiCalls";
+import { fetchFriendsForUser, fetchUserPosts } from "../helper/apiCalls";
+import InfiniteScroll from 'react-infinite-scroller';
+import { useInfiniteQuery } from 'react-query';
+import FeedPost from './FeedPost';
 import { getToken } from "../helper/tokens";
 import { Table } from "react-bootstrap";
 import FriendRow from "./FriendRow";
+import { useParams } from "react-router-dom";
 
 function Profile(props) {
     const token = getToken();
+    const username = useParams();
+
+    const fetchPosts = async ({ pageParam = 1 }) => {
+        const results = await fetchUserPosts(username, pageParam);
+        return { results, nextPage: pageParam + 1, totalPages: 100 };
+    };
+
+    const {
+        data,
+        isLoading,
+        isError,
+        hasNextPage,
+        fetchNextPage
+    } = useInfiniteQuery('posts', fetchPosts, {
+        getNextPageParam: (lastPage) => (lastPage.nextPage < lastPage.totalPages) ? lastPage.nextPage : undefined
+    });
 
     const friendList = /*async*/ (t) => {
         return /*await*/ fetchFriendsForUser(t)/*.then(results => results.json())*/;
@@ -19,7 +39,7 @@ function Profile(props) {
                                                                 profilePic={friend.profilePic}/>);
         return (
             <div style={{display: 'flex', flexDirection: 'column'}}>
-                <h2>Profile Page</h2>
+                <h2>Profile Page for {username.username}</h2>            
                 <div>
                     <h4>hi</h4>
                 </div>
@@ -36,9 +56,26 @@ function Profile(props) {
                         }
                     </div>
                 </div>
+                <div style={{placeItems: 'center', display: 'flex', flexDirection: 'column'}}>
+                    <h3>{username.username}'s Posts</h3>
+                    <div className="col-6" style={{display: 'flex', justifyContent: 'center'}}>
+                        {isLoading ? (
+                                <p>Loading...</p>
+                            ) : isError ? (
+                                    <p>There was an error</p>
+                                ) : (
+                                    <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
+                                        {data?.pages.map((page) =>
+                                            page.results.map((post) => <FeedPost post={post} key={post.id} />)
+                                        )}
+                                    </InfiniteScroll>
+                                )
+                        }
+                    </div>
+                </div>
             </div>
         );
-    }, [friends]);
+    }, [friends, data?.pages, fetchNextPage, hasNextPage, isError, isLoading, username]);
 
     return content;
 }

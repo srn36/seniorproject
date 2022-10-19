@@ -82,3 +82,29 @@ export async function fetchFeedForUser(userToken, pageParam) {
         response.json()
     );
 }
+
+export async function fetchUserPosts(username, pageParam) {
+    /*
+    return fetch('username? to posts service', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'username': username})
+    }).then(data => 
+        data.json()
+    );
+    */
+    return fetch(
+    //This is just an api which provides images to use as sample posts
+        `https://picsum.photos/v2/list?page=${pageParam}&limit=10`, 
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+    ).then(response => 
+        response.json()
+    );
+}

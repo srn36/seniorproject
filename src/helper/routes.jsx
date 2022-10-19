@@ -15,7 +15,7 @@ function routes() {
             children: [],
         },
         {
-            path: "/profile/", 
+            path: "/profile/:username", 
             element: <AuthRoute child={<Profile/>}/>,
             children: [],
         },
