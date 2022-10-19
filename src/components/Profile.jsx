@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { fetchFriendsForUser, fetchUserPosts } from "../helper/apiCalls";
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
@@ -13,7 +13,11 @@ const toggleFriendsOrPosts = {Friends: 'Posts', Posts: 'Friends'};
 function Profile(props) {
     const token = getToken();
     const username = useParams();
-    const [postFriendToggle, setPostFriendToggle] = useState('Friends');
+    const [postFriendToggle, setPostFriendToggle] = useState();
+
+    useEffect(() => {
+        setPostFriendToggle('Friends');
+    }, [username]);
 
     const fetchPosts = async ({ pageParam = 1 }) => {
         const results = await fetchUserPosts(username, pageParam);
