@@ -1,3 +1,7 @@
+body {
+  background-image: "/Users/surbhi/Clone/seniorproject/src/BG.jpeg";
+}
+
 .App {
   text-align: center;
   display: flex;

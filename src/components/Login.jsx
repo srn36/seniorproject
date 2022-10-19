@@ -8,6 +8,10 @@ import { getToken, storeToken } from '../helper/tokens';
 import { fetchLoginTokenFromCredentials } from '../helper/apiCalls';
 import { Navigate } from 'react-router-dom/dist';
 import { useEffect } from 'react';
+import '/Users/surbhi/Clone/seniorproject/src/styles/App.css';
+import backg from '../BG.jpeg';
+
+<body background={backg} />
 
 function Login() {
     const [username, setUsername] = useState();
