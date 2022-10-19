@@ -52,7 +52,17 @@ export /*async*/ function fetchFriendsForUser(userToken) {
         {key: 'Friend 7', username: 'Friend 7', profilePic: mockPFP},
         {key: 'Friend 8', username: 'Friend 8', profilePic: mockPFP},
         {key: 'Friend 9', username: 'Friend 9', profilePic: mockPFP},
-        {key: 'Friend 10', username: 'Friend 10', profilePic: mockPFP}
+        {key: 'Friend 10', username: 'Friend 10', profilePic: mockPFP},
+        {key: 'Friend 11', username: 'Friend 11', profilePic: mockPFP},
+        {key: 'Friend 12', username: 'Friend 12', profilePic: mockPFP},
+        {key: 'Friend 13', username: 'Friend 13', profilePic: mockPFP},
+        {key: 'Friend 14', username: 'Friend 14', profilePic: mockPFP},
+        {key: 'Friend 15', username: 'Friend 15', profilePic: mockPFP},
+        {key: 'Friend 16', username: 'Friend 16', profilePic: mockPFP},
+        {key: 'Friend 17', username: 'Friend 17', profilePic: mockPFP},
+        {key: 'Friend 18', username: 'Friend 18', profilePic: mockPFP},
+        {key: 'Friend 19', username: 'Friend 19', profilePic: mockPFP},
+        {key: 'Friend 20', username: 'Friend 20', profilePic: mockPFP}
     ];
     return mockFriendList;
 }
