@@ -68,13 +68,15 @@ export async function fetchFeedForUser(userToken, pageParam) {
     );
     */
     return fetch(
-        //This is just an api which provides images to use as sample posts
-        `https://picsum.photos/v2/list?page=${pageParam}&limit=10`, {
+    //This is just an api which provides images to use as sample posts
+        `https://picsum.photos/v2/list?page=${pageParam}&limit=10`, 
+        {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(response => 
+        }
+    ).then(response => 
         response.json()
     );
 }
