@@ -1,3 +1,5 @@
+import mockPFP from '../logo192.png';
+
 export /*async*/ function fetchLoginTokenFromCredentials(credentials) {
     /*
     return fetch('login token service', {
@@ -41,16 +43,16 @@ export /*async*/ function fetchFriendsForUser(userToken) {
     );
     */
     const mockFriendList = [
-        {id: 'Friend 1', username: 'Friend 1'},
-        {id: 'Friend 2', username: 'Friend 2'},
-        {id: 'Friend 3', username: 'Friend 3'},
-        {id: 'Friend 4', username: 'Friend 4'},
-        {id: 'Friend 5', username: 'Friend 5'},
-        {id: 'Friend 6', username: 'Friend 6'},
-        {id: 'Friend 7', username: 'Friend 7'},
-        {id: 'Friend 8', username: 'Friend 8'},
-        {id: 'Friend 9', username: 'Friend 9'},
-        {id: 'Friend 10', username: 'Friend 10'}
+        {key: 'Friend 1', username: 'Friend 1', profilePic: mockPFP},
+        {key: 'Friend 2', username: 'Friend 2', profilePic: mockPFP},
+        {key: 'Friend 3', username: 'Friend 3', profilePic: mockPFP},
+        {key: 'Friend 4', username: 'Friend 4', profilePic: mockPFP},
+        {key: 'Friend 5', username: 'Friend 5', profilePic: mockPFP},
+        {key: 'Friend 6', username: 'Friend 6', profilePic: mockPFP},
+        {key: 'Friend 7', username: 'Friend 7', profilePic: mockPFP},
+        {key: 'Friend 8', username: 'Friend 8', profilePic: mockPFP},
+        {key: 'Friend 9', username: 'Friend 9', profilePic: mockPFP},
+        {key: 'Friend 10', username: 'Friend 10', profilePic: mockPFP}
     ];
     return mockFriendList;
 }
