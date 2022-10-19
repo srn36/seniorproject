@@ -5,6 +5,10 @@ import FeedPost from './FeedPost';
 import { getToken } from '../helper/tokens';
 import { fetchFeedForUser } from '../helper/apiCalls';
 
+<head>
+    <link rel="stylesheet" href="Login.css"/>
+</head>
+
 function Home(props) {
     const loginToken = getToken();
 
@@ -40,5 +44,6 @@ function Home(props) {
         </div>
     );
 }
+
 
 export default Home
