@@ -14,7 +14,9 @@ function Profile(props) {
     const friends = friendList(token);
     const content = useMemo(() => {
         const friendTable = Array.isArray(friends) 
-                            && friends.map(friend => <FriendRow key={friend.username} username={friend.username} profilePic={friend.profilePic}/>);
+                            && friends.map(friend => <FriendRow key={friend.username} 
+                                                                username={friend.username} 
+                                                                profilePic={friend.profilePic}/>);
         return (
             <div style={{display: 'flex', flexDirection: 'column'}}>
                 <h2>Profile Page</h2>
