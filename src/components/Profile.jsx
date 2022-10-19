@@ -19,7 +19,7 @@ function Profile(props) {
                                 </tr>
                             ));
         return (
-            <div>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
                 <h2>Profile Page</h2>
                 <div className="row">
                     <h4>hi</h4>
