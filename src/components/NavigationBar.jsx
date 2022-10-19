@@ -16,14 +16,14 @@ function NavigationBar(props) {
     };
 
     return (
-        <header className='App-header'>
+        <div>
             <DropdownButton id="dropdown-basic-button" title="Navigation" style={{display: 'flex'}}>
                 <Link to='/' className='dropdown-item'>Home</Link>
                 <Link to='/chat' className='dropdown-item'>Chat</Link>
                 <Link to='/profile' className='dropdown-item'>Profile</Link>
                 <button onClick={e => logOut()} className='dropdown-item'>Log Out</button>
             </DropdownButton>
-        </header>
+        </div>
     );
 }
 

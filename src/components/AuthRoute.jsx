@@ -10,7 +10,9 @@ function AuthRoute({ child }) {
     useEffect(() => {
         const pageContent = (
             <div className="App">
-                <NavigationBar setContent={setContent}/>
+                <header className='App-header'>
+                    <NavigationBar setContent={setContent}/>
+                </header>
                 <main>
                     {child}
                 </main>
