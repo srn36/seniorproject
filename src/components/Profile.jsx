@@ -21,10 +21,10 @@ function Profile(props) {
         return (
             <div style={{display: 'flex', flexDirection: 'column'}}>
                 <h2>Profile Page</h2>
-                <div className="row">
+                <div>
                     <h4>hi</h4>
                 </div>
-                <div className="row" style={{placeItems: 'center', display: 'flex', flexDirection: 'column'}}>
+                <div style={{placeItems: 'center', display: 'flex', flexDirection: 'column'}}>
                     <h3>Friend List</h3>
                     <div className="col-6" style={{display: 'flex'}}>
                         {
