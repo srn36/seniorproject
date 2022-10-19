@@ -1,5 +1,3 @@
-import * as ProfilePic from '../logo192.png';
-
 export /*async*/ function fetchLoginTokenFromCredentials(credentials) {
     /*
     return fetch('login token service', {
@@ -43,16 +41,16 @@ export /*async*/ function fetchFriendsForUser(userToken) {
     );
     */
     const mockFriendList = [
-        {id: 'Friend 1', username: 'Friend 1', profilePicture: <img src={ProfilePic} alt='Profile Pic'/>},
-        {id: 'Friend 2', username: 'Friend 2', profilePicture: <img src={ProfilePic} alt='Profile Pic'/>},
-        {id: 'Friend 3', username: 'Friend 3', profilePicture: <img src={ProfilePic} alt='Profile Pic'/>},
-        {id: 'Friend 4', username: 'Friend 4', profilePicture: <img src={ProfilePic} alt='Profile Pic'/>},
-        {id: 'Friend 5', username: 'Friend 5', profilePicture: <img src={ProfilePic} alt='Profile Pic'/>},
-        {id: 'Friend 6', username: 'Friend 6', profilePicture: <img src={ProfilePic} alt='Profile Pic'/>},
-        {id: 'Friend 7', username: 'Friend 7', profilePicture: <img src={ProfilePic} alt='Profile Pic'/>},
-        {id: 'Friend 8', username: 'Friend 8', profilePicture: <img src={ProfilePic} alt='Profile Pic'/>},
-        {id: 'Friend 9', username: 'Friend 9', profilePicture: <img src={ProfilePic} alt='Profile Pic'/>},
-        {id: 'Friend 10', username: 'Friend 10', profilePicture: <img src={ProfilePic} alt='Profile Pic'/>}
+        {id: 'Friend 1', username: 'Friend 1'},
+        {id: 'Friend 2', username: 'Friend 2'},
+        {id: 'Friend 3', username: 'Friend 3'},
+        {id: 'Friend 4', username: 'Friend 4'},
+        {id: 'Friend 5', username: 'Friend 5'},
+        {id: 'Friend 6', username: 'Friend 6'},
+        {id: 'Friend 7', username: 'Friend 7'},
+        {id: 'Friend 8', username: 'Friend 8'},
+        {id: 'Friend 9', username: 'Friend 9'},
+        {id: 'Friend 10', username: 'Friend 10'}
     ];
     return mockFriendList;
 }
@@ -71,8 +69,12 @@ export async function fetchFeedForUser(userToken, pageParam) {
     */
     return fetch(
         //This is just an api which provides images to use as sample posts
-        `https://picsum.photos/v2/list?page=${pageParam}&limit=10`
-    ).then(response => 
+        `https://picsum.photos/v2/list?page=${pageParam}&limit=10`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => 
         response.json()
     );
 }
