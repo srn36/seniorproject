@@ -3,17 +3,14 @@ import { fetchFriendsForUser, fetchUserPosts } from "../helper/apiCalls";
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import FeedPost from './FeedPost';
-import { Table } from "react-bootstrap";
-import FriendRow from "./FriendRow";
 import { useLocation, useParams } from "react-router-dom";
+import FriendList from "./friendDisplays/FriendList";
 
 const toggleFriendsOrPosts = {Friends: 'Posts', Posts: 'Friends'};
 
 function Profile(props) {
-    const userInfo = useLocation();
-    console.log(userInfo);
+    const userInfo = useLocation().state?.userInfo;
     const username = useParams();
-    console.log(username);
     const [postFriendToggle, setPostFriendToggle] = useState();
 
     useEffect(() => {
@@ -39,12 +36,10 @@ function Profile(props) {
         return /*await*/ fetchFriendsForUser(uname)/*.then(results => results.json())*/;
     };
 
-    const friends = friendList(username);
     const content = useMemo(() => {
-        const friendTable = Array.isArray(friends) 
-                            && friends.map(friend => <FriendRow key={friend.username} 
-                                                                username={friend.username} 
-                                                                profilePic={friend.profilePic}/>);
+        const retrieveFriends = friendList(username);
+        const friends = Array.isArray(retrieveFriends) ? retrieveFriends : [];
+        const friendListType = (username.username === userInfo?.username) ? 'Removable' : 'Standard';
         return (
             <div style={{placeItems: 'center', display: 'flex', flexDirection: 'column', }}>
                 <div className='col-6' style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
@@ -59,22 +54,13 @@ function Profile(props) {
                     (toggleFriendsOrPosts[postFriendToggle] === 'Friends') &&
                     <div className='col-12' style={{placeItems: 'center', display: 'flex', flexDirection: 'column'}}>
                         <h3>{username.username}'s Friends</h3>
-                        <div className="col-6" style={{display: 'flex', maxHeight: '75vh', overflowY: 'scroll'}}>
-                            {
-                                (Object.keys(friendTable).length > 0) &&
-                                <Table bordered hover>
-                                    <tbody>
-                                        {friendTable}
-                                    </tbody>
-                                </Table>
-                            }
-                        </div>
+                        <FriendList friends={friends} type={friendListType} userInfo={userInfo}/>
                     </div>
                 }
                 {
                     (toggleFriendsOrPosts[postFriendToggle] === 'Posts') &&
                     <div style={{placeItems: 'center', display: 'flex', flexDirection: 'column'}}>
-                        <h3>{username}'s Posts</h3>
+                        <h3>{username.username}'s Posts</h3>
                         <div className="col-6" style={{display: 'flex', justifyContent: 'center'}}>
                             {isLoading ? (
                                     <p>Loading...</p>
@@ -93,7 +79,7 @@ function Profile(props) {
                 }
             </div>
         );
-    }, [friends, data?.pages, fetchNextPage, hasNextPage, isError, isLoading, username, postFriendToggle]);
+    }, [data?.pages, fetchNextPage, hasNextPage, isError, isLoading, username, postFriendToggle, userInfo]);
 
     return content;
 }
