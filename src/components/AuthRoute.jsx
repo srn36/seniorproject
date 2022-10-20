@@ -7,7 +7,7 @@ import smallLogo from '../smollogo.png';
 function AuthRoute({ child }) {
     const token = getToken();
     const [content, setContent] = useState();
-    const userInfo = useLocation();
+    const userInfo = useLocation().state?.userInfo;
 
     useEffect(() => {
         const pageContent = (

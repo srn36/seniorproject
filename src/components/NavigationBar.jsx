@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 
 function NavigationBar(props) {
     const userInfo = props.userInfo;
+    console.log(userInfo);
     const logOut = () => {
         sessionStorage.removeItem('token');
         return props.setContent(<Navigate to='/login/' />);

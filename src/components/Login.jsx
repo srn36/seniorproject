@@ -4,9 +4,9 @@
  */
 
 import React, { useState } from 'react';
-import { getToken, storeToken } from '../helper/tokens';
+import { /*getToken,*/ storeToken } from '../helper/tokens';
 import { fetchLoginTokenFromCredentials, fetchUserInfoFromToken } from '../helper/apiCalls';
-import { Navigate } from 'react-router-dom/dist';
+import { useNavigate } from 'react-router-dom/dist';
 import { useEffect } from 'react';
 import backg from '../BG.jpeg';
 
@@ -15,8 +15,9 @@ import backg from '../BG.jpeg';
 function Login() {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
-    const [content, setContent] = useState(); 
-    const loginToken = getToken();
+    const [content, setContent] = useState();
+    const navigate = useNavigate();
+    //const loginToken = getToken();
 
     useEffect(() => {
         const submitCredentials = /*async*/ e => {
@@ -28,7 +29,7 @@ function Login() {
             const token = /*await*/ fetchLoginTokenFromCredentials(credentials);
             storeToken(token);
             const userInfo = fetchUserInfoFromToken(token);
-            setContent(<Navigate to='/' state={{userInfo: userInfo}}/>);
+            navigate('/', {state: {userInfo: userInfo} } );
         }
 
         setContent(
@@ -53,9 +54,9 @@ function Login() {
                 </form>
             </div>
         );
-    }, [username, password]);
+    }, [username, password, navigate]);
 
-    return (loginToken != null) ? <Navigate to='/' /> : content;
+    return /*(loginToken != null) ? navigate('/', {state: {userInfo: userInfo} } ) :*/ content;
 }
 
 export default Login

@@ -6,7 +6,7 @@ import { fetchFeedForUser } from '../helper/apiCalls';
 import { useLocation } from 'react-router-dom';
 
 function Home(props) {
-    const userInfo = useLocation();
+    const userInfo = useLocation().state?.userInfo;
 
     const fetchPosts = async ({ pageParam = 1 }) => {
         const results = await fetchFeedForUser(userInfo?.username, pageParam);
