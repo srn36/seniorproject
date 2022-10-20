@@ -30,7 +30,7 @@ export /*async*/ function fetchUserInfoFromToken(token) {
     return {username: 'username', password: 'password'};
 }
 
-export /*async*/ function fetchFriendsForUser(userToken) {
+export /*async*/ function fetchFriendsForUser(username) {
     /*
     return fetch('token? to friends list service', {
         method: 'POST',
@@ -67,7 +67,7 @@ export /*async*/ function fetchFriendsForUser(userToken) {
     return mockFriendList;
 }
 
-export async function fetchFeedForUser(userToken, pageParam) {
+export async function fetchFeedForUser(username, pageParam) {
     /*
     return fetch('token? to feed service', {
         method: 'POST',

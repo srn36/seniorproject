@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { getToken, storeToken } from '../helper/tokens';
-import { fetchLoginTokenFromCredentials } from '../helper/apiCalls';
+import { fetchLoginTokenFromCredentials, fetchUserInfoFromToken } from '../helper/apiCalls';
 import { Navigate } from 'react-router-dom/dist';
 import { useEffect } from 'react';
 import backg from '../BG.jpeg';
@@ -27,7 +27,8 @@ function Login() {
             };
             const token = /*await*/ fetchLoginTokenFromCredentials(credentials);
             storeToken(token);
-            setContent(<Navigate to='/' />);
+            const userInfo = fetchUserInfoFromToken(token);
+            setContent(<Navigate to='/' state={{userInfo: userInfo}}/>);
         }
 
         setContent(

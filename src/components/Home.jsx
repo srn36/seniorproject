@@ -2,14 +2,14 @@ import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import FeedPost from './FeedPost';
-import { getToken } from '../helper/tokens';
 import { fetchFeedForUser } from '../helper/apiCalls';
+import { useLocation } from 'react-router-dom';
 
 function Home(props) {
-    const loginToken = getToken();
+    const userInfo = useLocation();
 
     const fetchPosts = async ({ pageParam = 1 }) => {
-        const results = await fetchFeedForUser(loginToken, pageParam);
+        const results = await fetchFeedForUser(userInfo?.username, pageParam);
         return { results, nextPage: pageParam + 1, totalPages: 100 };
     };
 

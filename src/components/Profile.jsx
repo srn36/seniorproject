@@ -3,16 +3,17 @@ import { fetchFriendsForUser, fetchUserPosts } from "../helper/apiCalls";
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import FeedPost from './FeedPost';
-import { getToken } from "../helper/tokens";
 import { Table } from "react-bootstrap";
 import FriendRow from "./FriendRow";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 const toggleFriendsOrPosts = {Friends: 'Posts', Posts: 'Friends'};
 
 function Profile(props) {
-    const token = getToken();
+    const userInfo = useLocation();
+    console.log(userInfo);
     const username = useParams();
+    console.log(username);
     const [postFriendToggle, setPostFriendToggle] = useState();
 
     useEffect(() => {
@@ -34,11 +35,11 @@ function Profile(props) {
         getNextPageParam: (lastPage) => (lastPage.nextPage < lastPage.totalPages) ? lastPage.nextPage : undefined
     });
 
-    const friendList = /*async*/ (t) => {
-        return /*await*/ fetchFriendsForUser(t)/*.then(results => results.json())*/;
+    const friendList = /*async*/ (uname) => {
+        return /*await*/ fetchFriendsForUser(uname)/*.then(results => results.json())*/;
     };
 
-    const friends = friendList(token);
+    const friends = friendList(username);
     const content = useMemo(() => {
         const friendTable = Array.isArray(friends) 
                             && friends.map(friend => <FriendRow key={friend.username} 
@@ -73,7 +74,7 @@ function Profile(props) {
                 {
                     (toggleFriendsOrPosts[postFriendToggle] === 'Posts') &&
                     <div style={{placeItems: 'center', display: 'flex', flexDirection: 'column'}}>
-                        <h3>{username.username}'s Posts</h3>
+                        <h3>{username}'s Posts</h3>
                         <div className="col-6" style={{display: 'flex', justifyContent: 'center'}}>
                             {isLoading ? (
                                     <p>Loading...</p>

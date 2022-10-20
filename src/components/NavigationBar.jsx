@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function NavigationBar(props) {
+    const userInfo = props.userInfo;
     const logOut = () => {
         sessionStorage.removeItem('token');
         return props.setContent(<Navigate to='/login/' />);
@@ -17,9 +18,9 @@ function NavigationBar(props) {
     return (
         <div style={{display: 'flex'}}>
             <DropdownButton id="dropdown-basic-button" title="Navigation">
-                <Link to='/' className='dropdown-item'>Home</Link>
-                <Link to='/chat' className='dropdown-item'>Chat</Link>
-                <Link to={`/profile/${props.username}`} className='dropdown-item'>Profile</Link>
+                <Link to='/' className='dropdown-item' state={{userInfo: userInfo}}>Home</Link>
+                <Link to='/chat' className='dropdown-item' state={{userInfo: userInfo}}>Chat</Link>
+                <Link to={`/profile/${props.userInfo?.username}`} className='dropdown-item' state={{userInfo: userInfo}}>Profile</Link>
                 <button onClick={e => logOut()} className='dropdown-item'>Log Out</button>
             </DropdownButton>
         </div>
@@ -28,7 +29,7 @@ function NavigationBar(props) {
 
 NavigationBar.propTypes = {
     setContent: PropTypes.func.isRequired,
-    username: PropTypes.string.isRequired
+    userInfo: PropTypes.any.isRequired
 };
 
 export default NavigationBar
