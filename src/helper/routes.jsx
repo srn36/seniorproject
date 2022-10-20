@@ -11,17 +11,17 @@ function routes() {
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <AuthRoute child={<Home/>}/>,
+            element: <AuthRoute renderChild={(info) => <Home userInfo={info}/>}/>,
             children: [],
         },
         {
             path: "/profile/:username", 
-            element: <AuthRoute child={<Profile/>}/>,
+            element: <AuthRoute renderChild={(info) => <Profile userInfo={info}/>}/>,
             children: [],
         },
         {
             path: "/chat/", 
-            element: <AuthRoute child={<Chat/>}/>,
+            element: <AuthRoute renderChild={(info) => <Chat userInfo={info}/>}/>,
             children: [],
         },
         {

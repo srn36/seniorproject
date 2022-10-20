@@ -3,13 +3,13 @@ import { fetchFriendsForUser, fetchUserPosts } from "../helper/apiCalls";
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import FeedPost from './FeedPost';
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import FriendList from "./friendDisplays/FriendList";
 
 const toggleFriendsOrPosts = {Friends: 'Posts', Posts: 'Friends'};
 
 function Profile(props) {
-    const userInfo = useLocation().state?.userInfo;
+    const userInfo = props.userInfo;
     const username = useParams();
     const [postFriendToggle, setPostFriendToggle] = useState();
 

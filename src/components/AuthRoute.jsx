@@ -1,16 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { getToken } from "../helper/tokens";
-import { Navigate, useLocation } from "react-router-dom/dist";
+import { useNavigate, useLocation } from "react-router-dom/dist";
+import { fetchUserInfoFromToken } from "../helper/apiCalls";
 import NavigationBar from "./NavigationBar";
 import smallLogo from '../smollogo.png';
 
-function AuthRoute({ child }) {
-    const token = getToken();
+function AuthRoute({ renderChild }) {   
+    const navigate = useNavigate();
     const [content, setContent] = useState();
-    const userInfo = useLocation().state?.userInfo;
+    
+    const token = getToken();
+    const stateUserInfo = useLocation().state?.userInfo;
+    const userInfo = useMemo(() => {
+        return stateUserInfo || (!!token && /*await*/ fetchUserInfoFromToken(token));
+    }, [token, stateUserInfo]);
 
     useEffect(() => {
-        const pageContent = (
+        if(!token || !userInfo) {
+            navigate('/login/');
+        }
+    }, [token, userInfo, navigate]);  
+
+    const pageContent = useMemo(() => {
+        return (
             <div className="App">
                 <header className='App-header'>
                     <div style={{display: 'flex'}}>
@@ -19,12 +31,15 @@ function AuthRoute({ child }) {
                     <NavigationBar setContent={setContent} userInfo={userInfo}/>
                 </header>
                 <main>
-                    {child}
+                    {renderChild(userInfo)}
                 </main>
             </div>
         );
-        setContent(((token != null) && (userInfo != null)) ? pageContent : <Navigate to='/login/' />);
-    }, [child, token, userInfo]);
+    }, [renderChild, userInfo]);
+
+    useEffect(() => {
+        setContent(pageContent);
+    }, [pageContent]);
 
     return content;
 }

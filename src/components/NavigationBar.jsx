@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 
 function NavigationBar(props) {
     const userInfo = props.userInfo;
-    console.log(userInfo);
     const logOut = () => {
         sessionStorage.removeItem('token');
         return props.setContent(<Navigate to='/login/' />);
@@ -21,7 +20,7 @@ function NavigationBar(props) {
             <DropdownButton id="dropdown-basic-button" title="Navigation">
                 <Link to='/' className='dropdown-item' state={{userInfo: userInfo}}>Home</Link>
                 <Link to='/chat' className='dropdown-item' state={{userInfo: userInfo}}>Chat</Link>
-                <Link to={`/profile/${props.userInfo?.username}`} className='dropdown-item' state={{userInfo: userInfo}}>Profile</Link>
+                <Link to={`/profile/${userInfo?.username}`} className='dropdown-item' state={{userInfo: userInfo}}>Profile</Link>
                 <button onClick={e => logOut()} className='dropdown-item'>Log Out</button>
             </DropdownButton>
         </div>
@@ -29,8 +28,7 @@ function NavigationBar(props) {
 }
 
 NavigationBar.propTypes = {
-    setContent: PropTypes.func.isRequired,
-    userInfo: PropTypes.any.isRequired
+    setContent: PropTypes.func.isRequired
 };
 
 export default NavigationBar

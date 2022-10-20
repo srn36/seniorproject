@@ -3,11 +3,10 @@
  * https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
  */
 
-import React, { useState } from 'react';
-import { /*getToken,*/ storeToken } from '../helper/tokens';
+import React, { useState, useMemo, useEffect } from 'react';
+import { getToken, storeToken } from '../helper/tokens';
 import { fetchLoginTokenFromCredentials, fetchUserInfoFromToken } from '../helper/apiCalls';
-import { useNavigate } from 'react-router-dom/dist';
-import { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom/dist';
 import backg from '../BG.jpeg';
 
 <body background={backg} />
@@ -17,7 +16,18 @@ function Login() {
     const [password, setPassword] = useState();
     const [content, setContent] = useState();
     const navigate = useNavigate();
-    //const loginToken = getToken();
+    
+    const token = getToken();
+    const stateUserInfo = useLocation().state?.userInfo;
+    const userInfo = useMemo(() => {
+        return stateUserInfo || (!!token && /*await*/ fetchUserInfoFromToken(token));
+    }, [token, stateUserInfo]);
+
+    useEffect(() => {
+        if(token && userInfo) {
+            navigate('/', {state: {userInfo: userInfo} });
+        }
+    }, [token, userInfo, navigate]); 
 
     useEffect(() => {
         const submitCredentials = /*async*/ e => {
@@ -26,10 +36,10 @@ function Login() {
                 'username': username,
                 'password': password
             };
-            const token = /*await*/ fetchLoginTokenFromCredentials(credentials);
+            const loginToken = /*await*/ fetchLoginTokenFromCredentials(credentials);
             storeToken(token);
-            const userInfo = fetchUserInfoFromToken(token);
-            navigate('/', {state: {userInfo: userInfo} } );
+            const userInfo = /*await*/ fetchUserInfoFromToken(loginToken);
+            navigate('/', {state: {userInfo: userInfo} });
         }
 
         setContent(
@@ -54,9 +64,9 @@ function Login() {
                 </form>
             </div>
         );
-    }, [username, password, navigate]);
+    }, [username, password, navigate, token]);
 
-    return /*(loginToken != null) ? navigate('/', {state: {userInfo: userInfo} } ) :*/ content;
+    return content;
 }
 
 export default Login

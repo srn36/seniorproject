@@ -3,10 +3,9 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import FeedPost from './FeedPost';
 import { fetchFeedForUser } from '../helper/apiCalls';
-import { useLocation } from 'react-router-dom';
 
 function Home(props) {
-    const userInfo = useLocation().state?.userInfo;
+    const userInfo = props.userInfo;
 
     const fetchPosts = async ({ pageParam = 1 }) => {
         const results = await fetchFeedForUser(userInfo?.username, pageParam);
