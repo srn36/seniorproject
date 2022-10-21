@@ -1,11 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { fetchFriendsForUser, fetchUserPosts } from "../helper/api-calls/user";
-import InfiniteScroll from 'react-infinite-scroller';
-import { useInfiniteQuery } from 'react-query';
-import FeedPost from './post-feed/Post';
+import { removeFriend, sendFriendRequest } from "../helper/api-calls/friend";
 import { useParams } from "react-router-dom";
 import FriendList from "./friend-displays/FriendList";
-import { removeFriend, sendFriendRequest } from "../helper/api-calls/friend";
+import Feed from "./post-feed/Feed";
 
 const toggleFriendsOrPosts = {Friends: 'Posts', Posts: 'Friends'};
 
@@ -17,21 +15,6 @@ function Profile(props) {
     useEffect(() => {
         setPostFriendToggle('Friends');
     }, [username]);
-
-    const fetchPosts = async ({ pageParam = 1 }) => {
-        const results = await fetchUserPosts(username, pageParam);
-        return { results, nextPage: pageParam + 1, totalPages: 100 };
-    };
-
-    const {
-        data,
-        isLoading,
-        isError,
-        hasNextPage,
-        fetchNextPage
-    } = useInfiniteQuery('posts', fetchPosts, {
-        getNextPageParam: (lastPage) => (lastPage.nextPage < lastPage.totalPages) ? lastPage.nextPage : undefined
-    });
 
     const friendList = /*async*/ (uname) => {
         return /*await*/ fetchFriendsForUser(uname)/*.then(results => results.json())*/;
@@ -59,23 +42,12 @@ function Profile(props) {
                     (toggleFriendsOrPosts[postFriendToggle] === 'Posts') &&
                     <>
                         <h3>{username}'s Posts</h3>
-                        {isLoading ? (
-                                <p>Loading...</p>
-                            ) : isError ? (
-                                    <p>There was an error</p>
-                                ) : (
-                                    <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
-                                        {data?.pages.map((page) =>
-                                            page.results.map((post) => <FeedPost post={post} key={post.id} />)
-                                        )}
-                                    </InfiniteScroll>
-                                )
-                        }
+                        <Feed userInfo={userInfo} fetchForUsername={username} fetchFunction={fetchUserPosts}/>
                     </>
                 }
             </>
         );
-    }, [data?.pages, fetchNextPage, hasNextPage, isError, isLoading, username, postFriendToggle, userInfo]);
+    }, [username, postFriendToggle, userInfo]);
 
     return content;
 }

@@ -1,44 +1,16 @@
 import React from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
-import { useInfiniteQuery } from 'react-query';
-import FeedPost from './post-feed/Post';
 import { fetchFeedForUser } from '../helper/api-calls/user';
+import Feed from './post-feed/Feed';
 
 function Home(props) {
     const userInfo = props.userInfo;
 
-    const fetchPosts = async ({ pageParam = 1 }) => {
-        const results = await fetchFeedForUser(userInfo?.username, pageParam);
-        return { results, nextPage: pageParam + 1, totalPages: 100 };
-    };
-
-    const {
-        data,
-        isLoading,
-        isError,
-        hasNextPage,
-        fetchNextPage
-    } = useInfiniteQuery('posts', fetchPosts, {
-        getNextPageParam: (lastPage) => (lastPage.nextPage < lastPage.totalPages) ? lastPage.nextPage : undefined
-    });
-    
     return (
         <>
-            {isLoading ? (
-                    <p>Loading...</p>
-                ) : isError ? (
-                        <p>There was an error</p>
-                    ) : (
-                        <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
-                            {data.pages.map((page) =>
-                                page.results.map((post) => <FeedPost post={post} key={post.id} />)
-                            )}
-                        </InfiniteScroll>
-                    )
-            }
+            <Feed userInfo={userInfo} fetchForUsername={userInfo.username} fetchFunction={fetchFeedForUser}/>
         </>
     );
 }
 
 
-export default Home
+export default Home;
