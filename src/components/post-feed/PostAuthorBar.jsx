@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
     return (
         <div className="author-bar">
-            <Link to={`/profile/${author}`}
+            <Link reloadDocument to={`/profile/${author}`}
                 state={{userInfo: userInfo}}
             >
                 {author}

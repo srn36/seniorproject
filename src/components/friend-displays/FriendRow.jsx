@@ -6,7 +6,7 @@ function FriendRow({ username, profilePic, userInfo }) {
         <tr>
             <td>
                 <Link className='friend'
-                    to={`/profile/${username}`}
+                    reloadDocument to={`/profile/${username}`}
                     state={{userInfo: userInfo}}
                 >
                     <div>
