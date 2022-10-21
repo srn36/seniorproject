@@ -23,7 +23,7 @@ function Home(props) {
     });
     
     return (
-        <div>
+        <>
             {isLoading ? (
                     <p>Loading...</p>
                 ) : isError ? (
@@ -36,7 +36,7 @@ function Home(props) {
                         </InfiniteScroll>
                     )
             }
-        </div>
+        </>
     );
 }
 
