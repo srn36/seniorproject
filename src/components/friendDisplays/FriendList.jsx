@@ -18,7 +18,7 @@ function FriendList(props) {
         return rowTypes[type];
     });
     return (
-        <div className="col-6" style={{display: 'flex', maxHeight: '75vh', overflowY: 'scroll'}}>
+        <div className="friend-list">
             {
                 (Object.keys(friendTable).length > 0) &&
                 <Table bordered hover>

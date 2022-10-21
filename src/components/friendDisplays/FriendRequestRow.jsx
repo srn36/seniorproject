@@ -10,15 +10,14 @@ function FriendRequestRow({ username, profilePic, userInfo }) {
             <tr>
                 <td>
                     <Link className='friend'
-                        style={{justifyContent: 'space-between', display: 'flex'}} 
                         to={`/profile/${username}`} 
                         state={{userInfo: userInfo}}
                     >
-                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <div>
                             <img src={profilePic} alt=''/>
                             <p>{username}</p>
                         </div>
-                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <div>
                             <button onClick={e => {
                                 e.preventDefault();
                                 acceptFriendRequest(username, userInfo.username);

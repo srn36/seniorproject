@@ -9,12 +9,11 @@ function RemovableFriendRow({ username, profilePic, userInfo }) {
         setRow(
             <tr>
                 <td>
-                    <Link className='friend' 
-                        style={{justifyContent: 'space-between', display: 'flex'}} 
+                    <Link className='friend'
                         to={`/profile/${username}`} 
                         state={{userInfo: userInfo}}
                     >
-                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <div>
                             <img src={profilePic} alt=''/>
                             <p>{username}</p>
                         </div>

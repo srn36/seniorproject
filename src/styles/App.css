@@ -59,30 +59,3 @@ body {
     width: 500px;
     object-fit: cover;
 }
-
-.friend {
-    display: flex;
-    flex-direction: row;
-    place-items: center;
-    font-size: calc(10px + 2vmin);
-    text-decoration: none;
-    color:#212529;
-}
-
-.friend:focus, .friend:hover {
-    color:#1e2125;
-    background-color:#e9ecef
-}
-
-.friend img {
-    height: 2em;
-    width: 2em;
-    object-fit: cover;
-}
-
-.friend p {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-right: 0px;
-    margin-left: 0.5em;
-}
