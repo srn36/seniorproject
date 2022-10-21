@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { fetchFriendRequestsForUser } from "../helper/api-calls/friend";
-import FriendList from "./friendDisplays/FriendList";
+import FriendList from "./friend-displays/FriendList";
 
 function Requests(props) {
     const userInfo = props.userInfo;

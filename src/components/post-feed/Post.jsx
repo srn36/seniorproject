@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FeedPost = ({ post } ) => {
+const Post = ({ post } ) => {
     return (
         <div className='post'>
             <img src={post.download_url} alt={post.author} />
@@ -9,4 +9,4 @@ const FeedPost = ({ post } ) => {
     );
 }
 
-export default FeedPost
+export default Post
