@@ -5,8 +5,7 @@ import Post from './Post';
 import PropTypes from 'prop-types';
 
 function Feed(props) {
-    const username = props.fetchForUsername;
-    const userInfo = props.userInfo;
+    const {username, userInfo} = props;
 
     const fetchPosts = async ({ pageParam = 1 }) => {
         const results = await props.fetchFunction(username, pageParam);
@@ -32,7 +31,7 @@ function Feed(props) {
                     ) : (
                         <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
                             {data.pages.map((page) =>
-                                page.results.map((post) => <Post post={post} key={post.id} />)
+                                page.results.map((post) => <Post post={post} userInfo={userInfo} key={post.id}/>)
                             )}
                         </InfiniteScroll>
                     )

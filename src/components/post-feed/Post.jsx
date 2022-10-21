@@ -1,12 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import PostAuthorBar from './PostAuthorBar';
 
-const Post = ({ post } ) => {
+function Post(props) {
+    const {userInfo, post} = props;
+
     return (
         <div className='post'>
-            <img src={post.download_url} alt={post.author} />
-            <h4>{post.author}</h4> {/*eventually replace with a bar containing post info (likes? description?)*/}
+            <img src={post.download_url} alt={post.author}/>
+            <PostAuthorBar userInfo={userInfo} author={post.author}/>
         </div>
     );
 }
 
-export default Post
+Post.propTypes ={
+    userInfo: PropTypes.any.isRequired,
+    post: PropTypes.any.isRequired
+};
+
+export default Post;

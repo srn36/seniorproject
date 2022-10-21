@@ -27,7 +27,8 @@ function NavigationBar(props) {
 }
 
 NavigationBar.propTypes = {
-    navigate: PropTypes.func.isRequired
+    navigate: PropTypes.func.isRequired,
+    userInfo: PropTypes.any.isRequired
 };
 
 export default NavigationBar

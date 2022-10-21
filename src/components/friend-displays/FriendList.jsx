@@ -6,9 +6,8 @@ import FriendRequestRow from "./FriendRequestRow";
 import { Table } from "react-bootstrap";
 
 function FriendList(props) {
-    const friends = props.friends;
-    const type = props.type;
-    const userInfo = props.userInfo;
+    const {friends, type, userInfo} = props;
+
     const friendTable = friends.map(friend => {
         const rowTypes = {
             Standard: <FriendRow key={friend.username} username={friend.username} profilePic={friend.profilePic} userInfo={userInfo}/>,
@@ -33,7 +32,8 @@ function FriendList(props) {
 
 FriendList.propTypes = {
     friends: PropTypes.array.isRequired,
-    type: PropTypes.oneOf(['Removable', 'Requests', 'Standard']).isRequired
+    type: PropTypes.oneOf(['Removable', 'Requests', 'Standard']).isRequired,
+    userInfo: PropTypes.any.isRequired
 }
 
 export default FriendList
