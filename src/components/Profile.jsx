@@ -2,9 +2,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import { fetchFriendsForUser, fetchUserPosts } from "../helper/api-calls/user";
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
-import FeedPost from './FeedPost';
+import FeedPost from './post-feed/Post';
 import { useParams } from "react-router-dom";
-import FriendList from "./friendDisplays/FriendList";
+import FriendList from "./friend-displays/FriendList";
 import { removeFriend, sendFriendRequest } from "../helper/api-calls/friend";
 
 const toggleFriendsOrPosts = {Friends: 'Posts', Posts: 'Friends'};

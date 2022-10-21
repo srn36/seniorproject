@@ -1,7 +1,7 @@
 import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
-import FeedPost from './FeedPost';
+import FeedPost from './post-feed/Post';
 import { fetchFeedForUser } from '../helper/api-calls/user';
 
 function Home(props) {
