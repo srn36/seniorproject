@@ -1,8 +1,3 @@
-/*
- * Adapted from tutorial by Joe Morgan
- * https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
- */
-
 import React, { useState, useMemo, useEffect } from 'react';
 import { getToken, storeToken } from '../helper/tokens';
 import { fetchLoginTokenFromCredentials, fetchUserInfoFromToken } from '../helper/api-calls/user';
@@ -45,20 +40,20 @@ function Login() {
         setContent(
             <div className='center'>
                 <h1>LOGIN</h1>
-                <form onSubmit={submitCredentials}>        
-                    <div className='center'>
+                <form onSubmit={submitCredentials}>    
+                    <div>
                         <label>
-                            <p className='center'>Username</p>
+                            <p>Username</p>
                             <input type="text" onChange={e => setUsername(e.target.value)}></input>
                         </label>
                     </div>
-                    <div className='center'>
+                    <div>
                         <label>
-                            <p className='center'>Password</p>
+                            <p>Password</p>
                             <input type="password" onChange={e => setPassword(e.target.value)}></input>
                         </label>
                     </div>
-                    <div className='center'>
+                    <div>
                         <button type="submit">Log In</button>
                     </div>
                 </form>
