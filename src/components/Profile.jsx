@@ -56,14 +56,14 @@ function Profile(props) {
                     <h2>Profile Page for {username.username}</h2>
                     {//Also need to check if there is an existing friend request between them at some point
                         !isOwnProfile && (
-                            (!alreadyFriends && <button onClick={e => {sendFriendRequest(userInfo.username, username)}}>Request Friend</button>) ||
-                            (<button onClick={e => {removeFriend(userInfo.username, username)}}>Remove Friend</button>)
+                            (!alreadyFriends && <button onClick={_e => {sendFriendRequest(userInfo.username, username)}}>Request Friend</button>) ||
+                            (<button onClick={_e => {removeFriend(userInfo.username, username)}}>Remove Friend</button>)
                         )
                     }
                 </div>
                 <>
                     <h4>hi</h4>
-                    <button onClick={e => {setPostFriendToggle(toggleFriendsOrPosts[postFriendToggle]);}}>Show {postFriendToggle}</button>
+                    <button onClick={_e => {setPostFriendToggle(toggleFriendsOrPosts[postFriendToggle]);}}>Show {postFriendToggle}</button>
                 </>
                 {
                     (toggleFriendsOrPosts[postFriendToggle] === 'Friends') &&
