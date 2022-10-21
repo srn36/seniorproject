@@ -1,5 +1,6 @@
 .friend-list {
     display: flex;
+    flex-direction: column;
     flex: 0 0 auto;
     width: 50%;
     max-height: 75vh;

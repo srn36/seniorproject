@@ -20,21 +20,19 @@ function AuthRoute({ renderChild }) {
         }
     }, [token, userInfo, navigate]);  
 
-    const content = useMemo(() => {
+    return useMemo(() => {
         return (
-            <div className="App">
+            <div className='App'>
                 <header className='App-header'>
                     <img src={smallLogo} height="50" width="auto" alt="logo"/>
                     <NavigationBar navigate={navigate} userInfo={userInfo}/>
                 </header>
-                <main>
+                <main className='App-main'>
                     {renderChild(userInfo)}
                 </main>
             </div>
         );
     }, [renderChild, userInfo, navigate]);
-
-    return content;
 }
 
 export default AuthRoute

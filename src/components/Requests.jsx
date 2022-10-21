@@ -14,12 +14,10 @@ function Requests(props) {
         const friendRequests = Array.isArray(retrieveFriendRequests) ? retrieveFriendRequests : [];
 
         return (
-            <div style={{placeItems: 'center', display: 'flex', flexDirection: 'column', }}>
-                <div className='col-12' style={{placeItems: 'center', display: 'flex', flexDirection: 'column'}}>
-                    <h3>Friend Requests</h3>
-                    <FriendList friends={friendRequests} type={'Requests'} userInfo={userInfo}/>
-                </div>
-            </div>
+            <>
+                <h3>Friend Requests</h3>
+                <FriendList friends={friendRequests} type={'Requests'} userInfo={userInfo}/>
+            </>
         );
     }, [userInfo]);
 

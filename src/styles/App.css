@@ -28,6 +28,12 @@ body {
   color: white;
 }
 
+.App-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
 .App-link {
   color: #61dafb;
 }

@@ -2,7 +2,6 @@
 Use of this component has now been packaged into AuthRoute, which will serve as a base page.
 Load pages with AuthRoute to automatically have a NavigationBar appended
 */
-
 import React from "react";
 import { DropdownButton } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
