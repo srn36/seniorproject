@@ -21,6 +21,7 @@ function NavigationBar(props) {
                 <Link to='/' className='dropdown-item' state={{userInfo: userInfo}}>Home</Link>
                 <Link to='/chat' className='dropdown-item' state={{userInfo: userInfo}}>Chat</Link>
                 <Link to={`/profile/${userInfo?.username}`} className='dropdown-item' state={{userInfo: userInfo}}>Profile</Link>
+                <Link to={'/requests/'} className='dropdown-item' state={{userInfo: userInfo}}>Friend Requests</Link>
                 <button onClick={e => logOut()} className='dropdown-item'>Log Out</button>
             </DropdownButton>
         </div>

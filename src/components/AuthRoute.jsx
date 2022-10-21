@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { getToken } from "../helper/tokens";
 import { useNavigate, useLocation } from "react-router-dom/dist";
-import { fetchUserInfoFromToken } from "../helper/apiCalls";
+import { fetchUserInfoFromToken } from "../helper/api-calls/user";
 import NavigationBar from "./NavigationBar";
 import smallLogo from '../smollogo.png';
 

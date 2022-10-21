@@ -4,6 +4,7 @@ import Login from '../components/Login';
 import Profile from '../components/Profile';
 import AuthRoute from '../components/AuthRoute';
 import Chat from '../components/Chat';
+import Requests from '../components/Requests';
 
 function routes() {
     //ADD ROUTES FOR NEW PAGES BELOW
@@ -22,6 +23,11 @@ function routes() {
         {
             path: "/chat/", 
             element: <AuthRoute renderChild={(info) => <Chat userInfo={info}/>}/>,
+            children: [],
+        },
+        {
+            path: "/requests/", 
+            element: <AuthRoute renderChild={(info) => <Requests userInfo={info}/>}/>,
             children: [],
         },
         {

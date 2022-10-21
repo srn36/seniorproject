@@ -1,4 +1,4 @@
-import mockPFP from '../logo192.png';
+import mockPFP from '../../logo192.png';
 
 export /*async*/ function fetchLoginTokenFromCredentials(credentials) {
     /*

@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { fetchFriendsForUser, fetchUserPosts } from "../helper/apiCalls";
+import { fetchFriendsForUser, fetchUserPosts } from "../helper/api-calls/user";
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import FeedPost from './FeedPost';
 import { useParams } from "react-router-dom";
 import FriendList from "./friendDisplays/FriendList";
+import { removeFriend, sendFriendRequest } from "../helper/api-calls/friend";
 
 const toggleFriendsOrPosts = {Friends: 'Posts', Posts: 'Friends'};
 
@@ -37,19 +38,33 @@ function Profile(props) {
     };
 
     const content = useMemo(() => {
-        const retrieveFriends = friendList(username);
+        const retrieveFriends = friendList(username.username);
         const friends = Array.isArray(retrieveFriends) ? retrieveFriends : [];
-        const friendListType = (username.username === userInfo?.username) ? 'Removable' : 'Standard';
+        const isOwnProfile = (username.username === userInfo?.username);
+        const friendListType = isOwnProfile ? 'Removable' : 'Standard';
+        let alreadyFriends = isOwnProfile || false;
+        friends.forEach(friend => {
+            if(friend.username === userInfo?.username) {                
+                alreadyFriends = true;
+            }
+        });
+
         return (
             <div style={{placeItems: 'center', display: 'flex', flexDirection: 'column', }}>
                 <div className='col-6' style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
                     <img src='' alt='profile pic here'/>
                     <h2>Profile Page for {username.username}</h2>
+                    {//Also need to check if there is an existing friend request between them at some point
+                        !isOwnProfile && (
+                            (!alreadyFriends && <button onClick={e => {sendFriendRequest(userInfo.username, username)}}>Request Friend</button>) ||
+                            (<button onClick={e => {removeFriend(userInfo.username, username)}}>Remove Friend</button>)
+                        )
+                    }
                 </div>
-                <div>
+                <>
                     <h4>hi</h4>
                     <button onClick={e => {setPostFriendToggle(toggleFriendsOrPosts[postFriendToggle]);}}>Show {postFriendToggle}</button>
-                </div>
+                </>
                 {
                     (toggleFriendsOrPosts[postFriendToggle] === 'Friends') &&
                     <div className='col-12' style={{placeItems: 'center', display: 'flex', flexDirection: 'column'}}>

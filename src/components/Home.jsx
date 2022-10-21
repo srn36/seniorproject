@@ -2,7 +2,7 @@ import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import FeedPost from './FeedPost';
-import { fetchFeedForUser } from '../helper/apiCalls';
+import { fetchFeedForUser } from '../helper/api-calls/user';
 
 function Home(props) {
     const userInfo = props.userInfo;
