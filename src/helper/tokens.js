@@ -1,9 +1,9 @@
 export function storeToken(userLoginToken) {
-    sessionStorage.setItem('token', JSON.stringify(userLoginToken));
+    localStorage.setItem('token', JSON.stringify(userLoginToken));
 }
 
 export function getToken() {
-    const storedToken = sessionStorage.getItem('token');
+    const storedToken = localStorage.getItem('token');
     return storedToken;
     //const userLoginToken = JSON.parse(storedToken);  
     //return userLoginToken?.token;

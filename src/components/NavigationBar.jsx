@@ -11,7 +11,7 @@ function NavigationBar(props) {
     const userInfo = props.userInfo;
 
     const logOut = () => {
-        sessionStorage.removeItem('token');
+        localStorage.removeItem('token');
         props.navigate('/login/');
     };
 
