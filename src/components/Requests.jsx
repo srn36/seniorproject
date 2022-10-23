@@ -6,7 +6,7 @@ function Requests(props) {
     const userInfo = props.userInfo;
 
     const requestList = /*async*/ (uname) => {
-        return /*await*/ fetchFriendRequestsForUser(uname)/*.then(results => results.json())*/;
+        return /*await*/ fetchFriendRequestsForUser(uname)?.filter(request => request.toUsername === uname)/*.then(results => results.json())*/;
     };
 
     const content = useMemo(() => {

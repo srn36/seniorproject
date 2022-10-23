@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { fetchFriendsForUser, fetchUserPosts } from "../helper/api-calls/user";
-import { removeFriend, sendFriendRequest } from "../helper/api-calls/friend";
+import { checkFriendRequests, removeFriend, sendFriendRequest, acceptFriendRequest, rejectFriendRequest } from "../helper/api-calls/friend";
 import { useParams } from "react-router-dom";
 import FriendList from "./friend-displays/FriendList";
 import Feed from "./post-feed/Feed";
@@ -53,23 +53,38 @@ function Profile(props) {
 }
 
 function ProfileHeadline({ username, userInfo, isOwnProfile, friends }) {
-    let alreadyFriends = isOwnProfile || false;
-    friends.forEach(friend => {
-        if(friend.username === userInfo?.username) {                
-            alreadyFriends = true;
-        }
-    });
+    const relationshipBasedFriendButton = {
+        'Already Friends': <button onClick={_e => removeFriend(userInfo.username, username)}>Remove Friend</button>,
+        'Outgoing': <button disabled={true}>Requested</button>,
+        'Incoming': <div>
+                        <button onClick={_e => acceptFriendRequest(username, userInfo.username)}>
+                            Accept
+                        </button>
+                        <button onClick={_e => rejectFriendRequest(username, userInfo.username)}>
+                            Reject
+                        </button> 
+                    </div>,
+        'None': <button onClick={_e => sendFriendRequest(userInfo.username, username)}>Request Friend</button>
+    }
 
+    const friendButtonKey = (isOwnProfile ? 
+        undefined
+        :
+        (
+            !!(friends.filter(friend => friend.username === userInfo?.username).length) ?
+                'Already Friends'
+                :
+                checkFriendRequests(userInfo.username, username)
+        )
+    );
+    
     return (
-        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-            <img src='' alt='profile pic here'/>
-            <h2>Profile Page for {username}</h2>
-            {//Also need to check if there is an existing friend request between them at some point
-                !isOwnProfile && (
-                    (!alreadyFriends && <button onClick={_e => {sendFriendRequest(userInfo.username, username)}}>Request Friend</button>) ||
-                    (<button onClick={_e => {removeFriend(userInfo.username, username)}}>Remove Friend</button>)
-                )
-            }
+        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '60%'}}>
+            <div style={{display: 'flex'}}>
+                <img src='' alt='profile pic here'/>
+                <h2>Profile Page for {username}</h2>
+            </div>
+            {!isOwnProfile && relationshipBasedFriendButton[friendButtonKey]}
         </div>
     );
 }

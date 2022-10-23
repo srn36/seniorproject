@@ -13,43 +13,80 @@ export /*async*/ function fetchFriendRequestsForUser(username) {
     );
     */
     const mockRequestList = [
-        {key: 'Request 1', username: 'Request 1', profilePic: mockPFP},
-        {key: 'Request 2', username: 'Request 2', profilePic: mockPFP},
-        {key: 'Request 3', username: 'Request 3', profilePic: mockPFP},
-        {key: 'Request 4', username: 'Request 4', profilePic: mockPFP},
-        {key: 'Request 5', username: 'Request 5', profilePic: mockPFP},
-        {key: 'Request 6', username: 'Request 6', profilePic: mockPFP},
-        {key: 'Request 7', username: 'Request 7', profilePic: mockPFP},
-        {key: 'Request 8', username: 'Request 8', profilePic: mockPFP},
-        {key: 'Request 9', username: 'Request 9', profilePic: mockPFP},
-        {key: 'Request 10', username: 'Request 10', profilePic: mockPFP},
-        {key: 'Request 11', username: 'Request 11', profilePic: mockPFP},
-        {key: 'Request 12', username: 'Request 12', profilePic: mockPFP},
-        {key: 'Request 13', username: 'Request 13', profilePic: mockPFP},
-        {key: 'Request 14', username: 'Request 14', profilePic: mockPFP},
-        {key: 'Request 15', username: 'Request 15', profilePic: mockPFP},
-        {key: 'Request 16', username: 'Request 16', profilePic: mockPFP},
-        {key: 'Request 17', username: 'Request 17', profilePic: mockPFP},
-        {key: 'Request 18', username: 'Request 18', profilePic: mockPFP},
-        {key: 'Request 19', username: 'Request 19', profilePic: mockPFP},
-        {key: 'Request 20', username: 'Request 20', profilePic: mockPFP}
+        {key: 'Request 1', fromUsername: 'Friend 1', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 2', fromUsername: 'Friend 2', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 3', fromUsername: 'Friend 3', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 4', fromUsername: 'Friend 4', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 5', fromUsername: 'Friend 5', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 6', fromUsername: 'Friend 6', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 7', fromUsername: 'Friend 7', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 8', fromUsername: 'Friend 8', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 9', fromUsername: 'Friend 9', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 10', fromUsername: 'Friend 10', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 11', fromUsername: 'Request 11', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 12', fromUsername: 'Request 12', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 13', fromUsername: 'Request 13', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 14', fromUsername: 'Request 14', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 15', fromUsername: 'Request 15', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 16', fromUsername: 'Request 16', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 17', fromUsername: 'Request 17', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 18', fromUsername: 'Request 18', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 19', fromUsername: 'Request 19', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 20', fromUsername: 'Request 20', toUsername: username, profilePic: mockPFP},
+        {key: 'Request 21', fromUsername: username, toUsername: 'Friend 1', profilePic: mockPFP},
+        {key: 'Request 22', fromUsername: username, toUsername: 'Friend 22', profilePic: mockPFP},
+        {key: 'Request 23', fromUsername: username, toUsername: 'Friend 23', profilePic: mockPFP},
+        {key: 'Request 24', fromUsername: username, toUsername: 'Friend 24', profilePic: mockPFP},
+        {key: 'Request 25', fromUsername: username, toUsername: 'Friend 25', profilePic: mockPFP},
+        {key: 'Request 26', fromUsername: username, toUsername: 'Friend 26', profilePic: mockPFP},
+        {key: 'Request 27', fromUsername: username, toUsername: 'Friend 27', profilePic: mockPFP},
+        {key: 'Request 28', fromUsername: username, toUsername: 'Friend 28', profilePic: mockPFP},
+        {key: 'Request 29', fromUsername: username, toUsername: 'Friend 29', profilePic: mockPFP},
+        {key: 'Request 30', fromUsername: username, toUsername: 'Friend 30', profilePic: mockPFP},
+        {key: 'Request 31', fromUsername: username, toUsername: 'Request 31', profilePic: mockPFP},
+        {key: 'Request 32', fromUsername: username, toUsername: 'Request 32', profilePic: mockPFP},
+        {key: 'Request 33', fromUsername: username, toUsername: 'Request 33', profilePic: mockPFP},
+        {key: 'Request 34', fromUsername: username, toUsername: 'Request 34', profilePic: mockPFP},
+        {key: 'Request 35', fromUsername: username, toUsername: 'Request 35', profilePic: mockPFP},
+        {key: 'Request 36', fromUsername: username, toUsername: 'Request 36', profilePic: mockPFP},
+        {key: 'Request 37', fromUsername: username, toUsername: 'Request 37', profilePic: mockPFP},
+        {key: 'Request 38', fromUsername: username, toUsername: 'Request 38', profilePic: mockPFP},
+        {key: 'Request 39', fromUsername: username, toUsername: 'Request 39', profilePic: mockPFP},
+        {key: 'Request 40', fromUsername: username, toUsername: 'Request 40', profilePic: mockPFP},
     ];
     return mockRequestList;
 }
 
-export function sendFriendRequest(fromUser, toUser) {
+export /*async*/ function checkFriendRequests(loggedInUsername, viewingUsername) {
+    const requestsForLoggedInUser = fetchFriendRequestsForUser(loggedInUsername);
+    return !!(requestsForLoggedInUser?.filter(request => request.toUsername === viewingUsername).length) ? 
+        'Outgoing'
+        :
+        (
+            !!(requestsForLoggedInUser?.filter(request => request.fromUsername === viewingUsername).length) ?
+                'Incoming'
+                :
+                'None'
+        );
+
+}
+
+export /*async*/ function sendFriendRequest(fromUser, toUser) {
+    console.log('send');
     //I honestly don't know what a put call looks like and i do not feel like googling it rn
 }
 
-export function acceptFriendRequest(fromUser, toUser) {
+export /*async*/ function acceptFriendRequest(fromUser, toUser) {
+    console.log('accept');
     //delete existing request between the two users
     //put request to create friend relationship between the users
 }
 
-export function rejectFriendRequest(fromUser, toUser) {
+export /*async*/ function rejectFriendRequest(fromUser, toUser) {
+    console.log('reject');
     //delete existing request between the two users
 }
 
-export function removeFriend(user1, user2) {
+export /*async*/ function removeFriend(user1, user2) {
     //delete existing friend relationship between the two users
 }

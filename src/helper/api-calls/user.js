@@ -62,7 +62,8 @@ export /*async*/ function fetchFriendsForUser(username) {
         {key: 'Friend 17', username: 'Friend 17', profilePic: mockPFP},
         {key: 'Friend 18', username: 'Friend 18', profilePic: mockPFP},
         {key: 'Friend 19', username: 'Friend 19', profilePic: mockPFP},
-        {key: 'Friend 20', username: 'Friend 20', profilePic: mockPFP}
+        {key: 'Friend 20', username: 'Friend 20', profilePic: mockPFP},
+        //{key: 'Friend 21', username: 'username', profilePic: mockPFP}
     ];
     return mockFriendList;
 }

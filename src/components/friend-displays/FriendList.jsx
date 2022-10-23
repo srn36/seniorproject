@@ -12,7 +12,7 @@ function FriendList(props) {
         const rowTypes = {
             Standard: <FriendRow key={friend.username} username={friend.username} profilePic={friend.profilePic} userInfo={userInfo}/>,
             Removable: <RemovableFriendRow key={friend.username} username={friend.username} profilePic={friend.profilePic} userInfo={userInfo}/>,
-            Requests: <FriendRequestRow key={friend.username} username={friend.username} profilePic={friend.profilePic} userInfo={userInfo}/>
+            Requests: <FriendRequestRow key={friend.fromUsername} username={friend.fromUsername} profilePic={friend.profilePic} userInfo={userInfo}/>
         };
         return rowTypes[type];
     });
