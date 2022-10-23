@@ -30,6 +30,10 @@ export /*async*/ function fetchUserInfoFromToken(token) {
     return {username: 'username', password: 'password'};
 }
 
+export /*async*/ function fetchProfileInfoForUser(username) {
+    return {profilePic: mockPFP};
+}
+
 export /*async*/ function fetchFriendsForUser(username) {
     /*
     return fetch('token? to friends list service', {

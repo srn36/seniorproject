@@ -1,6 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { fetchFriendsForUser, fetchUserPosts } from "../helper/api-calls/user";
-import { checkFriendRequests, removeFriend, sendFriendRequest, acceptFriendRequest, rejectFriendRequest } from "../helper/api-calls/friend";
+import { 
+    fetchFriendsForUser,
+    fetchUserPosts,
+    fetchProfileInfoForUser
+} from "../helper/api-calls/user";
+import { 
+    checkFriendRequests,
+    removeFriend,
+    sendFriendRequest,
+    acceptFriendRequest,
+    rejectFriendRequest 
+} from "../helper/api-calls/friend";
 import { useParams } from "react-router-dom";
 import FriendList from "./friend-displays/FriendList";
 import Feed from "./post-feed/Feed";
@@ -16,19 +26,23 @@ function Profile(props) {
         setPostFriendToggle('Friends');
     }, [username]);
 
-    const friendList = /*async*/ (uname) => {
+    const fetchFriendList = /*async*/ (uname) => {
         return /*await*/ fetchFriendsForUser(uname)/*.then(results => results.json())*/;
     };
+    const fetchProfileInfo = /*async*/ (uname) => {
+        return /*await*/ fetchProfileInfoForUser(uname)/*.then(results => results.json())*/;
+    }
 
     const content = useMemo(() => {
-        const retrieveFriends = friendList(username);
+        const retrieveFriends = fetchFriendList(username);
         const friends = Array.isArray(retrieveFriends) ? retrieveFriends : [];
         const isOwnProfile = (username === userInfo?.username);
         const friendListType = isOwnProfile ? 'Removable' : 'Standard';
+        const profileInfo = fetchProfileInfo(username);
 
         return (
             <>
-                <ProfileHeadline username={username} userInfo={userInfo} isOwnProfile={isOwnProfile} friends={friends}/>
+                <ProfileHeadline {...{username, userInfo, profileInfo, isOwnProfile, friends}}/>
                 <h4>hi</h4>
                 <button onClick={_e => {setPostFriendToggle(toggleFriendsOrPosts[postFriendToggle]);}}>Show {postFriendToggle}</button>
                 {
@@ -52,7 +66,7 @@ function Profile(props) {
     return content;
 }
 
-function ProfileHeadline({ username, userInfo, isOwnProfile, friends }) {
+function ProfileHeadline({ username, userInfo, profileInfo, isOwnProfile, friends }) {
     const relationshipBasedFriendButton = {
         'Already Friends': <button onClick={_e => removeFriend(userInfo.username, username)}>Remove Friend</button>,
         'Outgoing': <button disabled={true}>Requested</button>,
@@ -79,9 +93,9 @@ function ProfileHeadline({ username, userInfo, isOwnProfile, friends }) {
     );
     
     return (
-        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '60%'}}>
-            <div style={{display: 'flex'}}>
-                <img src='' alt='profile pic here'/>
+        <div className="profile-headline">
+            <div>
+                <img src={profileInfo.profilePic} alt='profile pic here'/>
                 <h2>Profile Page for {username}</h2>
             </div>
             {!isOwnProfile && relationshipBasedFriendButton[friendButtonKey]}
