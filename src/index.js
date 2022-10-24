@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+//import { ReactQueryDevtools } from 'react-query/devtools';
 import App from './App';
 import './styles/index.css';
 import './styles/App.css';
@@ -15,7 +15,7 @@ root.render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
             <App />
-            <ReactQueryDevtools />
+            {/*<ReactQueryDevtools />*/}
         </QueryClientProvider>
     </React.StrictMode>
 );
