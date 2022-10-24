@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import PropTypes from 'prop-types';
 import FriendRow from "./FriendRow";
 import RemovableFriendRow from "./RemovableFriendRow";
@@ -7,35 +7,36 @@ import { Table } from "react-bootstrap";
 
 function FriendList(props) {
     const {friends, type, userInfo} = props;
-    const friendTable = friends.map(friend => {
-        const rowTypes = {
-            Standard: <FriendRow key={friend.username} username={friend.username} profilePic={friend.profilePic} userInfo={userInfo}/>,
-            Removable: <RemovableFriendRow key={friend.username} username={friend.username} profilePic={friend.profilePic} userInfo={userInfo}/>,
-            Requests: <FriendRequestRow key={friend.fromUsername} username={friend.fromUsername} profilePic={friend.profilePic} userInfo={userInfo}/>
-        };
-        return rowTypes[type];
-    });
 
-    const [filteredTable, setFilteredTable] = useState(friendTable);
+    //Function to create the rows of the table based on the given list of friends and the type of table requested
+    const mapFriendsToRows = useCallback((friendList) => {
+        return friendList.map(friend => {
+            const rowTypes = {
+                Standard: <FriendRow key={friend.username} username={friend.username} profilePic={friend.profilePic} userInfo={userInfo}/>,
+                Removable: <RemovableFriendRow key={friend.username} username={friend.username} profilePic={friend.profilePic} userInfo={userInfo}/>,
+                Requests: <FriendRequestRow key={friend.fromUsername} username={friend.fromUsername} profilePic={friend.profilePic} userInfo={userInfo}/>
+            };
+            return rowTypes[type];
+        });
+    }, [userInfo, type]);
+
+    //Function to first filter the original friend list, then re-create the table rows using the filtered list
+    const filter = useCallback((text) => {
+        const filteredFriends = friends.filter(friend => friend.username.includes(text));
+        return mapFriendsToRows(filteredFriends);
+    }, [friends, mapFriendsToRows]);
+
+    //Use a hook to reload the table contents when the user tried to filter the results. Default value is to display entire friend list
+    const [filteredTable, setFilteredTable] = useState(mapFriendsToRows(friends));
 
     return useMemo(() => {
-        const filter = (text) => {
-            return friends.filter(friend => friend.username.includes(text)).map(friend => {
-                const rowTypes = {
-                    Standard: <FriendRow key={friend.username} username={friend.username} profilePic={friend.profilePic} userInfo={userInfo}/>,
-                    Removable: <RemovableFriendRow key={friend.username} username={friend.username} profilePic={friend.profilePic} userInfo={userInfo}/>,
-                    Requests: <FriendRequestRow key={friend.fromUsername} username={friend.fromUsername} profilePic={friend.profilePic} userInfo={userInfo}/>
-                };
-                return rowTypes[type];
-            });
-        }
         return (
             <div className="friend-list">
                 <Table bordered hover>
                     <thead>
                         <tr>
-                            <th style={{display: 'flex', flexDirection: 'row'}}>
-                                <p style={{marginBottom: '0px', marginRight: '0.5em'}}>Filter List</p>
+                            <th className="friend-list-header">
+                                <p>Filter List</p>
                                 <input type="text" onChange={e => setFilteredTable(filter(e.target.value))}/>
                             </th>
                         </tr>
@@ -48,7 +49,7 @@ function FriendList(props) {
                 </Table>
             </div>
         );
-    }, [friends, type, userInfo, filteredTable, setFilteredTable]);
+    }, [filteredTable, setFilteredTable, filter]);
 }
 
 FriendList.propTypes = {

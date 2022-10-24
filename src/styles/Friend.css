@@ -7,6 +7,16 @@
     overflow-y: scroll;
 }
 
+.friend-list-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.friend-list-header p {
+    margin-bottom: 0px;
+    margin-right: 0.5em;
+}
+
 .friend {
     display: flex;
     flex-direction: row;
