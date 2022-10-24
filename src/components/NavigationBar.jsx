@@ -32,4 +32,4 @@ NavigationBar.propTypes = {
     userInfo: PropTypes.any.isRequired
 };
 
-export default NavigationBar
+export default NavigationBar;

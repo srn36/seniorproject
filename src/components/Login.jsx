@@ -64,4 +64,4 @@ function Login() {
     return content;
 }
 
-export default Login
+export default Login;

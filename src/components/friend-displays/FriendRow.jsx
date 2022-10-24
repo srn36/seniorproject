@@ -19,4 +19,4 @@ function FriendRow({ username, profilePic, userInfo }) {
     );
 }
 
-export default FriendRow
+export default FriendRow;

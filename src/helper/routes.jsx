@@ -39,4 +39,4 @@ function routes() {
     return router;
 }
 
-export default routes
+export default routes;

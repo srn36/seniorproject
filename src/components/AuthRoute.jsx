@@ -35,4 +35,4 @@ function AuthRoute({ renderChild }) {
     }, [renderChild, userInfo, navigate]);
 }
 
-export default AuthRoute
+export default AuthRoute;

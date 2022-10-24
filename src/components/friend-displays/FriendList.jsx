@@ -55,4 +55,4 @@ FriendList.propTypes = {
     userInfo: PropTypes.any.isRequired
 }
 
-export default FriendList
+export default FriendList;

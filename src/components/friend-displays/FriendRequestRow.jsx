@@ -42,4 +42,4 @@ function FriendRequestRow({ username, profilePic, userInfo }) {
     return row;
 }
 
-export default FriendRequestRow
+export default FriendRequestRow;

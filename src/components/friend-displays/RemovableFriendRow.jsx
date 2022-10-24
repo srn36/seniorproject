@@ -33,4 +33,4 @@ function RemovableFriendRow({ username, profilePic, userInfo }) {
     return row;
 }
 
-export default RemovableFriendRow
+export default RemovableFriendRow;
