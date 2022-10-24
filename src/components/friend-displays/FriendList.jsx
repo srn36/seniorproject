@@ -6,11 +6,10 @@ import FriendRequestRow from "./FriendRequestRow";
 import { Table } from "react-bootstrap";
 
 function FriendList(props) {
-    const {friends, type, userInfo} = props;
-
-    //Function to create the rows of the table based on the given list of friends and the type of table requested
-    const mapFriendsToRows = useCallback((friendList) => {
-        return friendList.map(friend => {
+    //Convert the full friend list to rows of the table based on the type of table requested
+    const friendTable = useMemo(() => {
+        const {friends, type, userInfo} = props;
+        return friends.map(friend => {
             const rowTypes = {
                 Standard: <FriendRow key={friend.username} username={friend.username} profilePic={friend.profilePic} userInfo={userInfo}/>,
                 Removable: <RemovableFriendRow key={friend.username} username={friend.username} profilePic={friend.profilePic} userInfo={userInfo}/>,
@@ -18,16 +17,14 @@ function FriendList(props) {
             };
             return rowTypes[type];
         });
-    }, [userInfo, type]);
+    }, [props]);
 
-    //Function to first filter the original friend list, then re-create the table rows using the filtered list
+    const [tableRows, setTableRows] = useState(friendTable);
+
+    //Function to filter the rows of the table to only show results containing the value of text within their username field
     const filter = useCallback((text) => {
-        const filteredFriends = friends.filter(friend => friend.username.includes(text));
-        return mapFriendsToRows(filteredFriends);
-    }, [friends, mapFriendsToRows]);
-
-    //Use a hook to reload the table contents when the user tried to filter the results. Default value is to display entire friend list
-    const [filteredTable, setFilteredTable] = useState(mapFriendsToRows(friends));
+        setTableRows(friendTable.filter(friend => friend.props.username.includes(text)));
+    }, [friendTable, setTableRows]);
 
     return useMemo(() => {
         return (
@@ -37,19 +34,19 @@ function FriendList(props) {
                         <tr>
                             <th className="friend-list-header">
                                 <p>Filter List</p>
-                                <input type="text" onChange={e => setFilteredTable(filter(e.target.value))}/>
+                                <input type="text" onChange={e => filter(e.target.value)}/>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            (Object.keys(filteredTable).length > 0) ? filteredTable : <tr><td><p>No Results</p></td></tr>
+                            (Object.keys(tableRows).length > 0) ? tableRows : <tr><td><p>No Results</p></td></tr>
                         }
                     </tbody>
                 </Table>
             </div>
         );
-    }, [filteredTable, setFilteredTable, filter]);
+    }, [tableRows, filter]);
 }
 
 FriendList.propTypes = {
