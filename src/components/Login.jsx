@@ -3,6 +3,7 @@ import { getToken, storeToken } from '../helper/tokens';
 import { fetchLoginTokenFromCredentials, fetchUserInfoFromToken } from '../helper/api-calls/user';
 import { useNavigate, useLocation } from 'react-router-dom/dist';
 import backg from '../BG.jpeg';
+//import { useCredentialsToToken } from '../helper/api-calls/useApiCalls';
 
 <body background={backg} />
 
@@ -32,7 +33,7 @@ function Login() {
                 'password': password
             };
             const loginToken = /*await*/ fetchLoginTokenFromCredentials(credentials);
-            storeToken(token);
+            storeToken(loginToken);
             const userInfo = /*await*/ fetchUserInfoFromToken(loginToken);
             navigate('/', {state: {userInfo: userInfo} });
         }
@@ -40,7 +41,11 @@ function Login() {
         setContent(
             <div className='center'>
                 <h1>LOGIN</h1>
-                <form onSubmit={submitCredentials}>    
+                <form onSubmit={e => {
+                        e.preventDefault();
+                        submitCredentials(username, password);
+                    }
+                }>    
                     <div>
                         <label>
                             <p>Username</p>
@@ -64,4 +69,18 @@ function Login() {
     return content;
 }
 
+/*
+* this is a problem, seems I won't be able to use hooks for this
+function submitCredentials(username, password) {
+    const navigate = useNavigate();
+    const credentials = {
+        'username': username,
+        'password': password
+    };
+    const loginToken = useCredentialsToToken(credentials);
+    storeToken(token);
+    const userInfo = await fetchUserInfoFromToken(loginToken);
+    navigate('/', {state: {userInfo: userInfo} });
+}
+*/
 export default Login;
