@@ -22,15 +22,18 @@ function AuthRoute({ renderChild }) {
 
     return useMemo(() => {
         return (
-            <div className='App'>
-                <header className='App-header'>
-                    <img src={smallLogo} height="50" width="auto" alt="logo"/>
-                    <NavigationDropdown navigate={navigate} userInfo={userInfo}/>
-                </header>
-                <main className='App-main'>
-                    {renderChild(userInfo)}
-                </main>
-            </div>
+            <>
+                <main className="background-pic"/>
+                <div className='App'>
+                    <header className='App-header'>
+                        <img src={smallLogo} height="50" width="auto" alt="logo"/>
+                        <NavigationDropdown navigate={navigate} userInfo={userInfo}/>
+                    </header>
+                    <main className='App-main'>
+                        {renderChild(userInfo)}
+                    </main>
+                </div>
+            </>
         );
     }, [renderChild, userInfo, navigate]);
 }
