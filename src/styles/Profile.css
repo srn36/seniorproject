@@ -1,0 +1,18 @@
+.profile-headline {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+}
+
+.profile-headline img {
+    height: 5em;
+    width: 5em;
+    object-fit: cover;
+}
+
+.profile-headline div {
+    display: flex;
+    align-items: center;
+}
