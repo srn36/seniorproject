@@ -24,6 +24,7 @@ function NavigationDropdown(props) {
     };
     const autoGenTabs = tabPaths.map(path => 
         <Link
+            key={path}
             to={`/${path}/`}
             className='dropdown-item'
             onClick={_e => closeDropdownRef.current.click()}
