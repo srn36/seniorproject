@@ -88,5 +88,6 @@ export /*async*/ function rejectFriendRequest(fromUser, toUser) {
 }
 
 export /*async*/ function removeFriend(user1, user2) {
+    console.log('remove');
     //delete existing friend relationship between the two users
 }
