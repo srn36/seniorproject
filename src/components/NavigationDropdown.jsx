@@ -7,7 +7,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function NavigationBar(props) {
+function NavigationDropdown(props) {
     const userInfo = props.userInfo;
     const closeDropdownRef = useRef(null);
 
@@ -16,39 +16,33 @@ function NavigationBar(props) {
         props.navigate('/login/');
     };
 
+    //To add a tab to the navigation dropdown, simply add the tab's path to tabPaths
+    //Add a key, value mapping to overrideText if you want to display different text for a tab
+    const tabPaths =['Home', 'Chat', 'Requests'];
+    const overrideText = {
+        'Requests': 'Friend Requests',
+    };
+    const autoGenTabs = tabPaths.map(path => 
+        <Link
+            to={`/${path}/`}
+            className='dropdown-item'
+            onClick={_e => closeDropdownRef.current.click()}
+            state={{userInfo: userInfo}}
+        >
+            {overrideText[path] ? overrideText[path] : path}
+        </Link>
+    );
+
     return (
         <DropdownButton id="dropdown-basic-button" title="Navigation" ref={closeDropdownRef}>
-            <Link
-                to='/'
-                className='dropdown-item'
-                onClick={_e => closeDropdownRef.current.click()}
-                state={{userInfo: userInfo}}
-            >
-                Home
-            </Link>
-            <Link
-                to='/chat'
-                className='dropdown-item'
-                onClick={_e => closeDropdownRef.current.click()}
-                state={{userInfo: userInfo}}
-            >
-                Chat
-            </Link>
+            {autoGenTabs}
             <Link reloadDocument
-                to={`/profile/${userInfo?.username}`}
+                to={`/profile/${userInfo.username}`}
                 className='dropdown-item'
                 onClick={_e => closeDropdownRef.current.click()}
                 state={{userInfo: userInfo}}
             >
                 Profile
-            </Link>
-            <Link
-                to='/requests/'
-                className='dropdown-item'
-                onClick={_e => closeDropdownRef.current.click()}
-                state={{userInfo: userInfo}}
-            >
-                Friend Requests
             </Link>
             <Dropdown.Divider />
             <button onClick={_e => logOut()} className='dropdown-item'>Log Out</button>
@@ -56,9 +50,9 @@ function NavigationBar(props) {
     );
 }
 
-NavigationBar.propTypes = {
+NavigationDropdown.propTypes = {
     navigate: PropTypes.func.isRequired,
     userInfo: PropTypes.any.isRequired
 };
 
-export default NavigationBar;
+export default NavigationDropdown;

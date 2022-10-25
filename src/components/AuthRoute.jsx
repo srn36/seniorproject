@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { getToken } from "../helper/tokens";
 import { useNavigate, useLocation } from "react-router-dom/dist";
 import { fetchUserInfoFromToken } from "../helper/api-calls/user";
-import NavigationBar from "./NavigationBar";
+import NavigationDropdown from "./NavigationDropdown";
 import smallLogo from '../smollogo.png';
 
 function AuthRoute({ renderChild }) {   
@@ -25,7 +25,7 @@ function AuthRoute({ renderChild }) {
             <div className='App'>
                 <header className='App-header'>
                     <img src={smallLogo} height="50" width="auto" alt="logo"/>
-                    <NavigationBar navigate={navigate} userInfo={userInfo}/>
+                    <NavigationDropdown navigate={navigate} userInfo={userInfo}/>
                 </header>
                 <main className='App-main'>
                     {renderChild(userInfo)}

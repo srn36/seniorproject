@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Home from '../components/Home';
 import Login from '../components/Login';
 import Profile from '../components/Profile';
@@ -12,6 +12,11 @@ function routes() {
     const router = createBrowserRouter([
         {
             path: "/",
+            element: <Navigate to="/home/"/>,
+            children: [],
+        },
+        {
+            path: "/home/",
             element: <AuthRoute renderChild={(info) => <Home userInfo={info}/>}/>,
             children: [],
         },
