@@ -28,7 +28,7 @@ function FriendList(props) {
 
     return useMemo(() => {
         return (
-            <div className="friend-list">
+            <div className={`friend-list-${props.type}`}>
                 <Table bordered hover>
                     <thead>
                         <tr>
@@ -46,7 +46,7 @@ function FriendList(props) {
                 </Table>
             </div>
         );
-    }, [tableRows, filter]);
+    }, [props.type, tableRows, filter]);
 }
 
 FriendList.propTypes = {
