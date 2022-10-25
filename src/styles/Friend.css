@@ -4,6 +4,7 @@
     flex: 0 0 auto;
     width: 50%;
     max-height: 75vh;
+    background-color: #FFFFFF;
     overflow-y: scroll;
 }
 
