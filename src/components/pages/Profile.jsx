@@ -1,18 +1,18 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { 
     fetchUserPosts
-} from "../helper/api-calls/user";
+} from "../../helper/api-calls/user";
 import { 
     checkFriendRequests,
     removeFriend,
     sendFriendRequest,
     acceptFriendRequest,
     rejectFriendRequest 
-} from "../helper/api-calls/friend";
+} from "../../helper/api-calls/friend";
 import { useParams } from "react-router-dom";
-import FriendList from "./friend-displays/FriendList";
-import Feed from "./post-feed/Feed";
-import { useFriendsForUser, useProfileInfo } from "../helper/api-calls/useApiCalls";
+import FriendList from "../friend-displays/FriendList";
+import Feed from "../post-feed/Feed";
+import { useFriendsForUser, useProfileInfo } from "../../helper/api-calls/useApiCalls";
 
 const toggleFriendsOrPosts = {Friends: 'Posts', Posts: 'Friends'};
 

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
-import { useFriendRequests } from "../helper/api-calls/useApiCalls";
-import FriendList from "./friend-displays/FriendList";
+import { useFriendRequests } from "../../helper/api-calls/useApiCalls";
+import FriendList from "../friend-displays/FriendList";
 
 function Requests(props) {
     const userInfo = props.userInfo;

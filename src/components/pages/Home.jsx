@@ -1,6 +1,6 @@
 import React from 'react';
-import { fetchFeedForUser } from '../helper/api-calls/user';
-import Feed from './post-feed/Feed';
+import { fetchFeedForUser } from '../../helper/api-calls/user';
+import Feed from '../post-feed/Feed';
 
 function Home(props) {
     const userInfo = props.userInfo;

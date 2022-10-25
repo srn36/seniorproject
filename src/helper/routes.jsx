@@ -1,10 +1,10 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import Home from '../components/Home';
-import Login from '../components/Login';
-import Profile from '../components/Profile';
-import AuthRoute from '../components/AuthRoute';
-import Chat from '../components/Chat';
-import Requests from '../components/Requests';
+import Home from '../components/pages/Home';
+import Login from '../components/pages/Login';
+import Profile from '../components/pages/Profile';
+import AuthRoute from '../components/pages/base/AuthRoute';
+import Chat from '../components/pages/Chat';
+import Requests from '../components/pages/Requests';
 
 function routes() {
     //ADD ROUTES FOR NEW PAGES BELOW

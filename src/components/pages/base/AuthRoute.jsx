@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo } from "react";
-import { getToken } from "../helper/tokens";
+import { getToken } from "../../../helper/tokens";
 import { useNavigate, useLocation } from "react-router-dom/dist";
-import { fetchUserInfoFromToken } from "../helper/api-calls/user";
+import { fetchUserInfoFromToken } from "../../../helper/api-calls/user";
 import NavigationDropdown from "./NavigationDropdown";
-import smallLogo from '../smollogo.png';
+import smallLogo from '../../../smollogo.png';
 
 function AuthRoute({ renderChild }) {   
     const token = getToken();
