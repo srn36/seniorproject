@@ -41,11 +41,7 @@ function Login() {
         setContent(
             <div className='center'>
                 <h1>LOGIN</h1>
-                <form onSubmit={e => {
-                        e.preventDefault();
-                        submitCredentials(username, password);
-                    }
-                }>    
+                <form onSubmit={e => submitCredentials(e)}>    
                     <div>
                         <label>
                             <p>Username</p>
