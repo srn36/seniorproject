@@ -1,8 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { 
-    fetchFriendsForUser,
-    fetchUserPosts,
-    fetchProfileInfoForUser
+    fetchUserPosts
 } from "../helper/api-calls/user";
 import { 
     checkFriendRequests,
@@ -14,6 +12,7 @@ import {
 import { useParams } from "react-router-dom";
 import FriendList from "./friend-displays/FriendList";
 import Feed from "./post-feed/Feed";
+import { useFriendsForUser, useProfileInfo } from "../helper/api-calls/useApiCalls";
 
 const toggleFriendsOrPosts = {Friends: 'Posts', Posts: 'Friends'};
 
@@ -26,30 +25,41 @@ function Profile(props) {
         setPostFriendToggle('Friends');
     }, [username]);
 
-    const fetchFriendList = /*async*/ (uname) => {
-        return /*await*/ fetchFriendsForUser(uname)/*.then(results => results.json())*/;
-    };
-    const fetchProfileInfo = /*async*/ (uname) => {
-        return /*await*/ fetchProfileInfoForUser(uname)/*.then(results => results.json())*/;
-    }
+    const friendList = useFriendsForUser(username);
+    const profileInfo = useProfileInfo(username);
 
     const content = useMemo(() => {
-        const retrieveFriends = fetchFriendList(username);
-        const friends = Array.isArray(retrieveFriends) ? retrieveFriends : [];
+        const friends = Array.isArray(friendList.data) ? friendList.data : [];
         const isOwnProfile = (username === userInfo?.username);
         const friendListType = isOwnProfile ? 'Removable' : 'Standard';
-        const profileInfo = fetchProfileInfo(username);
 
         return (
             <>
-                <ProfileHeadline {...{username, userInfo, profileInfo, isOwnProfile, friends}}/>
+                {
+                    profileInfo.loading ? 
+                        <h4>Loading...</h4> : (
+                            !!(profileInfo.error) ? <h4>Error</h4> : 
+                                <ProfileHeadline 
+                                    username={username}
+                                    userInfo={userInfo}
+                                    profileInfo={profileInfo.data}
+                                    isOwnProfile={isOwnProfile}
+                                    friends={friends}
+                                />
+                        )
+                }             
                 <h4>hi</h4>
                 <button onClick={_e => {setPostFriendToggle(toggleFriendsOrPosts[postFriendToggle]);}}>Show {postFriendToggle}</button>
                 {
                     (toggleFriendsOrPosts[postFriendToggle] === 'Friends') &&
                     <>
                         <h3>{username}'s Friends</h3>
-                        <FriendList friends={friends} type={friendListType} userInfo={userInfo}/>
+                        {
+                            friendList.loading ? 
+                                <h4>Loading...</h4> : (
+                                    !!(friendList.error) ? <h4>Error</h4> : <FriendList friends={friends} type={friendListType} userInfo={userInfo}/>
+                                )
+                        }                        
                     </>
                 }
                 {
@@ -61,7 +71,7 @@ function Profile(props) {
                 }
             </>
         );
-    }, [username, postFriendToggle, userInfo]);
+    }, [username, postFriendToggle, friendList.data, friendList.error, friendList.loading, profileInfo.data, profileInfo.error, profileInfo.loading, userInfo]);
 
     return content;
 }
@@ -85,7 +95,7 @@ function ProfileHeadline({ username, userInfo, profileInfo, isOwnProfile, friend
         undefined
         :
         (
-            !!(friends.filter(friend => friend.username === userInfo?.username).length) ?
+            !!(friends.filter(friend => friend.username === userInfo.username).length) ?
                 'Already Friends'
                 :
                 checkFriendRequests(userInfo.username, username)

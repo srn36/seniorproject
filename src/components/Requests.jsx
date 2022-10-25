@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useFriendRequests } from "../helper/api-calls/useApiCall";
+import { useFriendRequests } from "../helper/api-calls/useApiCalls";
 import FriendList from "./friend-displays/FriendList";
 
 function Requests(props) {
