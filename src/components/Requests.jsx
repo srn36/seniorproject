@@ -1,25 +1,30 @@
 import React, { useMemo } from "react";
-import { fetchFriendRequestsForUser } from "../helper/api-calls/friend";
+import { useFriendRequests } from "../helper/api-calls/useApiCall";
 import FriendList from "./friend-displays/FriendList";
 
 function Requests(props) {
     const userInfo = props.userInfo;
-
-    const requestList = /*async*/ (uname) => {
-        return /*await*/ fetchFriendRequestsForUser(uname)?.filter(request => request.toUsername === uname)/*.then(results => results.json())*/;
-    };
+    const {loading, error, data} = useFriendRequests(userInfo.username);
 
     const content = useMemo(() => {
-        const retrieveFriendRequests = requestList(userInfo.username);
-        const friendRequests = Array.isArray(retrieveFriendRequests) ? retrieveFriendRequests : [];
+        let requestRows;
+        if(!loading && !error) {
+            const incomingRequests = data?.filter(request => request.toUsername === userInfo.username);
+            requestRows = Array.isArray(incomingRequests) ? incomingRequests : [];
+        }
 
         return (
             <>
                 <h3>Friend Requests</h3>
-                <FriendList friends={friendRequests} type={'Requests'} userInfo={userInfo}/>
+                {
+                    loading ? 
+                        <h4>Loading...</h4> : (
+                            !!error ? <h4>Error</h4> : <FriendList friends={requestRows} type={'Requests'} userInfo={userInfo}/>
+                        )
+                }               
             </>
         );
-    }, [userInfo]);
+    }, [userInfo, loading, error, data]);
 
     return content;
 }
