@@ -21,7 +21,7 @@ function Login() {
 
     useEffect(() => {
         if(token && userInfo) {
-            navigate('/', {state: {userInfo: userInfo} });
+            navigate('/home/', {state: {userInfo: userInfo} });
         }
     }, [token, userInfo, navigate]); 
 
@@ -35,7 +35,7 @@ function Login() {
             const loginToken = /*await*/ fetchLoginTokenFromCredentials(credentials);
             storeToken(loginToken);
             const userInfo = /*await*/ fetchUserInfoFromToken(loginToken);
-            navigate('/', {state: {userInfo: userInfo} });
+            navigate('/home/', {state: {userInfo: userInfo} });
         }
 
         setContent(
