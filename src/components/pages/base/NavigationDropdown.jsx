@@ -17,14 +17,14 @@ function NavigationDropdown(props) {
         props.navigate('/login/');
     };
 
-    const autoGenTabs = useMemo(() => {
+    const dropdownTabs = useMemo(() => {
         //To add a tab to the navigation dropdown, simply add the tab's path to tabPaths
         //Add a key, value mapping to overrideText if you want to display different text for a tab
         const tabPaths =['Home', 'Chat', 'Requests'];
         const overrideText = {
             'Requests': 'Friend Requests',
         };
-        const tabsFromList = tabPaths.map(path => 
+        const autoGenFromList = tabPaths.map(path => 
             <Dropdown.Item
                 key={path}
                 disabled={path.toLowerCase() === pathName}
@@ -39,7 +39,7 @@ function NavigationDropdown(props) {
         );
 
         const profilePath = `/profile/${userInfo.username}`;
-        const profileItem = (
+        const profileTab = (
             <Dropdown.Item
                 reloadDocument
                 key={profilePath}
@@ -55,14 +55,14 @@ function NavigationDropdown(props) {
         );
 
         return [
-            ...tabsFromList,
-            profileItem
+            ...autoGenFromList,
+            profileTab
         ];
     }, [userInfo, closeDropdownRef, pathName])  
 
     return (
         <DropdownButton id="dropdown-basic-button" title="Navigation" ref={closeDropdownRef}>
-            {autoGenTabs}
+            {dropdownTabs}
             <Dropdown.Divider />
             <button onClick={_e => logOut()} className='dropdown-item'>Log Out</button>
         </DropdownButton>
