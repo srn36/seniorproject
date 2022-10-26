@@ -5,10 +5,10 @@ import Post from './Post';
 import PropTypes from 'prop-types';
 
 function Feed(props) {
-    const {username, userInfo} = props;
+    const {fetchForUsername, userInfo, fetchFunction} = props;
 
     const fetchPosts = async ({ pageParam = 1 }) => {
-        const results = await props.fetchFunction(username, pageParam);
+        const results = await fetchFunction(fetchForUsername, pageParam);
         return { results, nextPage: pageParam + 1, totalPages: 100 };
     };
 
