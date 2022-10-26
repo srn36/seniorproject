@@ -10,7 +10,6 @@ function RemovableFriendRow({ username, profilePic, userInfo }) {
             <tr>
                 <td>
                     <Link 
-                        reloadDocument
                         className='friend'
                         to={`/profile/${username}`}
                         state={{userInfo: userInfo}}
