@@ -6,9 +6,7 @@ function Home(props) {
     const userInfo = props.userInfo;
 
     return (
-        <>
-            <Feed userInfo={userInfo} fetchForUsername={userInfo.username} fetchFunction={fetchFeedForUser}/>
-        </>
+        <Feed userInfo={userInfo} fetchForUsername={userInfo.username} fetchFunction={fetchFeedForUser}/>
     );
 }
 
