@@ -2,10 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { getToken, storeToken } from '../../helper/tokens';
 import { fetchLoginTokenFromCredentials, fetchUserInfoFromToken } from '../../helper/api-calls/user';
 import { useNavigate, useLocation } from 'react-router-dom/dist';
-import backg from '../../BG.jpeg';
 //import { useCredentialsToToken } from '../helper/api-calls/useApiCalls';
-
-<body background={backg} />
 
 function Login() {
     const [username, setUsername] = useState();

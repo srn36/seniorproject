@@ -20,7 +20,7 @@ function NavigationDropdown(props) {
     const dropdownTabs = useMemo(() => {
         //To add a tab to the navigation dropdown, simply add the tab's path to tabPaths
         //Add a key, value mapping to overrideText if you want to display different text for a tab
-        const tabPaths =['Home', 'Chat', 'Requests'];
+        const tabPaths = ['Home', 'Chat', 'Requests'];
         const overrideText = {
             'Requests': 'Friend Requests',
         };
@@ -58,7 +58,7 @@ function NavigationDropdown(props) {
             ...autoGenFromList,
             profileTab
         ];
-    }, [userInfo, closeDropdownRef, pathName])  
+    }, [userInfo, closeDropdownRef, pathName]);  
 
     return (
         <DropdownButton id="dropdown-basic-button" title="Navigation" ref={closeDropdownRef}>
