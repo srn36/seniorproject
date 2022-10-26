@@ -9,8 +9,10 @@ function RemovableFriendRow({ username, profilePic, userInfo }) {
         setRow(
             <tr>
                 <td>
-                    <Link className='friend'
-                        reloadDocument to={`/profile/${username}`} 
+                    <Link 
+                        reloadDocument
+                        className='friend'
+                        to={`/profile/${username}`}
                         state={{userInfo: userInfo}}
                     >
                         <div>

@@ -41,6 +41,7 @@ function NavigationDropdown(props) {
         const profilePath = `/profile/${userInfo.username}`;
         const profileItem = (
             <Dropdown.Item
+                reloadDocument
                 key={profilePath}
                 disabled={profilePath.replaceAll('/','').toLowerCase() === pathName}
                 as={Link}
