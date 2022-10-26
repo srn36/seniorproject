@@ -27,6 +27,7 @@ export /*async*/ function fetchUserInfoFromToken(token) {
         data.json()
     );
     */
+    console.log('fetching user info');
     return {username: 'username', password: 'password'};
 }
 
@@ -46,6 +47,7 @@ export /*async*/ function fetchFriendsForUser(username) {
         data.json()
     );
     */
+    console.log(`fetching ${username}'s friends`);
     const mockFriendList = [
         {key: 'Friend 1', username: 'Friend 1', profilePic: mockPFP},
         {key: 'Friend 2', username: 'Friend 2', profilePic: mockPFP},
@@ -84,6 +86,7 @@ export async function fetchFeedForUser(username, pageParam) {
         data.json()
     );
     */
+    console.log(`fetching ${username}'s feed`);
     return fetch(
     //This is just an api which provides images to use as sample posts
         `https://picsum.photos/v2/list?page=${pageParam}&limit=10`, 
@@ -110,6 +113,7 @@ export async function fetchUserPosts(username, pageParam) {
         data.json()
     );
     */
+    console.log(`fetching ${username}'s posts`);
     return fetch(
     //This is just an api which provides images to use as sample posts
         `https://picsum.photos/v2/list?page=${pageParam}&limit=10`, 
