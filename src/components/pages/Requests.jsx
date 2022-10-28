@@ -6,7 +6,7 @@ function Requests(props) {
     const userInfo = props.userInfo;
     const {loading, error, data} = useFriendRequests(userInfo.username);
 
-    const content = useMemo(() => {
+    return useMemo(() => {
         let requestRows;
         if(!loading && !error) {
             const incomingRequests = data?.filter(request => request.toUsername === userInfo.username);
@@ -26,7 +26,6 @@ function Requests(props) {
         );
     }, [userInfo, loading, error, data]);
 
-    return content;
 }
 
 export default Requests;

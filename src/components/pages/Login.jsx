@@ -7,7 +7,6 @@ import { useNavigate, useLocation } from 'react-router-dom/dist';
 function Login() {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
-    const [content, setContent] = useState();
     const navigate = useNavigate();
     
     const token = getToken();
@@ -22,7 +21,7 @@ function Login() {
         }
     }, [token, userInfo, navigate]); 
 
-    useEffect(() => {
+    return useMemo(() => {
         const submitCredentials = /*async*/ e => {
             e.preventDefault();
             const credentials = {
@@ -35,7 +34,7 @@ function Login() {
             navigate('/home/', {state: {userInfo: userInfo} });
         }
 
-        setContent(
+        return (
             <div className='center'>
                 <h1>LOGIN</h1>
                 <form onSubmit={e => submitCredentials(e)}>    
@@ -57,9 +56,7 @@ function Login() {
                 </form>
             </div>
         );
-    }, [username, password, navigate, token]);
-
-    return content;
+    }, [username, password, navigate]);
 }
 
 /*
