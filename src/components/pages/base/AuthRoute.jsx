@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom/dist";
 import { fetchUserInfoFromToken } from "../../../helper/api-calls/user";
 import NavigationDropdown from "./NavigationDropdown";
 import smallLogo from '../../../smollogo.png';
+import bg from '../../../BG.jpeg';
 
 function AuthRoute({ renderChild }) {   
     const token = getToken();
@@ -23,7 +24,9 @@ function AuthRoute({ renderChild }) {
     return useMemo(() => {
         return (
             <>
-                <main className="background-pic"/>
+                <main>
+                    <img className="background-pic" src={bg} alt="" />
+                </main>
                 <div className='App'>
                     <header className='App-header'>
                         <img src={smallLogo} height="50" width="auto" alt="logo"/>
