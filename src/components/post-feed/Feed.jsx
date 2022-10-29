@@ -8,7 +8,7 @@ import FootBar from './FootBar';
 function Feed(props) {
     const {fetchForUsername, userInfo, fetchFunction} = props;
 
-    const fetchPosts = async ({ pageParam = 1 }) => {
+    const fetchPosts = async (pageParam) => {
         const results = await fetchFunction(fetchForUsername, pageParam);
         return { results, nextPage: pageParam + 1, totalPages: 100 };
     };
@@ -19,7 +19,9 @@ function Feed(props) {
         isError,
         hasNextPage,
         fetchNextPage
-    } = useInfiniteQuery('posts', fetchPosts, {
+    } = useInfiniteQuery('posts', ({ pageParam = 1 }) => fetchPosts(pageParam), {
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
         getNextPageParam: (lastPage) => (lastPage.nextPage < lastPage.totalPages) ? lastPage.nextPage : undefined
     });
     
