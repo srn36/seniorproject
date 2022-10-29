@@ -3,6 +3,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import Post from './Post';
 import PropTypes from 'prop-types';
+import FootBar from './FootBar';
 
 function Feed(props) {
     const {fetchForUsername, userInfo, fetchFunction} = props;
@@ -29,11 +30,14 @@ function Feed(props) {
                 ) : isError ? (
                         <p>There was an error</p>
                     ) : (
-                        <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
-                            {data.pages.map((page) =>
-                                page.results.map((post) => <Post post={post} userInfo={userInfo} key={post.id}/>)
-                            )}
-                        </InfiniteScroll>
+                        <>
+                            <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
+                                {data.pages.map((page) =>
+                                    page.results.map((post) => <Post post={post} userInfo={userInfo} key={post.id}/>)
+                                )}
+                            </InfiniteScroll>
+                            <FootBar/>
+                        </>
                     )
             }
         </>
