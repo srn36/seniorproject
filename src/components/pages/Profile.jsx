@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import FriendList from "../friend-displays/FriendList";
 import Feed from "../post-feed/Feed";
 import { useFriendsForUser, useProfileInfo } from "../../helper/api-calls/useApiCalls";
+import FootBar from "./FootBar";
 
 const toggleFriendsOrPosts = {Friends: 'Posts', Posts: 'Friends'};
 
@@ -67,11 +68,12 @@ function Profile(props) {
                     <>
                         <h3>{username}'s Posts</h3>
                         <Feed userInfo={userInfo} fetchForUsername={username} fetchFunction={fetchUserPosts}/>
+                        <FootBar/>
                     </>
                 }
             </>
         );
-    }, [username, postFriendToggle, friendList.data, friendList.error, friendList.loading, profileInfo.data, profileInfo.error, profileInfo.loading, userInfo]);
+    }, [username, postFriendToggle, friendList, profileInfo, userInfo]);
 
     return content;
 }

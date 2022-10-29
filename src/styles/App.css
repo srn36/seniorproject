@@ -12,7 +12,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 0.1fr 0.9fr;
-    align-items: center;
+    justify-content: center;
 }
 
 .App-logo {
@@ -49,6 +49,21 @@
     width: 100%;
     color: #FFFFFF;
     z-index: 1;
+}
+
+.App-footer {
+    grid-row: 2;
+    grid-column: 1;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    position: sticky;
+    width: 100%;
+    bottom: 0;
+    z-index: 2;
 }
 
 .App-link {
