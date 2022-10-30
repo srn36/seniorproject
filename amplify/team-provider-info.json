@@ -1,0 +1,23 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-gameon-staging-141728-authRole",
+      "UnauthRoleArn": "arn:aws:iam::176100888834:role/amplify-gameon-staging-141728-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::176100888834:role/amplify-gameon-staging-141728-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-gameon-staging-141728-deployment",
+      "UnauthRoleName": "amplify-gameon-staging-141728-unauthRole",
+      "StackName": "amplify-gameon-staging-141728",
+      "StackId": "arn:aws:cloudformation:us-east-1:176100888834:stack/amplify-gameon-staging-141728/40c5fb60-56cb-11ed-9d53-12f097df9d23",
+      "AmplifyAppId": "d1frvji4eu1yih"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1frvji4eu1yih",
+          "type": "manual"
+        }
+      }
+    }
+  }
+}

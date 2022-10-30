@@ -12,10 +12,10 @@ import './styles/Posts.css';
 import './styles/Profile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-//import { Amplify } from 'aws-amplify';
-//import awsExports from './aws-exports';
+import { Amplify } from 'aws-amplify';
+import awsExports from './aws-exports';
 
-//Amplify.configure(awsExports);
+Amplify.configure(awsExports);
 
 const queryClient = new QueryClient();
 
