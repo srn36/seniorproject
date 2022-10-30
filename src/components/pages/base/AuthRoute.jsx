@@ -29,7 +29,7 @@ function AuthRoute({ renderChild }) {
                 </main>
                 <div className='App'>
                     <header className='App-header'>
-                        <img src={smallLogo} height="50" width="auto" alt="logo"/>
+                        <img src={smallLogo} alt="logo"/>
                         <NavigationDropdown navigate={navigate} userInfo={userInfo}/>
                     </header>
                     <main className='App-main'>
