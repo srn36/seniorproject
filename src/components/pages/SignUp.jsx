@@ -1,10 +1,10 @@
 import React from "react";
 
-function Chat(props) {
+function SignUp(props) {
     
     return (
         <h4>Sign Up Page</h4>
     );
 }
 
-export default Chat;
+export default SignUp;
