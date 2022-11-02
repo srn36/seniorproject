@@ -6,12 +6,10 @@ function Post(props) {
     const {userInfo, post} = props;
 
     return (
-        //<div className='App-logo' >
         <div className='post'>
             <img src={post.download_url} alt={post.author}/>
             <PostAuthorBar userInfo={userInfo} author={post.author}/>
         </div>
-        //</div>
     );
 }
 
