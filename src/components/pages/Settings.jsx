@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { putUserInfoFromSettings } from "../../helper/api-calls/user";
 
 function Settings(props) {
     const userInfo = props.userInfo;
@@ -24,19 +25,17 @@ function Settings(props) {
                 'deleteAccount': deleteAccount,
                 'privacy': privacy
             };
-            const loginToken = /*await*/ fetchLoginTokenFromCredentials(credentials);
-            storeToken(loginToken);
-            const userInfo = /*await*/ fetchUserInfoFromToken(loginToken);
+            const settingsList = /*await*/ putUserInfoFromSettings(settings);
             navigate('/profile/', {state: {userInfo: userInfo} });
         }
 
         <div className='center'>
                 <h1>SETTINGS</h1>
-                <form onSave={e => saveCredentials(e)}>    
+                <form onSave={e => saveSettings(e)}>    
                     <div>
                         <label>
-                            <p>Username</p>
-                            <input type="text" onChange={e => setUsername(e.target.value)}></input>
+                            <p>Age</p>
+                            <input type="text" onChange={e => setAge(e.target.value)}></input>
                         </label>
                     </div>
                     <div>
@@ -46,7 +45,19 @@ function Settings(props) {
                         </label>
                     </div>
                     <div>
-                        <button type="submit">Log In</button>
+                        <label>
+                            <p>Display Name</p>
+                            <input type="text" onChange={e => setDisplayName(e.target.value)}></input>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <p>Delete Account</p>
+                            <input type="text" onChange={e => setDeletePassword(e.target.value)}></input>
+                        </label>
+                    </div>
+                    <div>
+                        <button type="save">Save</button>
                     </div>
                 </form>
             </div>
