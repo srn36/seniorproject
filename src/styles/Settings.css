@@ -1,0 +1,13 @@
+.center {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.center form {
+    display: contents;
+}
+
+.center div {
+    margin-top: 1em;
+}

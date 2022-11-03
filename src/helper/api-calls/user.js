@@ -96,3 +96,11 @@ export async function fetchUserPosts(username, pageParam) {
         response.json()
     );
 }
+
+export async function putUserInfoFromSettings(settings) {
+    /*
+    retrun put('settings service', {
+        method:
+    })
+    */
+}
