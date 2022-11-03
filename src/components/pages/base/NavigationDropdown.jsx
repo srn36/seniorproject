@@ -5,17 +5,11 @@ Load pages with AuthRoute to automatically have a NavigationBar appended
 import React, { useMemo, useRef } from "react";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
-function NavigationDropdown(props) {
-    const userInfo = props.userInfo;
+function NavigationDropdown({ userInfo, signOut }) {
     const closeDropdownRef = useRef(null);
     const pathName = useLocation().pathname.replaceAll('/','').toLowerCase();
-
-    const logOut = () => {
-        localStorage.removeItem('token');
-        props.navigate('/login/');
-    };
 
     const dropdownTabs = useMemo(() => {
         //To add a tab to the navigation dropdown, simply add the tab's path to tabPaths
@@ -64,14 +58,9 @@ function NavigationDropdown(props) {
         <DropdownButton id="dropdown-basic-button" title="Navigation" ref={closeDropdownRef}>
             {dropdownTabs}
             <Dropdown.Divider />
-            <button onClick={_e => logOut()} className='dropdown-item'>Log Out</button>
+            <button onClick={signOut} className='dropdown-item'>Log Out</button>
         </DropdownButton>
     );
 }
 
-NavigationDropdown.propTypes = {
-    navigate: PropTypes.func.isRequired,
-    userInfo: PropTypes.any.isRequired
-};
-
-export default NavigationDropdown;
+export default withAuthenticator(NavigationDropdown);

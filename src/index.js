@@ -6,7 +6,6 @@ import App from './App';
 
 import './styles/index.css';
 import './styles/App.css';
-import './styles/Login.css';
 import './styles/Friend.css';
 import './styles/Posts.css';
 import './styles/Profile.css';
