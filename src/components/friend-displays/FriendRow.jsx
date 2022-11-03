@@ -8,7 +8,6 @@ function FriendRow({ username, profilePic, userInfo }) {
                 <Link 
                     className='friend'
                     to={`/profile/${username}`}
-                    state={{userInfo: userInfo}}
                 >
                     <div>
                         <img src={profilePic} alt=''/>

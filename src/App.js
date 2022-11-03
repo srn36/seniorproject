@@ -11,7 +11,6 @@ function App({ signOut }) {
                 <img className="background-pic" src={bg} alt="" />
             </main>
             <div className='App'>
-                <button onClick={signOut}>sign out</button>
                 <RouterProvider router={router} />
             </div>
         </View>

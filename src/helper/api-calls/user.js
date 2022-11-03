@@ -1,36 +1,5 @@
 import mockPFP from '../../logo192.png';
 
-export /*async*/ function fetchLoginTokenFromCredentials(credentials) {
-    /*
-    return fetch('login token service', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    }).then(data => 
-        data.json()
-    );
-    */
-   return 'login token';
-}
-
-export /*async*/ function fetchUserInfoFromToken(token) {
-    /*
-    return fetch('token to info service', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({'token': token})
-    }).then(data => 
-        data.json()
-    );
-    */
-    console.log('fetching user info');
-    return {username: 'username', password: 'password'};
-}
-
 export /*async*/ function fetchProfileInfoForUser(username) {
     return {profilePic: mockPFP};
 }
