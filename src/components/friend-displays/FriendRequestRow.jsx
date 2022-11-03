@@ -9,10 +9,7 @@ function FriendRequestRow({ username, profilePic, userInfo }) {
         setRow(
             <tr>
                 <td>
-                    <Link 
-                        className='friend'
-                        to={`/profile/${username}`}
-                    >
+                    <Link className='friend' to={`/profile/${username}`}>
                         <div>
                             <img src={profilePic} alt=''/>
                             <p>{username}</p>
