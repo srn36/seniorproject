@@ -6,35 +6,34 @@ import Chat from '../components/pages/Chat';
 import Requests from '../components/pages/Requests';
 
 function routes() {
-    //ADD ROUTES FOR NEW PAGES BELOW
-    //Wrap the 'element' for each page in an PageBase for access control
+    //Add routes for new pages to createRoutes
+    //all you need is the desired path and the page component
+    const createRoutes = {
+        "/home/": Home,
+        "/profile/:username": Profile,
+        "/chat/": Chat,
+        "/requests/": Requests,
+    };
+
+
+    const autoRoutes = Object.keys(createRoutes).map(path => {
+        return (
+            {
+                'path': path,
+                element: <PageBase children={createRoutes[path]}/>,
+                children: [],
+            }
+        );
+    })
     const router = createBrowserRouter([
         {
             path: "/",
             element: <Navigate to="/home/"/>,
             children: [],
         },
-        {
-            path: "/home/",
-            element: <PageBase renderChild={(info) => <Home userInfo={info}/>}/>,
-            children: [],
-        },
-        {
-            path: "/profile/:username", 
-            element: <PageBase renderChild={(info) => <Profile userInfo={info}/>}/>,
-            children: [],
-        },
-        {
-            path: "/chat/", 
-            element: <PageBase renderChild={(info) => <Chat userInfo={info}/>}/>,
-            children: [],
-        },
-        {
-            path: "/requests/", 
-            element: <PageBase renderChild={(info) => <Requests userInfo={info}/>}/>,
-            children: [],
-        }
+        ...autoRoutes
     ]);
+    
     return router;
 }
 
