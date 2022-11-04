@@ -26,7 +26,6 @@ function NavigationDropdown({ userInfo, signOut }) {
                 to={`/${path}/`}
                 className='dropdown-item'
                 onClick={_e => closeDropdownRef.current.click()}
-                state={{userInfo: userInfo}}
             >
                 {overrideText[path] ? overrideText[path] : path}
             </Dropdown.Item>
@@ -42,7 +41,6 @@ function NavigationDropdown({ userInfo, signOut }) {
                 to={profilePath}
                 className='dropdown-item'
                 onClick={_e => closeDropdownRef.current.click()}
-                state={{userInfo: userInfo}}
             >
                 Profile
             </Dropdown.Item>
