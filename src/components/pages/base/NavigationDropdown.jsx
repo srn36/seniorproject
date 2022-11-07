@@ -23,7 +23,7 @@ function NavigationDropdown({ userInfo, signOut }) {
                 key={path}
                 disabled={path.toLowerCase() === pathName}
                 as={Link}
-                to={`/${path}/`}
+                to={`${path}`}
                 className='dropdown-item'
                 onClick={_e => closeDropdownRef.current.click()}
             >
@@ -36,7 +36,7 @@ function NavigationDropdown({ userInfo, signOut }) {
             <Dropdown.Item
                 reloadDocument
                 key={profilePath}
-                disabled={profilePath.replaceAll('/','').toLowerCase() === pathName}
+                disabled={pathName.includes(profilePath.replaceAll('/','').toLowerCase())}
                 as={Link}
                 to={profilePath}
                 className='dropdown-item'

@@ -26,7 +26,7 @@ function Settings(props) {
                 'privacy': privacy
             };
             const settingsList = /*await*/ putUserInfoFromSettings(settings);
-            navigate('/profile/', {state: {userInfo: userInfo} });
+            navigate(`/profile/${userInfo.username}`);
         }
 
         <div className='center'>

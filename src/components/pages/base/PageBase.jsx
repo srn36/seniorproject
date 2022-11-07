@@ -19,15 +19,15 @@ function PageBase({children: Child}) {
             </main>
             { userInfo.loading ?
                 <p>Loading...</p> :
-                (<div className='App'>
+                <div className='App'>
                     <header className='App-header'>
                         <img src={smallLogo} alt="logo"/>
                         <NavigationDropdown userInfo={userInfo.data}/>
                     </header>
                     <main className='App-main'>
-                        {<Child userInfo={userInfo.data} />}
+                        <Child userInfo={userInfo.data}/>
                     </main>
-                </div>)
+                </div>
             }
         </>
     );
