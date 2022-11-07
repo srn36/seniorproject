@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Auth } from 'aws-amplify';
 import NavigationDropdown from "./NavigationDropdown";
 import smallLogo from '../../../smollogo.png';
-import bg from '../../../BG.jpeg';
 import { Outlet } from "react-router-dom";
 
 function PageBase(props) {
@@ -15,9 +14,6 @@ function PageBase(props) {
 
     return (
         <>
-            <main>
-                <img className="background-pic" src={bg} alt="" />
-            </main>
             { userInfo.loading ?
                 <p>Loading...</p> :
                 <div className='App'>
