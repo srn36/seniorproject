@@ -20,7 +20,7 @@ function Requests(props) {
                 {
                     loading ? 
                         <h4>Loading...</h4> : (
-                            !!error ? <h4>Error</h4> : <FriendList friends={requestRows} type={'Requests'} userInfo={userInfo}/>
+                            error ? <h4>Error</h4> : <FriendList friends={requestRows} type={'Requests'} userInfo={userInfo}/>
                         )
                 }               
             </>

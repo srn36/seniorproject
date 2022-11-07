@@ -49,7 +49,7 @@ function ProfileBase(props) {
                 {
                     profileInfo.loading ? 
                         <h4>Loading...</h4> : (
-                            !!(profileInfo.error) ? <h4>Error</h4> : 
+                            profileInfo.error ? <h4>Error</h4> : 
                                 <ProfileHeadline 
                                     username={username}
                                     userInfo={userInfo}
@@ -76,7 +76,7 @@ function ProfileContent({isOwnProfile, children}) {
             <div className='profile-view-selector'>
                 <Link 
                     to='posts'
-                    className={!!isOwnProfile ? 'third':'half'}                    
+                    className={isOwnProfile ? 'third':'half'}                    
                 >
                     <button disabled={path.includes('posts')}>
                         Posts
@@ -84,7 +84,7 @@ function ProfileContent({isOwnProfile, children}) {
                 </Link>
                 <Link
                     to='friends'
-                    className={!!isOwnProfile ? 'third':'half'}                    
+                    className={isOwnProfile ? 'third':'half'}                    
                 >
                     <button disabled={path.includes('friends')}>
                         Friends
