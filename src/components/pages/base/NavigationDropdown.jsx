@@ -23,7 +23,7 @@ function NavigationDropdown({ userInfo, signOut }) {
                 key={path}
                 disabled={path.toLowerCase() === pathName}
                 as={Link}
-                to={`${path}`}
+                to={`/${path}`}
                 className='dropdown-item'
                 onClick={_e => closeDropdownRef.current.click()}
             >
