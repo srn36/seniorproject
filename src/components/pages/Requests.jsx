@@ -1,9 +1,10 @@
 import React, { useMemo } from "react";
+import { useOutletContext } from "react-router-dom";
 import { useFriendRequests } from "../../helper/api-calls/useApiCalls";
 import FriendList from "../friend-displays/FriendList";
 
 function Requests(props) {
-    const userInfo = props.userInfo;
+    const {userInfo} = useOutletContext();
     const {loading, error, data} = useFriendRequests(userInfo.username);
 
     return useMemo(() => {

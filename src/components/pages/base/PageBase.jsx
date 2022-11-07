@@ -3,8 +3,9 @@ import { Auth } from 'aws-amplify';
 import NavigationDropdown from "./NavigationDropdown";
 import smallLogo from '../../../smollogo.png';
 import bg from '../../../BG.jpeg';
+import { Outlet } from "react-router-dom";
 
-function PageBase({children: Child}) {
+function PageBase(props) {
     const [userInfo, setUserInfo] = useState({loading: true, data: null});
     useEffect(() => {
         Auth.currentUserInfo().then(info => 
@@ -25,7 +26,7 @@ function PageBase({children: Child}) {
                         <NavigationDropdown userInfo={userInfo.data}/>
                     </header>
                     <main className='App-main'>
-                        <Child userInfo={userInfo.data}/>
+                        <Outlet context={{'userInfo': userInfo.data}}/>
                     </main>
                 </div>
             }
