@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import {
     Link,
     Outlet, 
+    useLocation, 
     useOutletContext,
     useParams
 } from "react-router-dom";
@@ -20,6 +21,7 @@ import {
     useFriendsForUser,
     useProfileInfo
 } from "../../../helper/api-calls/useApiCalls";
+
 
 function ProfileBase(props) {
     const {userInfo} = useOutletContext();
@@ -57,31 +59,54 @@ function ProfileBase(props) {
                                 />
                         )
                 }
-                <div>
-                    <Link to='posts'>
-                        <button>
-                            Posts
-                        </button>
-                    </Link>
-                    <Link to='friends'>
-                        <button>
-                            Friends
-                        </button>
-                    </Link>
-                    {
-                        !!isOwnProfile &&
-                        <Link to='settings'>
-                            <button>
-                                Settings
-                            </button>
-                        </Link>
-                    }
-                </div>
-                <Outlet context={outletContext}/>
+                <ProfileContent isOwnProfile={isOwnProfile}>
+                    <Outlet context={outletContext}/>
+                </ProfileContent>
             </>
         );
     }, [username, friendList, profileInfo, userInfo]);
 }
+
+
+function ProfileContent({isOwnProfile, children}) {
+    const path = useLocation().pathname;
+
+    return (
+        <>
+            <div className='profile-view-selector'>
+                <Link 
+                    to='posts'
+                    className={!!isOwnProfile ? 'third':'half'}                    
+                >
+                    <button disabled={path.includes('posts')}>
+                        Posts
+                    </button>
+                </Link>
+                <Link
+                    to='friends'
+                    className={!!isOwnProfile ? 'third':'half'}                    
+                >
+                    <button disabled={path.includes('friends')}>
+                        Friends
+                    </button>
+                </Link>
+                {
+                    !!isOwnProfile &&
+                    <Link
+                        to='settings'
+                        className='third'
+                    >
+                        <button disabled={path.includes('settings')}>
+                            Settings
+                        </button>
+                    </Link>
+                }
+            </div>
+            {children}
+        </>
+    );
+}
+
 
 function ProfileHeadline({ username, userInfo, profileInfo, isOwnProfile, friends }) {
     const relationshipBasedFriendButton = {

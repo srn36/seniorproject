@@ -16,3 +16,24 @@
     display: flex;
     align-items: center;
 }
+
+.profile-view-selector {
+    width: 40%;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.profile-view-selector .half {
+    grid-row: 1;
+    grid-column: span 3;
+}
+
+.profile-view-selector .third {
+    grid-row: 1;
+    grid-column: span 2;
+}
+
+.profile-view-selector .half button, .profile-view-selector .third button{
+    width: 100%;
+}
