@@ -1,4 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
+import {
+    Link,
+    Outlet, 
+    useOutletContext,
+    useParams
+} from "react-router-dom";
+
 import { 
     fetchUserPosts
 } from "../../../helper/api-calls/user";
@@ -9,29 +16,31 @@ import {
     acceptFriendRequest,
     rejectFriendRequest 
 } from "../../../helper/api-calls/friend";
-import { useParams } from "react-router-dom";
-import FriendList from "../../friend-displays/FriendList";
-import Feed from "../../post-feed/Feed";
-import { useFriendsForUser, useProfileInfo } from "../../../helper/api-calls/useApiCalls";
-
-const toggleFriendsOrPosts = {Friends: 'Posts', Posts: 'Friends'};
+import {
+    useFriendsForUser,
+    useProfileInfo
+} from "../../../helper/api-calls/useApiCalls";
 
 function ProfileBase(props) {
-    const userInfo = props.userInfo;
+    const {userInfo} = useOutletContext();
     const username = useParams().username;
-    const [postFriendToggle, setPostFriendToggle] = useState();
-
-    useEffect(() => {
-        setPostFriendToggle('Friends');
-    }, [username]);
 
     const friendList = useFriendsForUser(username);
     const profileInfo = useProfileInfo(username);
 
-    const content = useMemo(() => {
+    return useMemo(() => {
         const friends = Array.isArray(friendList.data) ? friendList.data : [];
         const isOwnProfile = (username === userInfo?.username);
         const friendListType = isOwnProfile ? 'Removable' : 'Standard';
+
+        const outletContext = {
+            userInfo: userInfo,
+            username: username,
+            fetchUserPosts: fetchUserPosts,
+            friendList: friendList,
+            friends: friends,
+            friendListType: friendListType
+        };
 
         return (
             <>
@@ -47,33 +56,31 @@ function ProfileBase(props) {
                                     friends={friends}
                                 />
                         )
-                }             
-                <h4>hi</h4>
-                <button onClick={_e => {setPostFriendToggle(toggleFriendsOrPosts[postFriendToggle]);}}>Show {postFriendToggle}</button>
-                {
-                    (toggleFriendsOrPosts[postFriendToggle] === 'Friends') &&
-                    <>
-                        <h3>{username}'s Friends</h3>
-                        {
-                            friendList.loading ? 
-                                <h4>Loading...</h4> : (
-                                    !!(friendList.error) ? <h4>Error</h4> : <FriendList friends={friends} type={friendListType} userInfo={userInfo}/>
-                                )
-                        }                        
-                    </>
                 }
-                {
-                    (toggleFriendsOrPosts[postFriendToggle] === 'Posts') &&
-                    <>
-                        <h3>{username}'s Posts</h3>
-                        <Feed userInfo={userInfo} fetchForUsername={username} fetchFunction={fetchUserPosts}/>
-                    </>
-                }
+                <div>
+                    <Link to='posts'>
+                        <button>
+                            Posts
+                        </button>
+                    </Link>
+                    <Link to='friends'>
+                        <button>
+                            Friends
+                        </button>
+                    </Link>
+                    {
+                        !!isOwnProfile &&
+                        <Link to='settings'>
+                            <button>
+                                Settings
+                            </button>
+                        </Link>
+                    }
+                </div>
+                <Outlet context={outletContext}/>
             </>
         );
-    }, [username, postFriendToggle, friendList, profileInfo, userInfo]);
-
-    return content;
+    }, [username, friendList, profileInfo, userInfo]);
 }
 
 function ProfileHeadline({ username, userInfo, profileInfo, isOwnProfile, friends }) {
