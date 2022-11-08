@@ -70,21 +70,30 @@ function ProfileBase(props) {
 
 function ProfileContent({isOwnProfile, children}) {
     const path = useLocation().pathname;
+    const linkClass = isOwnProfile ? 'quarter' : 'third';
 
     return (
         <>
             <div className='profile-view-selector'>
                 <Link 
                     to='posts'
-                    className={isOwnProfile ? 'third':'half'}                    
+                    className={linkClass}                    
                 >
                     <button disabled={path.includes('posts')}>
                         Posts
                     </button>
                 </Link>
                 <Link
+                    to='games'
+                    className={linkClass}                 
+                >
+                    <button disabled={path.includes('games')}>
+                        Games
+                    </button>
+                </Link>
+                <Link
                     to='friends'
-                    className={isOwnProfile ? 'third':'half'}                    
+                    className={linkClass}                 
                 >
                     <button disabled={path.includes('friends')}>
                         Friends
@@ -94,7 +103,7 @@ function ProfileContent({isOwnProfile, children}) {
                     !!isOwnProfile &&
                     <Link
                         to='settings'
-                        className='third'
+                        className={linkClass}
                     >
                         <button disabled={path.includes('settings')}>
                             Settings

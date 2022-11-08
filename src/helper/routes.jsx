@@ -1,15 +1,25 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import Home from '../components/pages/Home';
-import ProfileBase from '../components/pages/profile-pages/ProfileBase';
+
+// Default pages
 import PageBase from '../components/pages/base/PageBase';
+import ErrorPage from '../components/pages/ErrorPage';
+
+// Misc pages
+import Home from '../components/pages/Home';
 import Chat from '../components/pages/Chat';
-import Requests from '../components/pages/friend-zone/Requests';
+
+// Profile imports
+import ProfileBase from '../components/pages/profile-pages/ProfileBase';
 import Posts from '../components/pages/profile-pages/Posts';
+import Games from '../components/pages/profile-pages/Games';
 import Friends from '../components/pages/profile-pages/Friends';
 import Settings from '../components/pages/profile-pages/Settings';
-import ErrorPage from '../components/pages/ErrorPage';
+
+// Friend Zone imports
 import FriendZoneBase from '../components/pages/friend-zone/FriendZoneBase';
+import Requests from '../components/pages/friend-zone/Requests';
 import Recommendations from '../components/pages/friend-zone/Recommendations';
+
 
 function routes() {
     const errorRoute = {
@@ -23,6 +33,7 @@ function routes() {
         children: [
             {index: true, element: <Navigate to='posts'/>},
             {path: 'posts', element: <Posts/>},
+            {path: 'games', element: <Games/>},
             {path: 'friends', element: <Friends/>},
             {path: 'settings', element: <Settings/>}
         ],
