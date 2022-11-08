@@ -1,43 +1,23 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import FriendRow from './FriendRow';
-import RemovableFriendRow from './RemovableFriendRow';
-import FriendRequestRow from './FriendRequestRow';
 import { Table } from 'react-bootstrap';
-import RecommendationFriendRow from './RecommendationFriendRow';
 
 function FriendList(props) {
     //Convert the full friend list to rows of the table based on the type of table requested
     const friendTable = useMemo(() => {
         const {friends, type, userInfo} = props;
         return friends.map(friend => {
-            const rowTypes = {
-                Standard:   <FriendRow
-                                key={friend.username}
-                                username={friend.username}
-                                profilePic={friend.profilePic}
-                                userInfo={userInfo}
-                            />,
-                Removable:  <RemovableFriendRow
-                                key={friend.username}
-                                username={friend.username}
-                                profilePic={friend.profilePic}
-                                userInfo={userInfo}
-                            />,
-                Requests:   <FriendRequestRow
-                                key={friend.fromUsername}
-                                username={friend.fromUsername}
-                                profilePic={friend.profilePic}
-                                userInfo={userInfo}
-                            />,
-                Recommendations:    <RecommendationFriendRow
-                                        key={friend.username}
-                                        username={friend.username}
-                                        profilePic={friend.profilePic}
-                                        userInfo={userInfo}
-                                    />,
-            };
-            return rowTypes[type];
+            const friendUsername = type === 'Requests' ? friend.fromUsername : friend.username;
+            return (
+                <FriendRow
+                    key={friendUsername}
+                    username={friendUsername}
+                    profilePic={friend.profilePic}
+                    userInfo={userInfo}
+                    rowType={type}
+                />
+            );
         });
     }, [props]);
 
