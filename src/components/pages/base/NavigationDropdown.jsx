@@ -2,10 +2,10 @@
 Use of this component has now been packaged into AuthRoute, which will serve as a base page.
 Load pages with AuthRoute to automatically have a NavigationBar appended
 */
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
-import { withAuthenticator } from "@aws-amplify/ui-react";
+import { withAuthenticator } from '@aws-amplify/ui-react';
 
 function NavigationDropdown({ userInfo, signOut }) {
     const closeDropdownRef = useRef(null);
@@ -53,7 +53,7 @@ function NavigationDropdown({ userInfo, signOut }) {
     }, [userInfo, closeDropdownRef, pathName]);  
 
     return (
-        <DropdownButton id="dropdown-basic-button" title="Navigation" ref={closeDropdownRef}>
+        <DropdownButton id='dropdown-basic-button' title='Navigation' ref={closeDropdownRef}>
             {dropdownTabs}
             <Dropdown.Divider />
             <button onClick={signOut} className='dropdown-item'>Log Out</button>

@@ -1,26 +1,26 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 import {
     Link,
     Outlet, 
     useLocation, 
     useOutletContext,
     useParams
-} from "react-router-dom";
+} from 'react-router-dom';
 
 import { 
     fetchUserPosts
-} from "../../../helper/api-calls/user";
+} from '../../../helper/api-calls/user';
 import { 
     checkFriendRequests,
     removeFriend,
     sendFriendRequest,
     acceptFriendRequest,
     rejectFriendRequest 
-} from "../../../helper/api-calls/friend";
+} from '../../../helper/api-calls/friend';
 import {
     useFriendsForUser,
     useProfileInfo
-} from "../../../helper/api-calls/useApiCalls";
+} from '../../../helper/api-calls/useApiCalls';
 
 
 function ProfileBase(props) {
@@ -135,7 +135,7 @@ function ProfileHeadline({ username, userInfo, profileInfo, isOwnProfile, friend
     );
     
     return (
-        <div className="profile-headline">
+        <div className='profile-headline'>
             <div>
                 <img src={profileInfo.profilePic} alt='profile pic here'/>
                 <h2>Profile Page for {username}</h2>

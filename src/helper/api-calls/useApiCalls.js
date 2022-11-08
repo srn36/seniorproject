@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import mockPFP from '../../logo192.png';
 
 export function useCredentialsToToken(credentials) {

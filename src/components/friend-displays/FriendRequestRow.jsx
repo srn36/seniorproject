@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { acceptFriendRequest, rejectFriendRequest } from "../../helper/api-calls/friend";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { acceptFriendRequest, rejectFriendRequest } from '../../helper/api-calls/friend';
 
 function FriendRequestRow({ username, profilePic, userInfo }) {
     const [row, setRow] = useState();

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { removeFriend } from "../../helper/api-calls/friend";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { removeFriend } from '../../helper/api-calls/friend';
 
 function RemovableFriendRow({ username, profilePic, userInfo }) {
     const [row, setRow] = useState();

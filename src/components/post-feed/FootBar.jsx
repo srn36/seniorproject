@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState } from 'react';
 
 function FootBar() {
     const halfHeight = window.innerHeight / 2;
@@ -22,7 +22,7 @@ function FootBar() {
 
     return useMemo(() => {
         return (
-            <div className="App-footer">
+            <div className='App-footer'>
                 {
                     showButton && <button onClick={_e => window.scrollTo(0, 0)}>Return to top</button>
                 }
