@@ -14,14 +14,14 @@ function NavigationDropdown({ userInfo, signOut }) {
     const dropdownTabs = useMemo(() => {
         //To add a tab to the navigation dropdown, simply add the tab's path to tabPaths
         //Add a key, value mapping to overrideText if you want to display different text for a tab
-        const tabPaths = ['Home', 'Chat', 'Requests'];
+        const tabPaths = ['Home', 'Chat', 'Friends'];
         const overrideText = {
-            'Requests': 'Friend Requests',
+            'Friends': 'Friend Requests',
         };
         const autoGenFromList = tabPaths.map(path => 
             <Dropdown.Item
                 key={path}
-                disabled={path.toLowerCase() === pathName}
+                disabled={path.toLowerCase() === pathName || pathName.includes(path.toLowerCase())}
                 as={Link}
                 to={`/${path}`}
                 className='dropdown-item'

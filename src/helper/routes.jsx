@@ -29,7 +29,7 @@ function routes() {
     };
 
     const friendRoute = {
-        path: 'requests',
+        path: 'friends',
         element: <FriendZoneBase/>,
         children: [
             {index: true, element: <Navigate to='requests'/>},
