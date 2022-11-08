@@ -16,7 +16,7 @@ function NavigationDropdown({ userInfo, signOut }) {
         //Add a key, value mapping to overrideText if you want to display different text for a tab
         const tabPaths = ['Home', 'Chat', 'Friends'];
         const overrideText = {
-            'Friends': 'Friend Requests',
+            'Friends': 'Friend Zone',
         };
         const autoGenFromList = tabPaths.map(path => 
             <Dropdown.Item
