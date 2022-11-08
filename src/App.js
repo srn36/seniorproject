@@ -19,18 +19,23 @@ function App() {
             components={{
                 SignUp: {
                     FormFields() {
-                        const { validationErrors } = useAuthenticator();
+                        const { validationErrors } = useAuthenticator(); //Probably important to know wtf this atually does
             
                         return (
                             <>
+                                {/* Here we are simply telling the form to at least use the default fields.
+                                Below we will append additional custom fields. */}
                                 <Authenticator.SignUp.FormFields />
 
-                                {/* Append & require Terms & Conditions field to sign up  */}
+                                {/* Append & require Terms & Conditions field to sign up.  */}
+                                {/* This is the only thing that matters for determining if the user can hit the sign up button.
+                                Nothing else is required.
+                                All I know is that it has something to do with the services, as defined below this block. */}
                                 <CheckboxField
                                     errorMessage={validationErrors.acknowledgement}
                                     hasError={!!validationErrors.acknowledgement}
                                     name="acknowledgement"
-                                    value="yes"
+                                    value="yes" //IDK what this actually means
                                     label="I agree with the Terms & Conditions"
                                 />
 
@@ -46,6 +51,11 @@ function App() {
                 },
             }}
             services={{
+                /* 
+                This is somehow the thing that decides if the "sign up" button at the bottom
+                of the form is enabled or disabled.
+                Nearest I can tell, it works via black magic.
+                */
                 async validateCustomSignUp(formData) {
                     if (!formData.acknowledgement) {
                         return {
@@ -55,6 +65,7 @@ function App() {
                 },
             }}
         >
+            {/* This stuff down here is simply rendering the app itself */}
             {({ signOut, user }) => (
                 <View>
                     <main>
