@@ -7,8 +7,8 @@
 }
 
 .profile-headline img {
-    height: 5em;
-    width: 5em;
+    height: calc(3*(1.325rem + .9vw));
+    width: calc(3*(1.325rem + .9vw));
     object-fit: cover;
     margin-right: 1em;
 }

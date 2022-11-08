@@ -10,9 +10,7 @@ function App({ signOut }) {
             <main>
                 <img className='background-pic' src={bg} alt='' />
             </main>
-            <div className='App'>
-                <RouterProvider router={router} />
-            </div>
+            <RouterProvider router={router} />
         </View>
     );
 }
