@@ -6,17 +6,16 @@ import {
     useOutletContext,
     useParams
 } from 'react-router-dom';
-
-import { 
-    fetchUserPosts
-} from '../../../helper/api-calls/user';
-import { checkFriendRequests } from '../../../helper/api-calls/friend';
 import {
-    useFriendsForUser,
-    useProfileInfo
-} from '../../../helper/api-calls/useApiCalls';
-import { AcceptButton, AddButton, RejectButton, RemoveButton } from '../../helper/friend-buttons';
+    AcceptButton,
+    AddButton,
+    RejectButton,
+    RemoveButton
+} from '../../helper/friend-buttons';
 
+import { fetchUserPosts } from '../../../helper/api-calls/user';
+import { checkFriendRequests } from '../../../helper/api-calls/friend';
+import { useFriendsForUser, useProfileInfo } from '../../../helper/api-calls/useApiCalls';
 
 function ProfileBase(props) {
     const {userInfo} = useOutletContext();
