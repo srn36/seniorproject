@@ -33,7 +33,7 @@ function Settings(props) {
     }
 
     return (
-        <div className='center'>
+        <>
             <h1>SETTINGS</h1>
             <form onSubmit={e => saveSettings(e)}>    
                 <div>
@@ -64,7 +64,7 @@ function Settings(props) {
                     <button type="submit">Save</button>
                 </div>
             </form>
-        </div>
+        </>
     );
 }
 
