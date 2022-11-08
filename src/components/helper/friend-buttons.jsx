@@ -4,7 +4,7 @@ import {
     rejectFriendRequest,
     sendFriendRequest,
     removeFriend
-} from './api-calls/friend';
+} from '../../helper/api-calls/friend';
 
 export function AcceptButton({userInfo, username, ...props}) {
     return (

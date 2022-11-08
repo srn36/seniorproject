@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AcceptButton, RejectButton } from '../../helper/friend-buttons';
+import { AcceptButton, RejectButton } from '../helper/friend-buttons';
 
 function FriendRequestRow({ username, profilePic, userInfo }) {
     const [row, setRow] = useState();

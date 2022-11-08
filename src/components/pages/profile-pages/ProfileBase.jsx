@@ -15,7 +15,7 @@ import {
     useFriendsForUser,
     useProfileInfo
 } from '../../../helper/api-calls/useApiCalls';
-import { AcceptButton, AddButton, RejectButton, RemoveButton } from '../../../helper/friend-buttons';
+import { AcceptButton, AddButton, RejectButton, RemoveButton } from '../../helper/friend-buttons';
 
 
 function ProfileBase(props) {
