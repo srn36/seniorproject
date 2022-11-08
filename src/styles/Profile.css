@@ -10,6 +10,7 @@
     height: 5em;
     width: 5em;
     object-fit: cover;
+    margin-right: 1em;
 }
 
 .profile-headline div {
