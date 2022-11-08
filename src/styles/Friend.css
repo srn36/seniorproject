@@ -8,12 +8,12 @@
     overflow-y: scroll;
 }
 
-.friend-list-Requests {
+.friend-list-Requests, .friend-list-Recommendations {
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
     width: 50%;
-    max-height: 85vh;
+    max-height: 83vh;
     background-color: #FFFFFF;
     overflow-y: scroll;
 }
@@ -59,4 +59,21 @@
     margin-bottom: 0px;
     margin-right: 0px;
     margin-left: 0.5em;
+}
+
+.friend-zone {
+    width: 40%;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.friend-zone a {
+    grid-row: 1;
+    grid-column: span 1;    
+    text-decoration: none;
+}
+
+.friend-zone button {
+    width: 100%;
 }
