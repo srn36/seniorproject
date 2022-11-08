@@ -10,17 +10,12 @@ import {
 import { 
     fetchUserPosts
 } from '../../../helper/api-calls/user';
-import { 
-    checkFriendRequests,
-    removeFriend,
-    sendFriendRequest,
-    acceptFriendRequest,
-    rejectFriendRequest 
-} from '../../../helper/api-calls/friend';
+import { checkFriendRequests } from '../../../helper/api-calls/friend';
 import {
     useFriendsForUser,
     useProfileInfo
 } from '../../../helper/api-calls/useApiCalls';
+import { AcceptButton, AddButton, RejectButton, RemoveButton } from '../../../helper/friend-buttons';
 
 
 function ProfileBase(props) {
@@ -119,17 +114,13 @@ function ProfileContent({isOwnProfile, children}) {
 
 function ProfileHeadline({ username, userInfo, profileInfo, isOwnProfile, friends }) {
     const relationshipBasedFriendButton = {
-        'Already Friends': <button onClick={_e => removeFriend(userInfo.username, username)}>Remove Friend</button>,
+        'Already Friends': <RemoveButton userInfo={userInfo} username={username}/>,
         'Outgoing': <button disabled={true}>Requested</button>,
         'Incoming': <div>
-                        <button onClick={_e => acceptFriendRequest(username, userInfo.username)}>
-                            Accept
-                        </button>
-                        <button onClick={_e => rejectFriendRequest(username, userInfo.username)}>
-                            Reject
-                        </button> 
+                        <AcceptButton userInfo={userInfo} username={username}/>
+                        <RejectButton userInfo={userInfo} username={username}/> 
                     </div>,
-        'None': <button onClick={_e => sendFriendRequest(userInfo.username, username)}>Request Friend</button>
+        'None': <AddButton userInfo={userInfo} username={username}/>
     }
 
     const friendButtonKey = (isOwnProfile ? 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { sendFriendRequest } from '../../helper/api-calls/friend';
+import { AddButton } from '../../helper/friend-buttons';
 
 function RecommendationFriendRow({ username, profilePic, userInfo }) {
     const [row, setRow] = useState();
@@ -14,13 +14,7 @@ function RecommendationFriendRow({ username, profilePic, userInfo }) {
                             <img src={profilePic} alt=''/>
                             <p>{username}</p>
                         </div>
-                        <button onClick={e => {
-                            e.preventDefault();
-                            sendFriendRequest(userInfo.username, username);
-                            setRow();
-                        }}>
-                            Add Friend
-                        </button> 
+                        <AddButton userInfo={userInfo} username={username} onClick={() => setRow()}/> 
                     </Link>
                 </td>
             </tr>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { removeFriend } from '../../helper/api-calls/friend';
+import { RemoveButton } from '../../helper/friend-buttons';
 
 function RemovableFriendRow({ username, profilePic, userInfo }) {
     const [row, setRow] = useState();
@@ -14,13 +14,7 @@ function RemovableFriendRow({ username, profilePic, userInfo }) {
                             <img src={profilePic} alt=''/>
                             <p>{username}</p>
                         </div>
-                        <button onClick={e => {
-                            e.preventDefault();
-                            removeFriend(userInfo.username, username);
-                            setRow();
-                        }}>
-                            Remove
-                        </button> 
+                        <RemoveButton userInfo={userInfo} username={username} onClick={() => setRow()}/>  
                     </Link>
                 </td>
             </tr>

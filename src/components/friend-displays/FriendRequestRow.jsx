@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { acceptFriendRequest, rejectFriendRequest } from '../../helper/api-calls/friend';
+import { AcceptButton, RejectButton } from '../../helper/friend-buttons';
 
 function FriendRequestRow({ username, profilePic, userInfo }) {
     const [row, setRow] = useState();
@@ -15,20 +15,8 @@ function FriendRequestRow({ username, profilePic, userInfo }) {
                             <p>{username}</p>
                         </div>
                         <div>
-                            <button onClick={e => {
-                                e.preventDefault();
-                                acceptFriendRequest(username, userInfo.username);
-                                setRow();
-                            }}>
-                                Accept
-                            </button>
-                            <button onClick={e => {
-                                e.preventDefault();
-                                rejectFriendRequest(username, userInfo.username);
-                                setRow();
-                            }}>
-                                Reject
-                            </button> 
+                            <AcceptButton userInfo={userInfo} username={username} onClick={() => setRow()}/> 
+                            <RejectButton userInfo={userInfo} username={username} onClick={() => setRow()}/> 
                         </div>        
                     </Link>
                 </td>
