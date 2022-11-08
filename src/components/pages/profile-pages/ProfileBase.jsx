@@ -138,7 +138,7 @@ function ProfileHeadline({ username, userInfo, profileInfo, isOwnProfile, friend
         <div className='profile-headline'>
             <div>
                 <img src={profileInfo.profilePic} alt='profile pic here'/>
-                <h2>Profile Page for {username}</h2>
+                <h2>{username}</h2>
             </div>
             {!isOwnProfile && relationshipBasedFriendButton[friendButtonKey]}
         </div>
