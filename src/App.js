@@ -13,13 +13,19 @@ function App() {
 
     return (
         <Authenticator
-            // Default to Sign Up screen
+            // Default to Sign In screen
             initialState="signIn"
+            
             // Customize `Authenticator.SignUp.FormFields`
             components={{
                 SignUp: {
                     FormFields() {
-                        const { validationErrors } = useAuthenticator(); //Probably important to know wtf this atually does
+                        /* 
+                        Probably important to know wtf useAuthenticator atually does.
+                        The (context) => [context.user] is used to avoid re-rendering the entire site unnecessarily.
+                        Instead, that function makes sure the entire site is only reloaded when the site's validation errors change.
+                        */
+                        const { validationErrors } = useAuthenticator((context) => [context.validationErrors]);
             
                         return (
                             <>
@@ -28,21 +34,20 @@ function App() {
                                 <Authenticator.SignUp.FormFields />
 
                                 {/* Append & require Terms & Conditions field to sign up.  */}
-                                {/* This is the only thing that matters for determining if the user can hit the sign up button.
-                                Nothing else is required.
-                                All I know is that it has something to do with the services, as defined below this block. */}
                                 <CheckboxField
                                     errorMessage={validationErrors.acknowledgement}
                                     hasError={!!validationErrors.acknowledgement}
                                     name="acknowledgement"
-                                    value="yes" //IDK what this actually means
+                                    value="yes" // When this checkbox is checked the form will receive {<name>: <value>} as a key pair
                                     label="I agree with the Terms & Conditions"
                                 />
 
                                 <CheckboxField
+                                    errorMessage={validationErrors.cat}
+                                    hasError={!!validationErrors.cat}
                                     name="cat"
-                                    label="Cat"
-                                    value="cat"
+                                    value="Toast"
+                                    label="Cat"                     
                                     onChange={console.log('check')}
                                 />
                             </>
@@ -54,13 +59,15 @@ function App() {
                 /* 
                 This is somehow the thing that decides if the "sign up" button at the bottom
                 of the form is enabled or disabled.
-                Nearest I can tell, it works via black magic.
+                Assigning a validationError to a CheckBox makes it required -- I haven't tested input fields, but I imagine it'll be similar.
                 */
                 async validateCustomSignUp(formData) {
-                    if (!formData.acknowledgement) {
-                        return {
-                            acknowledgement: 'You must agree to the Terms & Conditions',
-                        };
+                    const validateErrors = {
+                        ...(!formData.acknowledgement && {acknowledgement: 'You must agree to the Terms & Conditions'}),
+                        ...(!formData.cat && {cat: 'You must have a cat'}),
+                    };
+                    if (Object.keys(validateErrors).length > 0) {
+                        return validateErrors;
                     }
                 },
             }}
