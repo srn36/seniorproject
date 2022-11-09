@@ -1,6 +1,6 @@
 /* 
-Use of this component has now been packaged into AuthRoute, which will serve as a base page.
-Load pages with AuthRoute to automatically have a NavigationBar appended
+Use of this component has now been packaged into PageBase, which will serve as a base page.
+Load pages with PageBase to automatically have a NavigationBar appended
 */
 import React, { useMemo, useRef } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
