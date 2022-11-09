@@ -1,6 +1,6 @@
-import React from "react";
-import { useOutletContext } from "react-router-dom";
-import FriendList from "../../friend-displays/FriendList";
+import React from 'react';
+import { useOutletContext } from 'react-router-dom';
+import FriendList from '../../friend-displays/FriendList';
 
 function Friends(props) {
     const {userInfo, username, friendList, friends, friendListType} = useOutletContext();

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
-import { putUserInfoFromSettings } from "../../../helper/api-calls/user";
+import React, { useState } from 'react';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import { putUserInfoFromSettings } from '../../../helper/api-calls/user';
 
 function Settings(props) {
     const {userInfo} = useOutletContext();
@@ -33,38 +33,38 @@ function Settings(props) {
     }
 
     return (
-        <div className='center'>
+        <>
             <h1>SETTINGS</h1>
             <form onSubmit={e => saveSettings(e)}>    
                 <div>
                     <label>
                         <p>Age</p>
-                        <input type="text" onChange={e => setAge(e.target.value)}></input>
+                        <input type='text' onChange={e => setAge(e.target.value)}></input>
                     </label>
                 </div>
                 <div>
                     <label>
                         <p>Password</p>
-                        <input type="password" onChange={e => setPassword(e.target.value)}></input>
+                        <input type='password' onChange={e => setPassword(e.target.value)}></input>
                     </label>
                 </div>
                 <div>
                     <label>
                         <p>Display Name</p>
-                        <input type="text" onChange={e => setDisplayName(e.target.value)}></input>
+                        <input type='text' onChange={e => setDisplayName(e.target.value)}></input>
                     </label>
                 </div>
                 <div>
                     <label>
                         <p>Delete Account</p>
-                        <input type="text" onChange={e => setDeleteAccount(e.target.value)}></input>
+                        <input type='text' onChange={e => setDeleteAccount(e.target.value)}></input>
                     </label>
                 </div>
                 <div>
-                    <button type="submit">Save</button>
+                    <button type='submit'>Save</button>
                 </div>
             </form>
-        </div>
+        </>
     );
 }
 

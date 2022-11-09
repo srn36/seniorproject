@@ -7,9 +7,10 @@
 }
 
 .profile-headline img {
-    height: 5em;
-    width: 5em;
+    height: calc(3*(1.325rem + .9vw));
+    width: calc(3*(1.325rem + .9vw));
     object-fit: cover;
+    margin-right: 1em;
 }
 
 .profile-headline div {
@@ -18,22 +19,22 @@
 }
 
 .profile-view-selector {
-    width: 40%;
+    width: 48%;
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(12, 1fr);
 }
 
-.profile-view-selector .half {
+.profile-view-selector .quarter {
     grid-row: 1;
     grid-column: span 3;
 }
 
 .profile-view-selector .third {
     grid-row: 1;
-    grid-column: span 2;
+    grid-column: span 4;
 }
 
-.profile-view-selector .half button, .profile-view-selector .third button{
+.profile-view-selector .quarter button, .profile-view-selector .third button{
     width: 100%;
 }

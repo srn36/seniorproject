@@ -1,60 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import mockPFP from '../../logo192.png';
-
-export function useCredentialsToToken(credentials) {
-    const [results, setResults] = useState({loading: true, error: null, data: null});
-
-    useEffect(() => {
-        setResults({loading: true, error: null, data: null});
-        /*
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(credentials)
-        }).then(response => 
-            response.json()
-        ).then(data => 
-            setResults({loading: false, error: null, data: data})
-        ).catch( e => {
-            console.log(e.message);
-            return setResults({loading: false, error: e, data: null});
-        });
-        */
-        setResults({loading: false, error: null, data: 'login token'});
-    }, [credentials]);
-
-    return results;
-}
-
-export function useTokenToUserInfo(token) {
-    const [results, setResults] = useState({loading: true, error: null, data: null});
-
-    useEffect(() => {
-        setResults({loading: true, error: null, data: null});
-        /*
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(credentials)
-        }).then(response => 
-            response.json()
-        ).then(data => 
-            setResults({loading: false, error: null, data: data})
-        ).catch( e => {
-            console.log(e.message);
-            return setResults({loading: false, error: e, data: null});
-        });
-        */
-        const mockData = {username: 'username', password: 'password'};
-        setResults({loading: false, error: null, data: mockData});
-    }, [token]);
-
-    return results;
-}
 
 export function useProfileInfo(username) {
     const [results, setResults] = useState({loading: true, error: null, data: null});
@@ -199,6 +144,75 @@ export function useFriendRequests(username) {
         ];
         setResults({loading: false, error: null, data: mockData});
     }, [username]);
+
+    return results;
+}
+
+export function useFriendRecommendations(username) {
+    const [results, setResults] = useState({loading: true, error: null, data: null});
+
+    useEffect(() => {
+        setResults({loading: true, error: null, data: null});
+        /*
+        fetch('', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(credentials)
+        }).then(response => 
+            response.json()
+        ).then(data => 
+            setResults({loading: false, error: null, data: data})
+        ).catch( e => {
+            console.log(e.message);
+            return setResults({loading: false, error: e, data: null});
+        });
+        */
+        const mockData = [
+            {key: 'Recommendation 1', username: 'Recommendation 1', profilePic: mockPFP},
+            {key: 'Recommendation 2', username: 'Recommendation 2', profilePic: mockPFP},
+            {key: 'Recommendation 3', username: 'Recommendation 3', profilePic: mockPFP},
+            {key: 'Recommendation 4', username: 'Recommendation 4', profilePic: mockPFP},
+            {key: 'Recommendation 5', username: 'Recommendation 5', profilePic: mockPFP},
+            {key: 'Recommendation 6', username: 'Recommendation 6', profilePic: mockPFP},
+            {key: 'Recommendation 7', username: 'Recommendation 7', profilePic: mockPFP},
+            {key: 'Recommendation 8', username: 'Recommendation 8', profilePic: mockPFP},
+            {key: 'Recommendation 9', username: 'Recommendation 9', profilePic: mockPFP},
+            {key: 'Recommendation 10', username: 'Recommendation 10', profilePic: mockPFP},
+            {key: 'Recommendation 11', username: 'Recommendation 11', profilePic: mockPFP},
+            {key: 'Recommendation 12', username: 'Recommendation 12', profilePic: mockPFP},
+            {key: 'Recommendation 13', username: 'Recommendation 13', profilePic: mockPFP},
+            {key: 'Recommendation 14', username: 'Recommendation 14', profilePic: mockPFP},
+            {key: 'Recommendation 15', username: 'Recommendation 15', profilePic: mockPFP},
+            {key: 'Recommendation 16', username: 'Recommendation 16', profilePic: mockPFP},
+            {key: 'Recommendation 17', username: 'Recommendation 17', profilePic: mockPFP},
+            {key: 'Recommendation 18', username: 'Recommendation 18', profilePic: mockPFP},
+            {key: 'Recommendation 19', username: 'Recommendation 19', profilePic: mockPFP},
+            {key: 'Recommendation 20', username: 'Recommendation 20', profilePic: mockPFP},
+            {key: 'Recommendation 21', username: 'Recommendation 21', profilePic: mockPFP},
+            {key: 'Recommendation 22', username: 'Recommendation 22', profilePic: mockPFP},
+            {key: 'Recommendation 23', username: 'Recommendation 23', profilePic: mockPFP},
+            {key: 'Recommendation 24', username: 'Recommendation 24', profilePic: mockPFP},
+            {key: 'Recommendation 25', username: 'Recommendation 25', profilePic: mockPFP},
+            {key: 'Recommendation 26', username: 'Recommendation 26', profilePic: mockPFP},
+            {key: 'Recommendation 27', username: 'Recommendation 27', profilePic: mockPFP},
+            {key: 'Recommendation 28', username: 'Recommendation 28', profilePic: mockPFP},
+            {key: 'Recommendation 29', username: 'Recommendation 29', profilePic: mockPFP},
+            {key: 'Recommendation 30', username: 'Recommendation 30', profilePic: mockPFP},
+            {key: 'Recommendation 31', username: 'Recommendation 31', profilePic: mockPFP},
+            {key: 'Recommendation 32', username: 'Recommendation 32', profilePic: mockPFP},
+            {key: 'Recommendation 33', username: 'Recommendation 33', profilePic: mockPFP},
+            {key: 'Recommendation 34', username: 'Recommendation 34', profilePic: mockPFP},
+            {key: 'Recommendation 35', username: 'Recommendation 35', profilePic: mockPFP},
+            {key: 'Recommendation 36', username: 'Recommendation 36', profilePic: mockPFP},
+            {key: 'Recommendation 37', username: 'Recommendation 37', profilePic: mockPFP},
+            {key: 'Recommendation 38', username: 'Recommendation 38', profilePic: mockPFP},
+            {key: 'Recommendation 39', username: 'Recommendation 39', profilePic: mockPFP},
+            {key: 'Recommendation 40', username: 'Recommendation 40', profilePic: mockPFP},
+        ];
+        setResults({loading: false, error: null, data: mockData});
+    }, []);
 
     return results;
 }
