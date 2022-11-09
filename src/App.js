@@ -7,6 +7,7 @@ import {
     CheckboxField,
     useAuthenticator
 } from "@aws-amplify/ui-react";
+import { GameCheckboxes } from './components/helper/game-selection';
 
 function App() {
     const router = routes();
@@ -22,7 +23,7 @@ function App() {
                     FormFields() {
                         /* 
                         Probably important to know wtf useAuthenticator atually does.
-                        The (context) => [context.user] is used to avoid re-rendering the entire site unnecessarily.
+                        The (context) => [context.validationErrors] is used to avoid re-rendering the entire site unnecessarily.
                         Instead, that function makes sure the entire site is only reloaded when the site's validation errors change.
                         */
                         const { validationErrors } = useAuthenticator((context) => [context.validationErrors]);
@@ -33,6 +34,28 @@ function App() {
                                 Below we will append additional custom fields. */}
                                 <Authenticator.SignUp.FormFields />
 
+                                {/* 
+                                >>>>>> CHECKBOX FORMAT GUIDE <<<<<<
+
+                                <CheckboxField
+                                    -------------------------------------------------
+                                    -- Validation/Error Handling --
+
+                                    errorMessage={Message to display when box isn't checked}
+                                    hasError={Highlight box in red if not checked} <-------------- This is the field that makes a checkbox required
+                                    -------------------------------------------------
+                                    -- Submitted Form Data --
+
+                                    name="acknowledgement"
+                                    value="yes"
+
+                                    -- When this checkbox is checked the form will receive {<name>: <value>} as a key-value pair --
+                                    -------------------------------------------------
+                                    -- Display Text --
+                                    label="Text You Want Displayed"
+                                /> 
+                                */}
+
                                 {/* Append & require Terms & Conditions field to sign up.  */}
                                 <CheckboxField
                                     errorMessage={validationErrors.acknowledgement}
@@ -42,14 +65,8 @@ function App() {
                                     label="I agree with the Terms & Conditions"
                                 />
 
-                                <CheckboxField
-                                    errorMessage={validationErrors.cat}
-                                    hasError={!!validationErrors.cat}
-                                    name="cat"
-                                    value="Toast"
-                                    label="Cat"                     
-                                    onChange={console.log('check')}
-                                />
+                                {/* As of right now, I have no idea how AWS Cognito will handle/store the checkbox options */}
+                                <GameCheckboxes validationErrors={validationErrors}/>
                             </>
                         );
                     },
@@ -62,10 +79,15 @@ function App() {
                 Assigning a validationError to a CheckBox makes it required -- I haven't tested input fields, but I imagine it'll be similar.
                 */
                 async validateCustomSignUp(formData) {
+                    // Check to ensure that at least one game has been selected
+                    const hasGameSelected = Object.values(formData).filter(dataVal => dataVal === 'game-selected').length > 0;
+
                     const validateErrors = {
                         ...(!formData.acknowledgement && {acknowledgement: 'You must agree to the Terms & Conditions'}),
-                        ...(!formData.cat && {cat: 'You must have a cat'}),
+                        ...(!hasGameSelected && {game: 'You must select at least one game'}),
                     };
+
+                    // Check if there is at least 1 validation error
                     if (Object.keys(validateErrors).length > 0) {
                         return validateErrors;
                     }
