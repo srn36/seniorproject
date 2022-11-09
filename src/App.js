@@ -79,8 +79,12 @@ function App() {
                 Assigning a validationError to a CheckBox makes it required -- I haven't tested input fields, but I imagine it'll be similar.
                 */
                 async validateCustomSignUp(formData) {
-                    // Check to ensure that at least one game has been selected
-                    const hasGameSelected = Object.values(formData).filter(dataVal => dataVal === 'game-selected').length > 0;
+                    /*
+                    Generate an array of game titles which have been selected.
+                    Check that this array is not empty.
+                    */
+                    const selectedGames = Object.keys(formData).filter(dataKey => formData[dataKey] === 'game-selected');
+                    const hasGameSelected = selectedGames.length > 0;
 
                     const validateErrors = {
                         ...(!formData.acknowledgement && {acknowledgement: 'You must agree to the Terms & Conditions'}),

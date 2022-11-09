@@ -3,21 +3,21 @@ import { CheckboxField, Flex, /* View */ } from '@aws-amplify/ui-react';
 import placeholderImg from '../../logo192.png';
 
 export const gamesList = [
-    {icon: placeholderImg, name: 'Game 00'},
-    {icon: placeholderImg, name: 'Game 01'},
-    {icon: placeholderImg, name: 'Game 02'},
-    {icon: placeholderImg, name: 'Game 03'},
-    {icon: placeholderImg, name: 'Game 04'},
-    {icon: placeholderImg, name: 'Game 05'},
-    {icon: placeholderImg, name: 'Game 06'},
-    {icon: placeholderImg, name: 'Game 07'},
-    {icon: placeholderImg, name: 'Game 08'},
-    {icon: placeholderImg, name: 'Game 09'},
-    {icon: placeholderImg, name: 'Game 10'},
-    {icon: placeholderImg, name: 'Game 11'},
-    {icon: placeholderImg, name: 'Game 12'},
-    {icon: placeholderImg, name: 'Game 13'},
-    {icon: placeholderImg, name: 'Game 14'}
+    {icon: placeholderImg, title: 'Game 00'},
+    {icon: placeholderImg, title: 'Game 01'},
+    {icon: placeholderImg, title: 'Game 02'},
+    {icon: placeholderImg, title: 'Game 03'},
+    {icon: placeholderImg, title: 'Game 04'},
+    {icon: placeholderImg, title: 'Game 05'},
+    {icon: placeholderImg, title: 'Game 06'},
+    {icon: placeholderImg, title: 'Game 07'},
+    {icon: placeholderImg, title: 'Game 08'},
+    {icon: placeholderImg, title: 'Game 09'},
+    {icon: placeholderImg, title: 'Game 10'},
+    {icon: placeholderImg, title: 'Game 11'},
+    {icon: placeholderImg, title: 'Game 12'},
+    {icon: placeholderImg, title: 'Game 13'},
+    {icon: placeholderImg, title: 'Game 14'}
 ];
 
 
@@ -42,8 +42,8 @@ export function GameCheckboxes({ validationErrors }) {
                     errorMessage={validationErrors.game}
                     hasError={!!validationErrors.game}
                     key={index}
-                    name={gamesList[index].name}
-                    label={gamesList[index].name}
+                    name={gamesList[index].title}
+                    label={gamesList[index].title}
                     value='game-selected'
                     onChange={e => handleGameChecked(index, e)}
                 />
@@ -51,8 +51,8 @@ export function GameCheckboxes({ validationErrors }) {
                 <CheckboxField
                     hasError={!!validationErrors.game}
                     key={index}
-                    name={gamesList[index].name}
-                    label={gamesList[index].name}
+                    name={gamesList[index].title}
+                    label={gamesList[index].title}
                     value='game-selected'
                     onChange={e => handleGameChecked(index, e)}
                 />
