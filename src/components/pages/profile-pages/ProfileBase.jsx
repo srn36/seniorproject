@@ -20,7 +20,6 @@ import { useFriendsForUser, useProfileInfo } from '../../../helper/api-calls/use
 function ProfileBase(props) {
     const {userInfo} = useOutletContext();
     const username = useParams().username;
-
     const friendList = useFriendsForUser(username);
     const profileInfo = useProfileInfo(username);
 
@@ -43,7 +42,8 @@ function ProfileBase(props) {
                 {
                     profileInfo.loading ? 
                         <h4>Loading...</h4> : (
-                            profileInfo.error ? <h4>Error</h4> : 
+                            profileInfo.error ? 
+                                <h4>Error</h4> : 
                                 <ProfileHeadline 
                                     username={username}
                                     userInfo={userInfo}
