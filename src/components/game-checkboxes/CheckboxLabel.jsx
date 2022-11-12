@@ -49,7 +49,13 @@ function ConsoleDropdown(title, consoleOptionString, disable, hasError) {
             title='Console'
             autoClose='outside'
             disabled={disable}
-            onClick={e => {return disable ? e.preventDefault() : e.stopPropagation()}}
+            onClick={e => {
+                if(disable) {
+                    e.preventDefault();
+                } else if(e.currentTarget.className === 'show dropdown') {
+                    e.stopPropagation();
+                }
+            }}
         >
             {consoleDropdownItems}
         </DropdownButton>
@@ -64,17 +70,13 @@ function CheckboxLabel(props) {
     return (
         <div
             className='game-label'
+            onClick={e => e.preventDefault()}
         >
-            <div
-                className='disable-clicks'
-                onClick={e => e.preventDefault()}
-            >
-                <img src={icon} alt=''/>
-                <p>{title}</p>                
-            </div>
+            <img src={icon} alt=''/>
+            <p>{title}</p>
             {consoleDropdown}
         </div>
-    )
+    );
 }
 
 export default CheckboxLabel;
