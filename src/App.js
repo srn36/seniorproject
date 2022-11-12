@@ -68,11 +68,12 @@ function App() {
                 Assigning a validationError to a CheckBox makes it required -- I haven't tested text input fields, but I imagine it'll be similar.
                 */
                 async validateCustomSignUp(formData) {
+                    console.log(formData);
                     // Separate arrays containing each selected game and console
                     const selectedGames = Object.keys(formData).filter(dataKey => formData[dataKey] === 'game-selected');
                     const selectedConsoles = Object.keys(formData).filter(dataKey => formData[dataKey] === 'console-selected');
 
-                    const gameToConsoleMap = {};
+                    const gameToInfoMap = {};
                     const validateErrors = selectedGames.length > 0 ? {} : {game: 'You must select at least one game'};
                     selectedGames.forEach(gameTitle => {
                         // I can explain, I swear
@@ -81,15 +82,18 @@ function App() {
                         ).map(selectedConsole => 
                             selectedConsole.substring(gameTitle.length + 1)
                         );
-                        
-                        // Store the consoles listed for each game
-                        gameToConsoleMap[gameTitle] = [...selectedConsolesForTitle];
+                                                
+                        // Store the consoles and username listed for each game
+                        gameToInfoMap[gameTitle] = {
+                            'consoles': [...selectedConsolesForTitle],
+                            'username': formData[`${gameTitle}-Username`] || ''
+                        };
 
                         if(selectedConsolesForTitle.length === 0) {
                             validateErrors[gameTitle] = `You must select at least one console for ${gameTitle}`;
                         }
                     });
-
+                    console.log(gameToInfoMap)
                     // Check if there is at least 1 validation error
                     if (Object.keys(validateErrors).length > 0) {
                         return validateErrors;
