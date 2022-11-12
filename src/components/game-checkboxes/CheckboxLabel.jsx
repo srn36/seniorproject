@@ -50,9 +50,9 @@ function ConsoleDropdown(title, consoleOptionString, disable, hasError) {
             autoClose='outside'
             disabled={disable}
             onClick={e => {
-                if(disable) {
+                if(disable || e.target.className === 'dropdown-menu show') {
                     e.preventDefault();
-                } else if(e.currentTarget.className === 'show dropdown') {
+                } else if(e.target.className !== 'dropdown-toggle btn btn-primary') {
                     e.stopPropagation();
                 }
             }}

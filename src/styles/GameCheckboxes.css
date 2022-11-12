@@ -31,3 +31,8 @@
     margin-left: 0.5em;
     grid-column: 2;
 }
+
+.dropdown-item label {
+    width: 100%;
+    justify-content: flex-end;
+}
