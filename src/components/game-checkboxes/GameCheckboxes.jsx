@@ -14,7 +14,7 @@ function GameCheckboxes({ validationErrors }) {
                     hasError={!!validationErrors.game}
                     key={index}
                     name={games[index].title}
-                    label={games[index].title}
+                    label={<CheckboxLabel {...games[index]}/>}
                     value='game-selected'
                 />
                 :
