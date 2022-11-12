@@ -25,7 +25,15 @@ function GameCheckboxes({ validationErrors }) {
                     hasError={!!validationErrors.game || !!validationErrors[gameTitle]}
                     key={index}
                     name={gameTitle}
-                    label={<CheckboxLabel {...{'disable': selectedGames[index], ...games[index]}}/>}
+                    label={
+                        <CheckboxLabel {
+                            ...{
+                                'disable': selectedGames[index],
+                                'hasError': !!validationErrors[gameTitle],
+                                ...games[index]
+                            }
+                        }/>
+                    }
                     value='game-selected'
                     onChange={e => handleGameChecked(index, e)}
                 />
@@ -35,7 +43,15 @@ function GameCheckboxes({ validationErrors }) {
                     hasError={!!validationErrors.game || !!validationErrors[gameTitle]}
                     key={index}
                     name={gameTitle}
-                    label={<CheckboxLabel {...{'disable': selectedGames[index], ...games[index]}}/>}
+                    label={
+                        <CheckboxLabel {
+                            ...{
+                                'disable': !selectedGames[index],
+                                'hasError': !!validationErrors[gameTitle],
+                                ...games[index]
+                            }
+                        }/>
+                    }
                     value='game-selected'
                     onChange={e => handleGameChecked(index, e)}
                 />

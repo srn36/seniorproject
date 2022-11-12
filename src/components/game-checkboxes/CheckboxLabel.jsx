@@ -25,7 +25,7 @@ function optionStringToConsoles(optionString) {
 }
 
 
-function ConsoleDropdown(title, consoleOptionString, disable) {
+function ConsoleDropdown(title, consoleOptionString, disable, hasError) {
     let consoleOptions = [];
     try {
         consoleOptions = optionStringToConsoles(consoleOptionString);
@@ -37,6 +37,7 @@ function ConsoleDropdown(title, consoleOptionString, disable) {
             as={CheckboxField}
             key={gameConsole}
             className='dropdown-item'
+            hasError={hasError}
             name={`${title}-${gameConsole}`}
             label={gameConsole}
             value='console-selected'
@@ -47,8 +48,8 @@ function ConsoleDropdown(title, consoleOptionString, disable) {
             id={`dropdown-basic-button-${title}`}
             title='Console'
             autoClose='outside'
-            disabled={!disable}
-            onClick={e => e.stopPropagation()}
+            disabled={disable}
+            onClick={e => {return disable ? e.preventDefault() : e.stopPropagation()}}
         >
             {consoleDropdownItems}
         </DropdownButton>
@@ -57,16 +58,21 @@ function ConsoleDropdown(title, consoleOptionString, disable) {
 
 
 function CheckboxLabel(props) {
-    const {disable, icon, title, consoleOptionString} = props;
-    const consoleDropdown = ConsoleDropdown(title, consoleOptionString, disable);
+    const {disable, hasError, icon, title, consoleOptionString} = props;
+    const consoleDropdown = ConsoleDropdown(title, consoleOptionString, disable, hasError);
 
     return (
         <div
             className='game-label'
         >
-            <img src={icon} alt=''/>
-            <p>{title}</p>
-            {consoleDropdown} 
+            <div
+                className='disable-clicks'
+                onClick={e => e.preventDefault()}
+            >
+                <img src={icon} alt=''/>
+                <p>{title}</p>                
+            </div>
+            {consoleDropdown}
         </div>
     )
 }

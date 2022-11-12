@@ -16,6 +16,14 @@
     object-fit: cover;
 }
 
+.game-label button {
+    display: flex;
+    align-items: center;
+    max-height: 1.2rem;
+    font-size: 1rem;
+    grid-column: 3;
+}
+
 .game-label p {
     margin-top: 0px;
     margin-bottom: 0px;
@@ -24,10 +32,10 @@
     grid-column: 2;
 }
 
-.game-label button {
-    display: flex;
-    align-items: center;
-    max-height: 1.2rem;
-    font-size: 1rem;
-    grid-column: 3;
+.disable-clicks {
+    width: 100%;
+    height: 100%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: contents;
 }
