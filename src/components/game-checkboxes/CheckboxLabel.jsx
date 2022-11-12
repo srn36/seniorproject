@@ -97,7 +97,7 @@ function ConsoleDropdownWithUsername(title, consoleOptionString, disable, hasErr
         >
             {consoleDropdownItems}
             <Dropdown.Divider/>
-            <div key='Username'>
+            <div>
                 <input
                     name={`${title}-Username`}
                     type='text'
