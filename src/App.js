@@ -20,41 +20,12 @@ function App() {
             components={{
                 SignUp: {
                     FormFields() {
-                        /* 
-                        The (context) => [context.validationErrors] is used to avoid re-rendering the entire site unnecessarily.
-                        Instead, that function makes sure the entire site is only reloaded when the site's validation errors change.
-                        */
+                        // (context) => [context.validationErrors] ensures reloads only happen when validationErrors changes
                         const { validationErrors } = useAuthenticator((context) => [context.validationErrors]);
             
                         return (
                             <>
-                                {/* Here we are simply telling the form to at least use the default fields.
-                                Below we will append additional custom fields. */}
                                 <Authenticator.SignUp.FormFields />
-
-                                {/* 
-                                >>>>>> CHECKBOX FORMAT GUIDE <<<<<<
-
-                                <CheckboxField
-                                    -------------------------------------------------
-                                    -- Validation/Error Handling --
-
-                                    errorMessage={Message to display when box isn't checked}
-                                    hasError={Highlight box in red if not checked} <-------------- This is the field that makes a checkbox required
-                                    -------------------------------------------------
-                                    -- Submitted Form Data --
-
-                                    name="acknowledgement"
-                                    value="yes"
-
-                                    -- When this checkbox is checked the form will receive {<name>: <value>} as a key-value pair --
-                                    -------------------------------------------------
-                                    -- Display Text --
-                                    label="Text You Want Displayed"
-                                /> 
-                                */}
-
-                                {/* As of right now, I have no idea how AWS Cognito will handle/store the checkbox options */}
                                 <GameCheckboxes validationErrors={validationErrors}/>
                             </>
                         );
@@ -63,8 +34,7 @@ function App() {
             }}
             services={{
                 /* 
-                This is somehow the thing that decides if the "sign up" button at the bottom
-                of the form is enabled or disabled.
+                This what decides if the "sign up" button at the bottom of the form is enabled or disabled.
                 Assigning a validationError to a CheckBox makes it required -- I haven't tested text input fields, but I imagine it'll be similar.
                 */
                 async validateCustomSignUp(formData) {

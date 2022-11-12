@@ -6,8 +6,8 @@ import { Dropdown } from 'react-bootstrap';
 
 function GameCheckboxes({ validationErrors }) {
     const allFalseCheckValues = games.map(_game => false);
+    // We have to track which checkboxes are not checked so that we can disable their droprowns
     const [selectedGames, setSelectedGames] = useState(allFalseCheckValues);
-
     const handleGameChecked = (index, e) => {
         const newSelectedGames = Object.keys(selectedGames).map(gameIndex => {
             return gameIndex === index ? e.target.checked : selectedGames[gameIndex];
@@ -17,50 +17,33 @@ function GameCheckboxes({ validationErrors }) {
 
     const gamesKeys = Object.keys(games);
     const checkboxesFromGames = gamesKeys.map(index => {
-        const gameTitle = games[index].title;
+        const gameTitle = games[index].title;     
+        // The following check ensures that the error message is only displayed once instead of after each checkbox
+        const errorMessage = parseInt(index) === (gamesKeys.length - 1) ?
+                                (validationErrors.game || validationErrors[gameTitle])
+                                :
+                                (validationErrors[gameTitle]);
+
         return (
-            // This check ensures that the error message is only displayed once instead of after each checkbox
-            parseInt(index) === (gamesKeys.length - 1) ?               
-                <React.Fragment key={index}>
-                    <Dropdown.Divider/>
-                    <CheckboxField
-                        errorMessage={validationErrors.game || validationErrors[gameTitle]}
-                        hasError={!!validationErrors.game || !!validationErrors[gameTitle]}
-                        name={gameTitle}
-                        label={
-                            <CheckboxLabel {
-                                ...{
-                                    'disable': !selectedGames[index],
-                                    'hasError': !!validationErrors[gameTitle],
-                                    ...games[index]
-                                }
-                            }/>
-                        }
-                        value='game-selected'
-                        onChange={e => handleGameChecked(index, e)}
-                    />
-                </React.Fragment>
-                :
-                <React.Fragment key={index}>
-                    <Dropdown.Divider/>
-                    <CheckboxField
-                        errorMessage={validationErrors[gameTitle]}
-                        hasError={!!validationErrors.game || !!validationErrors[gameTitle]}
-                        name={gameTitle}
-                        label={                        
-                            <CheckboxLabel {
-                                ...{
-                                    'disable': !selectedGames[index],
-                                    'hasError': !!validationErrors[gameTitle],
-                                    ...games[index]
-                                }
-                            }/>
-                        }
-                        value='game-selected'
-                        onChange={e => handleGameChecked(index, e)}
-                    />                
-                </React.Fragment>
-                
+            <React.Fragment key={index}>
+                <Dropdown.Divider/>
+                <CheckboxField
+                    errorMessage={errorMessage}
+                    hasError={!!validationErrors.game || !!validationErrors[gameTitle]}
+                    name={gameTitle}
+                    label={
+                        <CheckboxLabel {
+                            ...{
+                                'disable': !selectedGames[index],
+                                'hasError': !!validationErrors[gameTitle],
+                                ...games[index]
+                            }
+                        }/>
+                    }
+                    value='game-selected'
+                    onChange={e => handleGameChecked(index, e)}
+                />
+            </React.Fragment>
         );
     });
 
