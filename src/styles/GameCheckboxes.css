@@ -1,0 +1,33 @@
+.game-label {
+    display: grid;
+    grid-template-columns: 1fr 4fr 2fr;
+    grid-template-rows: 1fr;
+    height: 3rem;
+    align-items: center;
+    font-size: 1rem;
+    text-decoration: none;
+    color:#212529;
+}
+
+.game-label img {
+    grid-column: 1;
+    height: 2.5rem;
+    width: 2.5rem;
+    object-fit: cover;
+}
+
+.game-label p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 0.5em;
+    grid-column: 2;
+}
+
+.game-label button {
+    display: flex;
+    align-items: center;
+    max-height: 1.2rem;
+    font-size: 1rem;
+    grid-column: 3;
+}

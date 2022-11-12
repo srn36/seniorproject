@@ -87,13 +87,3 @@
         transform: rotate(360deg);
     }
 }
-
-.game-label {
-    display: flex;
-    flex-direction: row;
-    place-items: center;
-    justify-content: space-between;
-    font-size: calc(10px + 2vmin);
-    text-decoration: none;
-    color:#212529;
-}

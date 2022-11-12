@@ -24,7 +24,7 @@ function optionStringToConsoles(optionString) {
 }
 
 
-function ConsoleDropdown(consoleOptionString) {
+function ConsoleDropdown(title, consoleOptionString) {
     let consoleOptions = [];
     try {
         consoleOptions = optionStringToConsoles(consoleOptionString);
@@ -41,7 +41,7 @@ function ConsoleDropdown(consoleOptionString) {
     );
     return (
         <DropdownButton
-            id='dropdown-basic-button'
+            id={`dropdown-basic-button-${title}`}
             title='Console'
         >
             {consoleDropdownItems}
@@ -52,14 +52,12 @@ function ConsoleDropdown(consoleOptionString) {
 
 function CheckboxLabel(props) {
     const {icon, title, consoleOptionString} = props;
-    const consoleDropdown = ConsoleDropdown(consoleOptionString);
+    const consoleDropdown = ConsoleDropdown(title, consoleOptionString);
 
     return (
         <div className='game-label'>
-            <div>
-                <img src={icon} alt=''/>
-                <p>{title}</p>
-            </div>
+            <img src={icon} alt=''/>
+            <p>{title}</p>
             {consoleDropdown}
         </div>
     )
