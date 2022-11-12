@@ -7,7 +7,7 @@ import {
     CheckboxField,
     useAuthenticator
 } from "@aws-amplify/ui-react";
-import { GameCheckboxes } from './components/helper/game-selection';
+import GameCheckboxes from './components/game-checkboxes/GameCheckboxes';
 
 function App() {
     const router = routes();
