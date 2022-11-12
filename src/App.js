@@ -49,6 +49,7 @@ function App() {
                         const selectedConsolesForTitle = selectedConsoles.filter(gameConsoleLabel => 
                             gameConsoleLabel.includes(gameTitle)
                         ).map(selectedConsole => 
+                            // selectedConsoles has strings formatted as '<gameTitle>-<console>', we want '<console>'
                             selectedConsole.substring(gameTitle.length + 1)
                         );
                                                 
