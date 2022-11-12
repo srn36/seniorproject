@@ -21,7 +21,6 @@ function App() {
                 SignUp: {
                     FormFields() {
                         /* 
-                        Probably important to know wtf useAuthenticator atually does.
                         The (context) => [context.validationErrors] is used to avoid re-rendering the entire site unnecessarily.
                         Instead, that function makes sure the entire site is only reloaded when the site's validation errors change.
                         */
@@ -66,7 +65,7 @@ function App() {
                 /* 
                 This is somehow the thing that decides if the "sign up" button at the bottom
                 of the form is enabled or disabled.
-                Assigning a validationError to a CheckBox makes it required -- I haven't tested input fields, but I imagine it'll be similar.
+                Assigning a validationError to a CheckBox makes it required -- I haven't tested text input fields, but I imagine it'll be similar.
                 */
                 async validateCustomSignUp(formData) {
                     // Separate arrays containing each selected game and console
