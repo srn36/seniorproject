@@ -24,7 +24,7 @@ function optionStringToConsoles(optionString) {
     return consoleOptions;
 }
 
-// eslint-disable-next-line
+
 function ConsoleDropdown(title, consoleOptionString, disable, hasError) {
     let consoleOptions = [];
     try {
@@ -62,57 +62,10 @@ function ConsoleDropdown(title, consoleOptionString, disable, hasError) {
     );
 }
 
-// eslint-disable-next-line
-function ConsoleDropdownWithUsername(title, consoleOptionString, disable, hasError) {
-    let consoleOptions = [];
-    try {
-        consoleOptions = optionStringToConsoles(consoleOptionString);
-    } catch(e) {
-        console.error(e);
-    }   
-    const consoleDropdownItems = consoleOptions.map(gameConsole => 
-        <Dropdown.Item
-            as={CheckboxField}
-            key={gameConsole}
-            className='dropdown-item'
-            hasError={hasError}
-            name={`${title}-${gameConsole}`}
-            label={gameConsole}
-            value='console-selected'
-        />
-    );
-    return (
-        <DropdownButton
-            id={`dropdown-basic-button-${title}`}
-            title='Console'
-            autoClose='outside'
-            disabled={disable}
-            onClick={e => {
-                if(disable || e.target.className === 'dropdown-menu show') {
-                    e.preventDefault();
-                } else if(e.target.className !== 'dropdown-toggle btn btn-primary') {
-                    e.stopPropagation();
-                }
-            }}
-        >
-            {consoleDropdownItems}
-            <Dropdown.Divider/>
-            <div>
-                <input
-                    name={`${title}-Username`}
-                    type='text'
-                    className='form-control'
-                    placeholder='Username'
-                />
-            </div>
-        </DropdownButton>
-    );
-}
-
 
 function CheckboxLabel(props) {
     const {disable, hasError, icon, title, consoleOptionString} = props;
-    const consoleDropdown = ConsoleDropdownWithUsername(title, consoleOptionString, disable, hasError);
+    const consoleDropdown = ConsoleDropdown(title, consoleOptionString, disable, hasError);
 
     return (
         <div

@@ -52,18 +52,22 @@ function App() {
                             // selectedConsoles has strings formatted as '<gameTitle>-<console>', we want '<console>'
                             selectedConsole.substring(gameTitle.length + 1)
                         );
-                                                
+                        
+                        if(!formData[`${gameTitle}-Username`] && !formData[`${gameTitle}-Default-Username`]) {
+                            validateErrors[`${gameTitle}-Username`] = `Input username for ${gameTitle}`;
+                        }
+
                         // Store the consoles and username listed for each game
                         gameToInfoMap[gameTitle] = {
                             'consoles': [...selectedConsolesForTitle],
-                            'username': formData[`${gameTitle}-Username`] || ''
+                            'username': !!formData[`${gameTitle}-Default-Username`] ? 1 : (formData[`${gameTitle}-Username`] ||  '')
                         };
 
                         if(selectedConsolesForTitle.length === 0) {
                             validateErrors[gameTitle] = `You must select at least one console for ${gameTitle}`;
                         }
                     });
-                    
+                    console.log(gameToInfoMap);
                     // Check if there is at least 1 validation error
                     if (Object.keys(validateErrors).length > 0) {
                         return validateErrors;
