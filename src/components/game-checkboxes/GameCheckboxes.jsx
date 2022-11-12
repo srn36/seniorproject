@@ -28,7 +28,7 @@ function GameCheckboxes({ validationErrors }) {
                     label={
                         <CheckboxLabel {
                             ...{
-                                'disable': selectedGames[index],
+                                'disable': !selectedGames[index],
                                 'hasError': !!validationErrors[gameTitle],
                                 ...games[index]
                             }
