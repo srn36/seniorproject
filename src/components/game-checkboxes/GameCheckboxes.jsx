@@ -5,15 +5,26 @@ import CheckboxLabel from './CheckboxLabel';
 import { Dropdown } from 'react-bootstrap';
 
 function GameCheckboxes({ validationErrors }) {
-    const allFalseCheckValues = games.map(_game => false);
+    const allFalseCheckValues = {};
+    games.forEach(game => allFalseCheckValues[game.title] = false);
     // We have to track which checkboxes are not checked so that we can disable their droprowns
-    const [selectedGames, setSelectedGames] = useState(allFalseCheckValues);
+    const [selectedGames, setSelectedGames] = useState(Object.values(allFalseCheckValues));
+    const [defaultUsernames, setDefaultUsernames] = useState(allFalseCheckValues);
+
+    // Checkbox event handlers
     const handleGameChecked = (index, e) => {
         const newSelectedGames = Object.keys(selectedGames).map(gameIndex => {
             return gameIndex === index ? e.target.checked : selectedGames[gameIndex];
         });
         setSelectedGames(newSelectedGames);
     };
+    const handleUsernameChecked = (gameTitle, e) => {
+        const newDefaultUsernames = {};
+        Object.keys(defaultUsernames).forEach(title => {
+            newDefaultUsernames[title] = title === gameTitle ? e.target.checked : defaultUsernames[title];
+        });
+        setDefaultUsernames(newDefaultUsernames);
+    }
 
     const gamesKeys = Object.keys(games);
     const checkboxesFromGames = gamesKeys.map(index => {
@@ -61,11 +72,12 @@ function GameCheckboxes({ validationErrors }) {
                                         type='text'
                                         className='form-control'
                                         placeholder='Username'
-                                        disabled={document.getElementById(`${gameTitle}-Default-Username`)?.checked || false}
+                                        disabled={defaultUsernames[gameTitle]}
                                     />
                                 </div>
                             }
                             value='default-username'
+                            onChange={e => handleUsernameChecked(gameTitle, e)}
                         />                       
                     }
                 </div>
