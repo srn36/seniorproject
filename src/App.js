@@ -91,8 +91,6 @@ function App() {
                         }
                     });
 
-                    console.log(gameToConsoleMap);
-
                     // Check if there is at least 1 validation error
                     if (Object.keys(validateErrors).length > 0) {
                         return validateErrors;
