@@ -1,3 +1,4 @@
+import { CheckboxField } from '@aws-amplify/ui-react';
 import React from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { consoles } from '../../helper/game-selection';
@@ -24,25 +25,30 @@ function optionStringToConsoles(optionString) {
 }
 
 
-function ConsoleDropdown(title, consoleOptionString) {
+function ConsoleDropdown(title, consoleOptionString, disable) {
     let consoleOptions = [];
     try {
         consoleOptions = optionStringToConsoles(consoleOptionString);
     } catch(e) {
         console.error(e);
     }   
-    const consoleDropdownItems = consoleOptions.map(console => 
+    const consoleDropdownItems = consoleOptions.map(gameConsole => 
         <Dropdown.Item
-            key={console}
+            as={CheckboxField}
+            key={gameConsole}
             className='dropdown-item'
-        >
-            {console}
-        </Dropdown.Item> 
+            name={`${title}-${gameConsole}`}
+            label={gameConsole}
+            value='console-selected'
+        />
     );
     return (
         <DropdownButton
             id={`dropdown-basic-button-${title}`}
             title='Console'
+            autoClose='outside'
+            disabled={!disable}
+            onClick={e => e.stopPropagation()}
         >
             {consoleDropdownItems}
         </DropdownButton>
@@ -51,14 +57,16 @@ function ConsoleDropdown(title, consoleOptionString) {
 
 
 function CheckboxLabel(props) {
-    const {icon, title, consoleOptionString} = props;
-    const consoleDropdown = ConsoleDropdown(title, consoleOptionString);
+    const {disable, icon, title, consoleOptionString} = props;
+    const consoleDropdown = ConsoleDropdown(title, consoleOptionString, disable);
 
     return (
-        <div className='game-label'>
+        <div
+            className='game-label'
+        >
             <img src={icon} alt=''/>
             <p>{title}</p>
-            {consoleDropdown}
+            {consoleDropdown} 
         </div>
     )
 }
