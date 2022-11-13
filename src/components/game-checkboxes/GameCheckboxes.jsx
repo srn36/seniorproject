@@ -54,6 +54,7 @@ function GameCheckboxes({ validationErrors }) {
                             }/>
                         }
                         value='game-selected'
+                        checked={selectedGames[index]}
                         onChange={e => handleGameChecked(index, e)}
                     />
                     {
@@ -77,6 +78,7 @@ function GameCheckboxes({ validationErrors }) {
                                 </div>
                             }
                             value='default-username'
+                            checked={defaultUsernames[gameTitle]}
                             onChange={e => handleUsernameChecked(gameTitle, e)}
                         />                       
                     }
