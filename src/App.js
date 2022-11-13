@@ -15,7 +15,7 @@ function App() {
         <Authenticator
             // Default to Sign In screen
             initialState="signIn"
-            
+            className='App-logo'
             // Customize Authenticator.SignUp.FormFields
             components={{
                 SignUp: {
