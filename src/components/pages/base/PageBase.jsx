@@ -3,6 +3,7 @@ import { Auth } from 'aws-amplify';
 import NavigationDropdown from './NavigationDropdown';
 import smallLogo from '../../../smollogo.png';
 import { Outlet } from 'react-router-dom';
+import SearchBar from '../../SearchBar';
 
 function PageBase(props) {
     const [userInfo, setUserInfo] = useState({loading: true, data: null});
@@ -19,6 +20,7 @@ function PageBase(props) {
                 <div className='App'>
                     <header className='App-header'>
                         <img src={smallLogo} alt='logo'/>
+                        <SearchBar/>
                         <NavigationDropdown userInfo={userInfo.data}/>
                     </header>
                     <main className='App-main'>

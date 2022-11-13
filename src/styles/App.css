@@ -11,7 +11,7 @@
     text-align: center;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 50 auto;
+    grid-template-rows: 50px auto;
     justify-content: center;
 }
 
@@ -30,9 +30,9 @@
     grid-row: 1;
     grid-column: 1;
     background-color: transparent;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
     font-size: calc(10px + 2vmin);
     color: white;
     position: sticky;
@@ -40,13 +40,51 @@
     z-index: 2;
 }
 
-.App-header div.dropdown {
-    display: flex;
-}
-
 .App-header img {
     height: 50px;
     width: auto;
+    grid-column: 1;
+}
+
+.App-header div.dropdown {
+    height: 50px;
+    display: flex;
+    grid-column: 3;
+    justify-content: flex-end;
+}
+
+div.search-bar {
+    grid-column: 2;
+    height: 42px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+div.search-bar button {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border: 0px;
+}
+
+div.bar-and-results-false {
+    width: calc(100% - 42px);
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 42px;
+}
+
+div.bar-and-results-false div, div.bar-and-results-true div {
+    grid-row: 1;
+    display: contents;
+}
+
+div.bar-and-results-false div input, div.bar-and-results-true div input {
+    grid-row: 1;
+    text-align: left;
+    background-color: #FFFFFF;
+    width: 100%;
 }
 
 .App-main {
