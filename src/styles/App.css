@@ -38,12 +38,15 @@
     position: sticky;
     top: 0;
     z-index: 2;
+    overflow-y: visible;
 }
 
 .App-header img {
     height: 50px;
     width: auto;
     grid-column: 1;
+    position: absolute;
+    left: 0;
 }
 
 .App-header div.dropdown {
@@ -51,36 +54,37 @@
     display: flex;
     grid-column: 3;
     justify-content: flex-end;
+    position: absolute;
+    right: 0;
 }
 
-div.search-bar {
+div.search-bar-false {
     grid-column: 2;
-    height: 42px;
     width: 100%;
-    display: flex;
-    align-items: center;
-}
-
-div.search-bar button {
-    height: 100%;
-    aspect-ratio: 1 / 1;
-    border: 0px;
-}
-
-div.bar-and-results-false {
-    width: calc(100% - 42px);
     display: grid;
     align-items: center;
     grid-template-columns: 1fr;
-    grid-template-rows: 42px;
+    grid-template-rows: 50px;
+    overflow-y: visible;
 }
 
-div.bar-and-results-false div, div.bar-and-results-true div {
+div.search-bar-true {
+    grid-column: 2;
+    width: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 300px;
+    overflow-y: visible;
+}
+
+div.search-bar-false div, div.search-bar-true div {
     grid-row: 1;
     display: contents;
 }
 
-div.bar-and-results-false div input, div.bar-and-results-true div input {
+div.search-bar-false div input, div.search-bar-true div input {
+    height: 42px;
     grid-row: 1;
     text-align: left;
     background-color: #FFFFFF;
