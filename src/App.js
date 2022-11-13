@@ -16,7 +16,7 @@ function App() {
             // Default to Sign In screen
             initialState="signIn"
             
-            // Customize `Authenticator.SignUp.FormFields`
+            // Customize Authenticator.SignUp.FormFields
             components={{
                 SignUp: {
                     FormFields() {
