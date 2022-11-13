@@ -86,9 +86,14 @@ function GameCheckboxes({ validationErrors }) {
     });
 
     return (
-        <Flex direction='column' gap='0'>
-            {checkboxesFromGames}
-        </Flex>
+        <>
+            <hr/>
+            <h3>Select Games</h3>
+            <Flex direction='column' gap='0'>
+                {checkboxesFromGames}
+            </Flex>
+        </>
+        
     );
 }
 

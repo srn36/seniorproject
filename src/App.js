@@ -26,6 +26,7 @@ function App() {
                         return (
                             <>
                                 <Authenticator.SignUp.FormFields />
+                                
                                 <GameCheckboxes validationErrors={validationErrors}/>
                             </>
                         );
