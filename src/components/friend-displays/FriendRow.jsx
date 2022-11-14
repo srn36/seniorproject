@@ -17,20 +17,20 @@ function FriendRow({ username, profilePic, userInfo, ...props}) {
             'Standard': null,
             'Removable': <RemoveButton userInfo={userInfo} username={username} onClick={() => setRow()}/>,
             'Recommendations': <AddButton userInfo={userInfo} username={username} onClick={() => setRow()}/>,
-            'Requests': <div>
+            'Requests': <span>
                             <AcceptButton userInfo={userInfo} username={username} onClick={() => setRow()}/> 
                             <RejectButton userInfo={userInfo} username={username} onClick={() => setRow()}/> 
-                        </div>
+                        </span>
         }[rowType];
 
         setRow(
             <tr>
                 <td>
                     <Link className='friend' to={`/profile/${username}`}>
-                        <div>
+                        <span>
                             <img src={profilePic} alt=''/>
                             <p>{username}</p>
-                        </div>
+                        </span>
                         {!!rowButtons && rowButtons}
                     </Link>
                 </td>

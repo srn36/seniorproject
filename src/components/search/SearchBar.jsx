@@ -20,6 +20,7 @@ const mockUserList = createMockUserList();
 const sendMockQuery = (query) => {
     return mockUserList.filter(user => user.username.includes(query));
 };
+// End of mock functions
 
 function SearchBar(props) {
     const MIN_CHARS_FOR_QUERY = 3;

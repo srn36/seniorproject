@@ -2,12 +2,9 @@ import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
 import Post from './Post';
-import PropTypes from 'prop-types';
 import FootBar from './FootBar';
 
-function Feed(props) {
-    const {fetchForUsername, userInfo, fetchFunction} = props;
-
+function Feed({ fetchForUsername, userInfo, fetchFunction }) {
     const fetchPosts = async (pageParam) => {
         const results = await fetchFunction(fetchForUsername, pageParam);
         return { results, nextPage: pageParam + 1, totalPages: 100 };
@@ -45,11 +42,5 @@ function Feed(props) {
         </>
     );
 }
-
-Feed.propTypes = {
-    fetchFunction: PropTypes.func.isRequired,
-    fetchForUsername: PropTypes.string.isRequired,
-    userInfo: PropTypes.any.isRequired
-};
 
 export default Feed;

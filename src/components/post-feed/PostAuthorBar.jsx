@@ -1,10 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
- function PostAuthorBar(props) {
-    const {userInfo, author, preview} = props;
-
+ function PostAuthorBar({ userInfo, author, preview }) {
     return (
         <div className={`author-bar-${preview}`}>
             <Link reloadDocument to={`/profile/${author}`}>
@@ -21,10 +18,5 @@ import { Link } from 'react-router-dom';
         </div>
     );
  }
-
-PostAuthorBar.propTypes = {
-    userInfo: PropTypes.any.isRequired,
-    author: PropTypes.string.isRequired
-};
 
  export default PostAuthorBar;

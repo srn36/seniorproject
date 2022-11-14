@@ -28,7 +28,6 @@ function MakePost(props) {
             </Card>
             <form onSubmit={onSubmit}>      
                 <label>
-                    <p>Select Image</p>
                     <input type='file' name='upload' accept='image/*' onChange={onImageChange}/>  
                 </label>
                 <div>
