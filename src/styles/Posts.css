@@ -17,7 +17,7 @@
     object-fit: cover;
 }
 
-.author-bar {
+.author-bar-false {
     display: flex;
     flex-direction: row;
     place-items: center;
@@ -25,7 +25,40 @@
     font-size: calc(10px + 2vmin);
 }
 
-.author-bar a {
+.author-bar-true {
+    display: flex;
+    flex-direction: row;
+    place-items: center;
+    justify-content: space-between;
+    font-size: calc(10px + 2vmin);
+    pointer-events: none;
+}
+
+.author-bar-false a, .author-bar-true a {
     text-decoration: none;
     color:#212529;
+}
+
+.make-post {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: calc(10px + 2vmin);
+}
+
+.make-post div.amplify-card {
+    background: transparent;
+}
+
+.make-post form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.make-post p {
+    margin-bottom: 8px;
+}
+
+.upload-button {
+    margin-top: 16px;
 }

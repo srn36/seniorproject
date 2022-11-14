@@ -1,14 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
+import { Card } from '@aws-amplify/ui-react';
+import Post from '../post-feed/Post';
 
 function MakePost(props) {
-    // eslint-disable-next-line
     const {userInfo} = useOutletContext();
+    const [image, setImage] = useState(null);
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+    };
+
+    const onImageChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setImage(URL.createObjectURL(e.target.files[0]));
+        }
+    };
 
     return (
-        <form>
-            <input type = "file" name = "upload" accept = "image/*"/>
-        </form>
+        <div className='make-post'>
+            <Card
+                variation='elevated'
+            >
+                <h3>Post Preview</h3>
+                <Post userInfo={userInfo} post={{image: image, author: userInfo.username}} preview={true}/>
+            </Card>
+            <form onSubmit={onSubmit}>      
+                <label>
+                    <p>Select Image</p>
+                    <input type = "file" name = "upload" accept = "image/*" onChange={e => onImageChange(e)}/>  
+                </label>
+                <div>
+                    <button className='upload-button' type='submit'>
+                        Upload Post
+                    </button>
+                </div>            
+            </form>
+        </div>
     );
 }
 

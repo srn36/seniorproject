@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
  function PostAuthorBar(props) {
-    const {userInfo, author} = props;
+    const {userInfo, author, preview} = props;
 
     return (
-        <div className='author-bar'>
+        <div className={`author-bar-${preview}`}>
             <Link reloadDocument to={`/profile/${author}`}>
                 {author}
             </Link>
