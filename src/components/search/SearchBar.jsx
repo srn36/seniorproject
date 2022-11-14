@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TextField } from '@aws-amplify/ui-react';
-import mockPFP from './../logo192.png';
+import mockPFP from '../../logo192.png';
+import SearchResults from './SearchResults';
 
 // Mock data for testing
 const createMockUserList = () => {
@@ -38,13 +39,17 @@ function SearchBar(props) {
     console.log(results);
 
     return (
-        <div className={`search-bar-${!!results.length}`}>
+        <div className='search-bar'>
             <TextField
                 label='Search Bar'
                 placeholder='Search for users'
                 onChange={e => setQueryText(e.target.value)}
                 labelHidden
             />
+            {
+                (queryText.length >= MIN_CHARS_FOR_QUERY) &&
+                <SearchResults results={results} query={queryText}/>
+            }
         </div>
     );
 }
