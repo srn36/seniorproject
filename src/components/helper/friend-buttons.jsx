@@ -6,7 +6,7 @@ import {
     removeFriend
 } from '../../helper/api-calls/friend';
 
-export function AcceptButton({userInfo, username, ...props}) {
+export function AcceptButton({ userInfo, username, ...props }) {
     return (
         <button onClick={e => {
             e.preventDefault();
@@ -20,7 +20,7 @@ export function AcceptButton({userInfo, username, ...props}) {
     );
 }
 
-export function RejectButton({userInfo, username, ...props}) {
+export function RejectButton({ userInfo, username, ...props }) {
     return (
         <button onClick={e => {
             e.preventDefault();
@@ -34,7 +34,7 @@ export function RejectButton({userInfo, username, ...props}) {
     );
 }
 
-export function AddButton({userInfo, username, ...props}) {
+export function AddButton({ userInfo, username, ...props }) {
     return (
         <button onClick={e => {
             e.preventDefault();
@@ -48,7 +48,7 @@ export function AddButton({userInfo, username, ...props}) {
     );
 }
 
-export function RemoveButton({userInfo, username, ...props}) {
+export function RemoveButton({ userInfo, username, ...props }) {
     return (
         <button onClick={e => {
             e.preventDefault();

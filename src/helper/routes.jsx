@@ -7,6 +7,7 @@ import ErrorPage from '../components/pages/ErrorPage';
 // Misc pages
 import Home from '../components/pages/Home';
 import Chat from '../components/pages/Chat';
+import MakePost from '../components/pages/MakePost';
 
 // Profile imports
 import ProfileBase from '../components/pages/profile-pages/ProfileBase';
@@ -58,13 +59,14 @@ function routes() {
                     index: true,
                     element: <Navigate to='home'/>
                 },
-                profileRoute,
                 errorRoute,
+                profileRoute,                
                 friendRoute,
                 //Add routes for new pages below
                 //All you need is the desired path and the page component
                 {path: 'home', element: <Home/>},
                 {path: 'chat', element: <Chat/>},
+                {path: 'make-post', element: <MakePost/>},
             ]
         }
     ]);

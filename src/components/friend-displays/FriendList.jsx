@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import FriendRow from './FriendRow';
 import { Table } from 'react-bootstrap';
 
-function FriendList(props) {
+function FriendList({ friends, userInfo, ...props }) {
+    const {type} = props;
     //Convert the full friend list to rows of the table based on the type of table requested
     const friendTable = useMemo(() => {
-        const {friends, type, userInfo} = props;
         return friends.map(friend => {
             const friendUsername = type === 'Requests' ? friend.fromUsername : friend.username;
             return (
@@ -19,7 +19,7 @@ function FriendList(props) {
                 />
             );
         });
-    }, [props]);
+    }, [friends, userInfo, type]);
 
     const [tableRows, setTableRows] = useState(friendTable);
 
@@ -30,7 +30,7 @@ function FriendList(props) {
 
     return useMemo(() => {
         return (
-            <div className={`friend-list-${props.type}`}>
+            <div className={`friend-list-${type}`}>
                 <Table bordered hover>
                     <thead>
                         <tr>
@@ -48,13 +48,11 @@ function FriendList(props) {
                 </Table>
             </div>
         );
-    }, [props.type, tableRows, filter]);
+    }, [type, tableRows, filter]);
 }
 
 FriendList.propTypes = {
-    friends: PropTypes.array.isRequired,
-    type: PropTypes.oneOf(['Removable', 'Requests', 'Standard', 'Recommendations']).isRequired,
-    userInfo: PropTypes.any.isRequired
-}
+    type: PropTypes.oneOf(['Removable', 'Requests', 'Standard', 'Recommendations']).isRequired
+};
 
 export default FriendList;

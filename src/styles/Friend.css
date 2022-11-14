@@ -43,7 +43,7 @@
     background-color:#e9ecef
 }
 
-.friend div {
+.friend span {
     display: flex;
     flex-direction: row;
 }
