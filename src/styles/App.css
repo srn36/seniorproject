@@ -7,6 +7,11 @@
     flex-grow: 100;
 }
 
+button:focus, button:hover, input[type="file"]::file-selector-button:hover, input[type="file"]::file-selector-button:hover {
+    color:#1e2125;
+    background-color:#b7bcc0;
+}
+
 .App {
     text-align: center;
     display: grid;
