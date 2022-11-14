@@ -36,8 +36,6 @@ function SearchBar(props) {
         }
     }, [queryText, setResults]);
 
-    console.log(results);
-
     return (
         <div className='search-bar'>
             <TextField

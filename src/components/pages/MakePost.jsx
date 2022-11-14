@@ -6,9 +6,12 @@ import Post from '../post-feed/Post';
 function MakePost(props) {
     const {userInfo} = useOutletContext();
     const [image, setImage] = useState(null);
+    const date = new Date();
 
     const onSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault();     
+        const postData = {image: image, author: userInfo.username, time: date.getTime()};
+        console.log(postData);
     };
 
     const onImageChange = (e) => {
@@ -29,7 +32,7 @@ function MakePost(props) {
                     <input type='file' name='upload' accept='image/*' onChange={onImageChange}/>  
                 </label>
                 <div>
-                    <button className='upload-button' type='submit'>
+                    <button className='upload-button' type='submit' disabled={!image}>
                         Upload Post
                     </button>
                 </div>            
