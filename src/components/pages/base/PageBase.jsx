@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
-import NavigationDropdown from './NavigationDropdown';
-import smallLogo from '../../../smollogo.png';
 import { Outlet } from 'react-router-dom';
-import SearchBar from '../../search/SearchBar';
+import NavigationDropdown from './NavigationDropdown';
+import SearchBar from './SearchBar';
+import smallLogo from '../../../smollogo.png';
 
 function PageBase(props) {
     const [userInfo, setUserInfo] = useState({loading: true, data: null});
