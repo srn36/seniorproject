@@ -20,17 +20,6 @@ button:hover, input[type="file"]::file-selector-button:hover {
     justify-content: center;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
-}
-
 .App-header {
     grid-row: 1;
     grid-column: 1;
@@ -99,7 +88,13 @@ button:hover, input[type="file"]::file-selector-button:hover {
     color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+@media (prefers-reduced-motion: no-preference) {
+    .spin {
+        animation: spin infinite 20s linear;
+    }
+}
+
+@keyframes spin {
     from {
         transform: rotate(0deg);
     }
