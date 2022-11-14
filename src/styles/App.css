@@ -72,16 +72,21 @@
 .App-footer {
     grid-row: 2;
     grid-column: 1;
+    width: 100%;
     background-color: transparent;
+    font-size: calc(10px + 2vmin);
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    justify-content: center;
     position: sticky;
-    width: 100%;
     bottom: 0;
     z-index: 2;
+}
+
+.return {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 .App-link {

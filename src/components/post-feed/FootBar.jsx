@@ -24,7 +24,7 @@ function FootBar() {
         return (
             <div className='App-footer'>
                 {
-                    showButton && <button onClick={_e => window.scrollTo(0, 0)}>Return to top</button>
+                    showButton && <button className='return' onClick={_e => window.scrollTo(0, 0)}>Return to top</button>
                 }
             </div>
         );
