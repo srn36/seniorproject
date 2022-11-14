@@ -62,7 +62,7 @@ function ProfileBase(props) {
 }
 
 
-function ProfileContent({isOwnProfile, children}) {
+function ProfileContent({ isOwnProfile, children }) {
     const path = useLocation().pathname;
     const linkClass = isOwnProfile ? 'quarter' : 'third';
 
@@ -115,10 +115,10 @@ function ProfileHeadline({ username, userInfo, profileInfo, isOwnProfile, friend
     const relationshipBasedFriendButton = {
         'Already Friends': <RemoveButton userInfo={userInfo} username={username}/>,
         'Outgoing': <button disabled={true}>Requested</button>,
-        'Incoming': <div>
+        'Incoming': <span>
                         <AcceptButton userInfo={userInfo} username={username}/>
                         <RejectButton userInfo={userInfo} username={username}/> 
-                    </div>,
+                    </span>,
         'None': <AddButton userInfo={userInfo} username={username}/>
     }
 
@@ -135,10 +135,10 @@ function ProfileHeadline({ username, userInfo, profileInfo, isOwnProfile, friend
     
     return (
         <div className='profile-headline'>
-            <div>
+            <span>
                 <img src={profileInfo.profilePic} alt='profile pic here'/>
                 <h2>{username}</h2>
-            </div>
+            </span>
             {!isOwnProfile && relationshipBasedFriendButton[friendButtonKey]}
         </div>
     );

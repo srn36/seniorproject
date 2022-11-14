@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
  function PostAuthorBar({ userInfo, author, preview }) {
     return (
-        <div className={`author-bar-${preview}`}>
+        <span className={`author-bar-${preview}`}>
             <Link reloadDocument to={`/profile/${author}`}>
                 {author}
             </Link>
@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
                     Edit Post
                 </button>
             }
-        </div>
+        </span>
     );
  }
 

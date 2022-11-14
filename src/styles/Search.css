@@ -49,7 +49,7 @@ div.search-bar div input {
     background-color:#e9ecef
 }
 
-.search-result div {
+.search-result span {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -61,7 +61,7 @@ div.search-bar div input {
     object-fit: cover;
 }
 
-.search-result span {
+.result-text {
     margin-top: 0px;
     margin-bottom: 0px;
     margin-right: 0px;
