@@ -11,7 +11,7 @@
     text-align: center;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 50 auto;
+    grid-template-rows: 50px auto;
     justify-content: center;
 }
 
@@ -25,23 +25,32 @@
     grid-row: 1;
     grid-column: 1;
     background-color: transparent;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
     position: sticky;
     top: 0;
     z-index: 2;
+    overflow-y: visible;
+}
+
+.site-logo {
+    height: 50px;
+    width: auto;
+    grid-column: 1;
+    position: absolute;
+    left: 0;
 }
 
 .App-header div.dropdown {
-    display: flex;
-}
-
-.App-header img {
+    grid-column: 3;
     height: 50px;
-    width: auto;
+    font-size: calc(10px + 2vmin);
+    color: #FFFFFF;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 0;
 }
 
 .App-main {
