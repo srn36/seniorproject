@@ -19,16 +19,14 @@ function MakePost(props) {
 
     return (
         <div className='make-post'>
-            <Card
-                variation='elevated'
-            >
+            <Card variation='elevated'>
                 <h3>Post Preview</h3>
                 <Post userInfo={userInfo} post={{image: image, author: (!!image ? userInfo.username : 'Upload an image')}} preview={true}/>
             </Card>
             <form onSubmit={onSubmit}>      
                 <label>
                     <p>Select Image</p>
-                    <input type = "file" name = "upload" accept = "image/*" onChange={e => onImageChange(e)}/>  
+                    <input type='file' name='upload' accept='image/*' onChange={onImageChange}/>  
                 </label>
                 <div>
                     <button className='upload-button' type='submit'>
