@@ -23,7 +23,7 @@ function MakePost(props) {
                 variation='elevated'
             >
                 <h3>Post Preview</h3>
-                <Post userInfo={userInfo} post={{image: image, author: userInfo.username}} preview={true}/>
+                <Post userInfo={userInfo} post={{image: image, author: (!!image ? userInfo.username : 'Upload an image')}} preview={true}/>
             </Card>
             <form onSubmit={onSubmit}>      
                 <label>
