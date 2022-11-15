@@ -7,7 +7,7 @@
     flex-grow: 100;
 }
 
-button:not(.dropdown-toggle):hover:enabled, input[type="file"]::file-selector-button:hover {
+button:not(.dropdown-toggle,.tab-button):hover:enabled, input[type="file"]::file-selector-button:hover {
     color:#1e2125;
     background-color:#b7bcc0;
 }
@@ -83,10 +83,10 @@ button:not(.dropdown-toggle):hover:enabled, input[type="file"]::file-selector-bu
     position: fixed;
     top: 0;
     left: 0;
-    margin-top: calc(3*(1.325rem + .9vw) - 50px);
+    margin-top: calc(3*(1.325rem + .9vw));
     height: min-content;
     width: 20%;
-    font-size: calc(10px + 2vmin);
+    font-size: calc(12px + 2vmin);
     color: #FFFFFF;
     display: flex;
     flex-direction: column;
@@ -94,9 +94,21 @@ button:not(.dropdown-toggle):hover:enabled, input[type="file"]::file-selector-bu
 }
 
 .tab-button {
-    margin-top: 50px;
-    
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: none;
+    width: 50%;
     text-align: right;
+    color: #FFFFFF;
+    background-color: transparent;
+}
+
+.tab-button:disabled {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tab-button:enabled:hover,.tab-button:enabled:focus {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .App-footer {
