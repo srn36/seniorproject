@@ -25,8 +25,7 @@ function App() {
             
                         return (
                             <>
-                                <Authenticator.SignUp.FormFields />
-                                
+                                <Authenticator.SignUp.FormFields />                                
                                 <GameCheckboxes validationErrors={validationErrors}/>
                             </>
                         );
@@ -73,15 +72,21 @@ function App() {
                         // Store the consoles and username listed for each game
                         gameToInfoMap[gameTitle] = {
                             'consoles': [...selectedConsolesForTitle],
+                            /**
+                             * REMOVE IF NO USERNAME INPUT
+                             */
                             'username': !!formData[`${gameTitle}-Default-Username`] ? username : (formData[`${gameTitle}-Username`] ||  '')
                         };
 
                         // Add validation errors
-                        if(!formData[`${gameTitle}-Username`] && !formData[`${gameTitle}-Default-Username`]) {
-                            validateErrors[`${gameTitle}-Username`] = `Input username for ${gameTitle}`;
-                        }
                         if(selectedConsolesForTitle.length === 0) {
                             validateErrors[gameTitle] = `You must select at least one console for ${gameTitle}`;
+                        }
+                        /**
+                         * REMOVE IF NO USERNAME INPUT
+                         */
+                        if(!formData[`${gameTitle}-Username`] && !formData[`${gameTitle}-Default-Username`]) {
+                            validateErrors[`${gameTitle}-Username`] = `Input username for ${gameTitle}`;
                         }
                     });
 
