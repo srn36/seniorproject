@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
  function PostAuthorBar({ userInfo, author, preview }) {
     return (
         <span className={`author-bar-${preview}`}>
-            <Link reloadDocument to={`/profile/${author}`}>
+            <Link to={`/profile/${author}`}>
                 {author}
             </Link>
             {

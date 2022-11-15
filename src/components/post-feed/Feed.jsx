@@ -17,7 +17,7 @@ function Feed({ fetchForUsername, userInfo, fetchFunction }) {
         hasNextPage,
         fetchNextPage
     } = useInfiniteQuery('posts', ({ pageParam = 1 }) => fetchPosts(pageParam), {
-        refetchOnMount: false,
+        refetchOnMount: true,
         refetchOnWindowFocus: false,
         getNextPageParam: (lastPage) => (lastPage.nextPage < lastPage.totalPages) ? lastPage.nextPage : undefined
     });

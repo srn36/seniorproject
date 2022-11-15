@@ -27,7 +27,7 @@ const sendMockQuery = (query) => {
 function renderOption(option, value) {
     const { username, profilepic } = option
     return (
-        <Link className='search-result' to={`/profile/${username}`} reloadDocument>
+        <Link className='search-result' to={`/profile/${username}`}>
             <span>
                 <img src={profilepic} alt=''/>
                 <HighlightMatch query={value}>

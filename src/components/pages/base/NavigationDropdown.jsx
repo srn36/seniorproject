@@ -35,7 +35,6 @@ function NavigationDropdown({ userInfo, signOut }) {
         const profilePath = `/profile/${userInfo.username}`;
         const profileTab = (
             <Dropdown.Item
-                reloadDocument
                 key={profilePath}
                 disabled={pathName.includes(profilePath.replaceAll('/','').toLowerCase())}
                 as={Link}
