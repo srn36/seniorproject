@@ -1,14 +1,30 @@
 import React from 'react';
-import { Outlet, useOutletContext } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-function PageBase(props) {
-    const userInfo = useOutletContext();
+function PageWithNavTabs({ tabs, children }) {
+    const path = useLocation().pathname.toLowerCase();
+    
+    const pathTabs = tabs.map(tab => (
+        <Link 
+            key={tab}
+            to={tab}                    
+        >
+            <button disabled={path.includes(tab.toLowerCase())}>
+                {tab}
+            </button>
+        </Link>
+    ));
 
     return (
-        <>
-            <Outlet context={{'userInfo': userInfo.data}}/>
-        </>
+        <div className='base-grid'>
+            <div className='tabs'>
+                {pathTabs}
+            </div>
+            <div className='content'>
+                {children}
+            </div>          
+        </div>
     );
 }
 
-export default PageBase;
+export default PageWithNavTabs;

@@ -12,6 +12,7 @@ import {
     RejectButton,
     RemoveButton
 } from '../../helper/friend-buttons';
+import PageWithNavTabs from '../base/PageWithNavTabs';
 
 import { fetchUserPosts } from '../../../helper/api-calls/user';
 import { checkFriendRequests } from '../../../helper/api-calls/friend';
@@ -38,76 +39,27 @@ function ProfileBase(props) {
         };
 
         return (
-            <>
-                {
-                    profileInfo.loading ? 
-                        <h4>Loading...</h4> : (
-                            profileInfo.error ? 
-                                <h4>Error</h4> : 
-                                <ProfileHeadline 
-                                    username={username}
-                                    userInfo={userInfo}
-                                    profileInfo={profileInfo.data}
-                                    isOwnProfile={isOwnProfile}
-                                    friends={friends}
-                                />
-                        )
-                }
-                <ProfileContent isOwnProfile={isOwnProfile}>
+            <PageWithNavTabs tabs={['Posts', 'Friends', 'Games']}>
+                <>
+                    {
+                        profileInfo.loading ? 
+                            <h4>Loading...</h4> : (
+                                profileInfo.error ? 
+                                    <h4>Error</h4> : 
+                                    <ProfileHeadline 
+                                        username={username}
+                                        userInfo={userInfo}
+                                        profileInfo={profileInfo.data}
+                                        isOwnProfile={isOwnProfile}
+                                        friends={friends}
+                                    />
+                            )
+                    }
                     <Outlet context={outletContext}/>
-                </ProfileContent>
-            </>
+                </>
+            </PageWithNavTabs>
         );
     }, [username, friendList, profileInfo, userInfo]);
-}
-
-
-function ProfileContent({ isOwnProfile, children }) {
-    const path = useLocation().pathname;
-    const linkClass = isOwnProfile ? 'quarter' : 'third';
-
-    return (
-        <>
-            <div className='profile-view-selector'>
-                <Link 
-                    to='posts'
-                    className={linkClass}                    
-                >
-                    <button disabled={path.includes('posts')}>
-                        Posts
-                    </button>
-                </Link>
-                <Link
-                    to='games'
-                    className={linkClass}                 
-                >
-                    <button disabled={path.includes('games')}>
-                        Games
-                    </button>
-                </Link>
-                <Link
-                    to='friends'
-                    className={linkClass}                 
-                >
-                    <button disabled={path.includes('friends')}>
-                        Friends
-                    </button>
-                </Link>
-                {
-                    !!isOwnProfile &&
-                    <Link
-                        to='settings'
-                        className={linkClass}
-                    >
-                        <button disabled={path.includes('settings')}>
-                            Settings
-                        </button>
-                    </Link>
-                }
-            </div>
-            {children}
-        </>
-    );
 }
 
 

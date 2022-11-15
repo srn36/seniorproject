@@ -17,24 +17,3 @@
     display: flex;
     align-items: center;
 }
-
-.profile-view-selector {
-    width: 48%;
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(12, 1fr);
-}
-
-.profile-view-selector .quarter {
-    grid-row: 1;
-    grid-column: span 3;
-}
-
-.profile-view-selector .third {
-    grid-row: 1;
-    grid-column: span 4;
-}
-
-.profile-view-selector .quarter button, .profile-view-selector .third button{
-    width: 100%;
-}
