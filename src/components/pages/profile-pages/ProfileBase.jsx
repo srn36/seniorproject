@@ -1,8 +1,6 @@
 import React, { useMemo } from 'react';
 import {
-    Link,
-    Outlet, 
-    useLocation, 
+    Outlet,
     useOutletContext,
     useParams
 } from 'react-router-dom';

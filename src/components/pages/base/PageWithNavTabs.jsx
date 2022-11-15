@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function PageWithNavTabs({ tabs, children }) {
     const path = useLocation().pathname.toLowerCase();
