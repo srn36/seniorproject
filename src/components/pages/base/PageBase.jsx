@@ -7,6 +7,7 @@ import smallLogo from '../../../smollogo.png';
 
 function PageBase(props) {
     const [userInfo, setUserInfo] = useState({loading: true, data: null});
+    
     useEffect(() => {
         Auth.currentUserInfo().then(info => 
             setUserInfo({loading: false, data: info})

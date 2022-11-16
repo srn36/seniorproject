@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
-    width: 50%;
+    width: 80%;
     height: calc((99vh - (3*(1.325rem + .9vw) + 1.3rem + 0.6vw + 88px)));
     background-color: #FFFFFF;
     overflow-y: scroll;
@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
-    width: 50%;
+    width: 80%;
     height: calc((99vh - (1.3rem + 0.6vw + 88px)));
     background-color: #FFFFFF;
     overflow-y: scroll;

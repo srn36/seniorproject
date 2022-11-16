@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { withAuthenticator } from '@aws-amplify/ui-react';
@@ -31,24 +31,28 @@ function NavigationDropdown({ userInfo, signOut }) {
         };
     }, [profilePath]);
 
-    const dropdownTabs = useMemo(() => {
-        const generateTabsFromList = (tabPaths) => {
-            return tabPaths.map(path => 
-                <Dropdown.Item
-                    key={path}
-                    disabled={pathName.includes(path.toLowerCase())}
-                    className='dropdown-item'
-                    onClick={() => navigate(`/${path}`)}
-                >
-                    {overrideText[path] ? overrideText[path] : path}
-                </Dropdown.Item>
-            );
-        };
+    const generateTabsFromList = useCallback((tabPaths) => {
+        return tabPaths.map(path => 
+            <Dropdown.Item
+                key={path}
+                disabled={pathName.includes(path.toLowerCase())}
+                className='dropdown-item'
+                onClick={() => navigate(`/${path}`)}
+            >
+                {overrideText[path] ? overrideText[path] : path}
+            </Dropdown.Item>
+        );
+    }, [pathName, navigate, overrideText]);
 
+    const dropdownTabs = useMemo(() => {
         const pageTabList = generateTabsFromList(pagePaths);
         const actionTabList = generateTabsFromList(actionPaths);
-        return [...pageTabList, <Dropdown.Divider key='divider'/>, ...actionTabList];
-    }, [pagePaths, actionPaths, overrideText, pathName, navigate]);  
+        return [
+            ...pageTabList,
+            <Dropdown.Divider key='divider'/>,
+            ...actionTabList
+        ];
+    }, [pagePaths, actionPaths, generateTabsFromList]);
 
     return (
         <DropdownButton id='dropdown-basic-button' title='Navigation'>
