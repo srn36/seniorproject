@@ -24,7 +24,7 @@ function NavigationDropdown({ userInfo, signOut }) {
         const actionPathArray = ['make-post', 'Settings'];
         const override = {
             'friend-zone': 'Friend Zone',
-            'make-post': 'Make Post',
+            'make-post': 'Make a Post',
             [profilePath]: 'Profile',
         };
 
