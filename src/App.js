@@ -5,7 +5,7 @@ import {
     View,
     Authenticator,
     useAuthenticator
-} from "@aws-amplify/ui-react";
+} from '@aws-amplify/ui-react';
 import GameCheckboxes from './components/game-checkboxes/GameCheckboxes';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
 
     return (
         <Authenticator
-            initialState="signIn"
+            initialState='signIn'
             components={{
                 SignUp: {
                     FormFields() {
@@ -72,7 +72,7 @@ function App() {
             {({ signOut, user }) => (
                 <View>
                     <main>
-                        <img className="background-pic" src={bg} alt="" />
+                        <img className='background-pic' src={bg} alt='' />
                     </main>
                     <RouterProvider router={router} />
                 </View>
