@@ -51,7 +51,7 @@ function NavigationDropdown({ userInfo, signOut }) {
 
         const pageTabList = generateTabsFromList(pagePaths);
         const actionTabList = generateTabsFromList(actionPaths);
-        return [...pageTabList, <Dropdown.Divider/>, ...actionTabList];
+        return [...pageTabList, <Dropdown.Divider key='divider'/>, ...actionTabList];
     }, [pagePaths, actionPaths, overrideText, pathName, navigate]);  
 
     return (
