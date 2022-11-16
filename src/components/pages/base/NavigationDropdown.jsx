@@ -2,60 +2,62 @@
 Use of this component has now been packaged into PageBase, which will serve as a base page.
 Load pages with PageBase to automatically have a NavigationBar appended
 */
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 
 function NavigationDropdown({ userInfo, signOut }) {
-    const closeDropdownRef = useRef(null);
-    const pathName = useLocation().pathname.replaceAll('/','').toLowerCase();
+    const navigate = useNavigate();
+    const pathName = useLocation().pathname.toLowerCase();
 
-    const dropdownTabs = useMemo(() => {
-        //To add a tab to the navigation dropdown, simply add the tab's path to tabPaths
-        //Add a key, value mapping to overrideText if you want to display different text for a tab
-        const tabPaths = ['Home', 'Chat', 'friend-zone', 'make-post'];
-        const overrideText = {
+    const profilePath = useMemo(() => {
+        return `profile/${userInfo.username}`;
+    }, [userInfo]);
+
+    const {
+        pagePaths,
+        actionPaths,
+        overrideText
+    } = useMemo(() => {
+        const pagePathArray = ['Home', 'Chat', 'friend-zone', profilePath];
+        const actionPathArray = ['make-post', 'Settings'];
+        const override = {
             'friend-zone': 'Friend Zone',
             'make-post': 'Make Post',
+            [profilePath]: 'Profile',
         };
-        const autoGenFromList = tabPaths.map(path => 
-            <Dropdown.Item
-                key={path}
-                disabled={path.toLowerCase() === pathName || pathName.includes(path.toLowerCase())}
-                as={Link}
-                to={`/${path}`}
-                className='dropdown-item'
-                onClick={_e => closeDropdownRef.current.click()}
-            >
-                {overrideText[path] ? overrideText[path] : path}
-            </Dropdown.Item>
-        );
 
-        const profilePath = `/profile/${userInfo.username}`;
-        const profileTab = (
-            <Dropdown.Item
-                key={profilePath}
-                disabled={pathName.includes(profilePath.replaceAll('/','').toLowerCase())}
-                as={Link}
-                to={profilePath}
-                className='dropdown-item'
-                onClick={_e => closeDropdownRef.current.click()}
-            >
-                Profile
-            </Dropdown.Item>
-        );
+        return {
+            'pagePaths': pagePathArray,
+            'actionPaths': actionPathArray,
+            'overrideText': override
+        };
+    }, [profilePath]);
 
-        return [
-            ...autoGenFromList,
-            profileTab
-        ];
-    }, [userInfo, closeDropdownRef, pathName]);  
+    const dropdownTabs = useMemo(() => {
+        const generateTabsFromList = (tabPaths) => {
+            return tabPaths.map(path => 
+                <Dropdown.Item
+                    key={path}
+                    disabled={pathName.includes(path.toLowerCase())}
+                    className='dropdown-item'
+                    onClick={() => navigate(`/${path}`)}
+                >
+                    {overrideText[path] ? overrideText[path] : path}
+                </Dropdown.Item>
+            );
+        };
+
+        const pageTabList = generateTabsFromList(pagePaths);
+        const actionTabList = generateTabsFromList(actionPaths);
+        return [...pageTabList, <Dropdown.Divider/>, ...actionTabList];
+    }, [pagePaths, actionPaths, overrideText, pathName, navigate]);  
 
     return (
-        <DropdownButton id='dropdown-basic-button' title='Navigation' ref={closeDropdownRef}>
+        <DropdownButton id='dropdown-basic-button' title='Navigation'>
             {dropdownTabs}
-            <Dropdown.Divider />
+            <Dropdown.Divider/>
             <button onClick={signOut} className='dropdown-item'>Log Out</button>
         </DropdownButton>
     );
