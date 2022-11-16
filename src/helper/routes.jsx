@@ -14,7 +14,11 @@ import ProfileBase from '../components/pages/profile-pages/ProfileBase';
 import Posts from '../components/pages/profile-pages/Posts';
 import Games from '../components/pages/profile-pages/Games';
 import Friends from '../components/pages/profile-pages/Friends';
-import Settings from '../components/pages/profile-pages/Settings';
+
+// Settings imports
+import SettingsPageBase from '../components/pages/settings/SettingsPageBase';
+import AccountSettings from '../components/pages/settings/AccountSettings';
+import Settings from '../components/pages/settings/Settings';
 
 // Friend Zone imports
 import FriendZoneBase from '../components/pages/friend-zone/FriendZoneBase';
@@ -35,8 +39,17 @@ function routes() {
             {index: true, element: <Navigate to='posts'/>},
             {path: 'posts', element: <Posts/>},
             {path: 'games', element: <Games/>},
-            {path: 'friends', element: <Friends/>},
-            {path: 'settings', element: <Settings/>}
+            {path: 'friends', element: <Friends/>}
+        ],
+    };
+
+    const settingsRoute = {
+        path: 'settings',
+        element: <SettingsPageBase/>,
+        children: [
+            {index: true, element: <Navigate to='account'/>},
+            {path: 'account', element: <AccountSettings/>},
+            {path: 'default', element: <Settings/>},
         ],
     };
 
@@ -60,7 +73,8 @@ function routes() {
                     element: <Navigate to='home'/>
                 },
                 errorRoute,
-                profileRoute,                
+                profileRoute, 
+                settingsRoute,               
                 friendRoute,
                 //Add routes for new pages below
                 //All you need is the desired path and the page component
