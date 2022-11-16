@@ -30,23 +30,21 @@ function FriendList({ friends, userInfo, ...props }) {
 
     return useMemo(() => {
         return (
-            <div className={`friend-list-${type}`}>
-                <Table bordered hover>
-                    <thead>
-                        <tr>
-                            <th className='friend-list-header'>
-                                <p>Filter List</p>
-                                <input type='text' onChange={e => filter(e.target.value)}/>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            (Object.keys(tableRows).length > 0) ? tableRows : <tr><td><p>No Results</p></td></tr>
-                        }
-                    </tbody>
-                </Table>
-            </div>
+            <>
+                <div className='filter'>
+                    <p>Filter List:</p>
+                    <input type='text' onChange={e => filter(e.target.value)}/>
+                </div>
+                <div className={`friend-list-${type}`}>
+                    <Table bordered hover>
+                        <tbody>
+                            {
+                                (Object.keys(tableRows).length > 0) ? tableRows : <tr><td><p>No Results</p></td></tr>
+                            }
+                        </tbody>
+                    </Table>
+                </div>
+            </>
         );
     }, [type, tableRows, filter]);
 }
