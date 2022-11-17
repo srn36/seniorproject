@@ -20,11 +20,7 @@ function AccountSettings(props) {
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
-    const changePassword = (oldPassword, newPassword, confirmNewPassword) => {
-        if(newPassword !== confirmNewPassword) {
-            window.alert('Passwwords must match');
-        }
-        
+    const changePassword = () => {
         Auth.currentAuthenticatedUser().then(user => {
             return Auth.changePassword(user, oldPassword, newPassword);
         }).then(data => 
@@ -33,13 +29,14 @@ function AccountSettings(props) {
             console.log(err)
         );
     };
+    console.log((newPassword.length > 0 && newPassword === confirmNewPassword))
     
     return (
-        <div>
-            Account Settings
+        <div className='settings-content'>
+            <h2>Account Settings</h2>
             <Divider/>
-            Change Password
-            <form onSubmit={changePassword(oldPassword, newPassword, confirmNewPassword)}>
+            <h3>Change Password</h3>
+            <form onSubmit={changePassword}>
                 <TextField
                     placeholder="Old Password"
                     label="Old Password"
@@ -54,8 +51,15 @@ function AccountSettings(props) {
                     placeholder="Confirm New Password"
                     label="Confirm New Password"
                     onChange={e => setConfirmNewPassword(e.target.value)}
+                    hasError={confirmNewPassword !== newPassword}
+                    errorMessage='Must match new password'
                 />
-                <button type='submit'>Change Password</button>
+                <button 
+                    type='submit'
+                    disabled={!(newPassword.length > 0 && newPassword === confirmNewPassword)}
+                >
+                    Change Password
+                </button>
             </form>
         </div>
     );

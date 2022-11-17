@@ -11,3 +11,39 @@
 .center div {
     margin-top: 1em;
 }
+
+.settings-content {
+    width: 60%;
+    text-align: left;
+    color: #e9ecef;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-content h2 {
+    text-align: center;
+}
+
+.settings-content form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 80%;
+}
+
+.settings-content form .amplify-label {
+    color: #e9ecef;
+    margin-top: 8px;
+}
+
+.settings-content form input {
+    color: #212529;
+    background-color: #FFFFFF;
+}
+
+.settings-content form button[type='submit'] {
+    width: 40%;
+    margin-top: 16px;
+    align-self: center;
+}
