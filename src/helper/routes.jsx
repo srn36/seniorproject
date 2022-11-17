@@ -16,10 +16,10 @@ import Games from '../components/pages/profile-pages/Games';
 import Friends from '../components/pages/profile-pages/Friends';
 
 // Settings imports
-import SettingsPageBase from '../components/pages/settings/SettingsPageBase';
-import AccountSettings from '../components/pages/settings/AccountSettings';
-import ProfileSettings from '../components/pages/settings/ProfileSettings';
-import Settings from '../components/pages/settings/Settings';
+import SettingsPageBase from '../components/pages/settings-pages/SettingsPageBase';
+import AccountSettings from '../components/pages/settings-pages/AccountSettings';
+import ProfileSettings from '../components/pages/settings-pages/ProfileSettings';
+import Settings from '../components/pages/settings-pages/Settings';
 
 // Friend Zone imports
 import FriendZoneBase from '../components/pages/friend-zone/FriendZoneBase';

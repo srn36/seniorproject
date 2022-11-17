@@ -43,7 +43,8 @@
 }
 
 .settings-content form button[type='submit'] {
-    width: 40%;
-    margin-top: 16px;
+    max-width: 40%;
+    min-width: min-content;
+    margin: 16px 0;
     align-self: center;
 }
