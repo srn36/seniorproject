@@ -3,8 +3,7 @@ import { Auth } from 'aws-amplify';
 import SettingsForm from './SettingsForm';
 
 function DeleteAccount(props) {
-    const deleteAccount = (e) => {
-        e.preventDefault();
+    const deleteAccount = () => {
         if(window.confirm('Delete your account?')) {
             Auth.deleteUser();
         }

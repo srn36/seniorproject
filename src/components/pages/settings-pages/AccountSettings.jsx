@@ -2,6 +2,7 @@ import React from 'react';
 import { Divider } from '@aws-amplify/ui-react';
 import ChangePassword from './settings/ChangePassword';
 import DeleteAccount from './settings/DeleteAccount';
+import ChangeEmail from './settings/ChangeEmail';
 
 function AccountSettings(props) {
     /**
@@ -22,6 +23,8 @@ function AccountSettings(props) {
             <h2>Account Settings</h2>
             <Divider/>
             <ChangePassword/>
+            <Divider/>
+            <ChangeEmail/>
             <Divider/>
             <DeleteAccount/>
         </div>

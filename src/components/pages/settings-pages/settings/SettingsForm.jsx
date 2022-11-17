@@ -4,7 +4,10 @@ function SettingsForm({ title, fields, onSubmit }) {
     return (
         <>
             <h3>{title}</h3>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={e => {
+                e.preventDefault();
+                return onSubmit();
+            }}>
                 {fields}
             </form>
         </>

@@ -21,18 +21,18 @@ function ChangePassword(props) {
 
     const formFields = [
         <TextField
-            placeholder="Old Password"
-            label="Old Password"
+            placeholder='Old Password'
+            label='Old Password'
             onChange={e => setOldPassword(e.target.value)}
         />,
         <TextField
-            placeholder="New Password"
-            label="New Password"
+            placeholder='New Password'
+            label='New Password'
             onChange={e => setNewPassword(e.target.value)}
         />,
         <TextField
-            placeholder="Confirm New Password"
-            label="Confirm New Password"
+            placeholder='Confirm New Password'
+            label='Confirm New Password'
             onChange={e => setConfirmNewPassword(e.target.value)}
             hasError={confirmNewPassword !== newPassword}
             errorMessage='Must match new password'

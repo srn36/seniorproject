@@ -1,3 +1,4 @@
+import { Divider } from '@aws-amplify/ui-react';
 import React from 'react';
 
 function ProfileSettings(props) {
@@ -15,8 +16,9 @@ function ProfileSettings(props) {
      */
 
     return (
-        <div>
-            Profile Settings
+        <div className='settings-content'>
+            <h2>Profile Settings</h2>
+            <Divider/>
         </div>
     );
 
