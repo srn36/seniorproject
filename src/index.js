@@ -11,6 +11,7 @@ import './styles/GameCheckboxes.css';
 import './styles/Posts.css';
 import './styles/Profile.css';
 import './styles/Search.css';
+import './styles/Settings.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@aws-amplify/ui-react/styles.css';
 
