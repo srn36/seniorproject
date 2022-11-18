@@ -41,8 +41,9 @@
     margin-top: 8px;
 }
 
-.settings-content form .amplify-text {
+.settings-content form .amplify-text, .settings-content form input[type='file'] {
     color: #e9ecef;
+    background-color: transparent;
 }
 
 .settings-content form input, .settings-content form textarea {
