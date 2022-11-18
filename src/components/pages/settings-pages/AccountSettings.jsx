@@ -5,19 +5,6 @@ import ChangeEmail from './settings/ChangeEmail';
 import ChangePrivacy from './settings/ChangePrivacy';
 
 function AccountSettings(props) {
-    /**
-     * SETTINGS TO INCLUDE:
-     * 
-     * Change password
-     * 
-     * Change email address
-     * 
-     * Change privacy
-     * 
-     * Delete account
-     * 
-     */
-    
     return (
         <div className='settings-content'>
             <h2>Account Settings</h2>
@@ -27,7 +14,6 @@ function AccountSettings(props) {
             <DeleteAccount/>
         </div>
     );
-
 }
 
 export default AccountSettings;
