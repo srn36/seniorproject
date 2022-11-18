@@ -45,7 +45,7 @@
     color: #e9ecef;
 }
 
-.settings-content form input {
+.settings-content form input, .settings-content form textarea {
     color: #212529;
     background-color: #FFFFFF;
 }

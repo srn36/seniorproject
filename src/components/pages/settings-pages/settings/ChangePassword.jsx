@@ -45,7 +45,7 @@ function ChangePassword(props) {
     return (
         <SettingsForm
             title='Change Password'
-            fields={[...formFields]}
+            fields={formFields}
             onSubmit={changePassword}
             submitLabel='Change Password'
             submitDisabled={!(newPassword.length > 0 && newPassword === confirmNewPassword)}

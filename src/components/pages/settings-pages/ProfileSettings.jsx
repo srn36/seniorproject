@@ -1,4 +1,6 @@
 import React from 'react';
+import ChangeBio from './settings/ChangeBio';
+import ChangeName from './settings/ChangeName';
 
 function ProfileSettings(props) {
     /**
@@ -17,6 +19,8 @@ function ProfileSettings(props) {
     return (
         <div className='settings-content'>
             <h2>Profile Settings</h2>
+            <ChangeName/>
+            <ChangeBio/>
         </div>
     );
 
