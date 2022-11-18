@@ -12,6 +12,18 @@
     margin-top: 1em;
 }
 
+.amplify-card.current-pic {
+    height: min-content;
+    width: min-content;
+    place-self: center;
+}
+
+.current-pic img {
+    height: calc(3*(1.325rem + .9vw));
+    width: calc(3*(1.325rem + .9vw));
+    object-fit: cover;
+}
+
 .settings-content {
     width: 60%;
     text-align: left;

@@ -1,8 +1,10 @@
+import { Card } from '@aws-amplify/ui-react';
 import React, { useState } from 'react';
 import SettingsForm from './SettingsForm';
+import mockPFP from '../../../../logo192.png';
 
 function ChangeProfilePic(props) {
-    const initialProfilePic = null/* fetch ProfilePic somehow */;
+    const initialProfilePic = mockPFP/* fetch ProfilePic somehow */;
     const [profilePic, setProfilePic] = useState(initialProfilePic);
 
     const onImageChange = (e) => {
@@ -12,6 +14,12 @@ function ChangeProfilePic(props) {
     };
 
     const formFields = [
+        <Card 
+            key='Current Pic'
+            className='current-pic'
+        >
+            <img src={profilePic} alt='No Profile Pic'/>
+        </Card>,
         <label key='Profile Pic'>
             <input
                 type='file'
