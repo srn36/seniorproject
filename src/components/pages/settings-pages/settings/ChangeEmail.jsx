@@ -9,41 +9,40 @@ function ChangeEmail(props) {
     const [newEmail, setNewEmail] = useState('');
     const [confirmNewEmail, setConfirmNewEmail] = useState('');
 
-    const changeEmail = () => {
-        window.alert('Not implemented');
-    };
-
     const formFields = [
         <TextField
+            key='Old Email'
             placeholder='Old Email'
             label='Old Email'
             onChange={e => setOldEmail(e.target.value)}
         />,
         <TextField
+            key='New Email'
             placeholder='New Email'
             label='New Email'
             onChange={e => setNewEmail(e.target.value)}
         />,
         <TextField
+            key='Confirm New Email'
             placeholder='Confirm New Email'
             label='Confirm New Email'
             onChange={e => setConfirmNewEmail(e.target.value)}
             hasError={confirmNewEmail !== newEmail}
             errorMessage='Must match new Email'
-        />,
-        <button 
-            type='submit'
-            disabled={!(newEmail.length > 0 && newEmail === confirmNewEmail)}
-        >
-            Change Email
-        </button>
-    ]
+        />
+    ];
+
+    const changeEmail = () => {
+        window.alert('Not implemented');
+    };
     
     return (
         <SettingsForm
             title='Change Email'
             fields={formFields}
             onSubmit={changeEmail}
+            submitLabel='Change Email'
+            submitDisabled={!(newEmail.length > 0 && newEmail === confirmNewEmail)}
         />
     );
 }

@@ -41,6 +41,10 @@
     margin-top: 8px;
 }
 
+.settings-content form .amplify-text {
+    color: #e9ecef;
+}
+
 .settings-content form input {
     color: #212529;
     background-color: #FFFFFF;

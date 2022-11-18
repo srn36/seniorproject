@@ -2,6 +2,7 @@ import React from 'react';
 import ChangePassword from './settings/ChangePassword';
 import DeleteAccount from './settings/DeleteAccount';
 import ChangeEmail from './settings/ChangeEmail';
+import ChangePrivacy from './settings/ChangePrivacy';
 
 function AccountSettings(props) {
     /**
@@ -22,6 +23,7 @@ function AccountSettings(props) {
             <h2>Account Settings</h2>
             <ChangePassword/>
             <ChangeEmail/>
+            <ChangePrivacy/>
             <DeleteAccount/>
         </div>
     );

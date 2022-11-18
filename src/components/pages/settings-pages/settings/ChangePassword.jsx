@@ -8,6 +8,29 @@ function ChangePassword(props) {
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
+    const formFields = [
+        <TextField
+            key='Old Password'
+            placeholder='Old Password'
+            label='Old Password'
+            onChange={e => setOldPassword(e.target.value)}
+        />,
+        <TextField
+            key='New Password'
+            placeholder='New Password'
+            label='New Password'
+            onChange={e => setNewPassword(e.target.value)}
+        />,
+        <TextField
+            key='Confirm New Password'
+            placeholder='Confirm New Password'
+            label='Confirm New Password'
+            onChange={e => setConfirmNewPassword(e.target.value)}
+            hasError={confirmNewPassword !== newPassword}
+            errorMessage='Must match new password'
+        />
+    ];
+
     const changePassword = () => {
         Auth.currentAuthenticatedUser().then(user => {
             return Auth.changePassword(user, oldPassword, newPassword);
@@ -17,39 +40,15 @@ function ChangePassword(props) {
             console.log(err)
         );
     };
-    console.log((newPassword.length > 0 && newPassword === confirmNewPassword))
-
-    const formFields = [
-        <TextField
-            placeholder='Old Password'
-            label='Old Password'
-            onChange={e => setOldPassword(e.target.value)}
-        />,
-        <TextField
-            placeholder='New Password'
-            label='New Password'
-            onChange={e => setNewPassword(e.target.value)}
-        />,
-        <TextField
-            placeholder='Confirm New Password'
-            label='Confirm New Password'
-            onChange={e => setConfirmNewPassword(e.target.value)}
-            hasError={confirmNewPassword !== newPassword}
-            errorMessage='Must match new password'
-        />,
-        <button 
-            type='submit'
-            disabled={!(newPassword.length > 0 && newPassword === confirmNewPassword)}
-        >
-            Change Password
-        </button>
-    ]
+    console.log((newPassword.length > 0 && newPassword === confirmNewPassword));
     
     return (
         <SettingsForm
             title='Change Password'
-            fields={formFields}
+            fields={[...formFields]}
             onSubmit={changePassword}
+            submitLabel='Change Password'
+            submitDisabled={!(newPassword.length > 0 && newPassword === confirmNewPassword)}
         />
     );
 }

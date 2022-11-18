@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider } from '@aws-amplify/ui-react';
 
-function SettingsForm({ title, fields, onSubmit }) {   
+function SettingsForm({ title, fields, onSubmit, submitLabel, submitDisabled = false }) {   
     return (
         <>
             <Divider/>
@@ -11,6 +11,12 @@ function SettingsForm({ title, fields, onSubmit }) {
                 return onSubmit();
             }}>
                 {fields}
+                <button 
+                    type='submit'
+                    disabled={submitDisabled}
+                >
+                    {submitLabel}
+                </button>
             </form>
         </>
     );
