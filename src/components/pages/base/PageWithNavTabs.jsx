@@ -1,7 +1,24 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {
+    useOutletContext,
+    useParams
+} from 'react-router-dom';
+import {
+    useLocation,
+    useNavigate
+} from 'react-router-dom';
+import ProfileHeadline from './ProfileHeadline';
+import {
+    useFriendsForUser,
+    useProfileInfo
+} from '../../../helper/api-calls/useApiCalls';
 
 function PageWithNavTabs({ tabs, children }) {
+    const {userInfo} = useOutletContext();
+    const username = useParams().username || userInfo.username;
+    const friendList = useFriendsForUser(username);
+    const profileInfo = useProfileInfo(username);
+    const friends = Array.isArray(friendList.data) ? friendList.data : [];
     const path = useLocation().pathname.toLowerCase();
     const navigate = useNavigate();
     
@@ -17,14 +34,30 @@ function PageWithNavTabs({ tabs, children }) {
     ));
 
     return (
-        <div className='base-grid'>
-            <div className='tabs'>
-                {pathTabs}
+        <>
+            {
+                profileInfo.loading ? 
+                    <h4>Loading...</h4> : (
+                        profileInfo.error ? 
+                            <h4>Error</h4> : 
+                            <ProfileHeadline 
+                                username={username}
+                                userInfo={userInfo}
+                                profileInfo={profileInfo.data}
+                                isOwnProfile={username === userInfo.username}
+                                friends={friends}
+                            />
+                    )
+            }
+            <div className='base-grid'>
+                <div className='tabs'>
+                    {pathTabs}
+                </div>
+                <div className='content'>
+                    {children}
+                </div>          
             </div>
-            <div className='content'>
-                {children}
-            </div>          
-        </div>
+        </>
     );
 }
 
