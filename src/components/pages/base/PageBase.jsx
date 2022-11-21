@@ -25,7 +25,7 @@ function PageBase(props) {
                         <NavigationDropdown userInfo={userInfo.data}/>
                     </header>
                     <main className='App-main'>
-                        <Outlet context={{'userInfo': userInfo.data}}/>
+                        <Outlet context={{userInfo: userInfo.data}}/>
                     </main>
                 </div>
             }

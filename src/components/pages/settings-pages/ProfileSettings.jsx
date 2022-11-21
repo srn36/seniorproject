@@ -6,12 +6,12 @@ import ChangeName from './settings/ChangeName';
 import ChangeProfilePic from './settings/ChangeProfilePic';
 
 function ProfileSettings(props) {
-    const {userInfo, user} = useOutletContext();
+    const {userInfo} = useOutletContext();
 
     return (
         <div className='settings-content'>
             <h2>Profile Settings</h2>
-            <ChangeProfilePic userInfo={userInfo} user={user}/>
+            <ChangeProfilePic userInfo={userInfo}/>
             <ChangeName/>
             <ChangeBirthday/>
             <ChangeBio/>
