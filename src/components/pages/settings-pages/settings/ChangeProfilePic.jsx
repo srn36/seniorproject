@@ -15,7 +15,6 @@ function ChangeProfilePic({ userInfo }) {
         });
     }, [userInfo.username]);
     
-console.log(userInfo)
     const onImageChange = (e) => {
         if (e.target.files && e.target.files[0]) {
             setPicFile(e.target.files[0]);
