@@ -15,44 +15,12 @@ function App() {
     let pictureFile;
     
     async function onImageChange(e) {
-        const file = e.target.files[0];
-        try {
-            await Storage.put('hi', file, {
-                contentType: "image/png",
-            });
-        } catch (error) {
-            console.log("Error uploading file: ", error);
-        }
+        pictureFile = e.target.files[0];
     }
 
     return (
         <Authenticator
             initialState='signIn'
-            formFields={{
-                signUp: {
-                    username: {
-                        order: 1
-                    },
-                    password: {
-                        order: 2
-                    },
-                    confirm_password: {
-                        order: 3
-                    },
-                    email: {
-                        order: 4
-                    },
-                    birthdate: {
-                        order: 5
-                    },
-                    name: {
-                        order: 6
-                    },
-                    website: {
-                        hidden: true
-                    }                 
-                },
-            }}
             components={{
                 SignUp: {
                     FormFields() {
@@ -63,12 +31,11 @@ function App() {
                                 <Divider/>
                                 <input
                                     type='file'
-                                    name='picture'
                                     accept='image/*'
                                     onChange={onImageChange}
                                 />
                                 <Divider/>                    
-                                {/* <GameCheckboxes validationErrors={validationErrors}/> */}
+                                <GameCheckboxes validationErrors={validationErrors}/>
                             </>
                         );
                     },
@@ -119,16 +86,11 @@ function App() {
                     const profilePicKey = `${username}-profilepic`;
                     try {
                         await Storage.put(profilePicKey, pictureFile, {
-                            contentType: "image/png",
+                            contentType: 'image/png',
                         });
                     } catch (error) {
-                        console.log("Error uploading file: ", error);
+                        console.log('Error uploading file: ', error);
                     }
-                    const profilePic = await Storage.get(profilePicKey);
-                    console.log(profilePic)
-                    attributes.picture = profilePic.substring(0, 2048);
-                    attributes.website = profilePic.substring(2048) || '';
-                    console.log(attributes)
                     return Auth.signUp({
                         username,
                         password,

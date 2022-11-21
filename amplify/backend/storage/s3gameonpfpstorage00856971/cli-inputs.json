@@ -1,0 +1,16 @@
+{
+  "resourceName": "s3gameonpfpstorage00856971",
+  "bucketName": "gameon-pfp-storage-00856971",
+  "policyUUID": "82dc5e6f",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "authAccess": [
+    "READ",
+    "CREATE_AND_UPDATE",
+    "DELETE"
+  ]
+}

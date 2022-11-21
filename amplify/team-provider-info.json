@@ -18,8 +18,11 @@
           "type": "manual"
         }
       },
+      "storage": {
+        "s3gameonpfpstorage00856971": {}
+      },
       "auth": {
-        "gameon30479865": {}
+        "gameon": {}
       }
     }
   }

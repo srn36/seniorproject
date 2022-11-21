@@ -1,15 +1,28 @@
-import { Card } from '@aws-amplify/ui-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SettingsForm from './SettingsForm';
-import mockPFP from '../../../../logo192.png';
+import { Card } from '@aws-amplify/ui-react';
+import { Storage } from 'aws-amplify';
 
-function ChangeProfilePic(props) {
-    const initialProfilePic = mockPFP/* fetch ProfilePic somehow */;
-    const [profilePic, setProfilePic] = useState(initialProfilePic);
+function ChangeProfilePic({ userInfo }) {
+    const [initialProfilePic, setInitialProfilePic] = useState();
+    const [profilePic, setProfilePic] = useState();
+    const [picFile, setPicFile] = useState(null);
 
+    useEffect(() => {
+        Storage.get(`${userInfo.username}-profilepic`).then(url => {
+            setInitialProfilePic(url);
+            setProfilePic(url);
+        });
+    }, [userInfo.username]);
+    
+console.log(userInfo)
     const onImageChange = (e) => {
         if (e.target.files && e.target.files[0]) {
+            setPicFile(e.target.files[0]);
             setProfilePic(URL.createObjectURL(e.target.files[0]));
+        } else {
+            setPicFile(null);
+            setProfilePic(initialProfilePic);
         }
     };
 
@@ -26,19 +39,31 @@ function ChangeProfilePic(props) {
                 name='upload'
                 accept='image/*'
                 onChange={onImageChange}
-            />  
+            />
         </label>
     ];
 
-    const changeProfilePic = () => {
-        window.alert('Not Implemented');
+    async function changeProfilePic() {
+        const profilePicKey = `${userInfo.username}-profilepic`;
+        try {
+            await Storage.put(profilePicKey, picFile, {
+                contentType: 'image/png',
+            });
+            Storage.get(`${userInfo.username}-profilepic`).then(url => {
+                setInitialProfilePic(url);
+                setProfilePic(url);
+            });
+            window.alert('Profile picture changed successfully');
+        } catch (error) {
+            console.log('Error uploading file: ', error);
+        }
     };
     
     return (
         <SettingsForm
             title='Change Profile Picture'
             fields={formFields}
-            onSubmit={changeProfilePic}
+            onSubmit={_e => changeProfilePic()}
             submitLabel='Change Profile Picture'
             submitDisabled={profilePic === initialProfilePic}
         />

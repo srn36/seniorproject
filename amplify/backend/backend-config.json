@@ -7,7 +7,7 @@
     }
   },
   "auth": {
-    "gameon30479865": {
+    "gameon": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -16,10 +16,9 @@
         "socialProviders": [],
         "usernameAttributes": [],
         "signupAttributes": [
-          "BIRTHDATE",
           "EMAIL",
-          "NAME",
-          "PICTURE"
+          "BIRTHDATE",
+          "NAME"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
@@ -33,6 +32,13 @@
           "EMAIL"
         ]
       }
+    }
+  },
+  "storage": {
+    "s3gameonpfpstorage00856971": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
     }
   }
 }

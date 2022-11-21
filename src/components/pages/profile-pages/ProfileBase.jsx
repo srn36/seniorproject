@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import {
     Outlet,
     useOutletContext,
@@ -15,6 +15,7 @@ import PageWithNavTabs from '../base/PageWithNavTabs';
 import { fetchUserPosts } from '../../../helper/api-calls/user';
 import { checkFriendRequests } from '../../../helper/api-calls/friend';
 import { useFriendsForUser } from '../../../helper/api-calls/useApiCalls';
+import { Storage } from 'aws-amplify';
 
 function ProfileBase(props) {
     const {userInfo} = useOutletContext();
@@ -53,6 +54,12 @@ function ProfileBase(props) {
 
 
 function ProfileHeadline({ username, userInfo, isOwnProfile, friends }) {
+    const [profilePicUrl, setProfilePicUrl] = useState('');
+    useEffect(() => {
+        Storage.get(`${username}-profilepic`).then(url => setProfilePicUrl(url));
+    }, [username]);
+
+    console.log(profilePicUrl);
     const relationshipBasedFriendButton = {
         'Already Friends': <RemoveButton userInfo={userInfo} username={username}/>,
         'Outgoing': <button disabled={true}>Requested</button>,
@@ -77,7 +84,7 @@ function ProfileHeadline({ username, userInfo, isOwnProfile, friends }) {
     return (
         <div className='profile-headline'>
             <span>
-                <img src={userInfo.attributes.picture} alt='profile pic here'/>
+                <img src={profilePicUrl} alt='profile pic here'/>
                 <h2>{username}</h2>
             </span>
             {!isOwnProfile && relationshipBasedFriendButton[friendButtonKey]}
