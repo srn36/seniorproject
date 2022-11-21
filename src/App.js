@@ -8,28 +8,58 @@ import {
     Divider
 } from '@aws-amplify/ui-react';
 import GameCheckboxes from './components/game-checkboxes/GameCheckboxes';
-import { Auth } from 'aws-amplify';
+import { Auth, Storage } from 'aws-amplify';
 
 function App() {
     const router = routes();
-    let picture;
+    let pictureFile;
     
-    const onImageChange = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            picture = URL.createObjectURL(e.target.files[0]);
+    async function onImageChange(e) {
+        const file = e.target.files[0];
+        try {
+            await Storage.put('hi', file, {
+                contentType: "image/png",
+            });
+        } catch (error) {
+            console.log("Error uploading file: ", error);
         }
-    };
+    }
 
     return (
         <Authenticator
             initialState='signIn'
+            formFields={{
+                signUp: {
+                    username: {
+                        order: 1
+                    },
+                    password: {
+                        order: 2
+                    },
+                    confirm_password: {
+                        order: 3
+                    },
+                    email: {
+                        order: 4
+                    },
+                    birthdate: {
+                        order: 5
+                    },
+                    name: {
+                        order: 6
+                    },
+                    website: {
+                        hidden: true
+                    }                 
+                },
+            }}
             components={{
                 SignUp: {
                     FormFields() {
                         const { validationErrors } = useAuthenticator((context) => [context.validationErrors]);
                         return (
                             <>
-                                <Authenticator.SignUp.FormFields />
+                                <Authenticator.SignUp.FormFields/>
                                 <Divider/>
                                 <input
                                     type='file'
@@ -38,7 +68,7 @@ function App() {
                                     onChange={onImageChange}
                                 />
                                 <Divider/>                    
-                                <GameCheckboxes validationErrors={validationErrors}/>
+                                {/* <GameCheckboxes validationErrors={validationErrors}/> */}
                             </>
                         );
                     },
@@ -86,7 +116,19 @@ function App() {
                 },
                 async handleSignUp(formData) {
                     let { username, password, attributes } = formData;
-                    attributes.picture = picture;
+                    const profilePicKey = `${username}-profilepic`;
+                    try {
+                        await Storage.put(profilePicKey, pictureFile, {
+                            contentType: "image/png",
+                        });
+                    } catch (error) {
+                        console.log("Error uploading file: ", error);
+                    }
+                    const profilePic = await Storage.get(profilePicKey);
+                    console.log(profilePic)
+                    attributes.picture = profilePic.substring(0, 2048);
+                    attributes.website = profilePic.substring(2048) || '';
+                    console.log(attributes)
                     return Auth.signUp({
                         username,
                         password,
