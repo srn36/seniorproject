@@ -1,34 +1,6 @@
 import { useEffect, useState } from 'react';
 import mockPFP from '../../logo192.png';
 
-export function useProfileInfo(username) {
-    const [results, setResults] = useState({loading: true, error: null, data: null});
-
-    useEffect(() => {
-        setResults({loading: true, error: null, data: null});
-        /*
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(credentials)
-        }).then(response => 
-            response.json()
-        ).then(data => 
-            setResults({loading: false, error: null, data: data})
-        ).catch( e => {
-            console.log(e.message);
-            return setResults({loading: false, error: e, data: null});
-        });
-        */
-        const mockData = {profilePic: mockPFP};
-        setResults({loading: false, error: null, data: mockData});
-    }, [username]);
-
-    return results;
-}
-
 export function useFriendsForUser(username) {
     const [results, setResults] = useState({loading: true, error: null, data: null});
 

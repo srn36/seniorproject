@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "gameon98bef6eb_identitypool_98bef6eb",
+    "identityPoolName": "gameon30479865_identitypool_30479865",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "gameon98bef6eb",
-    "userPoolName": "gameon98bef6eb_userpool_98bef6eb",
+    "resourceNameTruncated": "gameon30479865",
+    "userPoolName": "gameon30479865_userpool_30479865",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -20,7 +20,10 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-      "email"
+      "birthdate",
+      "email",
+      "name",
+      "picture"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
@@ -31,12 +34,13 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "gameon98bef6eb_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "gameon30479865_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "98bef6eb",
-    "resourceName": "gameon98bef6eb",
+    "sharedId": "30479865",
+    "resourceName": "gameon30479865",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
+    "triggers": {},
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,

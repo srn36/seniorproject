@@ -13,7 +13,7 @@ function PageBase(props) {
             setUserInfo({loading: false, data: info})
         );
     }, []);
-
+    console.log(userInfo);
     return (
         <>
             { userInfo.loading ?

@@ -14,13 +14,12 @@ import PageWithNavTabs from '../base/PageWithNavTabs';
 
 import { fetchUserPosts } from '../../../helper/api-calls/user';
 import { checkFriendRequests } from '../../../helper/api-calls/friend';
-import { useFriendsForUser, useProfileInfo } from '../../../helper/api-calls/useApiCalls';
+import { useFriendsForUser } from '../../../helper/api-calls/useApiCalls';
 
 function ProfileBase(props) {
     const {userInfo} = useOutletContext();
     const username = useParams().username;
     const friendList = useFriendsForUser(username);
-    const profileInfo = useProfileInfo(username);
 
     return useMemo(() => {
         const friends = Array.isArray(friendList.data) ? friendList.data : [];
@@ -39,29 +38,21 @@ function ProfileBase(props) {
         return (
             <PageWithNavTabs tabs={['Posts', 'Friends', 'Games']}>
                 <>
-                    {
-                        profileInfo.loading ? 
-                            <h4>Loading...</h4> : (
-                                profileInfo.error ? 
-                                    <h4>Error</h4> : 
-                                    <ProfileHeadline 
-                                        username={username}
-                                        userInfo={userInfo}
-                                        profileInfo={profileInfo.data}
-                                        isOwnProfile={isOwnProfile}
-                                        friends={friends}
-                                    />
-                            )
-                    }
+                    <ProfileHeadline 
+                        username={username}
+                        userInfo={userInfo}
+                        isOwnProfile={isOwnProfile}
+                        friends={friends}
+                    />
                     <Outlet context={outletContext}/>
                 </>
             </PageWithNavTabs>
         );
-    }, [username, friendList, profileInfo, userInfo]);
+    }, [username, friendList, userInfo]);
 }
 
 
-function ProfileHeadline({ username, userInfo, profileInfo, isOwnProfile, friends }) {
+function ProfileHeadline({ username, userInfo, isOwnProfile, friends }) {
     const relationshipBasedFriendButton = {
         'Already Friends': <RemoveButton userInfo={userInfo} username={username}/>,
         'Outgoing': <button disabled={true}>Requested</button>,
@@ -86,7 +77,7 @@ function ProfileHeadline({ username, userInfo, profileInfo, isOwnProfile, friend
     return (
         <div className='profile-headline'>
             <span>
-                <img src={profileInfo.profilePic} alt='profile pic here'/>
+                <img src={userInfo.attributes.picture} alt='profile pic here'/>
                 <h2>{username}</h2>
             </span>
             {!isOwnProfile && relationshipBasedFriendButton[friendButtonKey]}

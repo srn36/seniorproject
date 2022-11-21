@@ -4,12 +4,21 @@ import { RouterProvider } from 'react-router-dom';
 import { 
     View,
     Authenticator,
-    useAuthenticator
+    useAuthenticator,
+    Divider
 } from '@aws-amplify/ui-react';
 import GameCheckboxes from './components/game-checkboxes/GameCheckboxes';
+import { Auth } from 'aws-amplify';
 
 function App() {
     const router = routes();
+    let picture;
+    
+    const onImageChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            picture = URL.createObjectURL(e.target.files[0]);
+        }
+    };
 
     return (
         <Authenticator
@@ -20,7 +29,15 @@ function App() {
                         const { validationErrors } = useAuthenticator((context) => [context.validationErrors]);
                         return (
                             <>
-                                <Authenticator.SignUp.FormFields />                                
+                                <Authenticator.SignUp.FormFields />
+                                <Divider/>
+                                <input
+                                    type='file'
+                                    name='picture'
+                                    accept='image/*'
+                                    onChange={onImageChange}
+                                />
+                                <Divider/>                    
                                 <GameCheckboxes validationErrors={validationErrors}/>
                             </>
                         );
@@ -66,6 +83,18 @@ function App() {
                     if (Object.keys(validateErrors).length > 0) {
                         return validateErrors;
                     }
+                },
+                async handleSignUp(formData) {
+                    let { username, password, attributes } = formData;
+                    attributes.picture = picture;
+                    return Auth.signUp({
+                        username,
+                        password,
+                        attributes,
+                        autoSignIn: {
+                            enabled: true,
+                        },
+                    });
                 },
             }}
         >
