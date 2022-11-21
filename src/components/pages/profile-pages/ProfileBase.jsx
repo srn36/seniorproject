@@ -1,4 +1,5 @@
 import React, { useMemo, useEffect, useState } from 'react';
+import { Storage } from 'aws-amplify';
 import {
     Outlet,
     useOutletContext,
@@ -15,7 +16,6 @@ import PageWithNavTabs from '../base/PageWithNavTabs';
 import { fetchUserPosts } from '../../../helper/api-calls/user';
 import { checkFriendRequests } from '../../../helper/api-calls/friend';
 import { useFriendsForUser } from '../../../helper/api-calls/useApiCalls';
-import { Storage } from 'aws-amplify';
 
 function ProfileBase(props) {
     const {userInfo} = useOutletContext();
