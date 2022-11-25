@@ -1,4 +1,4 @@
-import { Auth } from 'aws-amplify';
+import { Auth, API } from 'aws-amplify';
 import React from 'react';
 
 let nextToken;
