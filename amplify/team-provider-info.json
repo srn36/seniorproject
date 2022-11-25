@@ -22,7 +22,12 @@
         "s3gameonpfpstorage00856971": {}
       },
       "auth": {
-        "gameon": {}
+        "gameon": {
+          "userPoolId": "us-east-1_wuJvL7xhL",
+          "userPoolName": "gameon-final",
+          "webClientId": "4iop0o2v4hqcpjnrns4a5jcvan",
+          "nativeClientId": "4iop0o2v4hqcpjnrns4a5jcvan"
+        }
       }
     }
   }
