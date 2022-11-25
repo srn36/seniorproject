@@ -1,24 +1,37 @@
+import { Auth } from 'aws-amplify';
 import React from 'react';
 
-function Chat(props) {
-    const requestBody = JSON.stringify({
-        'Filter': '',
-        'Limit': 1000,
-        'UserPoolId': 'us-east-1_gameon',
-    });
-    
-    const users = fetch('https://cognito-idp.us-east-1.amazonaws.com/', {
-        method: 'POST',
-        headers: {
-            'x-amz-target': 'AWSCognitoIdentityProviderService.ListUsers',
-            'Content-Type': 'application/x-amz-json-1.1',
+let nextToken;
+
+async function listEditors(limit){
+    let apiName = 'AdminQueries';
+    let path = '/listUsersInGroup';
+    let myInit = { 
+        queryStringParameters: {
+          "groupname": "all",
+          "limit": limit,
+          "token": nextToken
         },
-        body: requestBody,
-    }).then(response => console.log(response)).then(response => response.json());
-    console.log(users);
+        headers: {
+          'Content-Type' : 'application/json',
+          Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+        }
+    }
+    const { NextToken, ...rest } =  await API.get(apiName, path, myInit);
+    nextToken = NextToken;
+    return rest;
+  }
+
+
+function Chat(props) {
+
+    
     
     return (
-        <h4>Chat Page</h4>
+        <>
+            <h4>Chat Page</h4>
+            <button onClick={_e => listEditors(10)}>test</button>
+        </>
     );
 }
 
