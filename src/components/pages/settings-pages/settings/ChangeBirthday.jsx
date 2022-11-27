@@ -48,7 +48,7 @@ function ChangeBirthday(props) {
         }
 
         // Date validation
-        if(day < 1 || day > maxDays) { // Fix date validation
+        if(day < 1 || day > maxDays) {
             return false;
         }
 
