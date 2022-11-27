@@ -5,21 +5,11 @@ import CheckboxLabel from './CheckboxLabel';
 import { Dropdown } from 'react-bootstrap';
 
 function GameCheckboxes({ validationErrors }) {
-    /**
-     * USE IF NO USERNAME INPUT
-     * const allFalseCheckValues = games.forEach(game => false);
-     * // We have to track which checkboxes are not checked so that we can disable their droprowns
-     * const [selectedGames, setSelectedGames] = useState(allFalseCheckValues);
-     */
     
-    /**
-     * REMOVE IF NO USERNAME INPUT
-     */
-    const allFalseCheckValues = {};
-    games.forEach(game => allFalseCheckValues[game.title] = false);
-    const [defaultUsernames, setDefaultUsernames] = useState(allFalseCheckValues);
+    const allFalseCheckValues = games.map(_game => false);
     // We have to track which checkboxes are not checked so that we can disable their droprowns
-    const [selectedGames, setSelectedGames] = useState(Object.values(allFalseCheckValues));
+    const [selectedGames, setSelectedGames] = useState(allFalseCheckValues);
+    
 
     // Checkbox event handlers
     const handleGameChecked = (index, e) => {
@@ -28,16 +18,6 @@ function GameCheckboxes({ validationErrors }) {
         });
         setSelectedGames(newSelectedGames);
     };
-    /**
-     * REMOVE IF NO USERNAME INPUT
-     */
-    const handleUsernameChecked = (gameTitle, e) => {
-        const newDefaultUsernames = {};
-        Object.keys(defaultUsernames).forEach(title => {
-            newDefaultUsernames[title] = title === gameTitle ? e.target.checked : defaultUsernames[title];
-        });
-        setDefaultUsernames(newDefaultUsernames);
-    }
 
     const gamesKeys = Object.keys(games);
     const checkboxesFromGames = gamesKeys.map(index => {
@@ -51,54 +31,24 @@ function GameCheckboxes({ validationErrors }) {
         return (
             <React.Fragment key={index}>
                 <Dropdown.Divider/>
-                <div className={`checkbox-grid-${!!selectedGames[index]}`}>
-                    <CheckboxField
-                        className='checkbox'
-                        errorMessage={errorMessage}
-                        hasError={!!validationErrors.game || !!validationErrors[gameTitle]}
-                        name={gameTitle}
-                        label={
-                            <CheckboxLabel {
-                                ...{
-                                    'disable': !selectedGames[index],
-                                    'hasError': !!validationErrors[gameTitle],
-                                    ...games[index]
-                                }
-                            }/>
-                        }
-                        value='game-selected'
-                        checked={selectedGames[index]}
-                        onChange={e => handleGameChecked(index, e)}
-                    />
-                    {
-                        /**
-                         * REMOVE IF NO USERNAME INPUT
-                         */
-                        !!selectedGames[index] &&
-                        <CheckboxField
-                            className='username-select'
-                            id={`${gameTitle}-Default-Username`}
-                            errorMessage={validationErrors[`${gameTitle}-Username`]}
-                            hasError={!!validationErrors[`${gameTitle}-Username`]}
-                            name={`${gameTitle}-Default-Username`}
-                            label={
-                                <div>
-                                    <p>Use site username</p>
-                                    <input
-                                        name={`${gameTitle}-Username`}
-                                        type='text'
-                                        className='form-control'
-                                        placeholder='Username'
-                                        disabled={defaultUsernames[gameTitle]}
-                                    />
-                                </div>
+                <CheckboxField
+                    className='checkbox'
+                    errorMessage={errorMessage}
+                    hasError={!!validationErrors.game || !!validationErrors[gameTitle]}
+                    name={gameTitle}
+                    label={
+                        <CheckboxLabel {
+                            ...{
+                                'disable': !selectedGames[index],
+                                'hasError': !!validationErrors[gameTitle],
+                                ...games[index]
                             }
-                            value='default-username'
-                            checked={defaultUsernames[gameTitle]}
-                            onChange={e => handleUsernameChecked(gameTitle, e)}
-                        />                       
+                        }/>
                     }
-                </div>
+                    value='game-selected'
+                    checked={selectedGames[index]}
+                    onChange={e => handleGameChecked(index, e)}
+                />
             </React.Fragment>
         );
     });

@@ -43,7 +43,6 @@ function App() {
             }}
             services={{
                 async validateCustomSignUp(formData) {
-                    const username = formData.username;
                     const selectedGames = Object.keys(formData).filter(dataKey => formData[dataKey] === 'game-selected');
                     const selectedConsoles = Object.keys(formData).filter(dataKey => formData[dataKey] === 'console-selected')
                     const gameToInfoMap = {};
@@ -59,21 +58,11 @@ function App() {
                         );
                         gameToInfoMap[gameTitle] = {
                             'consoles': [...selectedConsolesForTitle],
-                            /**
-                             * REMOVE IF NO USERNAME INPUT
-                             */
-                            'username': !!formData[`${gameTitle}-Default-Username`] ? username : (formData[`${gameTitle}-Username`] ||  '')
                         };
 
                         // Add validation errors
                         if(selectedConsolesForTitle.length === 0) {
                             validateErrors[gameTitle] = `You must select at least one console for ${gameTitle}`;
-                        }
-                        /**
-                         * REMOVE IF NO USERNAME INPUT
-                         */
-                        if(!formData[`${gameTitle}-Username`] && !formData[`${gameTitle}-Default-Username`]) {
-                            validateErrors[`${gameTitle}-Username`] = `Input username for ${gameTitle}`;
                         }
                     });
 
