@@ -26,7 +26,8 @@ function ChangeBirthday(props) {
         if(!(avoidEmojis[4] === '-' && avoidEmojis[7] === '-')) {
             return false;
         }
-
+        
+        const currentTime = new Date();
         const currentMonth = currentTime.getMonth() + 1;
         const currentDay = currentTime.getDate();
         const currentYear = currentTime.getFullYear();
