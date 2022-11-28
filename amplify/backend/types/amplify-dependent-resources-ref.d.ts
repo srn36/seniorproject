@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
     "storage": {
-        "s3gameonpfpstorage00856971": {
+        "s3gameonprofilepics": {
             "BucketName": "string",
             "Region": "string"
         }
