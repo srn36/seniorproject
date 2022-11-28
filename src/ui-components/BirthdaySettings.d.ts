@@ -26,10 +26,9 @@ export declare type BirthdaySettingsOverridesProps = {
 export declare type BirthdaySettingsProps = React.PropsWithChildren<{
     overrides?: BirthdaySettingsOverridesProps | undefined | null;
 } & {
-    initialData?: BirthdaySettingsInputValues;
     onSubmit: (fields: BirthdaySettingsInputValues) => void;
     onCancel?: () => void;
     onChange?: (fields: BirthdaySettingsInputValues) => BirthdaySettingsInputValues;
     onValidate?: BirthdaySettingsValidationValues;
-} & React.CSSProperties>;
+}>;
 export default function BirthdaySettings(props: BirthdaySettingsProps): React.ReactElement;

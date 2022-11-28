@@ -31,7 +31,7 @@ const checkValidation = (value, validation) => {
     switch (validation.type) {
       case "LessThanChar":
         return {
-          hasError: !(value.length <= validation.numValues[0]),
+          hasError: !(value.length < validation.numValues[0]),
           errorMessage:
             validation.validationMessage ||
             `The value must be shorter than ${validation.numValues[0]}`,

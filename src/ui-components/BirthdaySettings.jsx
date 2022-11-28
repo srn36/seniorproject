@@ -10,31 +10,17 @@ import { fetchByPath, validateField } from "./utils";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Grid, TextField } from "@aws-amplify/ui-react";
 export default function BirthdaySettings(props) {
-  const {
-    initialData,
-    onSubmit,
-    onCancel,
-    onValidate,
-    onChange,
-    overrides,
-    ...rest
-  } = props;
+  const { onSubmit, onCancel, onValidate, onChange, overrides, ...rest } =
+    props;
   const initialValues = {
     birthday: undefined,
   };
   const [birthday, setBirthday] = React.useState(initialValues.birthday);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = { ...initialValues, ...initialData };
-    setBirthday(cleanValues.birthday);
+    setBirthday(initialValues.birthday);
     setErrors({});
   };
-  React.useEffect(resetStateValues, [initialData]);
-  React.useEffect(() => {
-    if (initialData) {
-      setBirthday(initialData.birthday);
-    }
-  }, []);
   const validations = {
     birthday: [],
   };
@@ -83,9 +69,8 @@ export default function BirthdaySettings(props) {
       {...getOverrideProps(overrides, "BirthdaySettings")}
     >
       <TextField
-        label="Birthday"
+        label="Edit Birthday"
         type="date"
-        defaultValue={birthday}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -109,10 +94,7 @@ export default function BirthdaySettings(props) {
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
       >
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        ></Flex>
+        <Flex {...getOverrideProps(overrides, "RightAlignCTASubFlex")}></Flex>
       </Flex>
     </Grid>
   );

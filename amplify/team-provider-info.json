@@ -1,0 +1,44 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-seniorproject-dev-182601-authRole",
+      "UnauthRoleArn": "arn:aws:iam::176100888834:role/amplify-seniorproject-dev-182601-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::176100888834:role/amplify-seniorproject-dev-182601-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-seniorproject-dev-182601-deployment",
+      "UnauthRoleName": "amplify-seniorproject-dev-182601-unauthRole",
+      "StackName": "amplify-seniorproject-dev-182601",
+      "StackId": "arn:aws:cloudformation:us-east-1:176100888834:stack/amplify-seniorproject-dev-182601/0520ab70-6f74-11ed-8934-0e05c2f1c26d",
+      "AmplifyAppId": "dnt1v18cfp8hi"
+    },
+    "categories": {
+      "auth": {
+        "gameon": {
+          "userPoolId": "us-east-1_atJJemyyA",
+          "userPoolName": "GameOn-Final",
+          "webClientId": "668hpoek0c9ott60pajvugelue",
+          "nativeClientId": "668hpoek0c9ott60pajvugelue",
+          "identityPoolId": "us-east-1:b78be68f-e931-4e17-833b-233a83957fdc",
+          "identityPoolName": "gameon-identity-final",
+          "allowUnauthenticatedIdentities": true,
+          "authRoleArn": "arn:aws:iam::176100888834:role/Cognito_gameonidentityfinalAuth_Role",
+          "authRoleName": "Cognito_gameonidentityfinalAuth_Role",
+          "unauthRoleArn": "arn:aws:iam::176100888834:role/Cognito_gameonidentityfinalUnauth_Role",
+          "unauthRoleName": "Cognito_gameonidentityfinalUnauth_Role"
+        }
+      },
+      "storage": {
+        "gameonfd3fcbd9": {
+          "bucketName": "gameon-profile-pics141728-staging",
+          "region": "us-east-1"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dnt1v18cfp8hi",
+          "type": "manual"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "authSelections": "identityPoolAndUserPool",
+  "resourceName": "gameon",
+  "serviceType": "imported",
+  "region": "us-east-1",
+  "aliasAttributes": [
+    "email"
+  ],
+  "requiredAttributes": [
+    "name",
+    "family_name",
+    "email",
+    "birthdate"
+  ],
+  "passwordPolicyMinLength": 8,
+  "passwordPolicyCharacters": [],
+  "mfaConfiguration": "OFF",
+  "autoVerifiedAttributes": [
+    "email"
+  ],
+  "mfaTypes": []
+}
