@@ -36,7 +36,8 @@
         "gameondb6d2477": {
           "bucketName": "gameon-profile-storage182601-dev",
           "region": "us-east-1"
-        }
+        },
+        "s3gameonprofilepics": {}
       },
       "hosting": {
         "amplifyhosting": {

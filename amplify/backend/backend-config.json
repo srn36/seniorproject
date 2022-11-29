@@ -9,9 +9,8 @@
     }
   },
   "storage": {
-    "gameondb6d2477": {
+    "s3gameonprofilepics": {
       "service": "S3",
-      "serviceType": "imported",
       "providerPlugin": "awscloudformation",
       "dependsOn": []
     }
