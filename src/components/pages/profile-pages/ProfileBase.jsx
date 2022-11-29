@@ -59,7 +59,6 @@ function ProfileHeadline({ username, userInfo, isOwnProfile, friends }) {
         Storage.get(`${username}-profilepic`).then(url => setProfilePicUrl(url));
     }, [username]);
 
-    console.log(profilePicUrl);
     const relationshipBasedFriendButton = {
         'Already Friends': <RemoveButton userInfo={userInfo} username={username}/>,
         'Outgoing': <button disabled={true}>Requested</button>,
