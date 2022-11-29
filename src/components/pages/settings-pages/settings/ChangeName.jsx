@@ -28,9 +28,7 @@ function ChangeName({ firstName, lastName }) {
         Auth.updateUserAttributes(user, updateAttributes).then(() => {
             window.alert('Successfully updated name');
             window.location.reload();
-        }).catch(e => 
-            window.alert(`Update failed with reason: ${e}`)   
-        );
+        }).catch(e => window.alert(`Error updating name: ${e}`));
     };
     
     return (

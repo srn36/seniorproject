@@ -24,9 +24,7 @@ function ChangeBirthday({ birthdate }) {
         Auth.updateUserAttributes(user, updateAttributes).then(() => {
             window.alert('Birthday updated successfully');
             window.location.reload();
-        }).catch(e => 
-            window.alert('Error updating birthday: ', e)
-        );
+        }).catch(e => window.alert(`Error updating birthday: ${e}`));
     };
 
     const validateBirthday = () => {

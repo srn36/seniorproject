@@ -24,7 +24,7 @@ function ChangePrivacy({ currentPrivacy }) {
         Auth.updateUserAttributes(user, updateAttributes).then(() => {
             window.alert('Privacy updated successfully');
             window.location.reload();
-        }).catch(e => console.log('Error updating privacy: ', e));
+        }).catch(e => window.alert(`Error updating privacy: ${e}`));
     }
 
     return (

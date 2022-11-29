@@ -36,10 +36,12 @@ function ChangeEmail({ email }) {
         const user = Auth.currentAuthenticatedUser();
         Auth.veri
         const updateAttributes = {email: newEmail};
-        Auth.updateUserAttributes(user, updateAttributes).then(() => {
+        Auth.updateUserAttributes(user, updateAttributes)/* .then( () =>
+            Auth.verifyCurrentUserAttribute('email')
+        ) */.then(() => {
             window.alert('Email updated successfully');
             window.location.reload();
-        }).catch(e => console.log('Error updating email: ', e));
+        }).catch(e => window.alert(`Error updating email: ${e}`));
     };
     
     return (

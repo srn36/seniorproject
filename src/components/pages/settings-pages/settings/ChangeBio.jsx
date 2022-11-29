@@ -22,7 +22,7 @@ function ChangeBio({ currentBio }) {
         Auth.updateUserAttributes(user, updateAttributes).then(() => {
             window.alert('Bio updated successfully');
             window.location.reload();
-        }).catch(e => console.log('Error updating bio: ', e));
+        }).catch(e => window.alert(`Error updating bio: ${e}`));
     };
     
     return (
