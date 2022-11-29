@@ -7,7 +7,7 @@
     "email"
   ],
   "requiredAttributes": [
-    "name",
+    "given_name",
     "family_name",
     "email",
     "birthdate"

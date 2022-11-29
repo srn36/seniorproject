@@ -14,10 +14,10 @@
     "categories": {
       "auth": {
         "gameon": {
-          "userPoolId": "us-east-1_atJJemyyA",
-          "userPoolName": "GameOn-Final",
-          "webClientId": "668hpoek0c9ott60pajvugelue",
-          "nativeClientId": "668hpoek0c9ott60pajvugelue",
+          "userPoolId": "us-east-1_33pEMimdv",
+          "userPoolName": "GameOn",
+          "webClientId": "4b5fhp4j9fj2p43ij8k1jd31mc",
+          "nativeClientId": "4b5fhp4j9fj2p43ij8k1jd31mc",
           "identityPoolId": "us-east-1:b78be68f-e931-4e17-833b-233a83957fdc",
           "identityPoolName": "gameon-identity-final",
           "allowUnauthenticatedIdentities": true,
@@ -32,7 +32,11 @@
           "bucketName": "gameon-profile-pics141728-staging",
           "region": "us-east-1"
         },
-        "s3gameonprofilestorage": {}
+        "s3gameonprofilestorage": {},
+        "gameondb6d2477": {
+          "bucketName": "gameon-profile-storage182601-dev",
+          "region": "us-east-1"
+        }
       },
       "hosting": {
         "amplifyhosting": {
