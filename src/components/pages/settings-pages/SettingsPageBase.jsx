@@ -8,7 +8,7 @@ function SettingsPageBase(props) {
     const attributes = cognitoInfo.attributes;
     
     return(
-        <PageWithNavTabs  tabs={['Account', 'Profile', 'Default',]}>
+        <PageWithNavTabs  tabs={['Account', 'Profile']}>
             <Outlet context={{userInfo: userInfo, attributes: attributes}}/>
         </PageWithNavTabs>
     );
