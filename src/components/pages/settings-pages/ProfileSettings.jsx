@@ -7,7 +7,7 @@ import ChangeProfilePic from './settings/ChangeProfilePic';
 
 function ProfileSettings(props) {
     const {userInfo, attributes} = useOutletContext();
-    const {email, given_name, family_name, birthdate} = attributes;
+    const {given_name, family_name, birthdate} = attributes;
     const bio = attributes['custom:bio'];
 
     return (
