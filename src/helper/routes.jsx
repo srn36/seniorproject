@@ -20,7 +20,6 @@ import Friends from '../components/pages/profile-pages/Friends';
 import SettingsPageBase from '../components/pages/settings-pages/SettingsPageBase';
 import AccountSettings from '../components/pages/settings-pages/AccountSettings';
 import ProfileSettings from '../components/pages/settings-pages/ProfileSettings';
-import Settings from '../components/pages/settings-pages/Settings';
 
 // Friend Zone imports
 import FriendZoneBase from '../components/pages/friend-zone/FriendZoneBase';
@@ -55,7 +54,6 @@ function routes() {
             {index: true, element: <Navigate to='account'/>},
             {path: 'account', element: <AccountSettings/>},
             {path: 'profile', element: <ProfileSettings/>},
-            {path: 'default', element: <Settings/>},
         ],
     };
 
