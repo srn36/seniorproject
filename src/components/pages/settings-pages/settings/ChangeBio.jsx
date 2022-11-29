@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
 import { TextAreaField } from '@aws-amplify/ui-react';
 import SettingsForm from './SettingsForm';
+import { Auth } from 'aws-amplify';
 
-function ChangeBio(props) {
-    const initialBio = 'Bio' /* fetch bio somehow */;
-    const [bio, setBio] = useState(initialBio);
+function ChangeBio({ currentBio }) {
+    const [bio, setBio] = useState(currentBio);
 
     const formFields = [
         <TextAreaField
             key='Bio'
             label='Edit Bio'
             placeholder='Input Bio'
-            defaultValue={initialBio}
+            defaultValue={currentBio}
             onChange={(e) => setBio(e.target.value)}
         />
     ];
 
-    const changeBio = () => {
-        window.alert('Not Implemented');
+    const changeBio = async () => {
+        const user = await Auth.currentAuthenticatedUser();
+        let updateAttributes = {'custom:bio': bio};
+        Auth.updateUserAttributes(user, updateAttributes).then(() => {
+            window.alert('Bio updated successfully');
+            window.location.reload();
+        }).catch(e => console.log('Error updating bio: ', e));
     };
     
     return (
@@ -26,7 +31,7 @@ function ChangeBio(props) {
             fields={formFields}
             onSubmit={changeBio}
             submitLabel='Change Bio'
-            submitDisabled={bio === initialBio}
+            submitDisabled={bio === currentBio}
         />
     );
 }

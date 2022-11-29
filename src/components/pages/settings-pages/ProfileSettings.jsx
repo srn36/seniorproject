@@ -8,6 +8,7 @@ import ChangeProfilePic from './settings/ChangeProfilePic';
 function ProfileSettings(props) {
     const {userInfo, attributes} = useOutletContext();
     const {email, given_name, family_name, birthdate} = attributes;
+    const bio = attributes['custom:bio'];
 
     return (
         <div className='settings-content'>
@@ -15,7 +16,7 @@ function ProfileSettings(props) {
             <ChangeProfilePic userInfo={userInfo}/>
             <ChangeName firstName={given_name} lastName={family_name}/>
             <ChangeBirthday birthdate={birthdate}/>
-            <ChangeBio/>
+            <ChangeBio currentBio={bio}/>
         </div>
     );
 }
