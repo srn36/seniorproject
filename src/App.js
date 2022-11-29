@@ -72,6 +72,8 @@ function App() {
                 },
                 async handleSignUp(formData) {
                     let { username, password, attributes } = formData;
+                    attributes['custom:privacy'] = 'Private';
+                    attributes['custom:bio'] = 'Bio';
                     const profilePicKey = `${username}-profilepic`;
                     try {
                         await Storage.put(profilePicKey, pictureFile, {
