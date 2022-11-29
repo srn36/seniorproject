@@ -9,9 +9,8 @@
     }
   },
   "storage": {
-    "gameonfd3fcbd9": {
+    "s3gameonprofilestorage": {
       "service": "S3",
-      "serviceType": "imported",
       "providerPlugin": "awscloudformation",
       "dependsOn": []
     }

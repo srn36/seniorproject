@@ -1,0 +1,16 @@
+{
+  "resourceName": "s3gameonprofilestorage",
+  "bucketName": "gameon-profile-storage",
+  "policyUUID": "cf4423da",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}

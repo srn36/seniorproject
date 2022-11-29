@@ -1,1 +1,8 @@
-export type AmplifyDependentResourcesAttributes = {}
+export type AmplifyDependentResourcesAttributes = {
+    "storage": {
+        "s3gameonprofilestorage": {
+            "BucketName": "string",
+            "Region": "string"
+        }
+    }
+}

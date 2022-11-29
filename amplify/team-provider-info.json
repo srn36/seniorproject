@@ -31,7 +31,8 @@
         "gameonfd3fcbd9": {
           "bucketName": "gameon-profile-pics141728-staging",
           "region": "us-east-1"
-        }
+        },
+        "s3gameonprofilestorage": {}
       },
       "hosting": {
         "amplifyhosting": {
