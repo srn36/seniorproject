@@ -54,7 +54,7 @@ function ChangeProfilePic({ userInfo }) {
             });
             window.alert('Profile picture changed successfully');
         } catch (error) {
-            console.log('Error uploading file: ', error);
+            window.alert(`Error updating profile picture: ${error}`);
         }
     };
     
