@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
 import { Radio, RadioGroupField } from '@aws-amplify/ui-react';
 import SettingsForm from './SettingsForm';
+import { Auth } from 'aws-amplify';
 
-function ChangePrivacy(props) {
-    const initialPrivacy = /* Somehow get user Privacty setting */'Public';
-    const [privacy, setPrivacy] = useState(initialPrivacy);
+function ChangePrivacy({ currentPrivacy }) {
+    const [privacy, setPrivacy] = useState(currentPrivacy);
 
     const formFields = [
         <RadioGroupField
             key='RadioGroup'
             label='Privacy'
-            name='privacy'
             value={privacy}
-            onChange={(e) => setPrivacy(e.target.value)}
+            onChange={e => setPrivacy(e.target.value)}
         >
             <Radio value='Private'>Private</Radio>
             <Radio value='Public'>Public</Radio>
         </RadioGroupField>
     ];
     
-    const changePrivacy = () => {
-        window.alert('Not Implemented');
+    const changePrivacy = async () => {
+        const user = await Auth.currentAuthenticatedUser();
+        const updateAttributes = {'custom:privacy': privacy};
+        Auth.updateUserAttributes(user, updateAttributes).then(() => {
+            window.alert('Privacy updated successfully');
+            window.location.reload();
+        }).catch(e => console.log('Error updating privacy: ', e));
     }
 
     return (
@@ -29,7 +33,7 @@ function ChangePrivacy(props) {
             fields={formFields}
             onSubmit={changePrivacy}
             submitLabel='Update Privacy'
-            submitDisabled={privacy === initialPrivacy}
+            submitDisabled={privacy === currentPrivacy}
         />
     );
 }

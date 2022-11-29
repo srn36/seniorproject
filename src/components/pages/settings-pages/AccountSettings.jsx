@@ -15,7 +15,7 @@ function AccountSettings(props) {
             <h2>Account Settings</h2>
             <ChangePassword/>
             <ChangeEmail email={email}/>
-            <ChangePrivacy privacy={privacy}/>
+            <ChangePrivacy currentPrivacy={privacy}/>
             <DeleteAccount/>
         </div>
     );
