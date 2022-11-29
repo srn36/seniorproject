@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 
 // Default pages
 import PageBase from '../components/pages/base/PageBase';
@@ -47,6 +48,9 @@ function routes() {
     const settingsRoute = {
         path: 'settings',
         element: <SettingsPageBase/>,
+        loader: async () => {
+            return await Auth.currentUserInfo();
+        },
         children: [
             {index: true, element: <Navigate to='account'/>},
             {path: 'account', element: <AccountSettings/>},

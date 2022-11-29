@@ -1,13 +1,15 @@
 import React from 'react';
-import { Outlet, useOutletContext } from 'react-router-dom';
+import { Outlet, useLoaderData, useOutletContext } from 'react-router-dom';
 import PageWithNavTabs from '../base/PageWithNavTabs';
 
 function SettingsPageBase(props) {
     const {userInfo} = useOutletContext();
+    const cognitoInfo = useLoaderData();
+    const attributes = cognitoInfo.attributes;
     
     return(
         <PageWithNavTabs  tabs={['Account', 'Profile', 'Default',]}>
-            <Outlet context={{userInfo: userInfo}}/>
+            <Outlet context={{userInfo: userInfo, attributes: attributes}}/>
         </PageWithNavTabs>
     );
 }
