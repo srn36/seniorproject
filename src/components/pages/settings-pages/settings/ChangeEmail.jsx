@@ -34,6 +34,7 @@ function ChangeEmail({ email }) {
     const changeEmail = async () => {
         // REVERIFY EMAIL
         const user = Auth.currentAuthenticatedUser();
+        Auth.veri
         const updateAttributes = {email: newEmail};
         Auth.updateUserAttributes(user, updateAttributes).then(() => {
             window.alert('Email updated successfully');
