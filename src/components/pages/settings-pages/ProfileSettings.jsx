@@ -14,7 +14,7 @@ function ProfileSettings(props) {
             <h2>Profile Settings</h2>
             <ChangeProfilePic userInfo={userInfo}/>
             <ChangeName firstName={given_name} lastName={family_name}/>
-            <ChangeBirthday birthday={birthdate}/>
+            <ChangeBirthday birthdate={birthdate}/>
             <ChangeBio/>
         </div>
     );
