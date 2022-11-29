@@ -4,17 +4,16 @@ import { Auth } from 'aws-amplify';
 import { TextField } from '@aws-amplify/ui-react';
 import SettingsForm from './SettingsForm';
 
-function ChangeEmail(props) {
-    const [oldEmail, setOldEmail] = useState('');
+function ChangeEmail({ email }) {
     const [newEmail, setNewEmail] = useState('');
     const [confirmNewEmail, setConfirmNewEmail] = useState('');
 
     const formFields = [
         <TextField
-            key='Old Email'
-            placeholder='Old Email'
-            label='Old Email'
-            onChange={e => setOldEmail(e.target.value)}
+            key='Current Email'
+            label='Current Email'
+            defaultValue={email}
+            disabled={true}
         />,
         <TextField
             key='New Email'
@@ -32,8 +31,14 @@ function ChangeEmail(props) {
         />
     ];
 
-    const changeEmail = () => {
-        window.alert('Not implemented');
+    const changeEmail = async () => {
+        // REVERIFY EMAIL
+        const user = Auth.currentAuthenticatedUser();
+        const updateAttributes = {email: newEmail};
+        Auth.updateUserAttributes(user, updateAttributes).then(() => {
+            window.alert('Email updated successfully');
+            window.location.reload();
+        }).catch(e => console.log('Error updating email: ', e));
     };
     
     return (
@@ -42,7 +47,7 @@ function ChangeEmail(props) {
             fields={formFields}
             onSubmit={changeEmail}
             submitLabel='Change Email'
-            submitDisabled={!(newEmail.length > 0 && newEmail === confirmNewEmail)}
+            submitDisabled={!(newEmail.length > 0 && newEmail === confirmNewEmail && newEmail !== currentEmail)}
         />
     );
 }
