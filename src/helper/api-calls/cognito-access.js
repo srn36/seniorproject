@@ -22,7 +22,7 @@ export async function getUser(username) {
     const path = '/getUser';
     const myInit = {
         queryStringParameters: {
-            Username: `${username}`,
+            username: `${username}`,
             UserPoolId: 'us-east-1_gameon'
         },
         headers: {

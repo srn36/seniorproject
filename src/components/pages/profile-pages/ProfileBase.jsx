@@ -1,7 +1,8 @@
-import React, { useMemo, useEffect, useState } from 'react';
-import { Storage } from 'aws-amplify';
+import React, { useMemo } from 'react';
 import {
     Outlet,
+    useLoaderData,
+    useNavigate,
     useOutletContext,
     useParams
 } from 'react-router-dom';
@@ -19,10 +20,15 @@ import { useFriendsForUser } from '../../../helper/api-calls/useApiCalls';
 
 function ProfileBase(props) {
     const {userInfo} = useOutletContext();
+    const {attributes, profilePic, redirect} = useLoaderData();
     const username = useParams().username;
     const friendList = useFriendsForUser(username);
+    const navigate = useNavigate();
 
     return useMemo(() => {
+        if(redirect) {
+            return navigate('error');
+        }
         const friends = Array.isArray(friendList.data) ? friendList.data : [];
         const isOwnProfile = (username === userInfo?.username);
         const friendListType = isOwnProfile ? 'Removable' : 'Standard';
@@ -44,20 +50,17 @@ function ProfileBase(props) {
                         userInfo={userInfo}
                         isOwnProfile={isOwnProfile}
                         friends={friends}
+                        profilePic={profilePic}
                     />
                     <Outlet context={outletContext}/>
                 </>
             </PageWithNavTabs>
         );
-    }, [username, friendList, userInfo]);
+    }, [username, friendList, userInfo, profilePic, navigate, redirect]);
 }
 
 
-function ProfileHeadline({ username, userInfo, isOwnProfile, friends }) {
-    const [profilePicUrl, setProfilePicUrl] = useState('');
-    useEffect(() => {
-        Storage.get(`${username}-profilepic`).then(url => setProfilePicUrl(url));
-    }, [username]);
+function ProfileHeadline({ username, userInfo, isOwnProfile, friends, profilePic }) {
 
     const relationshipBasedFriendButton = {
         'Already Friends': <RemoveButton userInfo={userInfo} username={username}/>,
@@ -83,7 +86,7 @@ function ProfileHeadline({ username, userInfo, isOwnProfile, friends }) {
     return (
         <div className='profile-headline'>
             <span>
-                <img src={profilePicUrl} alt='profile pic here'/>
+                <img src={profilePic} alt='profile pic here'/>
                 <h2>{username}</h2>
             </span>
             {!isOwnProfile && relationshipBasedFriendButton[friendButtonKey]}

@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { Auth } from 'aws-amplify';
+import { Auth, Storage } from 'aws-amplify';
 
 // Default pages
 import PageBase from '../components/pages/base/PageBase';
@@ -25,6 +25,7 @@ import ProfileSettings from '../components/pages/settings-pages/ProfileSettings'
 import FriendZoneBase from '../components/pages/friend-zone/FriendZoneBase';
 import Requests from '../components/pages/friend-zone/Requests';
 import Recommendations from '../components/pages/friend-zone/Recommendations';
+import { getUser } from './api-calls/cognito-access';
 
 
 function routes() {
@@ -36,6 +37,16 @@ function routes() {
     const profileRoute = {
         path: 'profile/:username',
         element: <ProfileBase/>,
+        loader: async ({ params }) => {
+            console.log(params);
+            try{
+                const attributes = (await getUser(params.username)).UserAttributes;
+                const profilePic = await Storage.get(`${params.username}-profilepic`);
+                return {attributes, profilePic, redirect: false};
+            } catch(e) {
+                return {attributes: [], profilePic: '', redirect: true};
+            }
+        },
         children: [
             {index: true, element: <Navigate to='posts'/>},
             {path: 'posts', element: <Posts/>},
