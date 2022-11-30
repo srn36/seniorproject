@@ -1,65 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Autocomplete, HighlightMatch, View } from '@aws-amplify/ui-react';
 import { Link } from 'react-router-dom';
-import mockPFP from '../../../logo192.png';
-
-
-// Mock data for testing
-const createMockUserList = () => {
-    let userList = [
-        {key: 'Alejandro Escamilla', username: 'Alejandro Escamilla', profilepic: mockPFP},
-        {key: 'Paul Jarvis', username: 'Paul Jarvis', profilepic: mockPFP},
-        {key: 'test1', username: 'test1', profilepic: mockPFP},
-        {key: 'Aleks Dorohovich', username: 'Aleks Dorohovich', profilepic: mockPFP},
-    ];
-    for(let i = 0; i < 15; i++) {
-        userList = [{key: `User ${i}`, username: `User ${i}`, profilepic: mockPFP}, {key: `Person ${i}`, username: `Person ${i}`, profilepic: mockPFP}, ...userList];
-    }
-    return userList;
-};
-const mockUserList = createMockUserList();
-const sendMockQuery = (query) => {
-    return mockUserList.filter(user => user.username.includes(query));
-};
-// End of mock functions
-
-
-function renderOption(option, value) {
-    const { username, profilepic } = option
-    return (
-        <Link className='search-result' to={`/profile/${username}`}>
-            <span>
-                <img src={profilepic} alt=''/>
-                <HighlightMatch query={value}>
-                    {username}
-                </HighlightMatch>
-            </span>
-        </Link>
-    );
-}
+import { searchUsers } from '../../../helper/api-calls/cognito-access';
 
 function SearchBar(props) {
     const MIN_CHARS_FOR_QUERY = 3;
     const [queryText, setQueryText] = useState('');
     const [results, setResults] = useState([]);
+    const [loading, setLoading] = useState(false);
 
-    const onClear = () => {
+    const clearSearch = () => {
         setQueryText('');
+        setResults([]);
+        setLoading(false);
+    };
+
+    const renderOption = (option, value) => {
+        const { username } = option;
+        return (
+            <Link 
+                className='search-result'
+                to={`/profile/${username}`}
+                onClick={clearSearch}
+            >
+                <span>
+                    <HighlightMatch query={value}>
+                        {username}
+                    </HighlightMatch>
+                </span>
+            </Link>
+        );
     };
 
     const optionFilter = (option, value) => {
         return option?.username?.includes(value);
-    }
+    };
 
-    useEffect(() => {
-        if(queryText.length >= MIN_CHARS_FOR_QUERY) {
-            const queryResults = sendMockQuery(queryText);
-            setResults(queryResults);
+    const handleInputChange = async (e) => {
+        const input = e.target.value;
+        setLoading(true);
+        setQueryText(input);
+        if(input.length >= MIN_CHARS_FOR_QUERY) {
+            try {
+                const queryResults = (await searchUsers(input)).Users;
+                const errorFreeResults = queryResults.map(userResult => {
+                    return {username: userResult.Username};
+                });
+                setResults(errorFreeResults);
+                setLoading(false);
+            } catch(e) {
+                setResults([]);
+                setLoading(false);
+                console.log('Error searching for users: ', e);
+            }
         }
         else {
             setResults([]);
+            setLoading(false);
         }
-    }, [queryText, setResults]);
+    };
 
     return (
         <div className='search'>
@@ -67,17 +66,19 @@ function SearchBar(props) {
                 label='Search Bar'
                 placeholder='Search for users'
                 value={queryText}
-                onClear={onClear}
-                optionFilter={optionFilter}
+                onClear={clearSearch}
                 renderOption={renderOption}
+                optionFilter={optionFilter}
                 options={results}
-                onChange={e => setQueryText(e.target.value)}
+                onChange={handleInputChange}
                 menuSlots={{
                     Empty:  (queryText.length >= MIN_CHARS_FOR_QUERY ? 
                                 <View>No matching users found</View> : 
                                 <View>Username must be {`${MIN_CHARS_FOR_QUERY}`} characters long to get results</View>
                             ),
                 }}
+                disabled={loading}
+                isLoading={loading}
                 labelHidden
             />
         </div>
