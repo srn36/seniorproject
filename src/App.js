@@ -8,7 +8,7 @@ import {
     Divider
 } from '@aws-amplify/ui-react';
 import GameCheckboxes from './components/game-checkboxes/GameCheckboxes';
-import { Auth, Storage } from 'aws-amplify';
+import { Auth, Storage, API } from 'aws-amplify';
 
 function App() {
     const router = routes();
@@ -72,8 +72,8 @@ function App() {
                 },
                 async handleSignUp(formData) {
                     let { username, password, attributes } = formData;
-                    /* attributes['custom:privacy'] = 'Private';
-                    attributes['custom:bio'] = 'Bio'; */
+                    attributes['custom:privacy'] = 'Private';
+                    attributes['custom:bio'] = 'Bio';
                     const profilePicKey = `${username}-profilepic`;
                     try {
                         await Storage.put(profilePicKey, pictureFile, {
@@ -89,7 +89,23 @@ function App() {
                         autoSignIn: {
                             enabled: true,
                         },
-                    });
+                    })/* .then(async () => {
+                        const apiName = 'AdminQueries';
+                        const path = '/addUserToGroup';
+                        let myInit = { 
+                            body: {
+                                Groupname: 'Admin',
+                                Username: username,
+                                UserPoolId: 'us-east-1_gameon',
+                            },
+                            headers: {
+                                'Content-Type' : 'application/x-amz-json-1.1',
+                                Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+                            }
+                        }
+                        const confirmation = await API.post(apiName, path, myInit);
+                        console.log(confirmation);
+                    }); */
                 },
             }}
         >
