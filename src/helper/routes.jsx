@@ -43,6 +43,7 @@ function routes() {
                 const profilePic = await Storage.get(`${params.username}-profilepic`);
                 return {attributes, profilePic, redirect: false};
             } catch(e) {
+                console.clear();
                 return {attributes: [], profilePic: '', redirect: true};
             }
         },
