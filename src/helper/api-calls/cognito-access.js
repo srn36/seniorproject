@@ -31,6 +31,5 @@ export async function getUser(username) {
         }
     }
     const { ...rest } = await API.get(apiName, path, myInit);
-    console.log(rest);
     return rest;
 }

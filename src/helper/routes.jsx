@@ -38,7 +38,6 @@ function routes() {
         path: 'profile/:username',
         element: <ProfileBase/>,
         loader: async ({ params }) => {
-            console.log(params);
             try{
                 const attributes = (await getUser(params.username)).UserAttributes;
                 const profilePic = await Storage.get(`${params.username}-profilepic`);

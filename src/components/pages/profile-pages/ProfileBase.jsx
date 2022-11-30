@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import {
     Outlet,
     useLoaderData,
@@ -25,10 +25,13 @@ function ProfileBase(props) {
     const friendList = useFriendsForUser(username);
     const navigate = useNavigate();
 
-    return useMemo(() => {
+    useEffect(() => {
         if(redirect) {
-            return navigate('error');
+            navigate('error');
         }
+    }, [redirect, navigate]);
+
+    return useMemo(() => {
         const friends = Array.isArray(friendList.data) ? friendList.data : [];
         const isOwnProfile = (username === userInfo?.username);
         const friendListType = isOwnProfile ? 'Removable' : 'Standard';
@@ -36,6 +39,7 @@ function ProfileBase(props) {
         const outletContext = {
             userInfo: userInfo,
             username: username,
+            attributes: attributes,
             fetchUserPosts: fetchUserPosts,
             friendList: friendList,
             friends: friends,
@@ -44,8 +48,7 @@ function ProfileBase(props) {
 
         return (
             <PageWithNavTabs tabs={['Posts', 'Friends', 'Games']}>
-                <>
-                    <ProfileHeadline 
+                    <ProfileHeadline
                         username={username}
                         userInfo={userInfo}
                         isOwnProfile={isOwnProfile}
@@ -53,10 +56,9 @@ function ProfileBase(props) {
                         profilePic={profilePic}
                     />
                     <Outlet context={outletContext}/>
-                </>
             </PageWithNavTabs>
         );
-    }, [username, friendList, userInfo, profilePic, navigate, redirect]);
+    }, [username, friendList, userInfo, profilePic, attributes]);
 }
 
 
