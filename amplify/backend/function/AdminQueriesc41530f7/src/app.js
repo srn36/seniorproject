@@ -45,26 +45,6 @@ app.use((req, res, next) => {
 const allowedGroup = process.env.GROUP;
 
 const checkGroup = function (req, res, next) {
-  if (req.path == '/signUserOut') {
-    return next();
-  }
-
-  if (typeof allowedGroup === 'undefined' || allowedGroup === 'NONE') {
-    return next();
-  }
-
-  // Fail if group enforcement is being used
-  if (req.apiGateway.event.requestContext.authorizer.claims['cognito:groups']) {
-    const groups = req.apiGateway.event.requestContext.authorizer.claims['cognito:groups'].split(',');
-    if (!(allowedGroup && groups.indexOf(allowedGroup) > -1)) {
-      const err = new Error(`User does not have permissions to perform administrative tasks`);
-      next(err);
-    }
-  } else {
-    const err = new Error(`User does not have permissions to perform administrative tasks`);
-    err.statusCode = 403;
-    next(err);
-  }
   next();
 };
 

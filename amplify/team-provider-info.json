@@ -50,7 +50,7 @@
       "function": {
         "AdminQueriesc41530f7": {
           "deploymentBucketName": "amplify-seniorproject-dev-182601-deployment",
-          "s3Key": "amplify-builds/AdminQueriesc41530f7-5958674e79757739664b-build.zip"
+          "s3Key": "amplify-builds/AdminQueriesc41530f7-797a394b47615532766d-build.zip"
         }
       },
       "api": {

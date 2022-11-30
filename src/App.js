@@ -1,3 +1,4 @@
+import React from 'react';
 import routes from './helper/routes';
 import bg from './BG.jpeg';
 import { RouterProvider } from 'react-router-dom';
@@ -8,7 +9,7 @@ import {
     Divider
 } from '@aws-amplify/ui-react';
 import GameCheckboxes from './components/game-checkboxes/GameCheckboxes';
-import { Auth, Storage, API } from 'aws-amplify';
+import { Auth, Storage } from 'aws-amplify';
 
 function App() {
     const router = routes();
@@ -89,23 +90,7 @@ function App() {
                         autoSignIn: {
                             enabled: true,
                         },
-                    })/* .then(async () => {
-                        const apiName = 'AdminQueries';
-                        const path = '/addUserToGroup';
-                        let myInit = { 
-                            body: {
-                                Groupname: 'Admin',
-                                Username: username,
-                                UserPoolId: 'us-east-1_gameon',
-                            },
-                            headers: {
-                                'Content-Type' : 'application/x-amz-json-1.1',
-                                Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
-                            }
-                        }
-                        const confirmation = await API.post(apiName, path, myInit);
-                        console.log(confirmation);
-                    }); */
+                    });
                 },
             }}
         >
