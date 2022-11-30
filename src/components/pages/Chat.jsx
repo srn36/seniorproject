@@ -5,22 +5,23 @@ let nextToken;
 
 async function listEditors(limit){
     let apiName = 'AdminQueries';
-    let path = '/listUsersInGroup';
+    let path = '/listUsers';
     let myInit = { 
-        queryStringParameters: {
-          "groupname": "all",
-          "limit": limit,
-          "token": nextToken
+        body: {
+            Filter: '',
+            Limit: 1000,
+            UserPoolId: 'us-east-1_gameon',
         },
         headers: {
-          'Content-Type' : 'application/json',
+          'Content-Type' : 'application/x-amz-json-1.1',
           Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
         }
     }
-    const { NextToken, ...rest } =  await API.get(apiName, path, myInit);
+    const { NextToken, ...rest } = await API.get(apiName, path, myInit);
     nextToken = NextToken;
+    console.log(rest);
     return rest;
-  }
+}
 
 
 function Chat(props) {

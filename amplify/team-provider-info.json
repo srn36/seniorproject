@@ -25,7 +25,9 @@
           "authRoleName": "Cognito_gameonidentityfinalAuth_Role",
           "unauthRoleArn": "arn:aws:iam::176100888834:role/Cognito_gameonidentityfinalUnauth_Role",
           "unauthRoleName": "Cognito_gameonidentityfinalUnauth_Role"
-        }
+        },
+        "seniorproject14ca21e814ca21e8": {},
+        "userPoolGroups": {}
       },
       "storage": {
         "gameonfd3fcbd9": {
@@ -44,6 +46,15 @@
           "appId": "dnt1v18cfp8hi",
           "type": "manual"
         }
+      },
+      "function": {
+        "AdminQueriesc41530f7": {
+          "deploymentBucketName": "amplify-seniorproject-dev-182601-deployment",
+          "s3Key": "amplify-builds/AdminQueriesc41530f7-5958674e79757739664b-build.zip"
+        }
+      },
+      "api": {
+        "AdminQueries": {}
       }
     }
   }
