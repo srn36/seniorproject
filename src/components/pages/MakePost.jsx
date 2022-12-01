@@ -8,9 +8,17 @@ function MakePost(props) {
     const [image, setImage] = useState(null);
     const date = new Date();
 
-    const onSubmit = (e) => {
-        e.preventDefault();     
-        const postData = {image: image, author: userInfo.username, time: date.getTime()};
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const postTime = date.getTime();
+        const postData = {key: `${userInfo.username}-${postTime}`, author: userInfo.username, time: postTime};
+        try {
+            await Storage.put(`${userInfo.username}-${postTime}`, image, {
+                contentType: 'image/png',
+            });
+        } catch (error) {
+            console.log('Error uploading file: ', error);
+        }
         console.log(postData);
     };
 
