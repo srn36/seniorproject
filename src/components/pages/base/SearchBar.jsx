@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Autocomplete, HighlightMatch, View } from '@aws-amplify/ui-react';
 import { Link } from 'react-router-dom';
 import { searchUsers } from '../../../helper/api-calls/cognito-access';
@@ -6,13 +6,21 @@ import { searchUsers } from '../../../helper/api-calls/cognito-access';
 function SearchBar(props) {
     const MIN_CHARS_FOR_QUERY = 3;
     const [queryText, setQueryText] = useState('');
-    const [results, setResults] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [userList, setuserList] = useState([]);
+
+    useEffect(() => {
+        async function fetchUserList() {
+            const users = (await searchUsers()).Users;
+            const errorFreeUsers = users.map(userResult => {
+                return {username: userResult.Username};
+            });
+            setuserList(errorFreeUsers);
+        };
+        fetchUserList();
+    }, []);
 
     const clearSearch = () => {
         setQueryText('');
-        setResults([]);
-        setLoading(false);
     };
 
     const renderOption = (option, value) => {
@@ -33,31 +41,11 @@ function SearchBar(props) {
     };
 
     const optionFilter = (option, value) => {
-        return option?.username?.includes(value);
+        return option?.username?.includes(value) && value.length >= MIN_CHARS_FOR_QUERY;
     };
 
     const handleInputChange = async (e) => {
-        const input = e.target.value;
-        setLoading(true);
-        setQueryText(input);
-        if(input.length >= MIN_CHARS_FOR_QUERY) {
-            try {
-                const queryResults = (await searchUsers(input)).Users;
-                const errorFreeResults = queryResults.map(userResult => {
-                    return {username: userResult.Username};
-                });
-                setResults(errorFreeResults);
-                setLoading(false);
-            } catch(e) {
-                setResults([]);
-                setLoading(false);
-                console.log('Error searching for users: ', e);
-            }
-        }
-        else {
-            setResults([]);
-            setLoading(false);
-        }
+        setQueryText(e.target.value);
     };
 
     return (
@@ -69,7 +57,7 @@ function SearchBar(props) {
                 onClear={clearSearch}
                 renderOption={renderOption}
                 optionFilter={optionFilter}
-                options={results}
+                options={userList}
                 onChange={handleInputChange}
                 menuSlots={{
                     Empty:  (queryText.length >= MIN_CHARS_FOR_QUERY ? 
@@ -78,7 +66,7 @@ function SearchBar(props) {
                             ),
                 }}
                 //disabled={loading}
-                isLoading={loading}
+                isLoading={!userList}
                 labelHidden
             />
         </div>
