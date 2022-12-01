@@ -20,14 +20,6 @@ function ChangeEmail({ email }) {
             placeholder='New Email'
             label='New Email'
             onChange={e => setNewEmail(e.target.value)}
-        />,
-        <TextField
-            key='Confirm New Email'
-            placeholder='Confirm New Email'
-            label='Confirm New Email'
-            onChange={e => setConfirmNewEmail(e.target.value)}
-            hasError={confirmNewEmail !== newEmail}
-            errorMessage='Must match new Email'
         />
     ];
 
@@ -50,7 +42,7 @@ function ChangeEmail({ email }) {
             fields={formFields}
             onSubmit={changeEmail}
             submitLabel='Change Email'
-            submitDisabled={!(newEmail.length > 0 && newEmail === confirmNewEmail && newEmail !== currentEmail)}
+            submitDisabled={!(newEmail.length > 0 && newEmail !== currentEmail)}
         />
     );
 }
