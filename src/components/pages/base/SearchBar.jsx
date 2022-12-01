@@ -65,7 +65,6 @@ function SearchBar(props) {
                                 <View>Username must be {`${MIN_CHARS_FOR_QUERY}`} characters long to get results</View>
                             ),
                 }}
-                //disabled={loading}
                 isLoading={!userList}
                 labelHidden
             />
