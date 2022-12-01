@@ -41,9 +41,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Only perform tasks if the user is in a specific group
-const allowedGroup = process.env.GROUP;
-
 const checkGroup = function (req, res, next) {
   next();
 };
