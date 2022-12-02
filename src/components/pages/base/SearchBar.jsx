@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import { searchUsers } from '../../../helper/api-calls/cognito-access';
 
 function SearchBar(props) {
-    const MIN_CHARS_FOR_QUERY = 3;
     const [queryText, setQueryText] = useState('');
-    const [userList, setuserList] = useState([]);
+    const [userList, setUserList] = useState([]);
 
     useEffect(() => {
         async function fetchUserList() {
@@ -14,11 +13,11 @@ function SearchBar(props) {
             const errorFreeUsers = users.map(userResult => {
                 return {username: userResult.Username};
             });
-            setuserList(errorFreeUsers);
+            setUserList(errorFreeUsers);
         };
         fetchUserList();
     }, []);
-
+    
     const clearSearch = () => {
         setQueryText('');
     };
@@ -41,7 +40,7 @@ function SearchBar(props) {
     };
 
     const optionFilter = (option, value) => {
-        return option?.username?.includes(value) && value.length >= MIN_CHARS_FOR_QUERY;
+        return option?.username?.includes(value) && value.length > 0;
     };
 
     const handleInputChange = async (e) => {
@@ -60,10 +59,7 @@ function SearchBar(props) {
                 options={userList}
                 onChange={handleInputChange}
                 menuSlots={{
-                    Empty:  (queryText.length >= MIN_CHARS_FOR_QUERY ? 
-                                <View>No matching users found</View> : 
-                                <View>Username must be {`${MIN_CHARS_FOR_QUERY}`} characters long to get results</View>
-                            ),
+                    Empty: ((queryText.length > 0) ? <View>No matching users found</View> : <View>Enter a username to find users</View>),
                 }}
                 isLoading={!userList}
                 labelHidden
