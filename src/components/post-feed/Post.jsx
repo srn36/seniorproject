@@ -9,7 +9,7 @@ function Post({ userInfo, post, preview = false }) {
     /* if(preview) {
         setPostURL(post.image);
     } else {
-       Storage.get(`${post.image}`).then(url =>
+       Storage.get(`${post.key}`).then(url =>
             setPostURL(url)
         ).catch(e => console.log('Error retrieving post: ', e)); 
     } */
@@ -17,6 +17,12 @@ function Post({ userInfo, post, preview = false }) {
     useEffect(() => {
         setPostURL(post.download_url || post.image);
     }, []);
+
+    const deletePost = async (_e) => {
+        const s3Key = post.key;
+        await Storage.remove(s3Key);
+        // Remove post from db
+    }
     
     return useMemo(() => {
         return (
@@ -24,7 +30,7 @@ function Post({ userInfo, post, preview = false }) {
             <div className='post'>
                 <img src={postURL} alt={post.author}/>
                 <Divider/>
-                <PostAuthorBar userInfo={userInfo} author={post.author} preview={preview}/>
+                <PostAuthorBar userInfo={userInfo} author={post.author} deletePost={deletePost} preview={preview}/>
             </div>
         );
     }, [postURL]);

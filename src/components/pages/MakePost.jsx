@@ -11,9 +11,11 @@ function MakePost(props) {
     const onSubmit = async (e) => {
         e.preventDefault();
         const postTime = date.getTime();
-        const postData = {key: `${userInfo.username}-${postTime}`, author: userInfo.username, time: postTime};
+        // Inculde a random integer in each post key to almost guarantee no key overlap
+        const randomKey = Math.floor(Math.random() * 1000) + 1;
+        const postData = {key: `${userInfo.username}-${postTime}-${randomKey}`, author: userInfo.username, time: postTime};
         try {
-            await Storage.put(`${userInfo.username}-${postTime}`, image, {
+            await Storage.put(postData.key, image, {
                 contentType: 'image/png',
             });
         } catch (error) {
@@ -32,7 +34,7 @@ function MakePost(props) {
         <div className='make-post'>
             <Card variation='elevated'>
                 <h3>Post Preview</h3>
-                <Post userInfo={userInfo} post={{image: image, author: (!!image ? userInfo.username : 'Upload an image')}} preview={true}/>
+                <Post userInfo={userInfo} post={{key: '', image: image, author: (!!image ? userInfo.username : 'Upload an image')}} preview={true}/>
             </Card>
             <form onSubmit={onSubmit}>      
                 <label>
