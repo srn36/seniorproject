@@ -1,15 +1,28 @@
-import React from 'react';
+/* eslint-disable */
+import React, { useEffect, useMemo, useState } from 'react';
 import PostAuthorBar from './PostAuthorBar';
 import { Divider } from '@aws-amplify/ui-react';
+import { Storage } from 'aws-amplify';
 
 function Post({ userInfo, post, preview = false }) {
-    return (
-        <div className='post'>
-            <img src={post.download_url || post.image} alt={post.author}/>
-            <Divider orientation='horizontal' style={{marginTop: '2px', marginTBottom: '2px'}}/>
-            <PostAuthorBar userInfo={userInfo} author={post.author} preview={preview}/>
-        </div>
-    );
+    const [postURL, setPostURL] = useState(null);
+    /* Storage.get(`${post.image}`).then(url =>
+        setPostURL(url)
+    ); */
+    useEffect(() => {
+        setPostURL(post.download_url || post.image);
+    }, []);
+    
+    return useMemo(() => {
+        return (
+            !!postURL &&
+            <div className='post'>
+                <img src={postURL} alt={post.author}/>
+                <Divider/>
+                <PostAuthorBar userInfo={userInfo} author={post.author} preview={preview}/>
+            </div>
+        );
+    }, [postURL]);
 }
 
 export default Post;
