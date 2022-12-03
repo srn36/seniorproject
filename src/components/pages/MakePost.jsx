@@ -34,10 +34,6 @@ function MakePost(props) {
         }
     };
 
-    const onCaptionChange = (e) => {
-        setCaption(e.target.value);
-    }
-
     return (
         <div className='make-post'>
             <Card variation='elevated'>
@@ -45,7 +41,7 @@ function MakePost(props) {
                 <Post 
                     userInfo={userInfo}
                     post={{key: '', image: previewPic, author: (!!previewPic ? userInfo.username : 'Upload an image')}}
-                    captionChange={onCaptionChange}
+                    captionChange={(e) => setCaption(e.target.value)}
                     preview={true}
                 />
             </Card>
