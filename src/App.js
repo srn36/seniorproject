@@ -72,8 +72,8 @@ function App() {
                     // Check that user is 13 years old
                     const birthdate = formData.birthdate || '';
                     const birthdateValid = validateBirthday(birthdate);
-                    if(!birthdateValid) {
-                        validateErrors['birthdate'] = 'You must be 13 years old or older';
+                    if(!(birthdateValid.valid)) {
+                        validateErrors['birthdate'] = `${birthdateValid.message}`;
                     }
                     
                     if (Object.keys(validateErrors).length > 0) {

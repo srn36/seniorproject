@@ -32,7 +32,7 @@ function ChangeBirthday({ birthdate }) {
             }}>
                 <button 
                     type='submit'
-                    disabled={!validateBirthday(birthday) || birthday === birthdate}
+                    disabled={!(validateBirthday(birthday).valid) || birthday === birthdate}
                 >
                     Update Birthday
                 </button>
