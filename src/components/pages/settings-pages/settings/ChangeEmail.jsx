@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { TextField } from '@aws-amplify/ui-react';
@@ -6,7 +5,6 @@ import SettingsForm from './SettingsForm';
 
 function ChangeEmail({ email }) {
     const [newEmail, setNewEmail] = useState('');
-    const [confirmNewEmail, setConfirmNewEmail] = useState('');
 
     const formFields = [
         <TextField
@@ -24,25 +22,23 @@ function ChangeEmail({ email }) {
     ];
 
     const changeEmail = async () => {
-        // REVERIFY EMAIL
-        const user = Auth.currentAuthenticatedUser();
-        Auth.veri
+        const user = await Auth.currentAuthenticatedUser();
         const updateAttributes = {email: newEmail};
-        Auth.updateUserAttributes(user, updateAttributes)/* .then( () =>
-            Auth.verifyCurrentUserAttribute('email')
-        ) */.then(() => {
+        Auth.updateUserAttributes(user, updateAttributes).then(async () =>
+            await Auth.verifyCurrentUserAttributeSubmit('email', window.prompt('Enter the confirmation code:'))
+        ).then(() => {
             window.alert('Email updated successfully');
             window.location.reload();
         }).catch(e => window.alert(`Error updating email: ${e}`));
     };
-    
+
     return (
         <SettingsForm
             title='Change Email'
             fields={formFields}
             onSubmit={changeEmail}
             submitLabel='Change Email'
-            submitDisabled={!(newEmail.length > 0 && newEmail !== currentEmail)}
+            submitDisabled={!(newEmail.length > 0 && newEmail !== email)}
         />
     );
 }

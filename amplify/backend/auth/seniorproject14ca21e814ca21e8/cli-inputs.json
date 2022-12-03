@@ -38,7 +38,8 @@
       "birthdate",
       "email",
       "family_name",
-      "given_name"
+      "given_name",
+      "email_verified"
     ],
     "userpoolClientLambdaRole": "senior14ca21e8_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": true,
