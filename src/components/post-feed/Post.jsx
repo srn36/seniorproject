@@ -6,9 +6,14 @@ import { Storage } from 'aws-amplify';
 
 function Post({ userInfo, post, preview = false }) {
     const [postURL, setPostURL] = useState(null);
-    /* Storage.get(`${post.image}`).then(url =>
-        setPostURL(url)
-    ); */
+    /* if(preview) {
+        setPostURL(post.image);
+    } else {
+       Storage.get(`${post.image}`).then(url =>
+            setPostURL(url)
+        ).catch(e => console.log('Error retrieving post: ', e)); 
+    } */
+    
     useEffect(() => {
         setPostURL(post.download_url || post.image);
     }, []);
