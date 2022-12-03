@@ -63,7 +63,6 @@ function ProfileBase(props) {
 
 
 function ProfileHeadline({ username, userInfo, isOwnProfile, friends, profilePic }) {
-
     const relationshipBasedFriendButton = {
         'Already Friends': <RemoveButton userInfo={userInfo} username={username}/>,
         'Outgoing': <button disabled={true}>Requested</button>,
