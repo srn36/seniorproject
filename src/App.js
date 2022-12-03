@@ -8,8 +8,10 @@ import {
     useAuthenticator,
     Divider
 } from '@aws-amplify/ui-react';
-import GameCheckboxes from './components/game-checkboxes/GameCheckboxes';
+import GameCheckboxes from './components/signup-components/game-checkboxes/GameCheckboxes';
 import { Auth, Storage } from 'aws-amplify';
+import PrivacySelection from './components/signup-components/PrivacySelection';
+import ProfilePictureUpload from './components/signup-components/ProfilePictureUpload';
 
 function App() {
     const router = routes();
@@ -30,12 +32,10 @@ function App() {
                             <>
                                 <Authenticator.SignUp.FormFields/>
                                 <Divider/>
-                                <input
-                                    type='file'
-                                    accept='image/*'
-                                    onChange={onImageChange}
-                                />
-                                <Divider/>                    
+                                <ProfilePictureUpload onImageChange={onImageChange}/>
+                                <Divider/>
+                                <PrivacySelection/>
+                                <Divider/>                   
                                 <GameCheckboxes validationErrors={validationErrors}/>
                             </>
                         );
@@ -73,8 +73,7 @@ function App() {
                 },
                 async handleSignUp(formData) {
                     let { username, password, attributes } = formData;
-                    attributes['custom:privacy'] = 'Private';
-                    attributes['custom:bio'] = 'Bio';
+                    attributes['custom:bio'] = '';
                     const profilePicKey = `${username}-profilepic`;
                     
                     return await Storage.put(profilePicKey, pictureFile, {

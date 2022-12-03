@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { CheckboxField, Flex } from '@aws-amplify/ui-react';
-import { games } from '../../helper/game-selection';
+import { games } from '../../../helper/game-selection';
 import CheckboxLabel from './CheckboxLabel';
-import { Dropdown } from 'react-bootstrap';
 
 function GameCheckboxes({ validationErrors }) {
     
@@ -30,7 +29,6 @@ function GameCheckboxes({ validationErrors }) {
  
         return (
             <React.Fragment key={index}>
-                <Dropdown.Divider/>
                 <CheckboxField
                     className='checkbox'
                     errorMessage={errorMessage}
@@ -55,9 +53,8 @@ function GameCheckboxes({ validationErrors }) {
 
     return (
         <>
-            <hr/>
             <h3>Select Games</h3>
-            <Flex direction='column' gap='0'>
+            <Flex direction='column' gap='3px'>
                 {checkboxesFromGames}
             </Flex>
         </>

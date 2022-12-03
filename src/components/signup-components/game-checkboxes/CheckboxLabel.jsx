@@ -1,7 +1,7 @@
 import { CheckboxField } from '@aws-amplify/ui-react';
 import React from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { consoles } from '../../helper/game-selection';
+import { consoles } from '../../../helper/game-selection';
 
 function optionStringToConsoles(optionString) {
     if(optionString.length !== consoles.length) {
