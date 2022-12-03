@@ -12,6 +12,7 @@ import GameCheckboxes from './components/signup-components/game-checkboxes/GameC
 import { Auth, Storage } from 'aws-amplify';
 import PrivacySelection from './components/signup-components/PrivacySelection';
 import ProfilePictureUpload from './components/signup-components/ProfilePictureUpload';
+import { validateBirthday } from './helper/birthdate-validation';
 
 function App() {
     const router = routes();
@@ -66,7 +67,15 @@ function App() {
                             validateErrors[gameTitle] = `You must select at least one console for ${gameTitle}`;
                         }
                     });
+                    
 
+                    // Check that user is 13 years old
+                    const birthdate = formData.birthdate || '';
+                    const birthdateValid = validateBirthday(birthdate);
+                    if(!birthdateValid) {
+                        validateErrors['birthdate'] = 'You must be 13 years old or older';
+                    }
+                    
                     if (Object.keys(validateErrors).length > 0) {
                         return validateErrors;
                     }
