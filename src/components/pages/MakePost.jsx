@@ -58,11 +58,9 @@ function MakePost(props) {
                 <label>
                     <input type='file' name='upload' accept='image/*' onChange={onImageChange}/>  
                 </label>
-                <div>
-                    <button className='upload-button' type='submit' disabled={!image}>
-                        Upload Post
-                    </button>
-                </div>            
+                <button className='upload-button' type='submit' disabled={!image}>
+                    Upload Post
+                </button>          
             </form>
         </div>
     );

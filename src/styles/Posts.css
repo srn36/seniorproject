@@ -83,4 +83,6 @@
 
 .upload-button {
     margin-top: 16px;
+    width: max-content;
+    align-self: center;
 }
