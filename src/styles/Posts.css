@@ -3,7 +3,7 @@
     flex-direction: column;
     border: 1px solid #dbdbdb;
     margin-bottom: 1.5rem;
-    background-color: white;
+    background-color: #FFFFFF;
     color:#212529;
 }
 
@@ -13,16 +13,19 @@
 }
 
 .post img {
-    height: 300px;
+    max-height: 600px;
     width: 500px;
-    object-fit: scale-down;
+    display: flex;
+    flex-grow: 5;
+    flex-shrink: 5;
+    object-fit: contain;
 }
 
 .post .amplify-textarea {
     border: none;
 }
 
-.post .preview-false {
+.post .caption {
     pointer-events: none;
     overflow-y: hidden;
     border: none;
@@ -31,12 +34,29 @@
     height: calc(40px + 0.5vw);
 }
 
-.post .preview-true {
+.post .caption-preview {
     overflow-y: hidden;
     border: none;
     text-align: left;
     font-size: calc(8px + 0.5vw);
     height: calc(40px + 0.5vw);
+}
+
+.amplify-card.post-loader {
+    width: 500px;
+    height: 500px;
+    border: 1px solid #dbdbdb;
+    margin-bottom: 1.5rem;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.amplify-card.post-loader .spin {
+    width: 100px;
+    height: 100px;
 }
 
 .author-bar-false {

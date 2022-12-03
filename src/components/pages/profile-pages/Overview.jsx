@@ -17,9 +17,9 @@ function Overview(props) {
             <h3>Overview</h3>
             <div className='overview'>
                 <TextField
-                label='Name:'
-                defaultValue={name}
-                disabled 
+                    label='Name:'
+                    defaultValue={name}
+                    disabled 
                 />
                 <TextAreaField
                     label='Bio:'

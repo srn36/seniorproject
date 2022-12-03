@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Card } from '@aws-amplify/ui-react';
-import Post from '../post-feed/Post';
 import { Storage } from 'aws-amplify';
+import PostPreview from '../post-feed/PostPreview';
 
 function MakePost(props) {
     const {userInfo} = useOutletContext();
@@ -43,7 +43,7 @@ function MakePost(props) {
         <div className='make-post'>
             <Card variation='elevated'>
                 <h3>Post Preview</h3>
-                <Post 
+                <PostPreview 
                     userInfo={userInfo}
                     post={{
                         key: '',
@@ -51,7 +51,6 @@ function MakePost(props) {
                         author: (!!previewPic ? userInfo.username : 'Upload an image')
                     }}
                     captionChange={(e) => setCaption(e.target.value)}
-                    preview={true}
                 />
             </Card>
             <form onSubmit={onSubmit}>      

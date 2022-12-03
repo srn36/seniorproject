@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import PostAuthorBar from './PostAuthorBar';
-import { Divider, TextAreaField } from '@aws-amplify/ui-react';
+import { 
+    Card, 
+    Divider, 
+    Loader, 
+    TextAreaField 
+} from '@aws-amplify/ui-react';
 import { Storage } from 'aws-amplify';
 
-function Post({ userInfo, post, preview = false, captionChange = () => {} }) {
-    const [postURL, setPostURL] = useState();
-    const [postContent, setPostContent] = useState();
-
-    useEffect(() => {
-        const fetchPost = async () => {
-            if(preview) {
-                setPostURL(post.image);
-            } else {
-                setPostURL(await Storage.get(`${post.key}`)); 
-            }
-        }
-        fetchPost();
-    }, [post, preview]);
-    
-    /* useEffect(() => {
-        setPostURL(post.download_url || post.image);
-    }, [post]); */
+function Post({ userInfo, post }) {
+    const [postContent, setPostContent] = useState(
+        <Card
+            className='post-loader'
+        >
+            <Loader
+                className='spin'
+                scale='large'
+            />
+        </Card>
+    );
 
     useEffect(() => {
         const deletePost = async (_e) => {
@@ -29,27 +27,43 @@ function Post({ userInfo, post, preview = false, captionChange = () => {} }) {
             // Remove post from db
             setPostContent();
         }
-    
-        setPostContent(
-            <div className='post'>
-                <img src={postURL} alt={post.author}/>
-                <Divider/>
-                <PostAuthorBar userInfo={userInfo} author={post.author} deletePost={deletePost} preview={preview}/>
-                <Divider/>
-                <TextAreaField
-                    className={`preview-${preview}`}
-                    label='caption'
-                    placeholder='Enter caption'
-                    defaultValue={post.caption}
-                    onChange={captionChange}
-                    maxLength={50}
-                    rows={1}
-                    labelHidden
-                />
-            </div>
-        );
-        // eslint-disable-next-line
-    }, [postURL]);
+
+        const setContent = async () => {
+            let postURL = '';
+
+            if(post.key && post.key.length > 0) {
+                postURL = (await Storage.get(`${post.key}`));
+            } else {
+                postURL = post.download_url;
+                // TEXT POST
+            }
+
+            setPostContent(
+                <div className='post'>
+                    <img src={postURL} alt={post.author}/>
+                    <Divider/>
+                    <PostAuthorBar userInfo={userInfo} author={post.author} deletePost={deletePost} preview={false}/>
+                    {
+                        !!post.caption && 
+                        post.caption.length > 0 &&
+                        <>
+                            <Divider/>
+                            <TextAreaField
+                                className='caption'
+                                label='caption'
+                                defaultValue={post.caption}
+                                maxLength={50}
+                                rows={1}
+                                labelHidden
+                            />
+                        </>
+                    }
+                </div>
+            );
+        }
+
+        setContent();
+    }, [userInfo, post]);
     
     return postContent;        
 }
