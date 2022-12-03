@@ -59,7 +59,7 @@ function routes() {
         path: 'settings',
         element: <SettingsPageBase/>,
         children: [
-            {index: true, element: <Navigate to='account'/>},
+            {index: true, element: <Navigate to='profile'/>},
             {path: 'account', element: <AccountSettings/>},
             {path: 'profile', element: <ProfileSettings/>},
         ],

@@ -6,7 +6,7 @@ function SettingsPageBase(props) {
     const {userInfo} = useOutletContext();
     
     return(
-        <PageWithNavTabs  tabs={['Account', 'Profile']}>
+        <PageWithNavTabs  tabs={['Profile', 'Account']}>
             <Outlet context={{userInfo: userInfo, username: userInfo.username, attributes: userInfo.attributes}}/>
         </PageWithNavTabs>
     );
