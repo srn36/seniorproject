@@ -58,7 +58,7 @@ function NavigationDropdown({ userInfo, signOut }) {
         <DropdownButton id='dropdown-basic-button' title='Navigation'>
             {dropdownTabs}
             <Dropdown.Divider/>
-            <button onClick={signOut} className='dropdown-item'>Log Out</button>
+            <button onClick={() => {signOut(); navigate('/');}} className='dropdown-item'>Log Out</button>
         </DropdownButton>
     );
 }

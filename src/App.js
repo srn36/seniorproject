@@ -76,20 +76,20 @@ function App() {
                     attributes['custom:privacy'] = 'Private';
                     attributes['custom:bio'] = 'Bio';
                     const profilePicKey = `${username}-profilepic`;
-                    try {
-                        await Storage.put(profilePicKey, pictureFile, {
-                            contentType: 'image/png',
-                        });
-                    } catch (error) {
-                        console.log('Error uploading file: ', error);
-                    }
-                    return Auth.signUp({
-                        username,
-                        password,
-                        attributes,
-                        autoSignIn: {
-                            enabled: true,
-                        },
+                    
+                    return await Storage.put(profilePicKey, pictureFile, {
+                        contentType: 'image/png',
+                    }).then(async () => 
+                        await Auth.signUp({
+                            username,
+                            password,
+                            attributes,
+                            autoSignIn: {
+                                enabled: true,
+                            }
+                        })
+                    ).catch((error) => {
+                        console.log('Error signing up: ', error);
                     });
                 },
             }}
