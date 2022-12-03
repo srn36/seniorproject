@@ -37,7 +37,7 @@ function ChangePassword(props) {
     const changePassword = () => {
         Auth.currentAuthenticatedUser().then(async user => {
             return await Auth.changePassword(user, oldPassword, newPassword);
-        }).then(data => {
+        }).then(() => {
             window.alert('Password updated successfully');
             window.location.reload();
         }).catch(e => window.alert(`Error updating password: ${e}`));
