@@ -47,7 +47,7 @@ function ProfileBase(props) {
         };
 
         return (
-            <PageWithNavTabs tabs={['Posts', 'Friends', 'Games']}>
+            <PageWithNavTabs tabs={['Overview', 'Posts', 'Friends']}>
                     <ProfileHeadline
                         username={username}
                         userInfo={userInfo}

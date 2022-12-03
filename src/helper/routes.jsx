@@ -13,7 +13,7 @@ import MakePost from '../components/pages/MakePost';
 // Profile imports
 import ProfileBase from '../components/pages/profile-pages/ProfileBase';
 import Posts from '../components/pages/profile-pages/Posts';
-import Games from '../components/pages/profile-pages/Games';
+import Overview from '../components/pages/profile-pages/Overview';
 import Friends from '../components/pages/profile-pages/Friends';
 
 // Settings imports
@@ -48,9 +48,9 @@ function routes() {
             }
         },
         children: [
-            {index: true, element: <Navigate to='posts'/>},
+            {index: true, element: <Navigate to='overview'/>},
             {path: 'posts', element: <Posts/>},
-            {path: 'games', element: <Games/>},
+            {path: 'overview', element: <Overview/>},
             {path: 'friends', element: <Friends/>}
         ],
     };
