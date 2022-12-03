@@ -19,12 +19,10 @@ function Overview(props) {
                 <TextField
                     label='Name:'
                     defaultValue={name}
-                    disabled 
                 />
                 <TextAreaField
                     label='Bio:'
                     defaultValue={bio}
-                    disabled
                 />
             </div>
             <Divider/>
