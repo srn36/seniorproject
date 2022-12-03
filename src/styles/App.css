@@ -131,8 +131,13 @@ button:not(.dropdown-toggle,.tab-button):hover:enabled, input[type='file']::file
     bottom: 0;
 }
 
-.App-link {
-    color: #61dafb;
+.container {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 @media (prefers-reduced-motion: no-preference) {
