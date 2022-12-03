@@ -6,7 +6,7 @@ import ChangePrivacy from './settings/ChangePrivacy';
 import { useOutletContext } from 'react-router-dom';
 
 function AccountSettings(props) {
-    const {attributes} = useOutletContext();
+    const {username, attributes} = useOutletContext();
     const {email} = attributes;
     const privacy = attributes['custom:privacy'];
 
@@ -16,7 +16,7 @@ function AccountSettings(props) {
             <ChangePassword/>
             <ChangeEmail email={email}/>
             <ChangePrivacy currentPrivacy={privacy}/>
-            <DeleteAccount/>
+            <DeleteAccount username={username}/>
         </div>
     );
 }
