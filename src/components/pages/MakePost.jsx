@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Card } from '@aws-amplify/ui-react';
 import Post from '../post-feed/Post';
+import { Storage } from 'aws-amplify';
 
 function MakePost(props) {
     const {userInfo} = useOutletContext();
     const [image, setImage] = useState(null);
+    const [previewPic, setPreviewPic] = useState(null)
     const date = new Date();
 
     const onSubmit = async (e) => {
@@ -26,7 +28,8 @@ function MakePost(props) {
 
     const onImageChange = (e) => {
         if (e.target.files && e.target.files[0]) {
-            setImage(URL.createObjectURL(e.target.files[0]));
+            setImage(e.target.files[0]);
+            setPreviewPic(URL.createObjectURL(e.target.files[0]))
         }
     };
 
@@ -34,7 +37,7 @@ function MakePost(props) {
         <div className='make-post'>
             <Card variation='elevated'>
                 <h3>Post Preview</h3>
-                <Post userInfo={userInfo} post={{key: '', image: image, author: (!!image ? userInfo.username : 'Upload an image')}} preview={true}/>
+                <Post userInfo={userInfo} post={{key: '', image: previewPic, author: (!!previewPic ? userInfo.username : 'Upload an image')}} preview={true}/>
             </Card>
             <form onSubmit={onSubmit}>      
                 <label>

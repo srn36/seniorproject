@@ -1,22 +1,25 @@
 /* eslint-disable */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PostAuthorBar from './PostAuthorBar';
 import { Divider } from '@aws-amplify/ui-react';
 import { Storage } from 'aws-amplify';
 
 function Post({ userInfo, post, preview = false }) {
-    const [postURL, setPostURL] = useState(null);
-    /* if(preview) {
-        setPostURL(post.image);
-    } else {
-       Storage.get(`${post.key}`).then(url =>
-            setPostURL(url)
-        ).catch(e => console.log('Error retrieving post: ', e)); 
-    } */
+    const [postURL, setPostURL] = useState();
+    /* useEffect(() => {
+        const fetchPost = async () => {
+            if(preview) {
+                setPostURL(post.image);
+            } else {
+                setPostURL(await Storage.get(`${post.key}`)); 
+            }
+        }
+        fetchPost();
+    }, [post]); */
     
     useEffect(() => {
         setPostURL(post.download_url || post.image);
-    }, []);
+    }, [post]);
 
     const deletePost = async (_e) => {
         const s3Key = post.key;
@@ -24,16 +27,14 @@ function Post({ userInfo, post, preview = false }) {
         // Remove post from db
     }
     
-    return useMemo(() => {
-        return (
-            !!postURL &&
-            <div className='post'>
-                <img src={postURL} alt={post.author}/>
-                <Divider/>
-                <PostAuthorBar userInfo={userInfo} author={post.author} deletePost={deletePost} preview={preview}/>
-            </div>
-        );
-    }, [postURL]);
+    return (
+        <div className='post'>
+            <img src={postURL} alt={post.author}/>
+            <Divider/>
+            <PostAuthorBar userInfo={userInfo} author={post.author} deletePost={deletePost} preview={preview}/>
+        </div>
+    )
+        
 }
 
 export default Post;
