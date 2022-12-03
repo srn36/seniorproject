@@ -7,7 +7,7 @@ function SettingsPageBase(props) {
     
     return(
         <PageWithNavTabs  tabs={['Account', 'Profile']}>
-            <Outlet context={{username: userInfo.username, attributes: userInfo.attributes}}/>
+            <Outlet context={{userInfo: userInfo, username: userInfo.username, attributes: userInfo.attributes}}/>
         </PageWithNavTabs>
     );
 }
