@@ -15,7 +15,28 @@
 .post img {
     height: 300px;
     width: 500px;
-    object-fit: cover;
+    object-fit: scale-down;
+}
+
+.post .amplify-textarea {
+    border: none;
+}
+
+.post .preview-false {
+    pointer-events: none;
+    overflow-y: hidden;
+    border: none;
+    text-align: left;
+    font-size: calc(8px + 0.5vw);
+    height: calc(40px + 0.5vw);
+}
+
+.post .preview-true {
+    overflow-y: hidden;
+    border: none;
+    text-align: left;
+    font-size: calc(8px + 0.5vw);
+    height: calc(40px + 0.5vw);
 }
 
 .author-bar-false {

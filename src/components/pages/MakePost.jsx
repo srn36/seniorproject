@@ -7,7 +7,8 @@ import { Storage } from 'aws-amplify';
 function MakePost(props) {
     const {userInfo} = useOutletContext();
     const [image, setImage] = useState(null);
-    const [previewPic, setPreviewPic] = useState(null)
+    const [previewPic, setPreviewPic] = useState(null);
+    const [caption, setCaption] = useState('');
     const date = new Date();
 
     const onSubmit = async (e) => {
@@ -15,7 +16,7 @@ function MakePost(props) {
         const postTime = date.getTime();
         // Inculde a random integer in each post key to almost guarantee no key overlap
         const randomKey = Math.floor(Math.random() * 1000) + 1;
-        const postData = {key: `${userInfo.username}-${postTime}-${randomKey}`, author: userInfo.username, time: postTime};
+        const postData = {key: `${userInfo.username}-${postTime}-${randomKey}`, author: userInfo.username, time: postTime, caption: caption};
         try {
             await Storage.put(postData.key, image, {
                 contentType: 'image/png',
@@ -33,11 +34,20 @@ function MakePost(props) {
         }
     };
 
+    const onCaptionChange = (e) => {
+        setCaption(e.target.value);
+    }
+
     return (
         <div className='make-post'>
             <Card variation='elevated'>
                 <h3>Post Preview</h3>
-                <Post userInfo={userInfo} post={{key: '', image: previewPic, author: (!!previewPic ? userInfo.username : 'Upload an image')}} preview={true}/>
+                <Post 
+                    userInfo={userInfo}
+                    post={{key: '', image: previewPic, author: (!!previewPic ? userInfo.username : 'Upload an image')}}
+                    captionChange={onCaptionChange}
+                    preview={true}
+                />
             </Card>
             <form onSubmit={onSubmit}>      
                 <label>

@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import PostAuthorBar from './PostAuthorBar';
-import { Divider } from '@aws-amplify/ui-react';
+import { Divider, TextAreaField } from '@aws-amplify/ui-react';
 import { Storage } from 'aws-amplify';
 
-function Post({ userInfo, post, preview = false }) {
+function Post({ userInfo, post, preview = false, captionChange = () => {} }) {
     const [postURL, setPostURL] = useState();
-    /* useEffect(() => {
+    useEffect(() => {
         const fetchPost = async () => {
             if(preview) {
                 setPostURL(post.image);
@@ -15,11 +15,11 @@ function Post({ userInfo, post, preview = false }) {
             }
         }
         fetchPost();
-    }, [post]); */
-    
-    useEffect(() => {
-        setPostURL(post.download_url || post.image);
     }, [post]);
+    
+    /* useEffect(() => {
+        setPostURL(post.download_url || post.image);
+    }, [post]); */
 
     const deletePost = async (_e) => {
         const s3Key = post.key;
@@ -32,6 +32,17 @@ function Post({ userInfo, post, preview = false }) {
             <img src={postURL} alt={post.author}/>
             <Divider/>
             <PostAuthorBar userInfo={userInfo} author={post.author} deletePost={deletePost} preview={preview}/>
+            <Divider/>
+            <TextAreaField
+                className={`preview-${preview}`}
+                label='caption'
+                placeholder='Enter caption'
+                defaultValue={post.caption}
+                onChange={captionChange}
+                maxLength={50}
+                rows={1}
+                labelHidden
+            />
         </div>
     )
         
