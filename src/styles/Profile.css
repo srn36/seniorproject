@@ -3,7 +3,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 60%;
+    width: 80%;
+    margin-top: 8px;
 }
 
 .profile-headline img {
@@ -19,7 +20,7 @@
 }
 
 .profile-overview {
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
