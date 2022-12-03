@@ -32,14 +32,18 @@
       "birthdate",
       "email",
       "family_name",
-      "given_name"
+      "given_name",
+      "custom:bio",
+      "custom:privacy"
     ],
     "userpoolClientReadAttributes": [
       "birthdate",
       "email",
       "family_name",
       "given_name",
-      "email_verified"
+      "email_verified",
+      "custom:bio",
+      "custom:privacy"
     ],
     "userpoolClientLambdaRole": "senior14ca21e8_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": true,
