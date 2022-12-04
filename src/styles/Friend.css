@@ -68,12 +68,13 @@
     width: 100%;
 }
 
-.filter {
+.list-header {
     height: 38px;
     width: 80%;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     background-color: #FFFFFF;
     color:#212529;
     padding: 0.5rem 0.5rem;
@@ -81,10 +82,19 @@
     border-style: solid;
 }
 
-.filter p {
-    margin-bottom: 0px;
-    margin-right: 0.5em;
+.list-header span {
+    display: flex;
+    flex-direction: row;
+    align-items: inherit;
+}
+
+.list-header p {
+    margin: 0 0.5em;
     font-weight: bold;
+}
+
+.list-header hr:not([size]) {
+    height: calc(38px - 1rem);
 }
 
 button.accept, button.reject, button.request, button.remove {
