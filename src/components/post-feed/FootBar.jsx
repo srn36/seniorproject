@@ -30,9 +30,7 @@ function FootBar() {
                         className='return'
                         onClick={_e => window.scrollTo(0, 0)}
                         Icon={AiOutlineArrowUp}
-                    >
-                        Return to top
-                    </IconButton>
+                    />
                 }
             </div>
         );

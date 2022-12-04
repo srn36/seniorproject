@@ -137,14 +137,26 @@ button:not(.dropdown-toggle,.tab-button):hover:enabled, input[type='file']::file
     scrollbar-width: none;  /* Firefox */
 }
 
-.icon-button {
+.icon-button-false {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #FFFFFF;
     border-radius: 50%;
     padding: 5px 6px;
+    border: 1px solid #dbdbdb;
+    width: max-content;
+}
+
+.icon-button-true {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    border-radius: 25% / 50%;
+    padding: 5px calc(6px + 1ch);
     border: 1px solid #dbdbdb;
     width: max-content;
 }

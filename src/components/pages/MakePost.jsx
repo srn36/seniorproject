@@ -3,6 +3,8 @@ import { useOutletContext } from 'react-router-dom';
 import { Card } from '@aws-amplify/ui-react';
 import { Storage } from 'aws-amplify';
 import PostPreview from '../post-feed/PostPreview';
+import IconButton from '../helper/IconButton';
+import { MdUpload } from 'react-icons/md';
 
 function MakePost(props) {
     const {userInfo} = useOutletContext();
@@ -64,9 +66,14 @@ function MakePost(props) {
                 <label>
                     <input type='file' name='upload' accept='image/*' onChange={onImageChange}/>  
                 </label>
-                <button className='upload-button' type='submit' disabled={!image}>
-                    Upload Post
-                </button>          
+                <IconButton 
+                    className='upload-button'
+                    type='submit' 
+                    disabled={!image}
+                    Icon={MdUpload}
+                >
+                    Upload
+                </IconButton>
             </form>
         </div>
     );
