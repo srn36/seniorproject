@@ -48,7 +48,7 @@ export const validateBirthday = (birthday) => {
     // Age check
     if(year >= currentYear - 13) {
         // Check if the user turned 13 this year
-        if(year === currentYear - 13 && month <= currentMonth && day <= currentDay) {
+        if(year === currentYear - 13 && (month < currentMonth || (month === currentMonth && day <= currentDay))) {
             return {valid: true, message: ''};
         }
         return {valid: false, message: 'You must be 13 years old or older'};
