@@ -33,17 +33,6 @@
     background-color:#e9ecef
 }
 
-.friend span {
-    display: flex;
-    flex-direction: row;
-}
-
-.friend img {
-    height: 2em;
-    width: 2em;
-    object-fit: cover;
-}
-
 .friend p {
     margin-top: 0px;
     margin-bottom: 0px;

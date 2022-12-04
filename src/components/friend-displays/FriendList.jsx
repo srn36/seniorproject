@@ -1,95 +1,114 @@
-import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
+import React, { useMemo, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import FriendRow from './FriendRow';
 import { Table } from 'react-bootstrap';
 import { Divider } from '@aws-amplify/ui-react';
 
 function reducer(state, action) {
-    if (action.type === 'remove_row') {
-        if(state.friends[0]) {
-            const nameField = (state.friends[0].fromUsername && 
-                                state.friends[0].fromUsername.length > 0) ? 
-                                    'fromUsername' : 'username';
-            return {
-                friends: state.friends.filter(friend => friend[nameField] !== action.username)
-            };
-        } else {
-            return {
-                friends: state.friends
-            }
-        }
+    if(action.type === 'remove_row') {
+        // TODO: Send request to DB and only run the following on success
+
+        const updatedList = state.friends.filter(friend => friend[state.nameField] !== action.username);
+        const updatedTable = state.friendTable.filter(friend => friend.props.username !== action.username);
+        const updatedRows = updatedTable.filter(friend => friend.props.username.includes(state.filterText));
+
+        return {
+            nameField: state.nameField,
+            friends: updatedList,
+            friendTable: updatedTable,
+            tableRows: updatedRows,
+            filterText: state.filterText
+        };
+    } else if(action.type === 'filter_rows') {
+        return {
+            nameField: state.nameField,
+            friends: state.friends,
+            friendTable: state.friendTable,
+            tableRows: state.friendTable.filter(friend => friend.props.username.includes(action.filterText)),
+            filterText: action.filterText
+        };
     }
     throw Error('Unknown action.');
 }
 
 function FriendList({ friends, userInfo, ...props }) {
     const {type} = props;
-    const [state, dispatch] = useReducer(reducer, {friends: friends});
-    const [friendTable, setFriendTable] = useState([]);
-    const [tableRows, setTableRows] = useState([]);
-    const [filterText, setFilterText] = useState('');
-    
-    //Convert the full friend list to rows of the table based on the type of table requested
-    useEffect(() => {
-        const friendRowMap = state.friends.map(friend => {
-            const friendUsername = (type === 'Requests') ? friend.fromUsername : friend.username;
-            return (
-                <FriendRow
-                    key={friendUsername}
-                    username={friendUsername}
-                    profilePic={friend.profilePic}
-                    userInfo={userInfo}
-                    rowType={type}
-                    onDeleteRow={(name) => {dispatch({type: 'remove_row', username: name});}}
-                />
-            );
-        });
-        setFriendTable(friendRowMap);
-    }, [state.friends, userInfo, type]);
+    const nameField = (type === 'Requests') ? 'fromUsername' : 'username';
 
-    /**
-     * Filter the rows of the table to only show results 
-     * which include <text> within their username field.
-     * Updates the displayed table rows after filtering.
-     * 
-     * Executes each time filter text is changed or the
-     * master (unfiltered) FriendRow table changes.
-     */
-    useEffect(() => {
-        const filter = (text) => {
-            setTableRows(
-                friendTable.filter(friend => friend.props.username.includes(text))
-            );
-        }
-        filter(filterText);
-    }, [filterText, friendTable]);
+    const [state, dispatch] = useReducer(reducer, {
+        nameField: nameField,
+        friends: friends,
+        friendTable: (
+            (Object.values(friends).length > 0) ?
+                friends.map(friend => {
+                    const friendUsername = friend[nameField];
+                    return (
+                        <FriendRow
+                            key={friendUsername}
+                            username={friendUsername}
+                            profilePic={friend.profilePic}
+                            userInfo={userInfo}
+                            rowType={type}
+                            deleteRow={(name) => dispatch({type: 'remove_row', username: name})}
+                        />
+                    );
+                })
+                :
+                []
+        ),
+        tableRows: [],
+        filterText: ''
+    });
 
     return useMemo(() => {
+        const noFriends = (type === 'Requests' || type === 'Recommendations') ? ` ${type}` : 's';
+
         return (
             <>
-                <div className='list-header'>
+                <div 
+                    className='list-header'
+                    style={
+                        (Object.values(state.friends).length === 0) ? 
+                            {pointerEvents: 'none'}
+                            :
+                            {}
+                    }
+                >
                     <span>
                         <p>Filter List:</p>
-                        <input type='text' onChange={e => setFilterText(e.target.value)}/>
+                        <input type='text' onChange={e => {dispatch({type: 'filter_rows', filterText: e.target.value});}}/>
                     </span>
                     <span>
-                        <p>Filtered Total: {!!(tableRows?.length) ? tableRows.length : 0}</p>
+                        <p>Filtered Total: {(state.filterText.length > 0) ? state.tableRows.length : state.friendTable.length}</p>
                         <Divider orientation='vertical'/>
-                        <p>Overall Total: {!!(friendTable?.length) ? friendTable.length : 0}</p>
+                        <p>Overall Total: {state.friendTable.length}</p>
                     </span>
                 </div>
                 <div className={`friend-list-${type}`}>
                     <Table bordered hover>
                         <tbody>
                             {
-                                (tableRows?.length > 0) ? tableRows : <tr><td><p>No Results</p></td></tr>
+                                (state.friendTable.length === 0) ? 
+                                    <tr style={{pointerEvents: 'none'}}><td><p>{`User Has No Friend${noFriends}`}</p></td></tr>
+                                    :
+                                    (
+                                        (state.tableRows.length > 0) ? 
+                                            state.tableRows 
+                                            :
+                                            (
+                                                (state.filterText.length > 0) ?
+                                                    <tr style={{pointerEvents: 'none'}}><td><p>No Results</p></td></tr>
+                                                    :
+                                                    state.friendTable
+                                            )
+                                    )
                             }
                         </tbody>
                     </Table>
                 </div>
             </>
         );
-    }, [type, tableRows, friendTable]);
+    }, [type, state]);
 }
 
 FriendList.propTypes = {
