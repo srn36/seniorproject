@@ -127,13 +127,26 @@ button:not(.dropdown-toggle,.tab-button):hover:enabled, input[type='file']::file
 
 .return {
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: 30%;
+    bottom: 8px;
+    font-size: calc(30px + 2vmin);
 }
 
 .container {
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;  /* Firefox */
+}
+
+.icon-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    padding: 5px 6px;
+    border: 1px solid #dbdbdb;
+    width: max-content;
 }
 
 ::-webkit-scrollbar { 

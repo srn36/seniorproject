@@ -1,4 +1,6 @@
 import React, { useMemo, useState } from 'react';
+import { AiOutlineArrowUp } from 'react-icons/ai';
+import IconButton from '../helper/IconButton';
 
 function FootBar() {
     const halfHeight = window.innerHeight / 2;
@@ -24,7 +26,13 @@ function FootBar() {
         return (
             <div className='App-footer'>
                 {showButton &&
-                    <button className='return' onClick={_e => window.scrollTo(0, 0)}>Return to top</button>
+                    <IconButton 
+                        className='return'
+                        onClick={_e => window.scrollTo(0, 0)}
+                        Icon={AiOutlineArrowUp}
+                    >
+                        Return to top
+                    </IconButton>
                 }
             </div>
         );
