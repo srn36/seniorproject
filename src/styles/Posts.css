@@ -53,6 +53,7 @@
 
 .post .amplify-textarea {
     border: none;
+    border-radius: unset;
 }
 
 .post .caption {
@@ -66,10 +67,14 @@
 
 .post .caption-preview {
     overflow-y: hidden;
-    border: none;
     text-align: left;
     font-size: calc(8px + 0.5vw);
     height: calc(40px + 0.5vw);
+}
+
+.post .caption-preview textarea {
+    border: none;
+    border-radius: unset;
 }
 
 .amplify-card.post-loader {
