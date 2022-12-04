@@ -2,10 +2,17 @@ import React from 'react';
 
 function IconButton({ Icon, children, ...props }) {
     const spanProps = {...props};
+
     let onClick = () => {};
     if(!!spanProps.onClick) {
         onClick = spanProps.onClick;
         delete spanProps.onClick;
+    }
+
+    let disable = false;
+    if(spanProps.disabled) {
+        disable = spanProps.disabled;
+        delete spanProps.disabled;
     }
 
     return (
@@ -20,6 +27,7 @@ function IconButton({ Icon, children, ...props }) {
             <button 
                 className={`icon-button-${!!children}`}
                 onClick={onClick}
+                disabled={disable}
             >
                 <Icon/>
                 {!!children && children}
