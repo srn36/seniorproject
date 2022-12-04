@@ -17,13 +17,13 @@ export function useFriendsForUser(username) {
             response.json()
         ).then(data => 
             setResults({loading: false, error: null, data: data})
-        ).catch( e => {
+        ).catch(e => {
             console.log(e.message);
             return setResults({loading: false, error: e, data: null});
         });
         */
         const mockData = [
-            {key: 'Friend 1', username: 'Friend 1', profilePic: mockPFP},
+            {key: 'Friend 1', username: 'test', profilePic: mockPFP},
             {key: 'Friend 2', username: 'Friend 2', profilePic: mockPFP},
             {key: 'Friend 3', username: 'Friend 3', profilePic: mockPFP},
             {key: 'Friend 4', username: 'Friend 4', profilePic: mockPFP},

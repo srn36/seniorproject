@@ -25,11 +25,22 @@ function ProfileBase(props) {
     const friendList = useFriendsForUser(username);
     const navigate = useNavigate();
 
+    // Redirect to the error page if the requested profile page belongs to a nonexistent user
     useEffect(() => {
         if(redirect) {
             navigate('error');
         }
     }, [redirect, navigate]);
+
+    // Determine if the current user should be allowed to view this profile page
+    const pageViewable = useMemo(() => {
+        const privacy = attributes.filter(attr => attr.Name === 'custom:privacy')[0].Value.toLowerCase();
+        const isFriend =    Array.isArray(friendList.data) ? 
+                                friendList.data.filter(friend => friend.username === userInfo.username).length > 0 
+                                :
+                                false; //TODO: Revisit friendship check
+        return (privacy === 'public' || isFriend);
+    }, [attributes, friendList, userInfo.username]);
 
     return useMemo(() => {
         const friends = Array.isArray(friendList.data) ? friendList.data : [];
@@ -55,10 +66,15 @@ function ProfileBase(props) {
                         friends={friends}
                         profilePic={profilePic}
                     />
-                    <Outlet context={outletContext}/>
+                    {
+                        pageViewable ?
+                            <Outlet context={outletContext}/>
+                            :
+                            `This profile is private. Only ${username}'s friends can view it.`
+                    }
             </PageWithNavTabs>
         );
-    }, [username, friendList, userInfo, profilePic, attributes]);
+    }, [username, friendList, userInfo, profilePic, attributes, pageViewable]);
 }
 
 
@@ -73,6 +89,7 @@ function ProfileHeadline({ username, userInfo, isOwnProfile, friends, profilePic
         'None': <AddButton userInfo={userInfo} username={username}/>
     }
 
+    //TODO: Revisit friendship check
     const friendButtonKey = (isOwnProfile ? 
         undefined
         :
