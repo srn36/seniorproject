@@ -37,7 +37,7 @@ function MakePost(props) {
     const onImageChange = (e) => {
         if (e.target.files && e.target.files[0]) {
             setImage(e.target.files[0]);
-            setPreviewPic(URL.createObjectURL(e.target.files[0]))
+            setPreviewPic(URL.createObjectURL(e.target.files[0]));
         }
     };
 

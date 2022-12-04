@@ -46,7 +46,7 @@ function App() {
             services={{
                 async validateCustomSignUp(formData) {
                     const selectedGames = Object.keys(formData).filter(dataKey => formData[dataKey] === 'game-selected');
-                    const selectedConsoles = Object.keys(formData).filter(dataKey => formData[dataKey] === 'console-selected')
+                    const selectedConsoles = Object.keys(formData).filter(dataKey => formData[dataKey] === 'console-selected');
                     const gameToInfoMap = {};
                     const validateErrors = selectedGames.length > 0 ? {} : {game: 'You must select at least one game'};
 
