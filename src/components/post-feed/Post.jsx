@@ -7,6 +7,7 @@ import {
     TextAreaField 
 } from '@aws-amplify/ui-react';
 import { Storage } from 'aws-amplify';
+import { RiDeleteBin2Line } from 'react-icons/ri';
 
 function Post({ userInfo, post }) {
     const [postContent, setPostContent] = useState(
@@ -39,25 +40,35 @@ function Post({ userInfo, post }) {
             }
 
             setPostContent(
-                <div className='post'>
-                    <img src={postURL} alt={post.author}/>
-                    <Divider/>
-                    <PostAuthorBar userInfo={userInfo} author={post.author} deletePost={deletePost} preview={false}/>
+                <div className='post-container'>
                     {
-                        !!post.caption && 
-                        post.caption.length > 0 &&
-                        <>
-                            <Divider/>
-                            <TextAreaField
-                                className='caption'
-                                label='caption'
-                                defaultValue={post.caption}
-                                maxLength={50}
-                                rows={1}
-                                labelHidden
-                            />
-                        </>
+                        (userInfo.username === post.author) &&
+                        <div className='delete-post'>
+                            <button onClick={deletePost}>
+                                <RiDeleteBin2Line/>
+                            </button>
+                        </div>
                     }
+                    <div className='post'>
+                        <img src={postURL} alt={post.author}/>
+                        <Divider/>
+                        <PostAuthorBar userInfo={userInfo} author={post.author} deletePost={deletePost} time={post.time} preview={false}/>
+                        {
+                            !!post.caption && 
+                            post.caption.length > 0 &&
+                            <>
+                                <Divider/>
+                                <TextAreaField
+                                    className='caption'
+                                    label='caption'
+                                    defaultValue={post.caption}
+                                    maxLength={50}
+                                    rows={1}
+                                    labelHidden
+                                />
+                            </>
+                        }
+                    </div>
                 </div>
             );
         }

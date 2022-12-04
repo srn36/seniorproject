@@ -2,13 +2,13 @@ import React from 'react';
 import PostAuthorBar from './PostAuthorBar';
 import { Divider, TextAreaField } from '@aws-amplify/ui-react';
 
-function PostPreview({ userInfo, post, captionChange }) {
+function PostPreview({ post, captionChange }) {
     
     return (
         <div className='post'>
             <img src={post.image} alt={post.author}/>
             <Divider/>
-            <PostAuthorBar userInfo={userInfo} author={post.author} deletePost={() => {}} preview={true}/>
+            <PostAuthorBar author={post.author} preview={true}/>
             <Divider/>
             <TextAreaField
                 className='caption-preview'

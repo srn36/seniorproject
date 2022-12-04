@@ -6,7 +6,7 @@ import Post from '../post-feed/Post';
 
 function Chat(props) {
     const {userInfo} = useOutletContext();
-    const postInfo = {key: 'test-1670103409542-793', author: 'test', time: 1670103409542, caption: 'fsidbuisvlfdbva'}
+    const postInfo = {key: 'test-1670113549379-437', author: 'test', time: 1670113549379, caption: ''}
     return (
         <>
             <h4>Chat Page</h4>

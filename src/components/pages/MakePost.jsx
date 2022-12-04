@@ -41,18 +41,25 @@ function MakePost(props) {
 
     return (
         <div className='make-post'>
-            <Card variation='elevated'>
-                <h3>Post Preview</h3>
-                <PostPreview 
-                    userInfo={userInfo}
-                    post={{
-                        key: '',
-                        image: previewPic,
-                        author: (!!previewPic ? userInfo.username : 'Upload an image')
-                    }}
-                    captionChange={(e) => setCaption(e.target.value)}
-                />
-            </Card>
+            {
+                !!previewPic ? 
+                    <Card variation='elevated'>
+                        <h3>Post Preview</h3>
+                        <PostPreview 
+                            userInfo={userInfo}
+                            post={{
+                                key: '',
+                                image: previewPic,
+                                author: userInfo.username
+                            }}
+                            captionChange={(e) => setCaption(e.target.value)}
+                        />
+                    </Card>
+                    : 
+                    <Card className='upload'>
+                        <p>Upload an image</p>
+                    </Card>
+            }
             <form onSubmit={onSubmit}>      
                 <label>
                     <input type='file' name='upload' accept='image/*' onChange={onImageChange}/>  

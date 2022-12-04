@@ -1,9 +1,39 @@
+.post-container {
+    position: relative;
+}
+
+.delete-post {
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: visible;
+}
+
+.delete-post button {
+    display: flex;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 10;
+    border-radius: calc(20px + 0.5vw);
+    font-size: calc(16px + 0.5vw);
+    border: 1px solid #dbdbdb22;
+    background-color: #FFFFFF66;
+    padding: 5px 6px;
+    width: max-content;
+    height: min-content;
+}
+
+.delete-post button:hover svg, .delete-post button:active svg, .delete-post button:focus svg {
+    fill: red;
+}
+
 .post {
     display: flex;
     flex-direction: column;
     border: 1px solid #dbdbdb;
-    margin-bottom: 1.5rem;
     background-color: #FFFFFF;
+    margin-bottom: 1.5rem;
     color:#212529;
 }
 
@@ -79,6 +109,16 @@
 .author-bar-false a, .author-bar-true a {
     text-decoration: none;
     color:#212529;
+}
+
+.make-post div.amplify-card.upload {
+    height: 500px;
+    width: 500px;
+    border: 1px solid #dbdbdb;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .make-post {
