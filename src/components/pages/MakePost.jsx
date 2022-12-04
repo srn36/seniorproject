@@ -43,7 +43,7 @@ function MakePost(props) {
         <div className='make-post'>
             {
                 !!previewPic ? 
-                    <Card variation='elevated'>
+                    <Card>
                         <h3>Post Preview</h3>
                         <PostPreview 
                             userInfo={userInfo}
