@@ -37,8 +37,15 @@
     width: 80%;
 }
 
+.profile-overview .overview .amplify-flex {
+    gap: unset;
+    justify-content: flex-start;
+}
+
 .profile-overview .overview .amplify-label {
     color: inherit;
+    font-size: calc(1.2 * var(--amplify-components-fieldcontrol-font-size));
+    text-decoration: underline;
     margin-top: 8px;
 }
 
@@ -47,4 +54,5 @@
     background-color: transparent;
     padding: 0px;
     border: none;
+    margin-bottom: 16px;
 }

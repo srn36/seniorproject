@@ -17,11 +17,11 @@ function Overview(props) {
             <h3>Overview</h3>
             <div className='overview'>
                 <TextField
-                    label='Name:'
+                    label='Name'
                     defaultValue={name}
                 />
                 <TextAreaField
-                    label='Bio:'
+                    label='Bio'
                     defaultValue={bio}
                 />
             </div>
