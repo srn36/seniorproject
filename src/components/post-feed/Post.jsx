@@ -23,10 +23,12 @@ function Post({ userInfo, post }) {
 
     useEffect(() => {
         const deletePost = async (_e) => {
-            const s3Key = post.key;
-            await Storage.remove(s3Key);
-            // Remove post from db
-            setPostContent();
+            if(window.confirm('Delete post?')) {
+                const s3Key = post.key;
+                await Storage.remove(s3Key);
+                // Remove post from db
+                setPostContent();
+            }    
         }
 
         const setContent = async () => {
