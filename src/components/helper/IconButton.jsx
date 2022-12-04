@@ -2,6 +2,7 @@ import React from 'react';
 
 function IconButton({ Icon, children, ...props }) {
     const spanProps = {...props};
+    const hasChildren = !!children;
 
     let onClick = () => {};
     if(!!spanProps.onClick) {
@@ -20,17 +21,17 @@ function IconButton({ Icon, children, ...props }) {
             style={{
                 background: 'transparent',
                 border: 'none',
-                borderRadius: !!children ? '25% / 50%' : '50%',
+                borderRadius: hasChildren ? '25% / 50%' : '50%',
             }}
             {...spanProps}
         >
             <button 
-                className={`icon-button-${!!children}`}
+                className={`icon-button-${hasChildren}`}
                 onClick={onClick}
                 disabled={disable}
             >
                 <Icon/>
-                {!!children && children}
+                {hasChildren && children}
             </button>
         </span>
     );
