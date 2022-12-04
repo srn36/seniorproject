@@ -38,7 +38,8 @@ function routes() {
         path: 'profile/:username',
         element: <ProfileBase/>,
         loader: async ({ params }) => {
-            try{
+            try {
+                // Load attributes and profile picture of target user to display on profile page
                 const attributes = (await getUser(params.username)).UserAttributes;
                 const profilePic = await Storage.get(`${params.username}-profilepic`);
                 return {attributes, profilePic, redirect: false};
