@@ -80,6 +80,8 @@
 .list-header p {
     margin: 0 0.5em;
     font-weight: bold;
+    max-height: 38px;
+    font-size: 1.15vw;
 }
 
 .list-header hr:not([size]) {
@@ -107,4 +109,27 @@ button.remove:hover:not(:disabled), button.remove:focus:not(:disabled), button.r
     background-color: crimson;
     border-color: darkred;
     color: #FFFFFF;
+}
+
+button div.label-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: inherit;
+}
+
+button div.label-container .f-button-loader {
+    position: absolute;
+    z-index: 5;
+    width: 2ch;
+    height: 2ch;
+    font-size: inherit;
+    stroke: #8d8f91;
+}
+
+button div.label-container .f-button-loader g circle {
+    stroke-width: 15%;
 }

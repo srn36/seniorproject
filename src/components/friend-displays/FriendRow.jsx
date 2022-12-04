@@ -11,7 +11,6 @@ import {
 function FriendRow({ username, profilePic, userInfo, deleteRow, ...props}) {
     const rowType = props.rowType;
 
-    //TODO: Implement DB interaction
     const rowButtons = {
         'Standard': null,
         'Removable': <RemoveButton userInfo={userInfo} username={username} onClick={() => deleteRow(username)}/>,
