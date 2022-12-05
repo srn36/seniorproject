@@ -84,21 +84,38 @@ function App() {
                     let { username, password, attributes } = formData;
                     attributes['custom:bio'] = '';
                     const profilePicKey = `${username}-profilepic`;
-                    
-                    return await Storage.put(profilePicKey, pictureFile, {
-                        contentType: 'image/png',
-                    }).then(async () => 
-                        await Auth.signUp({
+                    const signUpRequests = [
+                        Storage.put(profilePicKey, pictureFile, {
+                            contentType: 'image/png',
+                        }),
+                        Auth.signUp({
                             username,
                             password,
                             attributes,
                             autoSignIn: {
                                 enabled: true,
                             }
-                        })
-                    ).catch((error) => {
-                        console.log('Error signing up: ', error);
+                        }),
+                        Promise.resolve('backend') //TODO: Real call to backend
+                    ];
+                    const { results, retry } = Promise.allSettled(signUpRequests).then(values => {
+                        const nextTry = Object.keys(values).map(respKey => 
+                            (values[respKey].status === 'rejected') ? 
+                                signUpRequests[respKey] 
+                                : values[respKey].value
+                        );
+                        return {values, nextTry};
                     });
+                    if(Object.values(retry).length === 0) {
+                        // No need to retry any requests if all succeed
+                        return results[1].value;
+                    } else {
+                        return Promise.allSettled(retry).then(values =>
+                            values[1].value
+                        ).catch(e => 
+                            window.alert(`Error signing up for site: ` + e)
+                        );
+                    }
                 },
             }}
         >
