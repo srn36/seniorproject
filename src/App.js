@@ -84,29 +84,21 @@ function App() {
                     let { username, password, attributes } = formData;
                     attributes['custom:bio'] = '';
                     const profilePicKey = `${username}-profilepic`;
-                    const signUpRequests = [
-                        Storage.put(profilePicKey, pictureFile, {
-                            contentType: 'image/png',
-                        }),
-                        Auth.signUp({
+                    
+                    return await Storage.put(profilePicKey, pictureFile, {
+                        contentType: 'image/png',
+                    }).then(async () => 
+                        await Auth.signUp({
                             username,
                             password,
                             attributes,
                             autoSignIn: {
                                 enabled: true,
                             }
-                        }),
-                        Promise.resolve('backend') //TODO: Real call to backend
-                    ];
-                    const { results, retry } = Promise.allSettled(signUpRequests).then((values) => {
-                        const nextTry = Object.keys(values).map(respKey => (values[respKey].status === 'rejected') ? signUpRequests[respKey] : values[respKey]);
-                        return {values, nextTry};
+                        })
+                    ).catch((error) => {
+                        console.log('Error signing up: ', error);
                     });
-                    if(Object.values(retry).length === 0) {
-                        return results[1].value;
-                    } else {
-                        // IDK I'm fuzzy in the head
-                    }
                 },
             }}
         >
