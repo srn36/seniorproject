@@ -5,7 +5,6 @@ import Post from './Post';
 import FootBar from './FootBar';
 
 function Feed({ fetchForUsername, userInfo, fetchFunction }) {
-    const fakeFetch = () => [];
     const fetchPosts = async (pageParam) => {
         const results = await fetchFunction(fetchForUsername, pageParam);
         return { results, nextPage: pageParam + 1, totalPages: 100 };
