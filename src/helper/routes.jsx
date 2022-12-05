@@ -42,9 +42,8 @@ function routes() {
                 // Load attributes and profile picture of target user to display on profile page
                 const attributes = (await getUser(params.username)).UserAttributes;
                 const profilePic = await Storage.get(`${params.username}-profilepic`);
-                return {attributes, profilePic, redirect: false};
+                return {attributes: attributes, profilePic: profilePic, redirect: false};
             } catch(e) {
-                console.clear();
                 return {attributes: [], profilePic: '', redirect: true};
             }
         },
