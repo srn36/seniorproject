@@ -26,7 +26,7 @@ function Post({ userInfo, post }) {
             if(window.confirm('Delete post?')) {
                 const s3Key = post.key;
                 await Storage.remove(s3Key);
-                // Remove post from db
+                //TODO: Remove post from db
                 setPostContent();
             }    
         }
