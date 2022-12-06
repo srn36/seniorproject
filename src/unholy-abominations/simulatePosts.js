@@ -30,7 +30,7 @@ function getPostsKeysForUser(username) {
             const s3Key = `${username}-posts.txt`;
             const reader = new FileReader();
             reader.onloadend = function() {
-                const postKeys = reader.result.split('\n');
+                const postKeys = reader.result.split('\n').filter(postKey => postKey.length > 0);
                 resolve((postKeys[0] === '' && postKeys.length === 1) ? [] : postKeys);
             };
             const s3url = await Storage.get(s3Key);
