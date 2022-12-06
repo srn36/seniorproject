@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { searchUsers } from '../../helper/api-calls/cognito-access';
-import { getPostsKeysForUser } from '../../unholy-abominations/simulatePosts';
+import { getPostsForUser, getPostsKeysForUser } from '../../unholy-abominations/simulatePosts';
 import { AcceptButton, AddButton, RejectButton, RemoveButton } from '../helper/friend-buttons';
 import Post from '../post-feed/Post';
 
@@ -40,20 +40,7 @@ function Chat(props) {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const postKeys = (await getPostsKeysForUser(userInfo.username));
-            console.log(postKeys);
-            const results = postKeys.map(pKey => {
-                const firstSpace = pKey.indexOf(' ');
-                let postData = {};
-                if(firstSpace > -1) {
-                    const postKey = pKey.substring(0, firstSpace);
-                    const caption = pKey.substring(firstSpace + 1);
-                    postData = {key: postKey, caption: caption};
-                } else {
-                    postData = {key: pKey};
-                }
-                return <Post key={pKey} userInfo={userInfo} post={postData}/>
-            });
+            const results = await getPostsForUser(userInfo, 'public');
             setPosts(results);
         };
 

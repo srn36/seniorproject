@@ -24,7 +24,6 @@ function ProfileBase(props) {
     const friendList = useFriendsForUser(username);
     const navigate = useNavigate();
 
-    console.log(redirect);
     // Redirect to the error page if the requested profile page belongs to a nonexistent user
     useEffect(() => {
         if(redirect) {
@@ -69,7 +68,7 @@ function ProfileBase(props) {
                             profilePic={profilePic}
                         />
                         {
-                            pageViewable ?
+                            (isOwnProfile || pageViewable) ?
                                 <Outlet context={outletContext}/>
                                 :
                                 `This profile is private. Only ${username}'s friends can view it.`

@@ -95,10 +95,10 @@ function App() {
                         biography: ''
                     }
 
+                    const postsBlob = new Blob([], {type: 'text/plain'});
+                    const postsFile = new File([postsBlob], `${username}-posts.txt`, {type: 'text/plain'});
+
                     const signUpRequests = [
-                        Storage.put(profilePicKey, pictureFile, {
-                            contentType: 'image/png',
-                        }),
                         Auth.signUp({
                             username,
                             password,
@@ -106,6 +106,12 @@ function App() {
                             autoSignIn: {
                                 enabled: true,
                             }
+                        }),
+                        Storage.put(profilePicKey, pictureFile, {
+                            contentType: 'image/png',
+                        }),
+                        Storage.put(`${username}-posts.txt`, postsFile, {
+                            contentType: 'text/plain',
                         }),
                         Promise.resolve(backendAttributes) //TODO: Real call to backend
                     ];
@@ -124,7 +130,7 @@ function App() {
                          * so there is no cost to always running this
                          */
                         return Promise.allSettled(retry).then(values =>
-                            values[1].value
+                            values[0].value
                         ).catch(e => 
                             window.alert(`Error signing up for site: ` + e)
                         );

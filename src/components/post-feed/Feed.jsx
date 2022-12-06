@@ -1,13 +1,12 @@
 import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
-import Post from './Post';
 import FootBar from './FootBar';
 
-function Feed({ fetchForUsername, userInfo, fetchFunction }) {
+function Feed({ userInfo, username, fetchFunction }) {
     const fetchPosts = async (pageParam) => {
-        const results = await fetchFunction(fetchForUsername, pageParam);
-        return { results, nextPage: pageParam + 1, totalPages: 100 };
+        const results = await fetchFunction(userInfo, username);
+        return { results, nextPage: pageParam + 1, totalPages: 1 };
     };
 
     const {
@@ -32,7 +31,7 @@ function Feed({ fetchForUsername, userInfo, fetchFunction }) {
                             <>
                                 <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
                                     {data.pages.map((page) =>
-                                        page.results.map((post) => <Post post={post} userInfo={userInfo} key={post.id}/>)
+                                        page.results
                                     )}
                                 </InfiniteScroll>
                                 <FootBar/>

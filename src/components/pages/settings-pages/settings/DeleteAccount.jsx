@@ -11,6 +11,7 @@ function DeleteAccount({ username }) {
         if(window.confirm('Delete your account?')) {
             const deleteRequests = [
                 Storage.remove(`${username}-profilepic`),
+                Storage.remove(`${username}-posts.txt`),
                 Auth.deleteUser(),
                 'backend' //TODO: Real call to backend
             ];

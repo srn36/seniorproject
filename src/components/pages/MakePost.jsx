@@ -26,12 +26,12 @@ function MakePost(props) {
             caption: caption
         };
         try{
-            await Storage.put(postData.key, image, {
+            await Storage.put(postData.s3key, image, {
                 contentType: 'image/png',
             });
             await uploadPost(postData);
             window.alert('Post successfully uploaded!');
-            window.location.reload();
+            //window.location.reload();
         } catch(error) {
             window.alert(`Error making post: ${error}`);
         }
@@ -42,7 +42,6 @@ function MakePost(props) {
         if (e.target.files && e.target.files[0]) {
             setImage(e.target.files[0]);
             setPreviewPic(URL.createObjectURL(e.target.files[0]));
-            console.log(e.target.files[0]);
         }
     };
 
