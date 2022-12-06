@@ -5,9 +5,9 @@ import Feed from '../post-feed/Feed';
 
 function Home(props) {
     const {userInfo} = useOutletContext();
-
+    
     return (
-        <Feed userInfo={userInfo} fetchForUsername={userInfo.username} fetchFunction={fetchFeedForUser}/>
+        <Feed userInfo={userInfo} username={userInfo.username} fetchFunction={fetchFeedForUser}/>
     );
 }
 

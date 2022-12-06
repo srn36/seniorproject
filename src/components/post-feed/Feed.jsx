@@ -5,7 +5,7 @@ import FootBar from './FootBar';
 
 function Feed({ userInfo, username, fetchFunction }) {
     const fetchPosts = async (pageParam) => {
-        const results = await fetchFunction(userInfo, username);
+        const results = await fetchFunction(userInfo, username, pageParam);
         return { results, nextPage: pageParam + 1, totalPages: 1 };
     };
 

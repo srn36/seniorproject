@@ -1,3 +1,4 @@
+import Post from '../../components/post-feed/Post';
 import mockPFP from '../../logo192.png';
 
 export /*async*/ function fetchProfileInfoForUser(username) {
@@ -43,7 +44,7 @@ export /*async*/ function fetchFriendsForUser(username) {
     return mockFriendList;
 }
 
-export async function fetchFeedForUser(username, pageParam) {
+export async function fetchFeedForUser(userInfo, username, pageParam=1) {
     /*
     return fetch('token? to feed service', {
         method: 'POST',
@@ -67,33 +68,8 @@ export async function fetchFeedForUser(username, pageParam) {
         }
     ).then(response => 
         response.json()
-    );
-}
-
-export async function fetchUserPosts(username, pageParam) {
-    /*
-    return fetch('username? to posts service', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({'username': username})
-    }).then(data => 
-        data.json()
-    );
-    */
-    console.log(`fetching ${username}'s posts`);
-    return fetch(
-    //This is just an api which provides images to use as sample posts
-        `https://picsum.photos/v2/list?page=${pageParam}&limit=10`, 
-        {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    ).then(response => 
-        response.json()
+    ).then(json => 
+        json.map((post) => <Post post={post} userInfo={userInfo} key={post.id}/>)
     );
 }
 
