@@ -32,14 +32,7 @@ function Post({ userInfo, post }) {
         }
 
         const setContent = async () => {
-            let postURL = '';
-
-            if(post.key && post.key.length > 0) {
-                postURL = (await Storage.get(`${post.key}`));
-            } else {
-                postURL = post.download_url;
-                // TEXT POST
-            }
+            const postURL = (post.key && post.key.length > 0) ? (await Storage.get(`${post.key}`)) : post.download_url;
 
             setPostContent(
                 <div className='post-container'>
