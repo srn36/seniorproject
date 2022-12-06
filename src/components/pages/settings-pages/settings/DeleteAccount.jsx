@@ -2,6 +2,7 @@ import React from 'react';
 import { Auth, Storage } from 'aws-amplify';
 import SettingsForm from './SettingsForm';
 import { useNavigate } from 'react-router-dom';
+import { safeDelete } from '../../../../unholy-abominations/simulateFriends';
 
 function DeleteAccount({ username }) {
     const navigate = useNavigate();
@@ -12,9 +13,13 @@ function DeleteAccount({ username }) {
             const deleteRequests = [
                 Storage.remove(`${username}-profilepic`),
                 Storage.remove(`${username}-posts.txt`),
-                Storage.remove(`${username}-friends.txt`),
-                Storage.remove(`${username}-incoming.txt`),
-                Storage.remove(`${username}-outgoing.txt`),
+                safeDelete(username).then(async () => {
+                    return await Promise.all([
+                        Storage.remove(`${username}-friends.txt`),
+                        Storage.remove(`${username}-incoming.txt`),
+                        Storage.remove(`${username}-outgoing.txt`)
+                    ]);
+                }),
                 Auth.deleteUser(),
                 'backend' //TODO: Real call to backend
             ];

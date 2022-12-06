@@ -1,12 +1,6 @@
 /* Here be dragons */
 
 import { Storage } from 'aws-amplify';
-import { searchUsers } from '../helper/api-calls/cognito-access';
-
-async function validateUserList(listNames) {
-    const existingUsers = (await searchUsers()).Users.map(userResult => userResult.Username);
-    return listNames.filter(name => existingUsers.includes(name));
-}
 
 function getListForUser(username, list = 'friends') {
     return new Promise(async (resolve) => {
@@ -14,9 +8,8 @@ function getListForUser(username, list = 'friends') {
             const s3Key = `${username}-${list}.txt`;
             const reader = new FileReader();
             reader.onloadend = async function() {
-                const listNames = reader.result.split('\n');
-                const validatedList = await validateUserList(listNames);
-                resolve(validatedList);
+                const listNames = reader.result.split('\n').filter(entry => entry.length > 0);
+                resolve(listNames);
             };
             const s3url = await Storage.get(s3Key);
             const response = await fetch(s3url);
@@ -24,7 +17,7 @@ function getListForUser(username, list = 'friends') {
             const nameFile = new File([nameListBlob], s3Key, {type: 'text/plain'});
             reader.readAsText(nameFile);
         } catch(error) {
-            console.log('Error retrieving post keys: ', error);
+            console.log('Error retrieving list: ', error);
             resolve([]);
         }
     });
@@ -193,4 +186,15 @@ export async function declineFriendRequest(toUsername, fromUsername) {
 
 export async function removeFriend(username, friendName) {
    return await updateFriendshipList(username, friendName, 'friends', 'remove');
+}
+
+export async function safeDelete(username) {
+    const friends = await getListForUser(username, 'friends');
+    await Promise.all(friends.map(friend => updateFriendshipList(username, friend, 'friends', 'remove')));
+
+    const incoming = await getListForUser(username, 'incoming');
+    await Promise.all(incoming.map(request => updateFriendshipList(username, request, 'requests', 'remove')));
+
+    const outgoing = await getListForUser(username, 'outgoing');
+    await Promise.all(outgoing.map(request => updateFriendshipList(request, username, 'requests', 'remove')));
 }
