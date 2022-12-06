@@ -83,7 +83,19 @@ function App() {
                 async handleSignUp(formData) {
                     let { username, password, attributes } = formData;
                     attributes['custom:bio'] = '';
+
                     const profilePicKey = `${username}-profilepic`;
+                    // eslint-disable-next-line
+                    const backendAttributes = {
+                        username: username,
+                        password: password,
+                        email: attributes['email'],
+                        birthday: attributes['birthdate'],
+                        firstname: attributes['first_name'],
+                        lastname: attributes['given_name'],
+                        biography: ''
+                    }
+
                     const signUpRequests = [
                         Storage.put(profilePicKey, pictureFile, {
                             contentType: 'image/png',
