@@ -14,9 +14,11 @@ export function AcceptButton({ userInfo, username, ...props }) {
                 if(window.confirm(`Accept ${username}'s request?`)) {
                     setWaiting(true);
                     //TODO: Send request to DB
-                    await acceptFriendRequest(userInfo.username, username);
+                    await acceptFriendRequest(userInfo.username, username).catch(error => {
+                        window.alert(`Error: ${error}`);
+                        setWaiting(false);
+                    });
                     props?.onClick();
-                    setWaiting(false);
                 }
             }}
             disabled={waiting}
@@ -49,9 +51,11 @@ export function RejectButton({ userInfo, username, ...props }) {
                 if(window.confirm(`Reject ${username}'s request?`)) {
                     setWaiting(true);
                     //TODO: Send request to DB
-                    await declineFriendRequest(userInfo.username, username);
+                    await declineFriendRequest(userInfo.username, username).catch(error => {
+                        window.alert(`Error: ${error}`);
+                        setWaiting(false);
+                    });
                     props?.onClick();
-                    setWaiting(false); 
                 }                               
             }}
             disabled={waiting}
@@ -84,9 +88,11 @@ export function AddButton({ userInfo, username, ...props }) {
                 if(window.confirm(`Send friend request to ${username}?`)) {
                     setWaiting(true);
                     //TODO: Send request to DB
-                    await sendFriendRequest(username, userInfo.username);
+                    await sendFriendRequest(username, userInfo.username).catch(error => {
+                        window.alert(`Error: ${error}`);
+                        setWaiting(false);
+                    });
                     props?.onClick();
-                    setWaiting(false);
                 }
             }}
             disabled={waiting}
@@ -119,9 +125,11 @@ export function RemoveButton({ userInfo, username, ...props }) {
                 if(window.confirm(`Remove ${username} from friends?`)) {
                     setWaiting(true);
                     //TODO: Send request to DB
-                    await removeFriend(userInfo.username, username);
+                    await removeFriend(userInfo.username, username).catch(error => {
+                        window.alert(`Error: ${error}`);
+                        setWaiting(false);
+                    });
                     props?.onClick();
-                    setWaiting(false);
                 }
             }}
             disabled={waiting}
