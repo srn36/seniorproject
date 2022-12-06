@@ -5,7 +5,6 @@ import { searchUsers } from '../helper/api-calls/cognito-access';
 
 async function validateUserList(listNames) {
     const existingUsers = (await searchUsers()).Users.map(userResult => userResult.Username);
-    console.log(existingUsers)
     return listNames.filter(name => existingUsers.includes(name));
 }
 
