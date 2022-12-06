@@ -1,15 +1,23 @@
 /* Here be dragons */
 
 import { Storage } from 'aws-amplify';
+import { searchUsers } from '../helper/api-calls/cognito-access';
+
+async function validateUserList(listNames) {
+    const existingUsers = (await searchUsers()).Users.map(userResult => userResult.Username);
+    console.log(existingUsers)
+    return listNames.filter(name => existingUsers.includes(name));
+}
 
 function getListForUser(username, list = 'friends') {
     return new Promise(async (resolve) => {
         try {
             const s3Key = `${username}-${list}.txt`;
             const reader = new FileReader();
-            reader.onloadend = function() {
+            reader.onloadend = async function() {
                 const listNames = reader.result.split('\n');
-                resolve((listNames[0] === '' && listNames.length === 1) ? [] : listNames);
+                const validatedList = await validateUserList(listNames);
+                resolve(validatedList);
             };
             const s3url = await Storage.get(s3Key);
             const response = await fetch(s3url);

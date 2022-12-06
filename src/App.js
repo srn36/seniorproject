@@ -95,8 +95,15 @@ function App() {
                         biography: ''
                     }
 
+                    // File for logging user posts
                     const postsBlob = new Blob([], {type: 'text/plain'});
                     const postsFile = new File([postsBlob], `${username}-posts.txt`, {type: 'text/plain'});
+
+                    // Files for logging user's friends, incoming requests, and outgoing requests
+                    const emptyBlob = new Blob([''], {type: 'text/plain'});
+                    const friends = new File([emptyBlob], `${username}-friends.txt`, {type: 'text/plain'});
+                    const incoming = new File([emptyBlob], `${username}-incoming.txt`, {type: 'text/plain'});
+                    const outgoing = new File([emptyBlob], `${username}-outgoing.txt`, {type: 'text/plain'});
 
                     const signUpRequests = [
                         Auth.signUp({
@@ -111,6 +118,15 @@ function App() {
                             contentType: 'image/png',
                         }),
                         Storage.put(`${username}-posts.txt`, postsFile, {
+                            contentType: 'text/plain',
+                        }),
+                        Storage.put(`${username}-friends.txt`, friends, {
+                            contentType: 'text/plain',
+                        }),
+                        Storage.put(`${username}-incoming.txt`, incoming, {
+                            contentType: 'text/plain',
+                        }),
+                        Storage.put(`${username}-outgoing.txt`, outgoing, {
                             contentType: 'text/plain',
                         }),
                         Promise.resolve(backendAttributes) //TODO: Real call to backend
