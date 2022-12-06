@@ -1,5 +1,5 @@
+import React, { useMemo, useState } from 'react';
 import { CheckboxField } from '@aws-amplify/ui-react';
-import React from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { consoles } from '../../../helper/game-selection';
 
@@ -25,13 +25,16 @@ function optionStringToConsoles(optionString) {
 }
 
 
-function ConsoleDropdown(title, consoleOptionString, disable, hasError) {
+function ConsoleDropdown(title, consoleOptionString, disable, hasError, setSelectionList) {
+    const [selections, setSelections] = useState([]);
+
     let consoleOptions = [];
     try {
         consoleOptions = optionStringToConsoles(consoleOptionString);
     } catch(e) {
         console.error(e);
-    }   
+    }
+
     const consoleDropdownItems = consoleOptions.map(gameConsole => 
         <Dropdown.Item
             as={CheckboxField}
@@ -41,6 +44,12 @@ function ConsoleDropdown(title, consoleOptionString, disable, hasError) {
             name={`${title}-${gameConsole}`}
             label={gameConsole}
             value='console-selected'
+            onChange={() => {
+                const selected = selections.filter(name => name !== gameConsole);
+                const updateSelections = selected.length === selections.length ? [...selected, gameConsole] : selected;
+                setSelections(updateSelections);
+                setSelectionList(updateSelections);
+            }}
         />
     );
     return (
@@ -65,15 +74,23 @@ function ConsoleDropdown(title, consoleOptionString, disable, hasError) {
 
 function CheckboxLabel(props) {
     const {disable, hasError, icon, title, consoleOptionString} = props;
-    const consoleDropdown = ConsoleDropdown(title, consoleOptionString, disable, hasError);
+    const [selectionList, setSelectionList] = useState([]);
+    const consoleDropdown = ConsoleDropdown(title, consoleOptionString, disable, hasError, setSelectionList);
+
+    const selectionString = useMemo(() => {
+        let str = '';
+        selectionList.forEach(select => str = str + `, ${select}`);
+        return str.substring(2);
+    }, [selectionList]);
 
     return (
         <div
-            className='game-label'
+            className={`game-label-${!!selectionList.length}`}
             onClick={e => e.preventDefault()}
         >
             <img src={icon} alt=''/>
             <p>{title}</p>
+            {!!selectionList.length && <p className='selections'>{selectionString}</p>}
             {consoleDropdown}
         </div>
     );

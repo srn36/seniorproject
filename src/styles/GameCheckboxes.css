@@ -1,4 +1,4 @@
-.game-label {
+.game-label-false {
     display: grid;
     grid-template-columns: 1fr 4fr 2fr;
     grid-template-rows: 1fr;
@@ -9,27 +9,47 @@
     color:#212529;
 }
 
-.game-label img {
+.game-label-true {
+    display: grid;
+    grid-template-columns: 1fr 4fr 2fr;
+    grid-template-rows: calc(100% - 1.2rem) 1.2rem;
+    height: 3rem;
+    align-items: center;
+    font-size: 1rem;
+    text-decoration: none;
+    color:#212529;
+}
+
+.game-label-false img, .game-label-true img {
     grid-column: 1;
+    grid-row: span 2;
     height: 2.5rem;
     width: 2.5rem;
     object-fit: scale-down;
 }
 
-.game-label button {
+.game-label-false p, .game-label-true p {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0 0 0 0.5em;
+}
+
+.game-label-true p.selections {
+    grid-column: 2 span 2;
+    grid-row: 2;
+    font-size: 0.8rem;
+    margin: .2rem 0.5em;
+    padding: 0;
+    border: none;
+}
+
+.game-label-false button, .game-label-true button {
+    grid-column: 3;
+    grid-row: 1;
     display: flex;
     align-items: center;
     max-height: 1.2rem;
     font-size: 1rem;
-    grid-column: 3;
-}
-
-.game-label p {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-right: 0px;
-    margin-left: 0.5em;
-    grid-column: 2;
 }
 
 .dropdown-item label {
