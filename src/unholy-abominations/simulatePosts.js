@@ -69,7 +69,7 @@ export async function removePost(postKey, author) {
     } catch(error) {
         console.log(error);
     }
-    const newPosts = currentPosts.filter(key => key.substring(postKey.length) !== postKey && key.length > 0);
+    const newPosts = currentPosts.filter(key => key.substring(0, postKey.length) !== postKey && key.length > 0);
     const postListString = newPosts.join('\n');
     const postsBlob = new Blob([postListString], {type: 'text/plain'});
     const postFile = new File([postsBlob], `${author}-posts.txt`, {type: 'text/plain'});
