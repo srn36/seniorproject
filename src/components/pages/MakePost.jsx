@@ -20,7 +20,7 @@ function MakePost(props) {
         // Inculde a random integer in each post key to almost guarantee no key overlap
         const randomKey = Math.floor(Math.random() * 1000) + 1;
         const postData = {
-            key: `${userInfo.username}-${postTime}-${randomKey}`,
+            s3key: `${userInfo.username}-${postTime}-${randomKey}`,
             author: userInfo.username,
             time: postTime,
             caption: caption

@@ -26,7 +26,7 @@ function Post({ userInfo, post }) {
         const deletePost = async (_e) => {
             if(window.confirm('Delete post?')) {
                 try {
-                    const s3Key = post.key;
+                    const s3Key = post.s3key;
                     await Storage.remove(s3Key);
                     await removePost(s3Key, userInfo.username);
                     //TODO: Remove post from db
@@ -39,10 +39,10 @@ function Post({ userInfo, post }) {
         }
 
         const setContent = async () => {
-            const keySplit = (!!post.key && post.key.length > 0) ? post.key.split('-') : [];
+            const keySplit = (!!post.s3key && post.s3key.length > 0) ? post.s3key.split('-') : [];
             const author = post.author || keySplit[0];
             const time = post.time || parseInt(keySplit[1]);
-            const postURL = (!!post.key && post.key.length > 0) ? (await Storage.get(`${post.key}`)) : post.download_url;
+            const postURL = (!!post.s3key && post.s3key.length > 0) ? (await Storage.get(`${post.s3key}`)) : post.download_url;
 
             setPostContent(
                 <div className='post-container'>

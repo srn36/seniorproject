@@ -14,7 +14,6 @@ import {
 } from '../../helper/friend-buttons';
 import PageWithNavTabs from '../base/PageWithNavTabs';
 
-import { fetchUserPosts } from '../../../helper/api-calls/user';
 import { checkFriendRequests } from '../../../helper/api-calls/friend';
 import { useFriendsForUser } from '../../../helper/api-calls/useApiCalls';
 
@@ -55,7 +54,6 @@ function ProfileBase(props) {
                 userInfo: userInfo,
                 username: username,
                 attributes: attributes,
-                fetchUserPosts: fetchUserPosts,
                 friendList: friendList,
                 friends: friends,
                 friendListType: friendListType
