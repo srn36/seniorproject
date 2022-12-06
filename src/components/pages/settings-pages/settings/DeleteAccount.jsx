@@ -9,9 +9,24 @@ function DeleteAccount({ username }) {
     
     const deleteAccount = async () => {
         if(window.confirm('Delete your account?')) {
-            await Storage.remove(`${username}-profilepic`);
-            Auth.deleteUser();
-            navigate('/');
+            const deleteRequests = [
+                Storage.remove(`${username}-profilepic`),
+                Auth.deleteUser(),
+                'backend' //TODO: Real call to backend
+            ];
+
+            Promise.allSettled(deleteRequests).then(values => {
+                const retry = Object.keys(values).map(respKey => 
+                    (values[respKey].status === 'rejected') ? deleteRequests[respKey] : values[respKey].value
+                );
+                
+                /**
+                 * Retry any failed requests
+                 * Any values from successful requests resolve instantly,
+                 * so there is no cost to always running this
+                 */
+                return Promise.allSettled(retry).then(() => navigate('/'));
+            });
         }
     };
 

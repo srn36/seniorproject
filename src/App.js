@@ -85,7 +85,6 @@ function App() {
                     attributes['custom:bio'] = '';
 
                     const profilePicKey = `${username}-profilepic`;
-                    // eslint-disable-next-line
                     const backendAttributes = {
                         username: username,
                         password: password,
@@ -108,26 +107,28 @@ function App() {
                                 enabled: true,
                             }
                         }),
-                        Promise.resolve('backend') //TODO: Real call to backend
+                        Promise.resolve(backendAttributes) //TODO: Real call to backend
                     ];
-                    const { results, retry } = Promise.allSettled(signUpRequests).then(values => {
-                        const nextTry = Object.keys(values).map(respKey => 
+                    
+                    return Promise.allSettled(signUpRequests).then(values => {
+                        // Determine which, if any, requests need to be retried
+                        const retry = Object.keys(values).map(respKey => 
                             (values[respKey].status === 'rejected') ? 
                                 signUpRequests[respKey] 
                                 : values[respKey].value
                         );
-                        return {values, nextTry};
-                    });
-                    if(Object.values(retry).length === 0) {
-                        // No need to retry any requests if all succeed
-                        return results[1].value;
-                    } else {
+                        
+                        /**
+                         * Retry any failed requests
+                         * Any values from successful requests resolve instantly,
+                         * so there is no cost to always running this
+                         */
                         return Promise.allSettled(retry).then(values =>
                             values[1].value
                         ).catch(e => 
                             window.alert(`Error signing up for site: ` + e)
                         );
-                    }
+                    });
                 },
             }}
         >

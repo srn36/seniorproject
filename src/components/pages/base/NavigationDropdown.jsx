@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { withAuthenticator } from '@aws-amplify/ui-react';
+import { Auth } from 'aws-amplify';
 
-function NavigationDropdown({ userInfo, signOut }) {
+function NavigationDropdown({ userInfo }) {
     const navigate = useNavigate();
     const pathName = useLocation().pathname.toLowerCase();
 
@@ -58,9 +58,9 @@ function NavigationDropdown({ userInfo, signOut }) {
         <DropdownButton id='dropdown-basic-button' title='Navigation'>
             {dropdownTabs}
             <Dropdown.Divider/>
-            <button onClick={() => {signOut(); navigate('/');}} className='dropdown-item'>Log Out</button>
+            <button onClick={() => (Auth.signOut()).then(() => navigate('/'))} className='dropdown-item'>Log Out</button>
         </DropdownButton>
     );
 }
 
-export default withAuthenticator(NavigationDropdown);
+export default NavigationDropdown;
