@@ -16,7 +16,7 @@ function NavigationDropdown({ userInfo }) {
         actionPaths,
         overrideText
     } = useMemo(() => {
-        const pagePathArray = ['Home', 'Chat', 'friend-zone', profilePath];
+        const pagePathArray = ['Home', 'friend-zone', profilePath];
         const actionPathArray = ['make-post', 'Settings'];
         const override = {
             'friend-zone': 'Friend Zone',
