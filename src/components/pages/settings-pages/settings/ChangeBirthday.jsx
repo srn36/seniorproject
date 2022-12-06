@@ -17,13 +17,14 @@ function ChangeBirthday({ birthdate }) {
             window.location.reload();
         }).catch(e => window.alert(`Error updating birthday: ${e}`));
     };
-
+    
     return (
         <>
             <Divider/>
             <h3>Change Birthday</h3>
             <BirthdaySettings 
                 key='birthday'
+                overrides={{birthday: {value: birthday}}}
                 onChange={(e) => setBirthday(e.birthday)}
             />
             <form onSubmit={e => {
