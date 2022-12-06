@@ -14,14 +14,17 @@ import {
 } from '../../helper/friend-buttons';
 import PageWithNavTabs from '../base/PageWithNavTabs';
 
-import { checkFriendRequests } from '../../../helper/api-calls/friend';
-import { useFriendsForUser } from '../../../helper/api-calls/useApiCalls';
-
 function ProfileBase(props) {
     const {userInfo} = useOutletContext();
-    const {attributes, profilePic, redirect} = useLoaderData();
+    const {
+        attributes, 
+        profilePic, 
+        friendList, 
+        incomingList,
+        outgoingList,
+        redirect
+    } = useLoaderData();
     const username = useParams().username;
-    const friendList = useFriendsForUser(username);
     const navigate = useNavigate();
 
     // Redirect to the error page if the requested profile page belongs to a nonexistent user
@@ -35,17 +38,13 @@ function ProfileBase(props) {
     const pageViewable = useMemo(() => {
         if(!redirect) {
             const privacy = attributes.filter(attr => attr.Name === 'custom:privacy')[0].Value.toLowerCase();
-            const isFriend =    Array.isArray(friendList.data) ? 
-                                    friendList.data.filter(friend => friend.username === userInfo.username).length > 0 
-                                    :
-                                    false; //TODO: Revisit friendship check
+            const isFriend = (Object.values(friendList).filter(friend => friend.username === userInfo.username).length > 0 );
             return (privacy === 'public' || isFriend);
         }
     }, [redirect, attributes, friendList, userInfo.username]);
 
     return useMemo(() => {
         if(!redirect) {
-            const friends = Array.isArray(friendList.data) ? friendList.data : [];
             const isOwnProfile = (username === userInfo?.username);
             const friendListType = isOwnProfile ? 'Removable' : 'Standard';
 
@@ -54,7 +53,6 @@ function ProfileBase(props) {
                 username: username,
                 attributes: attributes,
                 friendList: friendList,
-                friends: friends,
                 friendListType: friendListType
             };
 
@@ -64,7 +62,9 @@ function ProfileBase(props) {
                             username={username}
                             userInfo={userInfo}
                             isOwnProfile={isOwnProfile}
-                            friends={friends}
+                            friends={friendList}
+                            incomingList={incomingList}
+                            outgoingList={outgoingList}
                             profilePic={profilePic}
                         />
                         {
@@ -76,19 +76,19 @@ function ProfileBase(props) {
                 </PageWithNavTabs>
             );
         }
-    }, [redirect, username, friendList, userInfo, profilePic, attributes, pageViewable]);
+    }, [redirect, username, friendList, incomingList, outgoingList, userInfo, profilePic, attributes, pageViewable]);
 }
 
 
-function ProfileHeadline({ username, userInfo, isOwnProfile, friends, profilePic }) {
+function ProfileHeadline({ username, userInfo, isOwnProfile, friends, incomingList, outgoingList, profilePic }) {
     const relationshipBasedFriendButton = {
-        'Already Friends': <RemoveButton userInfo={userInfo} username={username}/>,
-        'Outgoing': <button disabled={true}>Requested</button>,
-        'Incoming': <span>
-                        <AcceptButton userInfo={userInfo} username={username}/>
-                        <RejectButton userInfo={userInfo} username={username}/> 
+        'Already Friends': <RemoveButton userInfo={userInfo} username={username} onClick={() => {window.location.reload()}}/>,
+        'Incoming': <button disabled={true}>Requested</button>,
+        'Outgoing': <span>
+                        <AcceptButton userInfo={userInfo} username={username} onClick={() => {window.location.reload()}}/>
+                        <RejectButton userInfo={userInfo} username={username} onClick={() => {window.location.reload()}}/> 
                     </span>,
-        'None': <AddButton userInfo={userInfo} username={username}/>
+        'None': <AddButton userInfo={userInfo} username={username} onClick={() => {window.location.reload()}}/>
     }
 
     //TODO: Revisit friendship check
@@ -96,10 +96,16 @@ function ProfileHeadline({ username, userInfo, isOwnProfile, friends, profilePic
         undefined
         :
         (
-            !!(friends.filter(friend => friend.username === userInfo.username).length) ?
+            (Object.values(friends).filter(friend => friend.username === userInfo.username).length > 0) ?
                 'Already Friends'
                 :
-                checkFriendRequests(userInfo.username, username)
+                (Object.values(outgoingList).filter(request => request.toUsername === userInfo.username).length > 0) ?
+                    'Outgoing'
+                    :
+                    (Object.values(incomingList).filter(request => request.fromUsername === userInfo.username).length > 0) ?
+                        'Incoming'
+                        :
+                        'None'
         )
     );
     

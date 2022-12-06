@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { Storage } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { searchUsers } from '../../helper/api-calls/cognito-access';
@@ -34,8 +35,33 @@ function Chat(props) {
         }).then(resp => console.log(resp)).catch(error => window.alert(`Error uploading file: ${error}`));
     }
 
-    const textFileTest = () => {
-        
+    const createTextFiles = async () => {
+        const users = (await searchUsers()).Users;
+        const nameList = users.map(userResult => {
+            return {username: userResult.Username};
+        }).map(user => user.username);
+        nameList.forEach(async name => {
+            const emptyBlob = new Blob([''], {type: 'text/plain'});
+            const friends = new File([emptyBlob], `${name}-friends.txt`, {type: 'text/plain'});
+            const incoming = new File([emptyBlob], `${name}-incoming.txt`, {type: 'text/plain'});
+            const outgoing = new File([emptyBlob], `${name}-outgoing.txt`, {type: 'text/plain'});
+            try {
+               /*  await Storage.put(`${name}-friends.txt`, friends, {
+                    contentType: 'text/plain',
+                });
+                await Storage.put(`${name}-incoming.txt`, incoming, {
+                    contentType: 'text/plain',
+                });
+                await Storage.put(`${name}-outgoing.txt`, outgoing, {
+                    contentType: 'text/plain',
+                }); */
+                return;
+            } catch(error) {
+                console.log(error);
+            }
+        });
+
+
     }
 
     useEffect(() => {
@@ -50,7 +76,7 @@ function Chat(props) {
     return (
         <>
             <h4>Chat Page</h4>
-            <button onClick={() => textFileTest()}>test text</button>
+            {/* <button onClick={() => createTextFiles()}>make</button> */}
             <button onClick={() => request()}>request</button>
             {(posts.length > 0) && posts}
         </>

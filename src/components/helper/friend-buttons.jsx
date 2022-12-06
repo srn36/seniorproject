@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
-import {
-    acceptFriendRequest,
-    rejectFriendRequest,
-    sendFriendRequest,
-    removeFriend
-} from '../../helper/api-calls/friend';
 import { Loader, useTheme } from '@aws-amplify/ui-react';
+import { acceptFriendRequest, declineFriendRequest, removeFriend, sendFriendRequest } from '../../unholy-abominations/simulateFriends';
 
 export function AcceptButton({ userInfo, username, ...props }) {
     const { tokens } = useTheme();
@@ -14,12 +9,12 @@ export function AcceptButton({ userInfo, username, ...props }) {
     return (
         <button 
             className='accept'
-            onClick={e => {
+            onClick={async (e) => {
                 e.preventDefault();
                 if(window.confirm(`Accept ${username}'s request?`)) {
                     setWaiting(true);
                     //TODO: Send request to DB
-                    acceptFriendRequest(username, userInfo.username);
+                    await acceptFriendRequest(userInfo.username, username);
                     props?.onClick();
                     setWaiting(false);
                 }
@@ -49,12 +44,12 @@ export function RejectButton({ userInfo, username, ...props }) {
     return (
         <button 
             className='reject'
-            onClick={e => {
+            onClick={async (e) => {
                 e.preventDefault();
                 if(window.confirm(`Reject ${username}'s request?`)) {
                     setWaiting(true);
                     //TODO: Send request to DB
-                    rejectFriendRequest(username, userInfo.username);
+                    await declineFriendRequest(userInfo.username, username);
                     props?.onClick();
                     setWaiting(false); 
                 }                               
@@ -84,12 +79,12 @@ export function AddButton({ userInfo, username, ...props }) {
     return (
         <button 
             className='request'
-            onClick={e => {
+            onClick={async (e) => {
                 e.preventDefault();
                 if(window.confirm(`Send friend request to ${username}?`)) {
                     setWaiting(true);
                     //TODO: Send request to DB
-                    sendFriendRequest(userInfo.username, username);
+                    await sendFriendRequest(username, userInfo.username);
                     props?.onClick();
                     setWaiting(false);
                 }
@@ -119,12 +114,12 @@ export function RemoveButton({ userInfo, username, ...props }) {
     return (
         <button 
             className='remove'
-            onClick={e => {
+            onClick={async (e) => {
                 e.preventDefault();
                 if(window.confirm(`Remove ${username} from friends?`)) {
                     setWaiting(true);
                     //TODO: Send request to DB
-                    removeFriend(userInfo.username, username);
+                    await removeFriend(userInfo.username, username);
                     props?.onClick();
                     setWaiting(false);
                 }

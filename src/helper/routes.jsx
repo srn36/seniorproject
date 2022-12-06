@@ -24,8 +24,15 @@ import ProfileSettings from '../components/pages/settings-pages/ProfileSettings'
 // Friend Zone imports
 import FriendZoneBase from '../components/pages/friend-zone/FriendZoneBase';
 import Requests from '../components/pages/friend-zone/Requests';
-import Recommendations from '../components/pages/friend-zone/Recommendations';
+/* import Recommendations from '../components/pages/friend-zone/Recommendations'; */
+
+// API imports
 import { getUser } from './api-calls/cognito-access';
+import { 
+    getFriendsForUser, 
+    getIncomingRequestsForUser, 
+    getOutgoingRequestsForUser 
+} from '../unholy-abominations/simulateFriends';
 
 
 function routes() {
@@ -42,9 +49,26 @@ function routes() {
                 // Load attributes and profile picture of target user to display on profile page
                 const attributes = (await getUser(params.username)).UserAttributes;
                 const profilePic = await Storage.get(`${params.username}-profilepic`);
-                return {attributes: attributes, profilePic: profilePic, redirect: false};
+                const friendList = await getFriendsForUser(params.username);
+                const incomingList = await getIncomingRequestsForUser(params.username);
+                const outgoingList = await getOutgoingRequestsForUser(params.username);
+                return {
+                    attributes: attributes, 
+                    profilePic: profilePic, 
+                    friendList: friendList,
+                    incomingList: incomingList,
+                    outgoingList: outgoingList,
+                    redirect: false
+                };
             } catch(e) {
-                return {attributes: [], profilePic: '', redirect: true};
+                return {
+                    attributes: [], 
+                    profilePic: '', 
+                    friendList: [],
+                    incomingList: [],
+                    outgoingList: [],
+                    redirect: true
+                };
             }
         },
         children: [
@@ -71,7 +95,7 @@ function routes() {
         children: [
             {index: true, element: <Navigate to='requests'/>},
             {path: 'requests', element: <Requests/>},
-            {path: 'recommendations', element: <Recommendations/>},
+            /* {path: 'recommendations', element: <Recommendations/>}, */
         ]
     };
 

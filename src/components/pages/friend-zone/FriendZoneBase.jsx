@@ -6,7 +6,7 @@ function FriendZoneBase(props) {
     const {userInfo} = useOutletContext();
 
     return (
-        <PageWithNavTabs tabs={['Requests', 'Recommendations']}>
+        <PageWithNavTabs tabs={['Requests'/* , 'Recommendations' */]}>
             <Outlet context={{userInfo: userInfo}}/>
         </PageWithNavTabs>
     );
