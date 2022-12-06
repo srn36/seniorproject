@@ -47,19 +47,22 @@ function routes() {
         loader: async ({ params }) => {
             try {
                 // Load attributes and profile picture of target user to display on profile page
-                const attributes = (await getUser(params.username)).UserAttributes;
-                const profilePic = await Storage.get(`${params.username}-profilepic`);
-                const friendList = await getFriendsForUser(params.username);
-                const incomingList = await getIncomingRequestsForUser(params.username);
-                const outgoingList = await getOutgoingRequestsForUser(params.username);
-                return {
-                    attributes: attributes, 
-                    profilePic: profilePic, 
-                    friendList: friendList,
-                    incomingList: incomingList,
-                    outgoingList: outgoingList,
-                    redirect: false
-                };
+                return await Promise.all([
+                    getUser(params.username).then(user => user.UserAttributes),
+                    Storage.get(`${params.username}-profilepic`),
+                    getFriendsForUser(params.username),
+                    getIncomingRequestsForUser(params.username),
+                    getOutgoingRequestsForUser(params.username)
+                ]).then(results => {
+                    return {
+                        attributes: results[0], 
+                        profilePic: results[1], 
+                        friendList: results[2],
+                        incomingList: results[3],
+                        outgoingList: results[4],
+                        redirect: false
+                    }
+                })
             } catch(e) {
                 return {
                     attributes: [], 
