@@ -5,6 +5,7 @@ import { Storage } from 'aws-amplify';
 import PostPreview from '../post-feed/PostPreview';
 import IconButton from '../helper/IconButton';
 import { MdUpload } from 'react-icons/md';
+import { uploadPost } from '../../unholy-abominations/simulatePosts';
 
 function MakePost(props) {
     const {userInfo} = useOutletContext();
@@ -24,12 +25,15 @@ function MakePost(props) {
             time: postTime,
             caption: caption
         };
-        try {
+        try{
             await Storage.put(postData.key, image, {
                 contentType: 'image/png',
             });
-        } catch (error) {
-            console.log('Error uploading file: ', error);
+            await uploadPost(postData);
+            window.alert('Post successfully uploaded!');
+            window.location.reload();
+        } catch(error) {
+            window.alert(`Error making post: ${error}`);
         }
         console.log(postData);
     };
@@ -38,6 +42,7 @@ function MakePost(props) {
         if (e.target.files && e.target.files[0]) {
             setImage(e.target.files[0]);
             setPreviewPic(URL.createObjectURL(e.target.files[0]));
+            console.log(e.target.files[0]);
         }
     };
 
