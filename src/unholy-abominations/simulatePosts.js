@@ -46,7 +46,6 @@ function getPostsKeysForUser(username) {
 }
 
 export async function uploadPost(postData) {
-    console.log(postData)
     const {s3key, author, caption} = postData;
     let currentPosts = []; 
     try {
