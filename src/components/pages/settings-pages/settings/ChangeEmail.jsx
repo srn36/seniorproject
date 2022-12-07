@@ -5,7 +5,6 @@ import SettingsForm from './SettingsForm';
 
 function ChangeEmail({ email }) {
     const [newEmail, setNewEmail] = useState('');
-    const [code, setCode] = useState('');
 
     const formFields = [
         <TextField
@@ -24,7 +23,12 @@ function ChangeEmail({ email }) {
 
     const verifyEmail = async () => new Promise((resolve) => {
         const dialog = document.getElementById('confirm');
-        const verifyButton = document.getElementById('verify-button');
+        const input = document.getElementById('code-input');
+        dialog.showModal();
+
+        input.addEventListener('change', (e) => {
+            dialog.returnValue = e.target.value;
+        })
 
         // I don't want the user to be able to exit the modal without inputting a 6 number code
         dialog.addEventListener('keydown', (e) => {
@@ -32,28 +36,10 @@ function ChangeEmail({ email }) {
                 e.preventDefault();
             }
         });
-        dialog.addEventListener('keypress', (e) => {
-            if(e.key === 'Escape') {
-                e.preventDefault();
-            }
-        });
 
-        // Listen for when the form is submitted
         dialog.addEventListener('close', () => {
             return resolve(dialog.returnValue);
         });
-
-        /**
-         * Apparently Chrome for Android and a few minor browsers do not support the 'close'
-         * event for dialog components?!?!?! This technique for detecting close events works
-         * for all browsers
-         */ 
-        verifyButton.addEventListener('click', () => {
-            dialog.close();
-            return resolve(dialog.returnValue);
-        });
-
-        dialog.showModal();
     });
 
     const changeEmail = async () => {
@@ -83,14 +69,10 @@ function ChangeEmail({ email }) {
                 <p>A verification code has been sent to your email address</p>
                 <form method='dialog'>
                     <TextField
+                        id='code-input'
                         placeholder='Enter verification code'
-                        onChange={e => setCode(e.target.value)}
                     />
-                    <button 
-                        id='verify-button'
-                        value={code} 
-                        disabled={code.length !== 6}
-                    >
+                    <button>
                         Verify
                     </button>
                 </form>
