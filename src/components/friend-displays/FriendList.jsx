@@ -33,7 +33,7 @@ function reducer(state, action) {
 
 function FriendList({ friends, userInfo, ...props }) {
     const {type} = props;
-    const nameField = (type === 'Requests') ? 'fromUsername' : 'username';
+    const nameField = (type === 'Incoming') ? 'fromUsername' : (type === 'Outgoing') ? 'toUsername' : 'username';
 
     const [state, dispatch] = useReducer(reducer, {
         nameField: nameField,
@@ -61,7 +61,7 @@ function FriendList({ friends, userInfo, ...props }) {
     });
 
     return useMemo(() => {
-        const noFriends = (type === 'Requests' || type === 'Recommendations') ? ` ${type}` : 's';
+        const noFriends = (type === 'Recommendations') ? ` ${type}` : (type === 'Incoming' || type === 'Outgoing') ? `${type} Friend Requests` : 'Friends';
 
         return (
             <>
@@ -89,7 +89,7 @@ function FriendList({ friends, userInfo, ...props }) {
                         <tbody>
                             {
                                 (state.friendTable.length === 0) ? 
-                                    <tr style={{pointerEvents: 'none'}}><td><p>{`User Has No Friend${noFriends}`}</p></td></tr>
+                                    <tr style={{pointerEvents: 'none'}}><td><p>{`User Has No ${noFriends}`}</p></td></tr>
                                     :
                                     (
                                         (state.tableRows.length > 0) ? 
@@ -112,7 +112,7 @@ function FriendList({ friends, userInfo, ...props }) {
 }
 
 FriendList.propTypes = {
-    type: PropTypes.oneOf(['Removable', 'Requests', 'Standard', 'Recommendations']).isRequired
+    type: PropTypes.oneOf(['Removable', 'Incoming', 'Outgoing', 'Standard', 'Recommendations']).isRequired
 };
 
 export default FriendList;

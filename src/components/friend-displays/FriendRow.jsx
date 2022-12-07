@@ -15,10 +15,11 @@ function FriendRow({ username, profilePic, userInfo, deleteRow, ...props}) {
         'Standard': null,
         'Removable': <RemoveButton userInfo={userInfo} username={username} onClick={() => deleteRow(username)}/>,
         'Recommendations': <AddButton userInfo={userInfo} username={username} onClick={() => deleteRow(username)}/>,
-        'Requests': <span>
+        'Incoming': <span>
                         <AcceptButton userInfo={userInfo} username={username} onClick={() => deleteRow(username)}/> 
                         <RejectButton userInfo={userInfo} username={username} onClick={() => deleteRow(username)}/> 
-                    </span>
+                    </span>,
+        'Outgoing': null
     };
     const buttons = rowButtons[rowType];
 
@@ -35,7 +36,7 @@ function FriendRow({ username, profilePic, userInfo, deleteRow, ...props}) {
 }
 
 FriendRow.propTypes = {
-    rowType: PropTypes.oneOf(['Standard', 'Requests', 'Removable', 'Recommendations']).isRequired
+    rowType: PropTypes.oneOf(['Standard', 'Incoming', 'Outgoing', 'Removable', 'Recommendations']).isRequired
 }
 
 export default FriendRow;

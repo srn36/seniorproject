@@ -22,7 +22,8 @@ import ProfileSettings from '../components/pages/settings-pages/ProfileSettings'
 
 // Friend Zone imports
 import FriendZoneBase from '../components/pages/friend-zone/FriendZoneBase';
-import Requests from '../components/pages/friend-zone/Requests';
+import IncomingRequests from '../components/pages/friend-zone/IncomingRequests';
+import OutgoingRequests from '../components/pages/friend-zone/OutgoingRequests';
 /* import Recommendations from '../components/pages/friend-zone/Recommendations'; */
 
 // API imports
@@ -95,8 +96,9 @@ function routes() {
         path: 'friend-zone',
         element: <FriendZoneBase/>,
         children: [
-            {index: true, element: <Navigate to='requests'/>},
-            {path: 'requests', element: <Requests/>},
+            {index: true, element: <Navigate to='incoming'/>},
+            {path: 'incoming', element: <IncomingRequests/>},
+            {path: 'outgoing', element: <OutgoingRequests/>}
             /* {path: 'recommendations', element: <Recommendations/>}, */
         ]
     };

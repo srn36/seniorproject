@@ -8,7 +8,7 @@
     overflow-y: scroll;
 }
 
-.friend-list-Requests, .friend-list-Recommendations {
+.friend-list-Incoming, .friend-list-Outgoing, .friend-list-Recommendations {
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;

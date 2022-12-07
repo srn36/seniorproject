@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import { getIncomingRequestsForUser } from '../../../unholy-abominations/simulateFriends';
 import FriendList from '../../friend-displays/FriendList';
 
-function Requests(props) {
+function IncomingRequests(props) {
     const {userInfo} = useOutletContext();
     const [loading, setLoading] = useState(true);
     const [incoming, setIncoming] = useState([]);
@@ -23,11 +23,11 @@ function Requests(props) {
             <h2>Loading...</h2>
             :
             <>
-                <h3>Friend Requests</h3>
-                <FriendList friends={incoming} type={'Requests'} userInfo={userInfo}/>             
+                <h3>Incoming Friend Requests</h3>
+                <FriendList friends={incoming} type={'Incoming'} userInfo={userInfo}/>             
             </>
     );
 
 }
 
-export default Requests;
+export default IncomingRequests;
