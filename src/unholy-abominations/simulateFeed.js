@@ -22,7 +22,7 @@ export async function getFeedForUser(userInfo, username, pageParam = 1) {
         return results.map(result => !!(result.value) ? result.value : null);
     });
     const flatFriendPosts = friendPosts.flat();
-    const sortedPosts = flatFriendPosts.sort((a,b) => extractTime(a) - extractTime(b));
+    const sortedPosts = flatFriendPosts.sort((a,b) => extractTime(b) - extractTime(a));
     return sortedPosts;
 }
 
