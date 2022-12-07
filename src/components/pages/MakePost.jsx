@@ -31,7 +31,7 @@ function MakePost(props) {
             });
             await uploadPost(postData);
             window.alert('Post successfully uploaded!');
-            //window.location.reload();
+            window.location.reload();
         } catch(error) {
             window.alert(`Error making post: ${error}`);
         }
