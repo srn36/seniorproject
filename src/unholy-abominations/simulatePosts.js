@@ -3,10 +3,6 @@
 import { Storage } from 'aws-amplify';
 import Post from '../components/post-feed/Post';
 
-function extractTime(post) {
-    return parseInt(post.props.post.s3key.split('-')[1]);
-}
-
 export async function getPostsForUser(userInfo, username) {
     const postKeys = (await getPostsKeysForUser(username));
     if(postKeys.length === 0) {
@@ -22,10 +18,9 @@ export async function getPostsForUser(userInfo, username) {
         } else {
             postData = {s3key: pKey};
         }
-        const sortedPosts = results.sort((a,b) => extractTime(b) - extractTime(a));
         return <Post key={pKey} userInfo={userInfo} post={postData}/>
     });
-
+    
     return results;
 };
 
